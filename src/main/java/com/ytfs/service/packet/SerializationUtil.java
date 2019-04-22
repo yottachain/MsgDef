@@ -21,6 +21,9 @@ public class SerializationUtil {
         if (obj == null) {
             throw new IllegalArgumentException();
         }
+        if (obj instanceof ServiceException) {
+            obj = ((ServiceException) obj).toErrMessage();
+        }
         @SuppressWarnings("unchecked")
         Schema schema = RuntimeSchema.getSchema(obj.getClass());
         LinkedBuffer buffer = BUFFER_THREAD_LOCAL.get();
@@ -59,6 +62,9 @@ public class SerializationUtil {
         }
         Schema schema = RuntimeSchema.getSchema(targetClass);
         ProtostuffIOUtil.mergeFrom(paramArrayOfByte, 2, paramArrayOfByte.length - 2, instance, schema);
+        if (instance instanceof ErrorMessage) {
+            return new ServiceException((ErrorMessage) instance);
+        }
         return instance;
     }
 }
