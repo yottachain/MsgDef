@@ -19,8 +19,9 @@ public class ServiceErrorCode {
     public static final int INVALID_SIGNATURE = 0x0e;
     public static final int INVALID_NODE_ID = 0x0f;
     public static final int INVALID_SHARD = 0x10;
-    
-    
+    public static final int INVALID_BUCKET_NAME = 0x11;//用户bucket不存在
+    public static final int INVALID_OBJECT_NAME = 0x12;//用户file不存在
+
     /*
     public static final String ACCESS_DENIED = "AccessDenied";
     public static final String ACCESS_FORBIDDEN = "AccessForbidden";

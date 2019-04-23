@@ -17,6 +17,43 @@ public class SerializationUtil {
      * @param obj
      * @return
      */
+    public static byte[] serializeNoId(Object obj) {
+        if (obj == null) {
+            throw new IllegalArgumentException();
+        }
+        @SuppressWarnings("unchecked")
+        Schema schema = RuntimeSchema.getSchema(obj.getClass());
+        LinkedBuffer buffer = BUFFER_THREAD_LOCAL.get();
+        try {
+            return ProtostuffIOUtil.toByteArray(obj, schema, buffer);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        } finally {
+            buffer.clear();
+        }
+    }
+
+    public static Object deserializeNoId(byte[] paramArrayOfByte, Class targetClass) {
+        if (paramArrayOfByte == null || paramArrayOfByte.length == 0) {
+            throw new IllegalArgumentException();
+        }
+        Object instance = null;
+        try {
+            instance = targetClass.newInstance();
+        } catch (InstantiationException | IllegalAccessException e) {
+            throw new RuntimeException(e);
+        }
+        Schema schema = RuntimeSchema.getSchema(targetClass);
+        ProtostuffIOUtil.mergeFrom(paramArrayOfByte, instance, schema);
+        return instance;
+    }
+
+    /**
+     * 序列化对象
+     *
+     * @param obj
+     * @return
+     */
     public static byte[] serialize(Object obj) {
         if (obj == null) {
             throw new IllegalArgumentException();

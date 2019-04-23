@@ -3,6 +3,7 @@ package com.ytfs.service.packet;
 public class DownloadObjectInitResp {
 
     private byte[] refers;
+    private long length;
 
     /**
      * @return the refers
@@ -16,6 +17,20 @@ public class DownloadObjectInitResp {
      */
     public void setRefers(byte[] refers) {
         this.refers = refers;
+    }
+
+    /**
+     * @return the length
+     */
+    public long getLength() {
+        return length;
+    }
+
+    /**
+     * @param length the length to set
+     */
+    public void setLength(long length) {
+        this.length = length;
     }
 
 }
