@@ -38,7 +38,7 @@ public class ObjectRefer {
      * @return
      */
     public static byte[] merge(List<ObjectRefer> ls) {
-        byte[] bs = new byte[50 * ls.size()];
+        byte[] bs = new byte[52 * ls.size()];
         int pos = 0;
         for (ObjectRefer refer : ls) {
             long2bytes(refer.getVBI(), bs, pos);

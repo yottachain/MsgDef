@@ -7,7 +7,7 @@ import io.protostuff.Schema;
 import io.protostuff.runtime.RuntimeSchema;
 
 public class SerializationUtil {
-
+ 
     private static final ThreadLocal<LinkedBuffer> BUFFER_THREAD_LOCAL = ThreadLocal
             .withInitial(() -> LinkedBuffer.allocate(512));
 
