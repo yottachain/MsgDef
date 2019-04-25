@@ -21,6 +21,8 @@ public class ServiceErrorCode {
     public static final int INVALID_SHARD = 0x10;
     public static final int INVALID_BUCKET_NAME = 0x11;//用户bucket不存在
     public static final int INVALID_OBJECT_NAME = 0x12;//用户file不存在
+    public static final int TOO_MANY_BUCKETS=0x13;
+ 
 
     /*
     public static final String ACCESS_DENIED = "AccessDenied";
@@ -48,7 +50,7 @@ public class ServiceErrorCode {
     public static final String REQUEST_TIME_TOO_SKEWED = "RequestTimeTooSkewed";
     public static final String REQUEST_TIMEOUT = "RequestTimeout";
     public static final String SIGNATURE_DOES_NOT_MATCH = "SignatureDoesNotMatch";
-    public static final String TOO_MANY_BUCKETS = "TooManyBuckets";
+ 
     public static final String NO_SUCH_CORS_CONFIGURATION = "NoSuchCORSConfiguration";
     public static final String NO_SUCH_WEBSITE_CONFIGURATION = "NoSuchWebsiteConfiguration";
     public static final String NO_SUCH_LIFECYCLE = "NoSuchLifecycle";
