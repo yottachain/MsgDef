@@ -22,6 +22,8 @@ public class ServiceErrorCode {
     public static final int INVALID_BUCKET_NAME = 0x11;//用户bucket不存在
     public static final int INVALID_OBJECT_NAME = 0x12;//用户file不存在
     public static final int TOO_MANY_BUCKETS=0x13;
+    public static final int BUCKET_ALREADY_EXISTS =0x14;
+    public static final int OBJECT_ALREADY_EXISTS =0x15;
  
 
     /*
