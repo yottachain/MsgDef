@@ -2,12 +2,12 @@ package com.ytfs.service.packet;
 
 import io.yottachain.nodemgmt.core.vo.Node;
 
- 
 public class DownloadBlockInitResp {
 
     private Node[] nodes;
     private int VNF;
     private byte[][] VHF;
+    private int[] nodeids;
 
     /**
      * @return the VHF
@@ -49,6 +49,20 @@ public class DownloadBlockInitResp {
      */
     public void setVNF(int VNF) {
         this.VNF = VNF;
+    }
+
+    /**
+     * @return the nodeids
+     */
+    public int[] getNodeids() {
+        return nodeids;
+    }
+
+    /**
+     * @param nodeids the nodeids to set
+     */
+    public void setNodeids(int[] nodeids) {
+        this.nodeids = nodeids;
     }
 
 }
