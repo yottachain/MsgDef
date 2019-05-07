@@ -4,6 +4,12 @@ import org.bson.types.ObjectId;
 
 public class SaveObjectMetaReq {
 
+    private int userID;
+    private ObjectId VNU;
+    private ObjectRefer refer;
+    private long nlink;
+   
+
     /**
      * @return the VNU
      */
@@ -32,7 +38,6 @@ public class SaveObjectMetaReq {
         this.refer = refer;
     }
 
- 
     /**
      * @return the userID
      */
@@ -47,10 +52,18 @@ public class SaveObjectMetaReq {
         this.userID = userID;
     }
 
-     
+    /**
+     * @return the nlink
+     */
+    public long getNlink() {
+        return nlink;
+    }
 
-    private int userID;
-    private ObjectId VNU;
-    private ObjectRefer refer;
+    /**
+     * @param nlink the nlink to set
+     */
+    public void setNlink(long nlink) {
+        this.nlink = nlink;
+    }
 
 }
