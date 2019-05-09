@@ -2,6 +2,8 @@ package com.ytfs.service.packet;
 
 public class UploadBlockSubResp {
 
+    private ShardNode[] nodes;
+
     /**
      * @return the nodes
      */
@@ -15,6 +17,5 @@ public class UploadBlockSubResp {
     public void setNodes(ShardNode[] nodes) {
         this.nodes = nodes;
     }
-    private ShardNode[] nodes;
 
 }

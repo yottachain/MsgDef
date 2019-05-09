@@ -1,4 +1,4 @@
-package com.ytfs.service.packet;
+package com.ytfs.service.utils;
 
 import com.github.snksoft.crc.CRC;
 import com.ytfs.service.utils.Function;
@@ -38,7 +38,7 @@ public class MessageFactory {
         }
     }
 
-    public static Class getMessageType(short commandid)  {
+    public static Class getMessageType(short commandid) {
         Class cls = id_class_Map.get(commandid);
         if (cls == null) {
             throw new RuntimeException("Invalid instruction.");
@@ -50,6 +50,15 @@ public class MessageFactory {
     private synchronized static void regMessageType() throws IOException {
         ResourcePatternResolver resourcePatternResolver = new PathMatchingResourcePatternResolver();
         Resource[] resources = resourcePatternResolver.getResources("classpath*:com/ytfs/service/packet/*.class");
+        for (Resource r : resources) {
+            if (r.isReadable()) {
+                try {
+                    checkResource(r);
+                } catch (Exception e) {
+                }
+            }
+        }
+        resources = resourcePatternResolver.getResources("classpath*:com/ytfs/service/packet/s3/*.class");
         for (Resource r : resources) {
             if (r.isReadable()) {
                 try {
@@ -84,7 +93,7 @@ public class MessageFactory {
 
     public static void main(String[] args) {
         Set<Short> set = id_class_Map.keySet();
-        for (Short s : set) {            
+        for (Short s : set) {
             System.out.print("MessageID:" + Hex.encodeHexString(Function.short2bytes(s)) + "---->");
             System.out.println(id_class_Map.get(s).getName());
         }

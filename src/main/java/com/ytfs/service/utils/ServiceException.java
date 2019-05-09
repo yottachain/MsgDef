@@ -1,4 +1,6 @@
-package com.ytfs.service.packet;
+package com.ytfs.service.utils;
+
+import com.ytfs.service.packet.ErrorMessage;
 
 public class ServiceException extends Exception {
 

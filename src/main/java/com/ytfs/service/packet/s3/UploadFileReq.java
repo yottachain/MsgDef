@@ -1,9 +1,12 @@
-package com.ytfs.service.packet;
+package com.ytfs.service.packet.s3;
 
-public class DownloadFileReq {
+import org.bson.types.ObjectId;
+
+public class UploadFileReq {
 
     private String bucketname;
     private String fileName;
+    private ObjectId VNU;
 
     /**
      * @return the bucketname
@@ -31,6 +34,20 @@ public class DownloadFileReq {
      */
     public void setFileName(String fileName) {
         this.fileName = fileName;
+    }
+
+    /**
+     * @return the VNU
+     */
+    public ObjectId getVNU() {
+        return VNU;
+    }
+
+    /**
+     * @param VNU the VNU to set
+     */
+    public void setVNU(ObjectId VNU) {
+        this.VNU = VNU;
     }
 
 }

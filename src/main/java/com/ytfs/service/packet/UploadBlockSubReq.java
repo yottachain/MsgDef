@@ -1,13 +1,12 @@
 package com.ytfs.service.packet;
 
+import org.bson.types.ObjectId;
+
 public class UploadBlockSubReq {
 
     private UploadShardRes[] res = null;
     private long VBI;    //上传块生成的流水号
 
-    /**
-     * @return the VBI
-     */
     public long getVBI() {
         return VBI;
     }
