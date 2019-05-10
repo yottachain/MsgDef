@@ -24,5 +24,6 @@ public class ServiceErrorCode {
     public static final int TOO_MANY_BUCKETS = 0x13;
     public static final int BUCKET_ALREADY_EXISTS = 0x14;
     public static final int OBJECT_ALREADY_EXISTS = 0x15;
+    public static final int NODE_EXISTS = 0x16;
 
 }

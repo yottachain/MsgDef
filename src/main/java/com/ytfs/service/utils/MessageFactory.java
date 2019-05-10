@@ -1,7 +1,6 @@
 package com.ytfs.service.utils;
 
 import com.github.snksoft.crc.CRC;
-import com.ytfs.service.utils.Function;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -49,16 +48,7 @@ public class MessageFactory {
 
     private synchronized static void regMessageType() throws IOException {
         ResourcePatternResolver resourcePatternResolver = new PathMatchingResourcePatternResolver();
-        Resource[] resources = resourcePatternResolver.getResources("classpath*:com/ytfs/service/packet/*.class");
-        for (Resource r : resources) {
-            if (r.isReadable()) {
-                try {
-                    checkResource(r);
-                } catch (Exception e) {
-                }
-            }
-        }
-        resources = resourcePatternResolver.getResources("classpath*:com/ytfs/service/packet/s3/*.class");
+        Resource[] resources = resourcePatternResolver.getResources("classpath*:com/ytfs/service/packet/**/*.class");
         for (Resource r : resources) {
             if (r.isReadable()) {
                 try {
