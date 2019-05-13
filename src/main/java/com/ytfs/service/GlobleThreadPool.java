@@ -1,4 +1,4 @@
-package com.ytfs.service.utils;
+package com.ytfs.service;
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.SynchronousQueue;

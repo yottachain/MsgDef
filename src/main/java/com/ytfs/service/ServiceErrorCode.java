@@ -1,4 +1,4 @@
-package com.ytfs.service.utils;
+package com.ytfs.service;
 
 public class ServiceErrorCode {
 

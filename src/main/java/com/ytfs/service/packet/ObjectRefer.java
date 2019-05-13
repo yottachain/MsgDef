@@ -1,7 +1,7 @@
 package com.ytfs.service.packet;
 
-import static com.ytfs.service.utils.Function.bytes2Integer;
-import static com.ytfs.service.utils.Function.long2bytes;
+import static com.ytfs.service.Function.bytes2Integer;
+import static com.ytfs.service.Function.long2bytes;
 import java.util.ArrayList;
 import java.util.List;
 

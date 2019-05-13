@@ -1,7 +1,7 @@
 package com.ytfs.service.packet;
 
-import com.ytfs.service.utils.SerializationUtil;
-import com.ytfs.service.utils.ServiceException;
+import com.ytfs.service.SerializationUtil;
+import com.ytfs.service.ServiceException;
 import java.io.IOException;
 
 public class ProtobufTest {

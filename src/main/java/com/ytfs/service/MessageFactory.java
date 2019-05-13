@@ -1,4 +1,4 @@
-package com.ytfs.service.utils;
+package com.ytfs.service;
 
 import com.github.snksoft.crc.CRC;
 import java.io.IOException;
