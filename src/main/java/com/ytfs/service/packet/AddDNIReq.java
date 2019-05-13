@@ -25,7 +25,7 @@ public class AddDNIReq {
         this.dnis = dnis;
     }
 
-    public class DNI {
+    public static class DNI {
 
         private byte[] VHF;
         private int nodeid;
