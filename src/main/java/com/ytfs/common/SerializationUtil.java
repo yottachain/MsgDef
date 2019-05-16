@@ -7,11 +7,9 @@ import io.protostuff.Schema;
 import io.protostuff.runtime.RuntimeSchema;
 
 public class SerializationUtil {
- 
+
     private static final ThreadLocal<LinkedBuffer> BUFFER_THREAD_LOCAL = ThreadLocal
             .withInitial(() -> LinkedBuffer.allocate(512));
-
-  
 
     /**
      * 序列化对象
@@ -67,6 +65,51 @@ public class SerializationUtil {
         if (instance instanceof ErrorMessage) {
             return new ServiceException((ErrorMessage) instance);
         }
+        return instance;
+    }
+
+    /**
+     * 序列化对象
+     *
+     * @param obj
+     * @return
+     */
+    public static byte[] serializeNoID(Object obj) {
+        if (obj == null) {
+            throw new IllegalArgumentException();
+        }
+        @SuppressWarnings("unchecked")
+        Schema schema = RuntimeSchema.getSchema(obj.getClass());
+        LinkedBuffer buffer = BUFFER_THREAD_LOCAL.get();
+        try {
+            return ProtostuffIOUtil.toByteArray(obj, schema, buffer);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        } finally {
+            buffer.clear();
+        }
+    }
+
+    /**
+     * 反序列化
+     *
+     * @param paramArrayOfByte
+     * @param targetClass
+     * @return
+     */
+    @SuppressWarnings("unchecked")
+    public static Object deserializeNoID(byte[] paramArrayOfByte, Class targetClass) {
+        if (paramArrayOfByte == null || paramArrayOfByte.length == 0) {
+            throw new IllegalArgumentException();
+        }
+        Object instance = null;
+        try {
+            instance = targetClass.newInstance();
+        } catch (InstantiationException | IllegalAccessException e) {
+            throw new RuntimeException(e);
+        }
+        Schema schema = RuntimeSchema.getSchema(targetClass);
+        ProtostuffIOUtil.mergeFrom(paramArrayOfByte, instance, schema);
         return instance;
     }
 }
