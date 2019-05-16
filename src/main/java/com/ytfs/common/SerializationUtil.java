@@ -5,9 +5,13 @@ import io.protostuff.LinkedBuffer;
 import io.protostuff.ProtostuffIOUtil;
 import io.protostuff.Schema;
 import io.protostuff.runtime.RuntimeSchema;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class SerializationUtil {
-
+    
     private static final ThreadLocal<LinkedBuffer> BUFFER_THREAD_LOCAL = ThreadLocal
             .withInitial(() -> LinkedBuffer.allocate(512));
 
@@ -71,13 +75,14 @@ public class SerializationUtil {
     /**
      * 序列化对象
      *
-     * @param obj
+     * @param map
      * @return
      */
-    public static byte[] serializeNoID(Object obj) {
-        if (obj == null) {
+    public static byte[] serializeMap(Map<String, String> map) {
+        if (map == null) {
             throw new IllegalArgumentException();
         }
+        MapObject obj = new MapObject(map);
         @SuppressWarnings("unchecked")
         Schema schema = RuntimeSchema.getSchema(obj.getClass());
         LinkedBuffer buffer = BUFFER_THREAD_LOCAL.get();
@@ -93,24 +98,69 @@ public class SerializationUtil {
     /**
      * 反序列化
      *
-     * @param <T>
      * @param paramArrayOfByte
-     * @param targetClass
      * @return
      */
     @SuppressWarnings("unchecked")
-    public static <T> T deserializeNoID(byte[] paramArrayOfByte, Class<T> targetClass) {
+    public static Map<String, String> deserializeMap(byte[] paramArrayOfByte) {
         if (paramArrayOfByte == null || paramArrayOfByte.length == 0) {
             throw new IllegalArgumentException();
         }
-        T instance = null;
-        try {
-            instance = targetClass.newInstance();
-        } catch (InstantiationException | IllegalAccessException e) {
-            throw new RuntimeException(e);
-        }
-        Schema schema = RuntimeSchema.getSchema(targetClass);
+        MapObject instance = new MapObject();        
+        Schema schema = RuntimeSchema.getSchema(MapObject.class);
         ProtostuffIOUtil.mergeFrom(paramArrayOfByte, instance, schema);
-        return instance;
+        return instance.toMap();
+    }
+    
+    public static class MapObject {
+        
+        private List<String> keys;
+        private List<String> values;
+        
+        public MapObject() {
+        }
+        
+        public MapObject(Map<String, String> map) {
+            keys = new ArrayList(map.keySet());
+            values = new ArrayList(map.values());
+        }
+
+        /**
+         * @return the keys
+         */
+        public List<String> getKeys() {
+            return keys;
+        }
+
+        /**
+         * @param keys the keys to set
+         */
+        public void setKeys(List<String> keys) {
+            this.keys = keys;
+        }
+
+        /**
+         * @return the values
+         */
+        public List<String> getValues() {
+            return values;
+        }
+
+        /**
+         * @param values the values to set
+         */
+        public void setValues(List<String> values) {
+            this.values = values;
+        }
+        
+        public Map<String, String> toMap() {
+            Map<String, String> map = new HashMap();
+            int len = keys.size();
+            for (int ii = 0; ii < len; ii++) {
+                map.put(keys.get(ii), values.get(ii));
+            }
+            return map;
+        }
+        
     }
 }
