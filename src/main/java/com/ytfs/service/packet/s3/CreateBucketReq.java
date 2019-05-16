@@ -4,6 +4,16 @@ public class CreateBucketReq {
 
     private String bucketName;
 
+    private byte[] meta;
+
+    public byte[] getMeta() {
+        return meta;
+    }
+
+    public void setMeta(byte[] meta) {
+        this.meta = meta;
+    }
+
     /**
      * @return the bucketName
      */
