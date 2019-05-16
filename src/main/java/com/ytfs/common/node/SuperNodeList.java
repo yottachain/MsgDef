@@ -44,6 +44,11 @@ public class SuperNodeList {
         return superList;
     }
 
+    public static int getSuperNodeCount() {
+        SuperNode[] nodes = getSuperNodeList();
+        return nodes.length;
+    }
+
     /**
      * 获取数据块所属超级节点编号
      *

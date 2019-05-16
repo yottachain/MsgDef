@@ -6,7 +6,6 @@ import io.yottachain.nodemgmt.YottaNodeMgmt;
 import io.yottachain.nodemgmt.core.exception.NodeMgmtException;
 import io.yottachain.nodemgmt.core.vo.Node;
 import io.yottachain.nodemgmt.core.vo.SuperNode;
-import java.util.ArrayList;
 import java.util.List;
 import org.apache.log4j.Logger;
 
@@ -19,7 +18,6 @@ public class NodeManager {
             ServerAddress serverAddress = addrs.get(0);
             String addr = "mongodb://" + serverAddress.getHost() + ":" + serverAddress.getPort();
             YottaNodeMgmt.start(addr);
-
             LOG.info("NodeManager init...");
         } catch (NodeMgmtException ne) {
             try {
@@ -30,22 +28,6 @@ public class NodeManager {
         }
     }
 
-    //Test
-    private static SuperNode[] gettestSuperNode() {
-        SuperNode[] sn = new SuperNode[1];
-        SuperNode n = new SuperNode(0, null, null, null, null);
-        List<String> addr = new ArrayList();
-        addr.add("/p2p-circuit");
-        addr.add("/ip4/127.0.0.1/tcp/9999");
-        addr.add("/ip4/172.21.0.13/tcp/9999");
-        n.setAddrs(addr);
-        n.setNodeid("16Uiu2HAm4ejSpUiVYEYc2pCk7RUa3ScdswM6cXGwzTZziSKcAYwi");
-        n.setId(0);
-        n.setPrivkey("5JvCxXLSLzihWdXT7C9mtQkfLFHJZPdX1hxQo6su7dNt28mZ5W2");
-        sn[0] = n;
-        return sn;
-    }
-
     /**
      * 获取超级节点列表,包括节点编号,加密或解签用公钥,接口地址
      *
@@ -53,15 +35,16 @@ public class NodeManager {
      * @throws io.yottachain.nodemgmt.core.exception.NodeMgmtException
      */
     public static SuperNode[] getSuperNode() throws NodeMgmtException {
-        List<SuperNode> ls = YottaNodeMgmt.getSuperNodes();
-        SuperNode[] sn = new SuperNode[ls.size()];
-        for (SuperNode n : ls) {
-            sn[n.getId()] = n;
+        try {
+            List<SuperNode> ls = YottaNodeMgmt.getSuperNodes();
+            SuperNode[] sn = new SuperNode[ls.size()];
+            for (SuperNode n : ls) {
+                sn[n.getId()] = n;
+            }
+            return sn;
+        } catch (Throwable t) {
+            throw new NodeMgmtException(t.getMessage());
         }
-        if (sn.length == 0) {
-            return gettestSuperNode();
-        }
-        return sn;
     }
 
     /**
