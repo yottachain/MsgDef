@@ -93,16 +93,17 @@ public class SerializationUtil {
     /**
      * 反序列化
      *
+     * @param <T>
      * @param paramArrayOfByte
      * @param targetClass
      * @return
      */
     @SuppressWarnings("unchecked")
-    public static Object deserializeNoID(byte[] paramArrayOfByte, Class targetClass) {
+    public static <T> T deserializeNoID(byte[] paramArrayOfByte, Class<T> targetClass) {
         if (paramArrayOfByte == null || paramArrayOfByte.length == 0) {
             throw new IllegalArgumentException();
         }
-        Object instance = null;
+        T instance = null;
         try {
             instance = targetClass.newInstance();
         } catch (InstantiationException | IllegalAccessException e) {
