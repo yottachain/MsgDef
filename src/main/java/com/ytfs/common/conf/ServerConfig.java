@@ -20,7 +20,7 @@ public class ServerConfig {
 
     //存储节点验签失败,拒绝存储,超过3次,惩罚
     public final static int PNF = 3;
- 
+
     //**************************可配置参数********************************
     //服务端超级节点编号,本服务节点编号
     public static int superNodeID;
@@ -34,6 +34,8 @@ public class ServerConfig {
 
     //eos ADD
     public static String eosURI;
+    public static String BPAccount;
+    public static String BPPriKey;
 
     //端口
     public static int httpPort = 8080;
