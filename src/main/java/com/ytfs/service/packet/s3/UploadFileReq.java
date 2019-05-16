@@ -7,6 +7,15 @@ public class UploadFileReq {
     private String bucketname;
     private String fileName;
     private ObjectId VNU;
+    private byte[] meta;
+
+    public byte[] getMeta() {
+        return meta;
+    }
+
+    public void setMeta(byte[] meta) {
+        this.meta = meta;
+    }
 
     /**
      * @return the bucketname
