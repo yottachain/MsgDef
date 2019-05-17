@@ -31,9 +31,6 @@ public class UserConfig {
     public final static int DOWNLOADSHARDTHREAD = 50;
 
     //**************************可配置参数********************************
-    //用户ID
-    public static int userID1;
-
     //用户钱包账户名
     public static String username;
 
@@ -47,9 +44,6 @@ public class UserConfig {
 
     //用户对应的超级节点
     public static SuperNode superNode;
-
-    //p2p端口
-    public static int port;
 
     //缓存路径
     public static File tmpFilePath;

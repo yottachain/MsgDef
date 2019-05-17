@@ -10,12 +10,12 @@ public class TestMap {
 
     public static void main(String[] args) {
 
-        Map<String, String> map = new HashMap();
-        map.put("sd", "value");
-        map.put("sdq", "valque");
+        Map<String, byte[]> map = new HashMap();
+        map.put("sd", "value".getBytes());
+        map.put("sdq", "valque".getBytes());
         byte[] bs = SerializationUtil.serializeMap(map);
 
-        Map<String, String> map1 = SerializationUtil.deserializeMap(bs);
+        Map<String, byte[]> map1 = SerializationUtil.deserializeMap(bs);
         
         System.out.print(map1.size());
 

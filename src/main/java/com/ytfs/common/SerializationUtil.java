@@ -75,10 +75,11 @@ public class SerializationUtil {
     /**
      * 序列化对象
      *
+     * @param <T>
      * @param map
      * @return
      */
-    public static byte[] serializeMap(Map<String, String> map) {
+    public static <T>byte[] serializeMap(Map<String, T> map) {
         if (map == null) {
             throw new IllegalArgumentException();
         }
@@ -98,29 +99,30 @@ public class SerializationUtil {
     /**
      * 反序列化
      *
+     * @param <T>
      * @param paramArrayOfByte
      * @return
      */
     @SuppressWarnings("unchecked")
-    public static Map<String, String> deserializeMap(byte[] paramArrayOfByte) {
+    public static <T>Map<String, T> deserializeMap(byte[] paramArrayOfByte) {
         if (paramArrayOfByte == null || paramArrayOfByte.length == 0) {
             throw new IllegalArgumentException();
         }
-        MapObject instance = new MapObject();        
+        MapObject<T> instance = new MapObject();        
         Schema schema = RuntimeSchema.getSchema(MapObject.class);
         ProtostuffIOUtil.mergeFrom(paramArrayOfByte, instance, schema);
         return instance.toMap();
     }
     
-    public static class MapObject {
+    public static class MapObject<T> {
         
         private List<String> keys;
-        private List<String> values;
+        private List<T> values;
         
         public MapObject() {
         }
         
-        public MapObject(Map<String, String> map) {
+        public MapObject(Map<String, T> map) {
             keys = new ArrayList(map.keySet());
             values = new ArrayList(map.values());
         }
@@ -142,19 +144,19 @@ public class SerializationUtil {
         /**
          * @return the values
          */
-        public List<String> getValues() {
+        public List<T> getValues() {
             return values;
         }
 
         /**
          * @param values the values to set
          */
-        public void setValues(List<String> values) {
+        public void setValues(List<T> values) {
             this.values = values;
         }
         
-        public Map<String, String> toMap() {
-            Map<String, String> map = new HashMap();
+        public Map<String, T> toMap() {
+            Map<String, T> map = new HashMap();
             int len = keys.size();
             for (int ii = 0; ii < len; ii++) {
                 map.put(keys.get(ii), values.get(ii));
