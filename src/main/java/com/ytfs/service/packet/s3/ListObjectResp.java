@@ -1,21 +1,23 @@
 package com.ytfs.service.packet.s3;
 
+import com.ytfs.common.SerializationUtil;
+
+import java.util.Map;
+
 public class ListObjectResp {
 
-    private String[] names;
+    Map<String,byte[]> map;
+    SerializationUtil.MapObject mapObject = new SerializationUtil.MapObject(map);
 
-    /**
-     * @return the names
-     */
-    public String[] getNames() {
-        return names;
+    public Map<String, byte[]> getMap() {
+        return map;
     }
 
-    /**
-     * @param names the names to set
-     */
-    public void setNames(String[] names) {
-        this.names = names;
+    public void setMap(Map<String, byte[]> map) {
+        this.map = map;
     }
+
+
+
 
 }
