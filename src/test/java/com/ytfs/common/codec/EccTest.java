@@ -1,7 +1,5 @@
 package com.ytfs.common.codec;
 
-import com.ytfs.common.codec.KeyStoreCoder;
-import com.ytfs.common.codec.Block;
 import io.jafka.jeos.util.Base58;
 import io.jafka.jeos.util.KeyUtil;
 
@@ -21,6 +19,7 @@ public class EccTest {
         byte[] bs = KeyStoreCoder.ecdsaSign(data, kusp);
         boolean c = KeyStoreCoder.ecdsaVerify(data, bs, kuep);
         System.out.println(c);
+
     }
 
     public static void crype() throws Exception {

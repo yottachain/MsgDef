@@ -110,4 +110,52 @@ public class EOSRequest {
         String hash = KeyUtil.signHash(privateKey, raw.bytes());
         return hash;
     }
+
+    public static PushTransactionRequest makeAddUsedSpaceRequest(SignArg arg, long length) throws JsonProcessingException, IOException {
+        Raw raw = new Raw();
+        raw.packName(ServerConfig.BPAccount);
+        raw.packUint64(length);
+        String transferData = raw.toHex();
+        List<TransactionAuthorization> authorizations = Arrays.asList(new TransactionAuthorization(ServerConfig.BPAccount, "active"));
+        List<TransactionAction> actions = Arrays.asList(
+                new TransactionAction(ServerConfig.contractAccount, "addhspace", authorizations, transferData)
+        );
+        PackedTransaction packedTransaction = new PackedTransaction();
+        packedTransaction.setExpiration(arg.getHeadBlockTime().plusSeconds(arg.getExpiredSecond()));
+        packedTransaction.setRefBlockNum(arg.getLastIrreversibleBlockNum());
+        packedTransaction.setRefBlockPrefix(arg.getRefBlockPrefix());
+        packedTransaction.setMaxNetUsageWords(0);
+        packedTransaction.setMaxCpuUsageMs(0);
+        packedTransaction.setDelaySec(0);
+        packedTransaction.setActions(actions);
+        String hash = sign(ServerConfig.BPPriKey, arg, packedTransaction);
+        PushTransactionRequest req = new PushTransactionRequest();
+        req.setTransaction(packedTransaction);
+        req.setSignatures(Arrays.asList(hash));
+        return req;
+    }
+
+    public static PushTransactionRequest makeSetHfeeRequest(SignArg arg, long cost) throws JsonProcessingException, IOException {
+        Raw raw = new Raw();
+        raw.packName(ServerConfig.BPAccount);
+        raw.packUint64(cost);
+        String transferData = raw.toHex();
+        List<TransactionAuthorization> authorizations = Arrays.asList(new TransactionAuthorization(ServerConfig.BPAccount, "active"));
+        List<TransactionAction> actions = Arrays.asList(
+                new TransactionAction(ServerConfig.contractAccount, "sethfee", authorizations, transferData)
+        );
+        PackedTransaction packedTransaction = new PackedTransaction();
+        packedTransaction.setExpiration(arg.getHeadBlockTime().plusSeconds(arg.getExpiredSecond()));
+        packedTransaction.setRefBlockNum(arg.getLastIrreversibleBlockNum());
+        packedTransaction.setRefBlockPrefix(arg.getRefBlockPrefix());
+        packedTransaction.setMaxNetUsageWords(0);
+        packedTransaction.setMaxCpuUsageMs(0);
+        packedTransaction.setDelaySec(0);
+        packedTransaction.setActions(actions);
+        String hash = sign(ServerConfig.BPPriKey, arg, packedTransaction);
+        PushTransactionRequest req = new PushTransactionRequest();
+        req.setTransaction(packedTransaction);
+        req.setSignatures(Arrays.asList(hash));
+        return req;
+    }
 }

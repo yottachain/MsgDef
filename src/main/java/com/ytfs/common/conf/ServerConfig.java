@@ -36,6 +36,7 @@ public class ServerConfig {
     public static String eosURI;
     public static String BPAccount;
     public static String BPPriKey;
+    public static String contractAccount;
 
     //端口
     public static int httpPort = 8080;
