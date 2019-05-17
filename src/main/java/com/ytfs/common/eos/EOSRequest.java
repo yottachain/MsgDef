@@ -80,14 +80,20 @@ public class EOSRequest {
         return encodeRequest(req);
     }
 
-    public static byte[] makeGetBalanceRequest(byte[] signarg, String from, String privateKey, String contractAccount) throws JsonProcessingException, IOException {
-        SignArg arg = decodeSignArg(signarg);
+    private static String sign(String privateKey, SignArg arg, PackedTransaction t) {
+        Raw raw = Packer.packPackedTransaction(arg.getChainId(), t);
+        raw.pack(ByteBuffer.allocate(33).array());
+        String hash = KeyUtil.signHash(privateKey, raw.bytes());
+        return hash;
+    }
+
+    public static PushTransactionRequest makeGetBalanceRequest(SignArg arg, String username) throws JsonProcessingException, IOException {
         Raw raw = new Raw();
-        raw.packName(from);
+        raw.packName(username);
         String transferData = raw.toHex();
-        List<TransactionAuthorization> authorizations = Arrays.asList(new TransactionAuthorization(from, "active"));
+        List<TransactionAuthorization> authorizations = Arrays.asList(new TransactionAuthorization(ServerConfig.BPAccount, "active"));
         List<TransactionAction> actions = Arrays.asList(
-                new TransactionAction(contractAccount, "getbalance", authorizations, transferData)
+                new TransactionAction(ServerConfig.contractAccount, "getbalance", authorizations, transferData)
         );
         PackedTransaction packedTransaction = new PackedTransaction();
         packedTransaction.setExpiration(arg.getHeadBlockTime().plusSeconds(arg.getExpiredSecond()));
@@ -97,23 +103,16 @@ public class EOSRequest {
         packedTransaction.setMaxCpuUsageMs(0);
         packedTransaction.setDelaySec(0);
         packedTransaction.setActions(actions);
-        String hash = sign(privateKey, arg, packedTransaction);
+        String hash = sign(ServerConfig.BPPriKey, arg, packedTransaction);
         PushTransactionRequest req = new PushTransactionRequest();
         req.setTransaction(packedTransaction);
         req.setSignatures(Arrays.asList(hash));
-        return encodeRequest(req);
+        return req;
     }
 
-    private static String sign(String privateKey, SignArg arg, PackedTransaction t) {
-        Raw raw = Packer.packPackedTransaction(arg.getChainId(), t);
-        raw.pack(ByteBuffer.allocate(33).array());
-        String hash = KeyUtil.signHash(privateKey, raw.bytes());
-        return hash;
-    }
-
-    public static PushTransactionRequest makeAddUsedSpaceRequest(SignArg arg, long length) throws JsonProcessingException, IOException {
+    public static PushTransactionRequest makeAddUsedSpaceRequest(SignArg arg, long length, String username) throws JsonProcessingException, IOException {
         Raw raw = new Raw();
-        raw.packName(ServerConfig.BPAccount);
+        raw.packName(username);
         raw.packUint64(length);
         String transferData = raw.toHex();
         List<TransactionAuthorization> authorizations = Arrays.asList(new TransactionAuthorization(ServerConfig.BPAccount, "active"));
@@ -135,9 +134,9 @@ public class EOSRequest {
         return req;
     }
 
-    public static PushTransactionRequest makeSetHfeeRequest(SignArg arg, long cost) throws JsonProcessingException, IOException {
+    public static PushTransactionRequest makeSetHfeeRequest(SignArg arg, long cost, String username) throws JsonProcessingException, IOException {
         Raw raw = new Raw();
-        raw.packName(ServerConfig.BPAccount);
+        raw.packName(username);
         raw.packUint64(cost);
         String transferData = raw.toHex();
         List<TransactionAuthorization> authorizations = Arrays.asList(new TransactionAuthorization(ServerConfig.BPAccount, "active"));

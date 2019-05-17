@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ytfs.common.conf.ServerConfig;
 import com.ytfs.common.conf.UserConfig;
 import static com.ytfs.common.eos.EOSRequest.makeAddUsedSpaceRequest;
+import static com.ytfs.common.eos.EOSRequest.makeGetBalanceRequest;
 import static com.ytfs.common.eos.EOSRequest.makeSetHfeeRequest;
 import io.jafka.jeos.EosApi;
 import io.jafka.jeos.EosApiFactory;
@@ -19,13 +20,15 @@ public class EOSClient {
      * 该用户是否有足够的HDD用于存储该数据最短存储时间PMS（例如60天）
      *
      * @param length 数据长度
-     * @param reqdata
-     * @param id
+     * @param username
      * @return true：有足够空间，false：没有
      * @throws java.lang.Throwable
      */
-    public static boolean hasSpace(long length, byte[] reqdata, ObjectId id) throws Throwable {
-        PushedTransaction pts = EOSRequest.request(reqdata, id);
+    public static boolean hasSpace(long length, String username) throws Throwable {
+        EosApi eosApi = EosApiFactory.create(ServerConfig.eosURI);
+        SignArg arg = eosApi.getSignArg((int) EOSClientCache.EXPIRED_TIME);
+        PushTransactionRequest req = makeGetBalanceRequest(arg, username);
+        PushedTransaction pts = eosApi.pushTransaction(req);
         String console = pts.getProcessed().getActionTraces().get(0).getConsole();
         ObjectMapper mapper = new ObjectMapper();
         Map readValue = mapper.readValue(console, Map.class);
@@ -52,19 +55,27 @@ public class EOSClient {
      * 增加用户使用空间
      *
      * @param length
+     * @param username
      * @throws Throwable
      */
-    public static void addUsedSpace(long length) throws Throwable {
+    public static void addUsedSpace(long length, String username) throws Throwable {
         EosApi eosApi = EosApiFactory.create(ServerConfig.eosURI);
         SignArg arg = eosApi.getSignArg((int) EOSClientCache.EXPIRED_TIME);
-        PushTransactionRequest req = makeAddUsedSpaceRequest(arg, length);
+        PushTransactionRequest req = makeAddUsedSpaceRequest(arg, length, username);
         eosApi.pushTransaction(req);
     }
 
-    public static void setUserFee(long length) throws Throwable {
+    /**
+     * 设置周期费用
+     *
+     * @param cost
+     * @param username
+     * @throws Throwable
+     */
+    public static void setUserFee(long cost, String username) throws Throwable {
         EosApi eosApi = EosApiFactory.create(ServerConfig.eosURI);
         SignArg arg = eosApi.getSignArg((int) EOSClientCache.EXPIRED_TIME);
-        PushTransactionRequest req = makeSetHfeeRequest(arg, length);
+        PushTransactionRequest req = makeSetHfeeRequest(arg, cost, username);
         eosApi.pushTransaction(req);
     }
 
