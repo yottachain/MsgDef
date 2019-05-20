@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 public class SerializationUtil {
-    
+
     private static final ThreadLocal<LinkedBuffer> BUFFER_THREAD_LOCAL = ThreadLocal
             .withInitial(() -> LinkedBuffer.allocate(512));
 
@@ -79,7 +79,7 @@ public class SerializationUtil {
      * @param map
      * @return
      */
-    public static <T>byte[] serializeMap(Map<String, T> map) {
+    public static <T> byte[] serializeMap(Map<String, T> map) {
         if (map == null) {
             throw new IllegalArgumentException();
         }
@@ -104,24 +104,24 @@ public class SerializationUtil {
      * @return
      */
     @SuppressWarnings("unchecked")
-    public static <T>Map<String, T> deserializeMap(byte[] paramArrayOfByte) {
+    public static <T> Map<String, T> deserializeMap(byte[] paramArrayOfByte) {
         if (paramArrayOfByte == null || paramArrayOfByte.length == 0) {
             throw new IllegalArgumentException();
         }
-        MapObject<T> instance = new MapObject();        
+        MapObject<T> instance = new MapObject();
         Schema schema = RuntimeSchema.getSchema(MapObject.class);
         ProtostuffIOUtil.mergeFrom(paramArrayOfByte, instance, schema);
         return instance.toMap();
     }
-    
+
     public static class MapObject<T> {
-        
+
         private List<String> keys;
         private List<T> values;
-        
+
         public MapObject() {
         }
-        
+
         public MapObject(Map<String, T> map) {
             keys = new ArrayList(map.keySet());
             values = new ArrayList(map.values());
@@ -154,15 +154,18 @@ public class SerializationUtil {
         public void setValues(List<T> values) {
             this.values = values;
         }
-        
+
         public Map<String, T> toMap() {
             Map<String, T> map = new HashMap();
+            if (keys == null || values == null) {
+                return map;
+            }
             int len = keys.size();
             for (int ii = 0; ii < len; ii++) {
                 map.put(keys.get(ii), values.get(ii));
             }
             return map;
         }
-        
+
     }
 }
