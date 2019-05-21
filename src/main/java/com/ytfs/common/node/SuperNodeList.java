@@ -18,7 +18,7 @@ public class SuperNodeList {
      *
      * @return SuperNode[]
      */
-    private static SuperNode[] getSuperNodeList() {
+    public static SuperNode[] getSuperNodeList() {
         if (superList != null) {
             return superList;
         }
@@ -60,6 +60,26 @@ public class SuperNodeList {
                 | ((src[1] & 0xFF) << 16)
                 | ((src[2] & 0xFF) << 8)
                 | (src[3] & 0xFF));
+        value = value & 0x0FFFF;
+        SuperNode[] nodes = getSuperNodeList();
+        int index = value % nodes.length;
+        return nodes[index];
+    }
+
+    /**
+     * 获取用户注册节点
+     *
+     * @param src
+     * @return
+     */
+    public static SuperNode getUserRegSuperNode(byte[] src) {
+        if (src.length < 8) {
+            throw new IllegalArgumentException("Invalid public key.");
+        }
+        int value = (int) (((src[4] & 0xFF) << 24)
+                | ((src[5] & 0xFF) << 16)
+                | ((src[6] & 0xFF) << 8)
+                | (src[7] & 0xFF));
         value = value & 0x0FFFF;
         SuperNode[] nodes = getSuperNodeList();
         int index = value % nodes.length;

@@ -38,7 +38,7 @@ public class UserConfig {
     public static byte[] KUSp;
     public static byte[] KUEp;       //用户公钥，不用配置
     public static String privateKey; //用户私钥
-    
+
     //合约账户名
     public static String contractAccount;
 
