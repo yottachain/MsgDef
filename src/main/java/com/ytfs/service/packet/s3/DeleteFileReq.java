@@ -4,7 +4,7 @@ import org.bson.types.ObjectId;
 
 public class DeleteFileReq {
 
-    private String bucketname;
+    private String bucketName;
     private String fileName;
     private ObjectId VNU;
     private byte[] meta;
@@ -20,15 +20,15 @@ public class DeleteFileReq {
     /**
      * @return the bucketname
      */
-    public String getBucketname() {
-        return bucketname;
+    public String getBucketName() {
+        return bucketName;
     }
 
     /**
-     * @param bucketname the bucketname to set
+     * @param bucketName the bucketname to set
      */
-    public void setBucketname(String bucketname) {
-        this.bucketname = bucketname;
+    public void setBucketname(String bucketName) {
+        this.bucketName = bucketName;
     }
 
     /**
