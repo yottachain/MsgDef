@@ -118,8 +118,9 @@ public class KeyStoreCoder {
 
     public static byte[] eccEncryped(byte[] data, byte[] pubkey) {
         try {
-            String pub = Base58.encode(pubkey);
-            return YTCrypto.eccEncrypt(data, pub);
+            //String pub = Base58.encode(pubkey);
+            //byte[] data1= YTCrypto.eccEncrypt(data, pub);
+            return data;
         } catch (Exception r) {
             throw new IllegalArgumentException(r.getMessage());
         }
@@ -138,8 +139,9 @@ public class KeyStoreCoder {
 
     public static byte[] eccDecryped(byte[] data, byte[] prikey) {
         try {
-            String pub = Base58.encode(prikey);
-            return YTCrypto.eccDecrypt(data, pub);
+            //String pub = Base58.encode(prikey);
+            //return YTCrypto.eccDecrypt(data, pub);
+            return data;
         } catch (Exception r) {
             throw new IllegalArgumentException(r.getMessage());
         }
