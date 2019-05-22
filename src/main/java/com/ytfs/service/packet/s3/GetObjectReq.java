@@ -1,9 +1,18 @@
 package com.ytfs.service.packet.s3;
 
-public class GetBucketResp {
+public class GetObjectReq {
 
     private String bucketName;
 
+    private String fileName;
+
+    public String getFileName() {
+        return fileName;
+    }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
+    }
 
     public String getBucketName() {
         return bucketName;
