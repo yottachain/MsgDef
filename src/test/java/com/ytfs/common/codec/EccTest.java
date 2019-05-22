@@ -43,6 +43,7 @@ public class EccTest {
         String sss = "dsfaaaaaafgdhytjtrjrytuj";
         System.out.println(sss);
         byte[] data = KeyStoreCoder.eccEncryped(sss.getBytes(), kuep);
+        
         byte[] bs = KeyStoreCoder.eccDecryped(data, kusp);
         System.out.println(new String(bs));
     }
