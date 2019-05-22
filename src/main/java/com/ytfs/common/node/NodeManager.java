@@ -13,11 +13,11 @@ public class NodeManager {
 
     private static final Logger LOG = Logger.getLogger(NodeManager.class);
 
-    public synchronized static void start(List<ServerAddress> addrs,String eos) throws NodeMgmtException {
+    public synchronized static void start(List<ServerAddress> addrs, String eos) throws NodeMgmtException {
         try {
             ServerAddress serverAddress = addrs.get(0);
             String addr = "mongodb://" + serverAddress.getHost() + ":" + serverAddress.getPort();
-            YottaNodeMgmt.start(addr,eos);
+            YottaNodeMgmt.start(addr, eos);
             LOG.info("NodeManager init...");
         } catch (NodeMgmtException ne) {
             try {
@@ -43,6 +43,7 @@ public class NodeManager {
             }
             return sn;
         } catch (Throwable t) {
+            LOG.info("", t);
             throw new NodeMgmtException(t.getMessage());
         }
     }
