@@ -6,7 +6,8 @@ import io.jafka.jeos.util.KeyUtil;
 public class EccTest {
 
     public static void main(String[] args) throws Exception {
-
+        crype();
+/*
         String prikey = "5JcDH48njDbUQLu1R8SWwKsfWLnqBpWXDDiCgxFC3hioDuwLhVx";
         byte[] kusp = Base58.decode(prikey);//si钥    
         String pubkey = KeyUtil.toPublicKey(prikey);
@@ -19,7 +20,7 @@ public class EccTest {
         byte[] bs = KeyStoreCoder.ecdsaSign(data, kusp);
         boolean c = KeyStoreCoder.ecdsaVerify(data, bs, kuep);
         System.out.println(c);
-
+*/
     }
 
     public static void crype() throws Exception {

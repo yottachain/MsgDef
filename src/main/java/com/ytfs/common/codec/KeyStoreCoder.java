@@ -4,6 +4,8 @@ import static io.jafka.jeos.util.KeyUtil.secp;
 import io.jafka.jeos.util.Raw;
 import io.jafka.jeos.util.ecc.Hex;
 import io.jafka.jeos.util.ecc.Point;
+import io.yottachain.p2phost.utils.Base58;
+import io.yottachain.ytcrypto.YTCrypto;
 import java.math.BigInteger;
 import java.security.Key;
 import java.security.Provider;
@@ -12,12 +14,11 @@ import java.security.Signature;
 import java.security.spec.ECPoint;
 import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
-import javax.crypto.NullCipher;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 import sun.security.ec.ECPrivateKeyImpl;
 import sun.security.ec.ECPublicKeyImpl;
-import sun.security.util.ECUtil;
+ 
 
 public class KeyStoreCoder {
 
@@ -94,6 +95,7 @@ public class KeyStoreCoder {
     private static final String SIGNATURE_ALGORITHM = "SHA512withECDSA";
     private static final String KEY_ALGORITHM = "secp256k1";
 
+    /*
     public static Key generatePrivateKey(byte[] private_wif) {
         byte version = (byte) 0x80;
         if (private_wif[0] != version) {
@@ -121,8 +123,19 @@ public class KeyStoreCoder {
             throw new IllegalArgumentException(r.getMessage());
         }
     }
+    */
+//4. byte[] encData = YTCrypto.eccEncrypt(byte[] data, String publicKey); //使用公钥publicKey对数据data加密
+//5. byte[] data = YTCrypto.eccDecrypt(byte[] encData, String privateKey); 
 
     public static byte[] eccEncryped(byte[] data, byte[] pubkey) {
+        try {
+            String pub = Base58.encode(pubkey);
+            return YTCrypto.eccEncrypt(data, pub);
+        } catch (Exception r) {
+            throw new IllegalArgumentException(r.getMessage());
+        }
+
+        /*
         try {
             ECPublicKeyImpl pkey = (ECPublicKeyImpl) generatePublicKey(pubkey);
             Cipher cipher = new NullCipher();
@@ -131,10 +144,17 @@ public class KeyStoreCoder {
             return bs;
         } catch (Exception r) {
             throw new IllegalArgumentException(r.getMessage());
-        }
+        }*/
     }
 
     public static byte[] eccDecryped(byte[] data, byte[] prikey) {
+        try {
+            String pub = Base58.encode(prikey);
+            return YTCrypto.eccDecrypt(data, pub);
+        } catch (Exception r) {
+            throw new IllegalArgumentException(r.getMessage());
+        }
+        /*    
         try {
             ECPrivateKeyImpl privateK = (ECPrivateKeyImpl) generatePrivateKey(prikey);
             Cipher cipher = new NullCipher();
@@ -142,10 +162,12 @@ public class KeyStoreCoder {
             return cipher.doFinal(data);
         } catch (Exception r) {
             throw new IllegalArgumentException(r.getMessage());
-        }
+        }*/
     }
 
-    public static byte[] ecdsaSign(byte[] data, byte[] prikey) {
+    public static byte[] ecdsaSign1(byte[] data, byte[] prikey) {
+        return null;
+        /*
         try {
             ECPrivateKeyImpl privateK = (ECPrivateKeyImpl) generatePrivateKey(prikey);
             Signature signature = Signature.getInstance(SIGNATURE_ALGORITHM);
@@ -154,10 +176,12 @@ public class KeyStoreCoder {
             return signature.sign();
         } catch (Exception r) {
             throw new IllegalArgumentException(r.getMessage());
-        }
+        }*/
     }
 
-    public static boolean ecdsaVerify(byte[] data, byte[] sign, byte[] pubkey) {
+    public static boolean ecdsaVerify1(byte[] data, byte[] sign, byte[] pubkey) {
+        return true;
+        /*
         try {
             ECPublicKeyImpl publicKey = (ECPublicKeyImpl) generatePublicKey(pubkey);
             Signature signature = Signature.getInstance(SIGNATURE_ALGORITHM);
@@ -166,7 +190,7 @@ public class KeyStoreCoder {
             return signature.verify(sign);
         } catch (Exception r) {
             throw new IllegalArgumentException(r.getMessage());
-        }
+        }*/
     }
 
 }
