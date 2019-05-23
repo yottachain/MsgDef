@@ -2,6 +2,7 @@ syntax = "proto3";
 
 option java_package = "com.ytfs.service.packet"; 
 
+#msgid=0xCB05
 message UploadShardRequest  { 
    int32 SHARDID=1;
    int32 BPDID = 2; 
@@ -12,6 +13,7 @@ message UploadShardRequest  {
    bytes USERSIGN=7; 
 }
 
+#msgid=0x870B
 message UploadShardResponse  {
    int32 RES= 1; 
    int32 SHARDID = 2;
@@ -20,18 +22,27 @@ message UploadShardResponse  {
    bytes USERSIGN=5;
 }
 
+#msgid=0xe64f
 message VoidResponse  {
 }
 
+#msgid=0x1978
 message UploadShard2CResponse  {
    int32 RES= 1; 
 }
 
+#msgid=0x1757
 message DownloadShardRequest {
    bytes VHF=1;
 }
 
+#msgid=0x7a56
 message DownloadShardResponse{
    bytes data=1;
 }
 
+#msgid=0x5913
+message ErrorMessage{
+   int32 code=1;
+   string msg=2;
+}

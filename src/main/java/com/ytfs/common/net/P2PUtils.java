@@ -85,12 +85,24 @@ public class P2PUtils {
                     break;
             }
         } catch (Throwable e) {
-            LOG.error("INTERNAL_ERROR:", e);
+            LOG.error("INTERNAL_ERROR" + toString(addr), e);
             throw new ServiceException(INTERNAL_ERROR, e.getMessage());
         }
         Object res = SerializationUtil.deserialize(bs);
         if (res instanceof ServiceException) {
             throw (ServiceException) res;
+        }
+        return res;
+    }
+
+    private static String toString(List<String> ls) {
+        String res = null;
+        for (String s : ls) {
+            if (res == null) {
+                res = ":" + s;
+            } else {
+                res = res + ";" + s;
+            }
         }
         return res;
     }
