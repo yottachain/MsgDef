@@ -10,12 +10,11 @@ public class QueryObjectMetaResp {
     public QueryObjectMetaResp() {
     }
 
-    public QueryObjectMetaResp(byte[] bs, long length) {
+    public QueryObjectMetaResp(List<ObjectRefer> refers, long length) {
         this.length = length;
-        if (bs == null) {
+        if (refers.isEmpty()) {
             blocknums = new short[0];
         } else {
-            List<ObjectRefer> refers = ObjectRefer.parse(bs);
             int ii = 0;
             blocknums = new short[refers.size()];
             for (ObjectRefer refer : refers) {
