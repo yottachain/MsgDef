@@ -7,7 +7,6 @@ import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
- 
 
 public class KeyStoreCoder {
 
@@ -81,107 +80,49 @@ public class KeyStoreCoder {
         }
     }
 
-    private static final String SIGNATURE_ALGORITHM = "SHA512withECDSA";
-    private static final String KEY_ALGORITHM = "secp256k1";
-
-    /*
-    public static Key generatePrivateKey(byte[] private_wif) {
-        byte version = (byte) 0x80;
-        if (private_wif[0] != version) {
-            throw new IllegalArgumentException("Expected version " + 0x80 + ", instead got " + version);
-        }
-        try {
-            byte[] private_key = Raw.copy(private_wif, 0, private_wif.length - 4);
-            byte[] last_private_key = Raw.copy(private_key, 1, private_key.length - 1);
-            BigInteger iKey = new BigInteger(Hex.toHex(last_private_key), 16);
-            ECPrivateKeyImpl priKey = new ECPrivateKeyImpl(iKey, ECUtil.getECParameterSpec((Provider) null, KEY_ALGORITHM));
-            return priKey;
-        } catch (Exception r) {
-            throw new IllegalArgumentException(r.getMessage());
-        }
-    }
-
-    public static Key generatePublicKey(byte[] pubkey) {
-        try {
-            byte[] pub_buf = Raw.copy(pubkey, 0, pubkey.length - 4);
-            Point ep = secp.getCurve().decodePoint(pub_buf);
-            ECPoint ecpoint = new ECPoint(ep.getX().toBigInteger(), ep.getY().toBigInteger());
-            ECPublicKeyImpl puk = new ECPublicKeyImpl(ecpoint, ECUtil.getECParameterSpec((Provider) null, KEY_ALGORITHM));
-            return puk;
-        } catch (Exception r) {
-            throw new IllegalArgumentException(r.getMessage());
-        }
-    }
-    */
-//4. byte[] encData = YTCrypto.eccEncrypt(byte[] data, String publicKey); //使用公钥publicKey对数据data加密
-//5. byte[] data = YTCrypto.eccDecrypt(byte[] encData, String privateKey); 
-
     public static byte[] eccEncryped(byte[] data, byte[] pubkey) {
-        try {
-            //String pub = Base58.encode(pubkey);
-            //byte[] data1= YTCrypto.eccEncrypt(data, pub);
-            return data;
-        } catch (Exception r) {
-            throw new IllegalArgumentException(r.getMessage());
-        }
-
+        return data;
         /*
         try {
-            ECPublicKeyImpl pkey = (ECPublicKeyImpl) generatePublicKey(pubkey);
-            Cipher cipher = new NullCipher();
-            cipher.init(Cipher.ENCRYPT_MODE, pkey, pkey.getParams());
-            byte[] bs = cipher.doFinal(data);
-            return bs;
+            String pub = Base58.encode(pubkey);
+            byte[] data1= YTCrypto.eccEncrypt(data, pub);
+            
         } catch (Exception r) {
             throw new IllegalArgumentException(r.getMessage());
         }*/
     }
 
     public static byte[] eccDecryped(byte[] data, byte[] prikey) {
+        return data;
+        /*
         try {
-            //String pub = Base58.encode(prikey);
-            //return YTCrypto.eccDecrypt(data, pub);
-            return data;
+            String pub = Base58.encode(prikey);
+            return YTCrypto.eccDecrypt(data, pub);
+        } catch (Exception r) {
+            throw new IllegalArgumentException(r.getMessage());
+        }*/
+    }
+
+    static String prefix = "SIG_K1_";
+
+    public static byte[] ecdsaSign(byte[] data, String prikey) {
+        try {
+            String sign = YTCrypto.sign(prikey, data);
+            sign = sign.substring(7);
+            return Base58.decode(sign);
         } catch (Exception r) {
             throw new IllegalArgumentException(r.getMessage());
         }
-        /*    
-        try {
-            ECPrivateKeyImpl privateK = (ECPrivateKeyImpl) generatePrivateKey(prikey);
-            Cipher cipher = new NullCipher();
-            cipher.init(Cipher.DECRYPT_MODE, privateK, privateK.getParams());
-            return cipher.doFinal(data);
-        } catch (Exception r) {
-            throw new IllegalArgumentException(r.getMessage());
-        }*/
     }
 
-    public static byte[] ecdsaSign1(byte[] data, byte[] prikey) {
-        return null;
-        /*
+    public static boolean ecdsaVerify(byte[] data, byte[] sign, String pubkey) {
         try {
-            ECPrivateKeyImpl privateK = (ECPrivateKeyImpl) generatePrivateKey(prikey);
-            Signature signature = Signature.getInstance(SIGNATURE_ALGORITHM);
-            signature.initSign(privateK);
-            signature.update(data);
-            return signature.sign();
+            String signstr = Base58.encode(sign);
+            signstr = prefix + signstr;
+            return YTCrypto.verify(pubkey, data, signstr);
         } catch (Exception r) {
             throw new IllegalArgumentException(r.getMessage());
-        }*/
-    }
-
-    public static boolean ecdsaVerify1(byte[] data, byte[] sign, byte[] pubkey) {
-        return true;
-        /*
-        try {
-            ECPublicKeyImpl publicKey = (ECPublicKeyImpl) generatePublicKey(pubkey);
-            Signature signature = Signature.getInstance(SIGNATURE_ALGORITHM);
-            signature.initVerify(publicKey);
-            signature.update(data);
-            return signature.verify(sign);
-        } catch (Exception r) {
-            throw new IllegalArgumentException(r.getMessage());
-        }*/
+        }
     }
 
 }
