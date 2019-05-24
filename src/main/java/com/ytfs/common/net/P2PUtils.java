@@ -86,6 +86,11 @@ public class P2PUtils {
             }
         } catch (Throwable e) {
             LOG.error("INTERNAL_ERROR" + toString(addr), e);
+            CONNECTS.remove(key);
+            try {
+                YottaP2P.disconnect(key);
+            } catch (P2pHostException ex) {
+            }
             throw new ServiceException(INTERNAL_ERROR, e.getMessage());
         }
         Object res = SerializationUtil.deserialize(bs);
