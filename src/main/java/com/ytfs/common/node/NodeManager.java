@@ -15,10 +15,11 @@ public class NodeManager {
 
     public synchronized static void start(List<ServerAddress> addrs, String eos) throws NodeMgmtException {
         try {
+            LOG.info("NodeManager init...");
             ServerAddress serverAddress = addrs.get(0);
             String addr = "mongodb://" + serverAddress.getHost() + ":" + serverAddress.getPort();
             YottaNodeMgmt.start(addr, eos);
-            LOG.info("NodeManager init...");
+            LOG.info("NodeManager init OK!");
         } catch (NodeMgmtException ne) {
             try {
                 Thread.sleep(1000);

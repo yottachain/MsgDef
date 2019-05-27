@@ -1,7 +1,5 @@
 package com.ytfs.service.packet;
 
-import org.bson.types.ObjectId;
-
 public class UploadBlockSubReq {
 
     private UploadShardRes[] res = null;

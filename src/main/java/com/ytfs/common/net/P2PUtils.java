@@ -85,7 +85,7 @@ public class P2PUtils {
                     break;
             }
         } catch (Throwable e) {
-            LOG.error("INTERNAL_ERROR" + toString(addr), e);
+            LOG.error("INTERNAL_ERROR[" + toString(addr) + "]:" + e.getMessage());
             CONNECTS.remove(key);
             try {
                 YottaP2P.disconnect(key);
