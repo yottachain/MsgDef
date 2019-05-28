@@ -122,7 +122,7 @@ public class P2PUtils {
                     break;
             }
         } catch (Throwable e) {
-            LOG.error("INTERNAL_ERROR:" + addrString);
+            LOG.error("INTERNAL_ERROR:" + addrString + ",ID:" + key);
             synchronized (CONNECTS) {
                 CONNECTS.remove(key);
                 try {
