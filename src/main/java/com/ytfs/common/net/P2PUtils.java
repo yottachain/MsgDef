@@ -2,6 +2,7 @@ package com.ytfs.common.net;
 
 import com.ytfs.common.SerializationUtil;
 import static com.ytfs.common.ServiceErrorCode.INTERNAL_ERROR;
+import static com.ytfs.common.ServiceErrorCode.SERVER_ERROR;
 import com.ytfs.common.ServiceException;
 import io.yottachain.nodemgmt.core.vo.Node;
 import io.yottachain.nodemgmt.core.vo.SuperNode;
@@ -48,11 +49,41 @@ public class P2PUtils {
     public static final int MSG_2NODE = 2;
 
     public static Object requestBPU(Object obj, SuperNode node) throws ServiceException {
-        return request(obj, node.getAddrs(), node.getNodeid(), MSG_2BPU);
+        ServiceException err = null;
+        for (int ii = 0; ii < 5; ii++) {
+            try {
+                return request(obj, node.getAddrs(), node.getNodeid(), MSG_2BPU);
+            } catch (ServiceException r) {
+                if (r.getErrorCode() != SERVER_ERROR) {
+                    throw r;
+                }
+                err = r;
+                try {
+                    Thread.sleep(5000);
+                } catch (InterruptedException ex) {
+                }
+            }
+        }
+        throw err;
     }
 
     public static Object requestBP(Object obj, SuperNode node) throws ServiceException {
-        return request(obj, node.getAddrs(), node.getNodeid(), MSG_2BP);
+        ServiceException err = null;
+        for (int ii = 0; ii < 5; ii++) {
+            try {
+                return request(obj, node.getAddrs(), node.getNodeid(), MSG_2BP);
+            } catch (ServiceException r) {
+                if (r.getErrorCode() != SERVER_ERROR) {
+                    throw r;
+                }
+                err = r;
+                try {
+                    Thread.sleep(5000);
+                } catch (InterruptedException ex) {
+                }
+            }
+        }
+        throw err;
     }
 
     public static Object requestNode(Object obj, Node node) throws ServiceException {
@@ -70,7 +101,7 @@ public class P2PUtils {
             } catch (P2pHostException ex) {
                 CONNECTS.remove(key);
                 throw new ServiceException(INTERNAL_ERROR, ex.getMessage());
-            }            
+            }
         }
         byte[] data = SerializationUtil.serialize(obj);
         byte[] bs = null;
