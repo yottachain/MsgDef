@@ -62,13 +62,15 @@ public class P2PUtils {
     public static Object request(Object obj, List<String> addr, String key, int type) throws ServiceException {
         if (!CONNECTS.contains(key)) {
             try {
+                CONNECTS.add(key);
                 String[] strs = new String[addr.size()];
                 strs = addr.toArray(strs);
                 YottaP2P.connect(key, strs);
+                LOG.info("Connect '" + toString(addr) + "' successfully.");
             } catch (P2pHostException ex) {
+                CONNECTS.remove(key);
                 throw new ServiceException(INTERNAL_ERROR, ex.getMessage());
-            }
-            CONNECTS.add(key);
+            }            
         }
         byte[] data = SerializationUtil.serialize(obj);
         byte[] bs = null;
@@ -85,7 +87,7 @@ public class P2PUtils {
                     break;
             }
         } catch (Throwable e) {
-            LOG.error("INTERNAL_ERROR[" + toString(addr) + "]:" + e.getMessage());
+            LOG.error("INTERNAL_ERROR:" + e.getMessage());
             CONNECTS.remove(key);
             try {
                 YottaP2P.disconnect(key);
