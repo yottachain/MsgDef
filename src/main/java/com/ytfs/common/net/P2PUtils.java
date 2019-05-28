@@ -7,7 +7,9 @@ import io.yottachain.nodemgmt.core.vo.Node;
 import io.yottachain.nodemgmt.core.vo.SuperNode;
 import io.yottachain.p2phost.YottaP2P;
 import io.yottachain.p2phost.core.exception.P2pHostException;
-import io.yottachain.p2phost.interfaces.*;
+import io.yottachain.p2phost.interfaces.BPNodeCallback;
+import io.yottachain.p2phost.interfaces.NodeCallback;
+import io.yottachain.p2phost.interfaces.UserCallback;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -60,13 +62,15 @@ public class P2PUtils {
     public static Object request(Object obj, List<String> addr, String key, int type) throws ServiceException {
         if (!CONNECTS.contains(key)) {
             try {
+                CONNECTS.add(key);
                 String[] strs = new String[addr.size()];
                 strs = addr.toArray(strs);
                 YottaP2P.connect(key, strs);
+                LOG.info("Connect '" + toString(addr) + "' successfully.");
             } catch (P2pHostException ex) {
+                CONNECTS.remove(key);
                 throw new ServiceException(INTERNAL_ERROR, ex.getMessage());
-            }
-            CONNECTS.add(key);
+            }            
         }
         byte[] data = SerializationUtil.serialize(obj);
         byte[] bs = null;
@@ -94,6 +98,18 @@ public class P2PUtils {
         Object res = SerializationUtil.deserialize(bs);
         if (res instanceof ServiceException) {
             throw (ServiceException) res;
+        }
+        return res;
+    }
+
+    private static String toString(List<String> ls) {
+        String res = null;
+        for (String s : ls) {
+            if (res == null) {
+                res = ":" + s;
+            } else {
+                res = res + ";" + s;
+            }
         }
         return res;
     }
