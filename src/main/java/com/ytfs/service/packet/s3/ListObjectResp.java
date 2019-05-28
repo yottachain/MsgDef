@@ -10,6 +10,16 @@ public class ListObjectResp {
 
     private SerializationUtil.MapObject<byte[]> mapObject;
 
+    private String fileName;
+
+
+    public String getFileName() {
+        return fileName;
+    }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
+    }
 
     public ObjectId getObjectId() {
         return objectId;
