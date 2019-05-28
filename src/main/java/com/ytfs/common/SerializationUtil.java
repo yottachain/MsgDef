@@ -7,6 +7,7 @@ import io.protostuff.Schema;
 import io.protostuff.runtime.RuntimeSchema;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -156,7 +157,7 @@ public class SerializationUtil {
         }
 
         public Map<String, T> toMap() {
-            Map<String, T> map = new HashMap();
+            Map<String, T> map = new LinkedHashMap();
             if (keys == null || values == null) {
                 return map;
             }
