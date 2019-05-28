@@ -11,15 +11,15 @@ import io.yottachain.p2phost.core.exception.P2pHostException;
 import io.yottachain.p2phost.interfaces.BPNodeCallback;
 import io.yottachain.p2phost.interfaces.NodeCallback;
 import io.yottachain.p2phost.interfaces.UserCallback;
-import java.util.ArrayList;
-import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import org.apache.log4j.Logger;
 
 public class P2PUtils {
 
     private static final Logger LOG = Logger.getLogger(P2PUtils.class);
-    private static final List<Integer> CONNECTS = new ArrayList();
+    private static final Map<String, String> CONNECTS = new HashMap();
 
     /**
      * 初始化P2P工具
@@ -52,7 +52,7 @@ public class P2PUtils {
         ServiceException err = null;
         for (int ii = 0; ii < 5; ii++) {
             try {
-                return request(obj, node.getAddrs(), node.getNodeid(), MSG_2BPU, node.getId() * -1);
+                return request(obj, node.getAddrs(), node.getNodeid(), MSG_2BPU);
             } catch (ServiceException r) {
                 if (r.getErrorCode() != SERVER_ERROR) {
                     throw r;
@@ -71,7 +71,7 @@ public class P2PUtils {
         ServiceException err = null;
         for (int ii = 0; ii < 5; ii++) {
             try {
-                return request(obj, node.getAddrs(), node.getNodeid(), MSG_2BP, node.getId() * -1);
+                return request(obj, node.getAddrs(), node.getNodeid(), MSG_2BP);
             } catch (ServiceException r) {
                 if (r.getErrorCode() != SERVER_ERROR) {
                     throw r;
@@ -87,21 +87,24 @@ public class P2PUtils {
     }
 
     public static Object requestNode(Object obj, Node node) throws ServiceException {
-        return request(obj, node.getAddrs(), node.getNodeid(), MSG_2NODE, node.getId());
+        return request(obj, node.getAddrs(), node.getNodeid(), MSG_2NODE);
     }
 
-    public static Object request(Object obj, List<String> addr, String key, int type, int id) throws ServiceException {
+    public static Object request(Object obj, List<String> addr, String key, int type) throws ServiceException {
+        String addrString = toString(addr);
         synchronized (CONNECTS) {
-            if (!CONNECTS.contains(id)) {
+            String value = CONNECTS.get(key);
+            if (value == null || !addrString.equals(value)) {
                 try {
                     String[] strs = new String[addr.size()];
                     strs = addr.toArray(strs);
                     YottaP2P.connect(key, strs);
+                    CONNECTS.put(key, addrString);
                 } catch (P2pHostException ex) {
-                    LOG.info("Connect " + toString(addr) + " Err.");
+                    CONNECTS.remove(key);
+                    LOG.info("Connect " + addrString + " Err.");
                     throw new ServiceException(INTERNAL_ERROR, ex.getMessage());
                 }
-                CONNECTS.add(id);
             }
         }
         byte[] data = SerializationUtil.serialize(obj);
@@ -119,13 +122,13 @@ public class P2PUtils {
                     break;
             }
         } catch (Throwable e) {
-            LOG.error("INTERNAL_ERROR:" + toString(addr));
+            LOG.error("INTERNAL_ERROR:" + addrString);
             synchronized (CONNECTS) {
-                CONNECTS.remove(Integer.valueOf(id));
-            }
-            try {
-                YottaP2P.disconnect(key);
-            } catch (P2pHostException ex) {
+                CONNECTS.remove(key);
+                try {
+                    YottaP2P.disconnect(key);
+                } catch (P2pHostException r) {
+                }
             }
             throw new ServiceException(INTERNAL_ERROR, e.getMessage());
         }
