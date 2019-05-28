@@ -97,8 +97,8 @@ public class P2PUtils {
                 String[] strs = new String[addr.size()];
                 strs = addr.toArray(strs);
                 YottaP2P.connect(key, strs);
-                LOG.info("Connect '" + toString(addr) + "' successfully.");
             } catch (P2pHostException ex) {
+                LOG.info("Connect " + toString(addr) + " Err.");
                 CONNECTS.remove(key);
                 throw new ServiceException(INTERNAL_ERROR, ex.getMessage());
             }
@@ -118,7 +118,7 @@ public class P2PUtils {
                     break;
             }
         } catch (Throwable e) {
-            LOG.error("INTERNAL_ERROR:" + e.getMessage());
+            LOG.error("INTERNAL_ERROR:" + toString(addr));
             CONNECTS.remove(key);
             try {
                 YottaP2P.disconnect(key);
@@ -137,12 +137,12 @@ public class P2PUtils {
         String res = null;
         for (String s : ls) {
             if (res == null) {
-                res = ":" + s;
+                res = "[" + s;
             } else {
-                res = res + ";" + s;
+                res = res + "," + s;
             }
         }
-        return res;
+        return res + "]";
     }
 
     /**
