@@ -91,19 +91,19 @@ public class P2PUtils {
     }
 
     public static Object request(Object obj, List<String> addr, String key, int type) throws ServiceException {
-        String addrString = toString(addr);
-        synchronized (CONNECTS) {
-            String value = CONNECTS.get(key);
-            if (value == null || !addrString.equals(value)) {
-                try {
-                    String[] strs = new String[addr.size()];
-                    strs = addr.toArray(strs);
-                    YottaP2P.connect(key, strs);
-                    CONNECTS.put(key, addrString);
-                } catch (P2pHostException ex) {
-                    CONNECTS.remove(key);
-                    LOG.info("Connect " + addrString + " Err.");
-                    throw new ServiceException(INTERNAL_ERROR, ex.getMessage());
+        if (!CONNECTS.containsKey(key)) {
+            synchronized (CONNECTS) {
+                if (!CONNECTS.containsKey(key)) {
+                    String addstr = getAddrString(addr);
+                    try {
+                        String[] strs = new String[addr.size()];
+                        strs = addr.toArray(strs);
+                        YottaP2P.connect(key, strs);
+                        CONNECTS.put(key, addstr);
+                    } catch (P2pHostException ex) {
+                        LOG.info("Connect " + addstr + " Err.");
+                        throw new ServiceException(INTERNAL_ERROR, ex.getMessage());
+                    }
                 }
             }
         }
@@ -122,15 +122,23 @@ public class P2PUtils {
                     break;
             }
         } catch (Throwable e) {
-            LOG.error("INTERNAL_ERROR:" + addrString + ",ID:" + key);
+            String oldaddrString = CONNECTS.get(key);
+            LOG.error("INTERNAL_ERROR:" + (oldaddrString == null ? ("[" + e.getMessage() + "]") : oldaddrString) + ",ID:" + key);
+            String newaddrString = getAddrString(addr);
             synchronized (CONNECTS) {
-                CONNECTS.remove(key);
-                try {
-                    YottaP2P.disconnect(key);
-                } catch (P2pHostException r) {
+                if (CONNECTS.containsKey(key)) {
+                    CONNECTS.remove(key);
+                    try {
+                        YottaP2P.disconnect(key);
+                    } catch (P2pHostException r) {
+                    }
                 }
             }
-            throw new ServiceException(INTERNAL_ERROR, e.getMessage());
+            if (oldaddrString == null || !oldaddrString.equals(newaddrString)) {
+                return request(obj, addr, key, type);
+            } else {
+                throw new ServiceException(INTERNAL_ERROR, e.getMessage());
+            }
         }
         Object res = SerializationUtil.deserialize(bs);
         if (res instanceof ServiceException) {
@@ -139,16 +147,16 @@ public class P2PUtils {
         return res;
     }
 
-    private static String toString(List<String> ls) {
-        String res = null;
+    private static String getAddrString(List<String> ls) {
+        StringBuilder res = null;
         for (String s : ls) {
             if (res == null) {
-                res = "[" + s;
+                res = (new StringBuilder("[")).append(s);
             } else {
-                res = res + "," + s;
+                res.append(",").append(s);
             }
         }
-        return res + "]";
+        return res == null ? "" : res.append("]").toString();
     }
 
     /**

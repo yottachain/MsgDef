@@ -10,7 +10,7 @@ public class UserConfig {
     public final static int Max_Memory_Usage = 1024 * 1024 * 6;
 
     //对大文件分块时,数据块大小
-    public final static int Default_Block_Size = 1024 * 1024 * 2 - 16 - 1;//PBL
+    public final static int Default_Block_Size = 1024 * 1024 * 2 - 1 - 128;//PBL
 
     //数据块压缩时,空出8K以备END输出
     public final static int Compress_Reserve_Size = 16 * 1024;
