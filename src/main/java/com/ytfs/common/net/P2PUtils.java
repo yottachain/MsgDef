@@ -50,7 +50,7 @@ public class P2PUtils {
 
     public static Object requestBPU(Object obj, SuperNode node) throws ServiceException {
         ServiceException err = null;
-        for (int ii = 0; ii < 5; ii++) {
+        for (int ii = 0; ii < 3; ii++) {
             try {
                 return request(obj, node.getAddrs(), node.getNodeid(), MSG_2BPU);
             } catch (ServiceException r) {
@@ -59,7 +59,7 @@ public class P2PUtils {
                 }
                 err = r;
                 try {
-                    Thread.sleep(5000);
+                    Thread.sleep(10000);
                 } catch (InterruptedException ex) {
                 }
             }
@@ -69,7 +69,7 @@ public class P2PUtils {
 
     public static Object requestBP(Object obj, SuperNode node) throws ServiceException {
         ServiceException err = null;
-        for (int ii = 0; ii < 5; ii++) {
+        for (int ii = 0; ii < 3; ii++) {
             try {
                 return request(obj, node.getAddrs(), node.getNodeid(), MSG_2BP);
             } catch (ServiceException r) {
@@ -78,7 +78,7 @@ public class P2PUtils {
                 }
                 err = r;
                 try {
-                    Thread.sleep(5000);
+                    Thread.sleep(10000);
                 } catch (InterruptedException ex) {
                 }
             }
