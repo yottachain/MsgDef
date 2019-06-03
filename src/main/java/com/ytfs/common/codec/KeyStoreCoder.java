@@ -23,9 +23,13 @@ public class KeyStoreCoder {
             (byte) (l >>> 56), (byte) (l >>> 48), (byte) (l >>> 40), (byte) (l >>> 32),
             (byte) (l >>> 24), (byte) (l >>> 16), (byte) (l >>> 8), (byte) (l)
         };
+        return generateRandomKey(bs);
+    }
+
+    public static byte[] generateRandomKey(byte[] pwd) {
         try {
             KeyGenerator kgen = KeyGenerator.getInstance("AES");
-            kgen.init(256, new SecureRandom(bs));
+            kgen.init(256, new SecureRandom(pwd));
             SecretKey secretKey = kgen.generateKey();
             byte[] enCodeFormat = secretKey.getEncoded();
             return enCodeFormat;
@@ -75,24 +79,6 @@ public class KeyStoreCoder {
             Cipher cipher = Cipher.getInstance("AES");
             cipher.init(Cipher.DECRYPT_MODE, skeySpec);
             return cipher.doFinal(srcdata);
-        } catch (Exception r) {
-            throw new IllegalArgumentException(r.getMessage());
-        }
-    }
-
-    public static byte[] eccEncryped(byte[] data, byte[] pubkey) {
-        try {
-            String pub = Base58.encode(pubkey);
-            return YTCrypto.eccEncrypt(data, pub);
-        } catch (Exception r) {
-            throw new IllegalArgumentException(r.getMessage());
-        }
-    }
-
-    public static byte[] eccDecryped(byte[] data, byte[] prikey) {
-        try {
-            String pub = Base58.encode(prikey);
-            return YTCrypto.eccDecrypt(data, pub);
         } catch (Exception r) {
             throw new IllegalArgumentException(r.getMessage());
         }
