@@ -24,7 +24,7 @@ public class ShardRSDecoder {
 
     public BlockEncrypted decode() {
         Shard shard = copyShard == null ? shards.get(0) : copyShard;
-        if (!shard.isRsShard()) {//副本
+        if (!shard.isRsShard()) {
             byte[] data = new byte[encryptedBlockSize];
             System.arraycopy(shard.getData(), 1, data, 0, encryptedBlockSize);
             BlockEncrypted b = new BlockEncrypted();

@@ -54,7 +54,7 @@ public class P2PUtils {
             try {
                 return request(obj, node.getAddrs(), node.getNodeid(), MSG_2BPU);
             } catch (ServiceException r) {
-                if (r.getErrorCode() != SERVER_ERROR) {
+                if (!(r.getErrorCode() == INTERNAL_ERROR || r.getErrorCode() == SERVER_ERROR)) {
                     throw r;
                 }
                 err = r;
@@ -73,7 +73,7 @@ public class P2PUtils {
             try {
                 return request(obj, node.getAddrs(), node.getNodeid(), MSG_2BP);
             } catch (ServiceException r) {
-                if (r.getErrorCode() != SERVER_ERROR) {
+                if (!(r.getErrorCode() == INTERNAL_ERROR || r.getErrorCode() == SERVER_ERROR)) {
                     throw r;
                 }
                 err = r;

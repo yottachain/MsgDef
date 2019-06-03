@@ -20,6 +20,10 @@ public class MessageFactory {
     private static final ClassPathScanningCandidateComponentProvider provider = new ClassPathScanningCandidateComponentProvider(true);
 
     static {
+        init();
+    }
+
+    public static void init() {
         try {
             regMessageType();
         } catch (Exception ex) {

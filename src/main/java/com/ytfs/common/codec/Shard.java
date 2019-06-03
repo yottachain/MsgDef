@@ -2,7 +2,7 @@ package com.ytfs.common.codec;
 
 public class Shard {
 
-    private final byte[] data;//数据分片内容
+    private final byte[] data;
     private final byte[] VHF;
 
     public Shard(byte[] data) {

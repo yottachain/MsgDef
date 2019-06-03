@@ -26,7 +26,7 @@ public class ShardRSEncoder {
         int shardsize = Default_Shard_Size - 1;
         int dataShardCount = encryptedBlock.getEncryptedBlockSize() / shardsize;
         int remainSize = encryptedBlock.getEncryptedBlockSize() % shardsize;
-        if (dataShardCount == 0) {//副本
+        if (dataShardCount == 0) {
             byte[] bs = new byte[Default_Shard_Size];
             bs[0] = (byte) 0xFF;
             System.arraycopy(encryptedBlock.getData(), 0, bs, 1, remainSize);

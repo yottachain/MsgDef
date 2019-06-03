@@ -50,16 +50,6 @@ public class Function {
         return num;
     }
 
-    /*
-    public static void integer2Bytes(long n, byte[] bs, int off, int len) {
-        if (bs == null || bs.length < off + len) {
-            throw new java.lang.IllegalArgumentException();
-        }
-        for(int ii=0;ii<len;ii++){
-            bs[off+ii]=(byte)(n >>> )
-            
-        }
-    }*/
 
     /**
      * short->byte[]

@@ -81,26 +81,21 @@ public class KeyStoreCoder {
     }
 
     public static byte[] eccEncryped(byte[] data, byte[] pubkey) {
-        return data;
-        /*
         try {
             String pub = Base58.encode(pubkey);
-            byte[] data1= YTCrypto.eccEncrypt(data, pub);
-            
+            return YTCrypto.eccEncrypt(data, pub);
         } catch (Exception r) {
             throw new IllegalArgumentException(r.getMessage());
-        }*/
+        }
     }
 
     public static byte[] eccDecryped(byte[] data, byte[] prikey) {
-        return data;
-        /*
         try {
             String pub = Base58.encode(prikey);
             return YTCrypto.eccDecrypt(data, pub);
         } catch (Exception r) {
             throw new IllegalArgumentException(r.getMessage());
-        }*/
+        }
     }
 
     static String prefix = "SIG_K1_";

@@ -1,6 +1,5 @@
 package com.ytfs.common;
 
-import java.io.File;
 import java.io.IOException;
 import java.text.MessageFormat;
 import java.util.Enumeration;
@@ -13,13 +12,9 @@ import org.apache.log4j.spi.LoggerRepository;
 
 public class LogConfigurator {
 
-    public static void configPath() throws IOException {
-        configPath(null, "INFO");
-    }
-
     private static JdkLogHandler handler;
 
-    public synchronized static void configPath(File path, String lv) throws IOException {
+    public synchronized static void configPath(String lv) throws IOException {
         if (handler == null) {
             handler = new JdkLogHandler();
             PropertyConfigurator configurator = new PropertyConfigurator();
@@ -34,15 +29,8 @@ public class LogConfigurator {
             } else {
                 lv = "INFO";
             }
-            if (path == null) {
-                logproperties.replace("log4j.rootCategory", lv + ",stdout");
-                logproperties.replace("log4j.rootLogger", lv + ",stdout");
-            } else {
-                logproperties.replace("log4j.rootCategory", lv + ",logDailyFile,stdout");
-                logproperties.replace("log4j.rootLogger", lv + ",logDailyFile,stdout");
-                logproperties.replace("log4j.appender.logDailyFile.Threshold", lv);
-                logproperties.replace("log4j.appender.logDailyFile.File", path.getAbsolutePath());
-            }
+            logproperties.replace("log4j.rootCategory", lv + ",stdout");
+            logproperties.replace("log4j.rootLogger", lv + ",stdout");
             LoggerRepository lr = LogManager.getLoggerRepository();
             configurator.doConfigure(logproperties, lr);
             handler.setLevel(java.util.logging.Level.ALL);

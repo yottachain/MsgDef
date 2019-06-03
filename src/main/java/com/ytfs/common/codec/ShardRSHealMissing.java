@@ -17,7 +17,7 @@ public class ShardRSHealMissing {
 
     public void heal() throws IOException {
         Shard shard = getShards().get(0);
-        if (!shard.isRsShard()) {//副本
+        if (!shard.isRsShard()) {
             getShards().clear();
             for (int ii = 0; ii < Default_PND + 1; ii++) {
                 getShards().add(shard);
