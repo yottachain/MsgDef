@@ -27,4 +27,6 @@ public class ServiceErrorCode {
     public static final int NODE_EXISTS = 0x16;
     public static final int BUCKET_NOT_EMPTY = 0x17;
     public static final int NO_ENOUGH_NODE = 0x18;
+    public static final int INVALID_NEXTFILENAME = 0x19;
+    public static final int INVALID_NEXTVERSIONID = 0x20;
 }
