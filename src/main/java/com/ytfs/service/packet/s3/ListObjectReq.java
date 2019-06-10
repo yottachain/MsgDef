@@ -13,6 +13,36 @@ public class ListObjectReq {
 
     private String fileName;
 
+    private String prefix;
+
+    private boolean isVersion;
+
+    private ObjectId nextVersionId;
+
+    public ObjectId getNextVersionId() {
+        return nextVersionId;
+    }
+
+    public void setNextVersionId(ObjectId nextVersionId) {
+        this.nextVersionId = nextVersionId;
+    }
+
+    public boolean isVersion() {
+        return isVersion;
+    }
+
+    public void setVersion(boolean version) {
+        isVersion = version;
+    }
+
+    public String getPrefix() {
+        return prefix;
+    }
+
+    public void setPrefix(String prefix) {
+        this.prefix = prefix;
+    }
+
     public String getFileName() {
         return fileName;
     }
