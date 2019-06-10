@@ -1,5 +1,6 @@
 package com.ytfs.service.packet;
 
+import com.google.protobuf.ByteString;
 import com.ytfs.common.SerializationUtil;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -9,9 +10,10 @@ import org.apache.commons.codec.binary.Hex;
 public class UploadShardRequestSerial {
 
     public static void main(String[] args) throws IOException {
-        MessageNode.NodeRegReq.Builder builder = MessageNode.NodeRegReq.newBuilder();
-        builder.addAddrs("sddvalue1");
-        builder.addAddrs("sddvalue2");
+        MessageRebuild.TaskDescription.Builder builder=MessageRebuild.TaskDescription.newBuilder();
+        
+        builder.setId(0);
+ /*
         builder.setMaxDataSpace(1);
         builder.setNodeid("sssss");
         builder.setOwner("aaaaa");
@@ -19,7 +21,7 @@ public class UploadShardRequestSerial {
         byte[] result = info.toByteArray();
         String ss = Hex.encodeHexString(result);
         System.out.println(ss);
-
+*/
         com.ytfs.service.packet.NodeRegReq req = new com.ytfs.service.packet.NodeRegReq();
         List<String> ls = new ArrayList();
         ls.add("sddvalue1");

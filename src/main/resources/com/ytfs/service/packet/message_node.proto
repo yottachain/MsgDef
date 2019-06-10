@@ -2,7 +2,7 @@ syntax = "proto3";
 
 option java_package = "com.ytfs.service.packet"; 
 
-#msgid=0x12aa
+//msgid=0x12aa
 message NodeRegReq {                       
    string nodeid= 1;                           
    string owner=2;                              
@@ -10,13 +10,13 @@ message NodeRegReq {
    repeated string addrs=4;                  
 }
 
-#msgid=0xfb92
+//msgid=0xfb92
 message NodeRegResp {                       
    uint32 id= 1;                                    
    uint64 assignedSpace=2;         
 }
 
-#msgid=0xc9a9
+//msgid=0xc9a9
 message StatusRepReq {   
    uint32 id=1;                                   
    uint32 cpu=2;                          
@@ -28,7 +28,7 @@ message StatusRepReq {
    repeated string addrs=8;             
 }
 
-#msgid=0xfa09
+//msgid=0xfa09
 message StatusRepResp {
    uint64 productiveSpace=1;               
 }

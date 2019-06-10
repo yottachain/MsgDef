@@ -108,17 +108,4 @@ public class SuperNodeList {
         int index = userid % nodes.length;
         return nodes[index];
     }
-
-    /**
-     * 获取管理该矿机的超级节点
-     *
-     * @param nodeid
-     * @return 0-32;
-     */
-    public static SuperNode getNGRSuperNode(int nodeid) {
-        SuperNode[] nodes = getSuperNodeList();
-        int index = nodeid % nodes.length;
-        return nodes[index];
-    }
-
 }
