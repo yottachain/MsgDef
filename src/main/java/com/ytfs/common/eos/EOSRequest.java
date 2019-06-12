@@ -101,6 +101,8 @@ public class EOSRequest {
     public static PushTransactionRequest makeGetBalanceRequest(SignArg arg, String username) throws JsonProcessingException, IOException {
         Raw raw = new Raw();
         raw.packName(username);
+        raw.packUint8(2);
+        raw.packName(ServerConfig.BPAccount);
         String transferData = raw.toHex();
         List<TransactionAuthorization> authorizations = Arrays.asList(new TransactionAuthorization(ServerConfig.BPAccount, "active"));
         List<TransactionAction> actions = Arrays.asList(
@@ -125,6 +127,7 @@ public class EOSRequest {
         Raw raw = new Raw();
         raw.packName(username);
         raw.packUint64(length);
+        raw.packName(ServerConfig.BPAccount);
         String transferData = raw.toHex();
         List<TransactionAuthorization> authorizations = Arrays.asList(new TransactionAuthorization(ServerConfig.BPAccount, "active"));
         List<TransactionAction> actions = Arrays.asList(
@@ -149,6 +152,7 @@ public class EOSRequest {
         Raw raw = new Raw();
         raw.packName(username);
         raw.packUint64(cost);
+        raw.packName(ServerConfig.BPAccount);
         String transferData = raw.toHex();
         List<TransactionAuthorization> authorizations = Arrays.asList(new TransactionAuthorization(ServerConfig.BPAccount, "active"));
         List<TransactionAction> actions = Arrays.asList(

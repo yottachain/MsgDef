@@ -1,10 +1,7 @@
 package com.ytfs.common.codec;
 
-import com.ytfs.common.conf.ServerConfig;
-import com.ytfs.service.packet.ShardNode;
 import io.jafka.jeos.util.KeyUtil;
 import java.nio.ByteBuffer;
-import java.nio.charset.Charset;
 import org.apache.commons.codec.binary.Hex;
 
 public class EccTest {

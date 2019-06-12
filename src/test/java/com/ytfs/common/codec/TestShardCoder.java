@@ -85,18 +85,7 @@ public class TestShardCoder {
         shards.remove(7);
         shards.remove(7);
         /*
-        shards.remove(7);
-        shards.remove(7);
-        shards.remove(7);
-        shards.remove(7);
-        shards.remove(7);
-
-        shards.remove(7);
-        shards.remove(7);
-        shards.remove(7);
-        shards.remove(7);
-        shards.remove(7);
-        shards.remove(7);
+ 
          */
         //shards.remove(7);
     }

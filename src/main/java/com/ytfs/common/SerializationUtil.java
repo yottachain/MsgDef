@@ -28,7 +28,7 @@ public class SerializationUtil {
         if (obj instanceof ServiceException) {
             obj = ((ServiceException) obj).toErrMessage();
         }
-        @SuppressWarnings("unchecked")
+        @SuppressWarnings("unchecked")             
         Schema schema = RuntimeSchema.getSchema(obj.getClass());
         LinkedBuffer buffer = BUFFER_THREAD_LOCAL.get();
         try {

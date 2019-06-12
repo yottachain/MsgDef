@@ -1,17 +1,19 @@
 package com.ytfs.service.packet;
 
+import java.util.List;
+
 public class TaskDescription {
 
     private long id;
-    private byte[][] dataHash;
-    private byte[][] parityHash;
-    private P2PLocation[] locations;
-    private int[] recoverId;
+    private List<byte[]> dataHash;
+    private List<byte[]> parityHash;
+    private List<P2PLocation> locations;
+    private List<Integer> recoverId;
 
     public static class P2PLocation {
 
         private String nodeId;
-        private String[] addrs;
+        private List<String> addrs;
 
         /**
          * @return the nodeId
@@ -30,14 +32,14 @@ public class TaskDescription {
         /**
          * @return the addrs
          */
-        public String[] getAddrs() {
+        public List<String> getAddrs() {
             return addrs;
         }
 
         /**
          * @param addrs the addrs to set
          */
-        public void setAddrs(String[] addrs) {
+        public void setAddrs(List<String> addrs) {
             this.addrs = addrs;
         }
 
@@ -60,56 +62,56 @@ public class TaskDescription {
     /**
      * @return the dataHash
      */
-    public byte[][] getDataHash() {
+    public List<byte[]> getDataHash() {
         return dataHash;
     }
 
     /**
      * @param dataHash the dataHash to set
      */
-    public void setDataHash(byte[][] dataHash) {
+    public void setDataHash(List<byte[]> dataHash) {
         this.dataHash = dataHash;
     }
 
     /**
      * @return the parityHash
      */
-    public byte[][] getParityHash() {
+    public List<byte[]> getParityHash() {
         return parityHash;
     }
 
     /**
      * @param parityHash the parityHash to set
      */
-    public void setParityHash(byte[][] parityHash) {
+    public void setParityHash(List<byte[]> parityHash) {
         this.parityHash = parityHash;
     }
 
     /**
      * @return the locations
      */
-    public P2PLocation[] getLocations() {
+    public List<P2PLocation> getLocations() {
         return locations;
     }
 
     /**
      * @param locations the locations to set
      */
-    public void setLocations(P2PLocation[] locations) {
+    public void setLocations(List<P2PLocation> locations) {
         this.locations = locations;
     }
 
     /**
      * @return the recoverId
      */
-    public int[] getRecoverId() {
+    public List<Integer> getRecoverId() {
         return recoverId;
     }
 
     /**
      * @param recoverId the recoverId to set
      */
-    public void setRecoverId(int[] recoverId) {
+    public void setRecoverId(List<Integer> recoverId) {
         this.recoverId = recoverId;
     }
 }

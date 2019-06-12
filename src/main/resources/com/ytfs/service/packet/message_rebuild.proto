@@ -2,16 +2,16 @@ syntax = "proto3";
 
 option java_package = "com.ytfs.service.packet"; 
 
-//msgid=0x7bab
+//msgid=0xd761
 message TaskDescription{
-    uint32 id = 1; 
+    uint64 id = 1; 
     repeated bytes dataHash=2;
     repeated bytes parityHash=3;
+    message P2PLocation{
+        string nodeId=1;
+        repeated string addrs=2;
+    }
     repeated P2PLocation locations=4;
     repeated uint32 recoverId=5;
 }
 
-message P2PLocation{
-    string nodeId=1;
-    repeated string addrs=2;
-}
