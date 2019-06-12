@@ -2,13 +2,11 @@ package com.ytfs.service.packet;
 
 import java.util.List;
 
-public class TaskDescription {
+public class TaskDescriptionCP {
 
     private long id;
-    private List<byte[]> dataHash;
-    private List<byte[]> parityHash;
+    private byte[] dataHash;
     private List<P2PLocation> locations;
-    private List<Integer> recoverId;
 
     /**
      * @return the id
@@ -27,29 +25,15 @@ public class TaskDescription {
     /**
      * @return the dataHash
      */
-    public List<byte[]> getDataHash() {
+    public byte[] getDataHash() {
         return dataHash;
     }
 
     /**
      * @param dataHash the dataHash to set
      */
-    public void setDataHash(List<byte[]> dataHash) {
+    public void setDataHash(byte[] dataHash) {
         this.dataHash = dataHash;
-    }
-
-    /**
-     * @return the parityHash
-     */
-    public List<byte[]> getParityHash() {
-        return parityHash;
-    }
-
-    /**
-     * @param parityHash the parityHash to set
-     */
-    public void setParityHash(List<byte[]> parityHash) {
-        this.parityHash = parityHash;
     }
 
     /**
@@ -66,17 +50,4 @@ public class TaskDescription {
         this.locations = locations;
     }
 
-    /**
-     * @return the recoverId
-     */
-    public List<Integer> getRecoverId() {
-        return recoverId;
-    }
-
-    /**
-     * @param recoverId the recoverId to set
-     */
-    public void setRecoverId(List<Integer> recoverId) {
-        this.recoverId = recoverId;
-    }
 }

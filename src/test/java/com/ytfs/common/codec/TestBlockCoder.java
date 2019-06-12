@@ -1,7 +1,5 @@
 package com.ytfs.common.codec;
 
-import com.ytfs.common.codec.YTFile;
-import com.ytfs.common.codec.BlockReader;
 import java.io.IOException;
 
 public class TestBlockCoder {

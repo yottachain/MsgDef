@@ -11,7 +11,7 @@ import io.protostuff.runtime.Delegate;
 import io.protostuff.runtime.RuntimeSchema;
 import java.io.IOException;
 
-public class TaskDelegate implements Delegate<TaskDescription.P2PLocation> {
+public class TaskDelegate implements Delegate<P2PLocation> {
 
     private static final ThreadLocal<LinkedBuffer> BUFFER_THREAD_LOCAL = ThreadLocal
             .withInitial(() -> LinkedBuffer.allocate(512));
@@ -22,19 +22,19 @@ public class TaskDelegate implements Delegate<TaskDescription.P2PLocation> {
     }
 
     @Override
-    public TaskDescription.P2PLocation readFrom(Input input) throws IOException {
-        TaskDescription.P2PLocation location = new TaskDescription.P2PLocation();
-        Schema schema = RuntimeSchema.getSchema(TaskDescription.P2PLocation.class);
+    public P2PLocation readFrom(Input input) throws IOException {
+        P2PLocation location = new P2PLocation();
+        Schema schema = RuntimeSchema.getSchema(P2PLocation.class);
         byte[] bs = input.readByteArray();
         ProtostuffIOUtil.mergeFrom(bs, 0, bs.length, location, schema);
         return location;
     }
 
     @Override
-    public void writeTo(Output output, int i, TaskDescription.P2PLocation v, boolean bln) throws IOException {
+    public void writeTo(Output output, int i, P2PLocation v, boolean bln) throws IOException {
         LinkedBuffer buffer = BUFFER_THREAD_LOCAL.get();
         try {
-            Schema schema = RuntimeSchema.getSchema(TaskDescription.P2PLocation.class);
+            Schema schema = RuntimeSchema.getSchema(P2PLocation.class);
             byte[] res = ProtostuffIOUtil.toByteArray(v, schema, buffer);
             output.writeByteArray(i, res, bln);
         } finally {
@@ -49,7 +49,7 @@ public class TaskDelegate implements Delegate<TaskDescription.P2PLocation> {
 
     @Override
     public Class<?> typeClass() {
-        return TaskDescription.P2PLocation.class;
+        return P2PLocation.class;
     }
 
 }
