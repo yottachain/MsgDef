@@ -4,6 +4,9 @@ import com.ytfs.service.packet.ErrorMessage;
 import io.protostuff.LinkedBuffer;
 import io.protostuff.ProtostuffIOUtil;
 import io.protostuff.Schema;
+import io.protostuff.runtime.DefaultIdStrategy;
+import io.protostuff.runtime.Delegate;
+import io.protostuff.runtime.RuntimeEnv;
 import io.protostuff.runtime.RuntimeSchema;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -15,21 +18,34 @@ public class SerializationUtil {
     private static final ThreadLocal<LinkedBuffer> BUFFER_THREAD_LOCAL = ThreadLocal
             .withInitial(() -> LinkedBuffer.allocate(512));
 
+    public static byte[] serialize(Object obj) {
+        return serialize(obj, null);
+    }
+
     /**
      * 序列化对象
      *
      * @param obj
-     * @return
+     * @param delegate
+     * @return byte[]
      */
-    public static byte[] serialize(Object obj) {
+    public static byte[] serialize(Object obj, Delegate delegate) {
         if (obj == null) {
             throw new IllegalArgumentException();
         }
         if (obj instanceof ServiceException) {
             obj = ((ServiceException) obj).toErrMessage();
         }
-        @SuppressWarnings("unchecked")             
-        Schema schema = RuntimeSchema.getSchema(obj.getClass());
+
+        @SuppressWarnings("unchecked")
+        Schema schema;
+        if (delegate == null) {
+            schema = RuntimeSchema.getSchema(obj.getClass());
+        } else {
+            DefaultIdStrategy idStrategy = ((DefaultIdStrategy) RuntimeEnv.ID_STRATEGY);
+            idStrategy.registerDelegate(delegate);
+            schema = RuntimeSchema.createFrom(obj.getClass(), idStrategy);
+        }
         LinkedBuffer buffer = BUFFER_THREAD_LOCAL.get();
         try {
             byte[] protostuff = ProtostuffIOUtil.toByteArray(obj, schema, buffer);
@@ -45,14 +61,19 @@ public class SerializationUtil {
         }
     }
 
+    public static Object deserialize(byte[] paramArrayOfByte) {
+        return deserialize(paramArrayOfByte, null);
+    }
+
     /**
      * 反序列化
      *
      * @param paramArrayOfByte
+     * @param delegate
      * @return
      */
     @SuppressWarnings("unchecked")
-    public static Object deserialize(byte[] paramArrayOfByte) {
+    public static Object deserialize(byte[] paramArrayOfByte, Delegate delegate) {
         if (paramArrayOfByte == null || paramArrayOfByte.length == 0) {
             throw new IllegalArgumentException();
         }
@@ -64,7 +85,14 @@ public class SerializationUtil {
         } catch (InstantiationException | IllegalAccessException e) {
             throw new RuntimeException(e);
         }
-        Schema schema = RuntimeSchema.getSchema(targetClass);
+        Schema schema;
+        if (delegate == null) {
+            schema = RuntimeSchema.getSchema(targetClass);
+        } else {
+            DefaultIdStrategy idStrategy = ((DefaultIdStrategy) RuntimeEnv.ID_STRATEGY);
+            idStrategy.registerDelegate(delegate);
+            schema = RuntimeSchema.createFrom(targetClass, idStrategy);
+        }
         ProtostuffIOUtil.mergeFrom(paramArrayOfByte, 2, paramArrayOfByte.length - 2, instance, schema);
         if (instance instanceof ErrorMessage) {
             return new ServiceException((ErrorMessage) instance);

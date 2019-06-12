@@ -4,7 +4,7 @@ option java_package = "com.ytfs.service.packet";
 
 //msgid=0xd761
 message TaskDescription{
-    uint64 id = 1; 
+    int64 id = 1; 
     repeated bytes dataHash=2;
     repeated bytes parityHash=3;
     message P2PLocation{
@@ -12,6 +12,7 @@ message TaskDescription{
         repeated string addrs=2;
     }
     repeated P2PLocation locations=4;
-    repeated uint32 recoverId=5;
+    repeated int32 recoverId=5;
+    int32 type=6;
 }
 

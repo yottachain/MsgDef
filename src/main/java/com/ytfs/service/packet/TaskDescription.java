@@ -9,6 +9,7 @@ public class TaskDescription {
     private List<byte[]> parityHash;
     private List<P2PLocation> locations;
     private List<Integer> recoverId;
+    private int type;
 
     public static class P2PLocation {
 
@@ -114,4 +115,19 @@ public class TaskDescription {
     public void setRecoverId(List<Integer> recoverId) {
         this.recoverId = recoverId;
     }
+
+    /**
+     * @return the type
+     */
+    public int getType() {
+        return type;
+    }
+
+    /**
+     * @param type the type to set
+     */
+    public void setType(int type) {
+        this.type = type;
+    }
+    
 }

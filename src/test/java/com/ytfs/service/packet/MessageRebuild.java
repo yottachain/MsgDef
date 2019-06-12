@@ -19,9 +19,9 @@ public final class MessageRebuild {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <code>uint32 id = 1;</code>
+     * <code>int64 id = 1;</code>
      */
-    int getId();
+    long getId();
 
     /**
      * <code>repeated bytes dataHash = 2;</code>
@@ -74,17 +74,22 @@ public final class MessageRebuild {
         int index);
 
     /**
-     * <code>repeated uint32 recoverId = 5;</code>
+     * <code>repeated int32 recoverId = 5;</code>
      */
     java.util.List<java.lang.Integer> getRecoverIdList();
     /**
-     * <code>repeated uint32 recoverId = 5;</code>
+     * <code>repeated int32 recoverId = 5;</code>
      */
     int getRecoverIdCount();
     /**
-     * <code>repeated uint32 recoverId = 5;</code>
+     * <code>repeated int32 recoverId = 5;</code>
      */
     int getRecoverId(int index);
+
+    /**
+     * <code>int32 type = 6;</code>
+     */
+    int getType();
   }
   /**
    * <pre>
@@ -103,11 +108,12 @@ public final class MessageRebuild {
       super(builder);
     }
     private TaskDescription() {
-      id_ = 0;
+      id_ = 0L;
       dataHash_ = java.util.Collections.emptyList();
       parityHash_ = java.util.Collections.emptyList();
       locations_ = java.util.Collections.emptyList();
       recoverId_ = java.util.Collections.emptyList();
+      type_ = 0;
     }
 
     @java.lang.Override
@@ -143,7 +149,7 @@ public final class MessageRebuild {
             }
             case 8: {
 
-              id_ = input.readUInt32();
+              id_ = input.readInt64();
               break;
             }
             case 18: {
@@ -176,7 +182,7 @@ public final class MessageRebuild {
                 recoverId_ = new java.util.ArrayList<java.lang.Integer>();
                 mutable_bitField0_ |= 0x00000010;
               }
-              recoverId_.add(input.readUInt32());
+              recoverId_.add(input.readInt32());
               break;
             }
             case 42: {
@@ -187,9 +193,14 @@ public final class MessageRebuild {
                 mutable_bitField0_ |= 0x00000010;
               }
               while (input.getBytesUntilLimit() > 0) {
-                recoverId_.add(input.readUInt32());
+                recoverId_.add(input.readInt32());
               }
               input.popLimit(limit);
+              break;
+            }
+            case 48: {
+
+              type_ = input.readInt32();
               break;
             }
           }
@@ -949,11 +960,11 @@ public final class MessageRebuild {
 
     private int bitField0_;
     public static final int ID_FIELD_NUMBER = 1;
-    private int id_;
+    private long id_;
     /**
-     * <code>uint32 id = 1;</code>
+     * <code>int64 id = 1;</code>
      */
-    public int getId() {
+    public long getId() {
       return id_;
     }
 
@@ -1039,25 +1050,34 @@ public final class MessageRebuild {
     public static final int RECOVERID_FIELD_NUMBER = 5;
     private java.util.List<java.lang.Integer> recoverId_;
     /**
-     * <code>repeated uint32 recoverId = 5;</code>
+     * <code>repeated int32 recoverId = 5;</code>
      */
     public java.util.List<java.lang.Integer>
         getRecoverIdList() {
       return recoverId_;
     }
     /**
-     * <code>repeated uint32 recoverId = 5;</code>
+     * <code>repeated int32 recoverId = 5;</code>
      */
     public int getRecoverIdCount() {
       return recoverId_.size();
     }
     /**
-     * <code>repeated uint32 recoverId = 5;</code>
+     * <code>repeated int32 recoverId = 5;</code>
      */
     public int getRecoverId(int index) {
       return recoverId_.get(index);
     }
     private int recoverIdMemoizedSerializedSize = -1;
+
+    public static final int TYPE_FIELD_NUMBER = 6;
+    private int type_;
+    /**
+     * <code>int32 type = 6;</code>
+     */
+    public int getType() {
+      return type_;
+    }
 
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
@@ -1072,8 +1092,8 @@ public final class MessageRebuild {
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
       getSerializedSize();
-      if (id_ != 0) {
-        output.writeUInt32(1, id_);
+      if (id_ != 0L) {
+        output.writeInt64(1, id_);
       }
       for (int i = 0; i < dataHash_.size(); i++) {
         output.writeBytes(2, dataHash_.get(i));
@@ -1089,7 +1109,10 @@ public final class MessageRebuild {
         output.writeUInt32NoTag(recoverIdMemoizedSerializedSize);
       }
       for (int i = 0; i < recoverId_.size(); i++) {
-        output.writeUInt32NoTag(recoverId_.get(i));
+        output.writeInt32NoTag(recoverId_.get(i));
+      }
+      if (type_ != 0) {
+        output.writeInt32(6, type_);
       }
       unknownFields.writeTo(output);
     }
@@ -1099,9 +1122,9 @@ public final class MessageRebuild {
       if (size != -1) return size;
 
       size = 0;
-      if (id_ != 0) {
+      if (id_ != 0L) {
         size += com.google.protobuf.CodedOutputStream
-          .computeUInt32Size(1, id_);
+          .computeInt64Size(1, id_);
       }
       {
         int dataSize = 0;
@@ -1129,7 +1152,7 @@ public final class MessageRebuild {
         int dataSize = 0;
         for (int i = 0; i < recoverId_.size(); i++) {
           dataSize += com.google.protobuf.CodedOutputStream
-            .computeUInt32SizeNoTag(recoverId_.get(i));
+            .computeInt32SizeNoTag(recoverId_.get(i));
         }
         size += dataSize;
         if (!getRecoverIdList().isEmpty()) {
@@ -1138,6 +1161,10 @@ public final class MessageRebuild {
               .computeInt32SizeNoTag(dataSize);
         }
         recoverIdMemoizedSerializedSize = dataSize;
+      }
+      if (type_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(6, type_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -1165,6 +1192,8 @@ public final class MessageRebuild {
           .equals(other.getLocationsList());
       result = result && getRecoverIdList()
           .equals(other.getRecoverIdList());
+      result = result && (getType()
+          == other.getType());
       result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
@@ -1177,7 +1206,8 @@ public final class MessageRebuild {
       int hash = 41;
       hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + ID_FIELD_NUMBER;
-      hash = (53 * hash) + getId();
+      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+          getId());
       if (getDataHashCount() > 0) {
         hash = (37 * hash) + DATAHASH_FIELD_NUMBER;
         hash = (53 * hash) + getDataHashList().hashCode();
@@ -1194,6 +1224,8 @@ public final class MessageRebuild {
         hash = (37 * hash) + RECOVERID_FIELD_NUMBER;
         hash = (53 * hash) + getRecoverIdList().hashCode();
       }
+      hash = (37 * hash) + TYPE_FIELD_NUMBER;
+      hash = (53 * hash) + getType();
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -1328,7 +1360,7 @@ public final class MessageRebuild {
       }
       public Builder clear() {
         super.clear();
-        id_ = 0;
+        id_ = 0L;
 
         dataHash_ = java.util.Collections.emptyList();
         bitField0_ = (bitField0_ & ~0x00000002);
@@ -1342,6 +1374,8 @@ public final class MessageRebuild {
         }
         recoverId_ = java.util.Collections.emptyList();
         bitField0_ = (bitField0_ & ~0x00000010);
+        type_ = 0;
+
         return this;
       }
 
@@ -1391,6 +1425,7 @@ public final class MessageRebuild {
           bitField0_ = (bitField0_ & ~0x00000010);
         }
         result.recoverId_ = recoverId_;
+        result.type_ = type_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -1433,7 +1468,7 @@ public final class MessageRebuild {
 
       public Builder mergeFrom(com.ytfs.service.packet.MessageRebuild.TaskDescription other) {
         if (other == com.ytfs.service.packet.MessageRebuild.TaskDescription.getDefaultInstance()) return this;
-        if (other.getId() != 0) {
+        if (other.getId() != 0L) {
           setId(other.getId());
         }
         if (!other.dataHash_.isEmpty()) {
@@ -1492,6 +1527,9 @@ public final class MessageRebuild {
           }
           onChanged();
         }
+        if (other.getType() != 0) {
+          setType(other.getType());
+        }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
         return this;
@@ -1520,28 +1558,28 @@ public final class MessageRebuild {
       }
       private int bitField0_;
 
-      private int id_ ;
+      private long id_ ;
       /**
-       * <code>uint32 id = 1;</code>
+       * <code>int64 id = 1;</code>
        */
-      public int getId() {
+      public long getId() {
         return id_;
       }
       /**
-       * <code>uint32 id = 1;</code>
+       * <code>int64 id = 1;</code>
        */
-      public Builder setId(int value) {
+      public Builder setId(long value) {
         
         id_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>uint32 id = 1;</code>
+       * <code>int64 id = 1;</code>
        */
       public Builder clearId() {
         
-        id_ = 0;
+        id_ = 0L;
         onChanged();
         return this;
       }
@@ -1938,26 +1976,26 @@ public final class MessageRebuild {
          }
       }
       /**
-       * <code>repeated uint32 recoverId = 5;</code>
+       * <code>repeated int32 recoverId = 5;</code>
        */
       public java.util.List<java.lang.Integer>
           getRecoverIdList() {
         return java.util.Collections.unmodifiableList(recoverId_);
       }
       /**
-       * <code>repeated uint32 recoverId = 5;</code>
+       * <code>repeated int32 recoverId = 5;</code>
        */
       public int getRecoverIdCount() {
         return recoverId_.size();
       }
       /**
-       * <code>repeated uint32 recoverId = 5;</code>
+       * <code>repeated int32 recoverId = 5;</code>
        */
       public int getRecoverId(int index) {
         return recoverId_.get(index);
       }
       /**
-       * <code>repeated uint32 recoverId = 5;</code>
+       * <code>repeated int32 recoverId = 5;</code>
        */
       public Builder setRecoverId(
           int index, int value) {
@@ -1967,7 +2005,7 @@ public final class MessageRebuild {
         return this;
       }
       /**
-       * <code>repeated uint32 recoverId = 5;</code>
+       * <code>repeated int32 recoverId = 5;</code>
        */
       public Builder addRecoverId(int value) {
         ensureRecoverIdIsMutable();
@@ -1976,7 +2014,7 @@ public final class MessageRebuild {
         return this;
       }
       /**
-       * <code>repeated uint32 recoverId = 5;</code>
+       * <code>repeated int32 recoverId = 5;</code>
        */
       public Builder addAllRecoverId(
           java.lang.Iterable<? extends java.lang.Integer> values) {
@@ -1987,11 +2025,37 @@ public final class MessageRebuild {
         return this;
       }
       /**
-       * <code>repeated uint32 recoverId = 5;</code>
+       * <code>repeated int32 recoverId = 5;</code>
        */
       public Builder clearRecoverId() {
         recoverId_ = java.util.Collections.emptyList();
         bitField0_ = (bitField0_ & ~0x00000010);
+        onChanged();
+        return this;
+      }
+
+      private int type_ ;
+      /**
+       * <code>int32 type = 6;</code>
+       */
+      public int getType() {
+        return type_;
+      }
+      /**
+       * <code>int32 type = 6;</code>
+       */
+      public Builder setType(int value) {
+        
+        type_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>int32 type = 6;</code>
+       */
+      public Builder clearType() {
+        
+        type_ = 0;
         onChanged();
         return this;
       }
@@ -2063,13 +2127,13 @@ public final class MessageRebuild {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\025message_rebuild.proto\"\265\001\n\017TaskDescript" +
-      "ion\022\n\n\002id\030\001 \001(\r\022\020\n\010dataHash\030\002 \003(\014\022\022\n\npar" +
+      "\n\025message_rebuild.proto\"\303\001\n\017TaskDescript" +
+      "ion\022\n\n\002id\030\001 \001(\003\022\020\n\010dataHash\030\002 \003(\014\022\022\n\npar" +
       "ityHash\030\003 \003(\014\022/\n\tlocations\030\004 \003(\0132\034.TaskD" +
       "escription.P2PLocation\022\021\n\trecoverId\030\005 \003(" +
-      "\r\032,\n\013P2PLocation\022\016\n\006nodeId\030\001 \001(\t\022\r\n\005addr" +
-      "s\030\002 \003(\tB\031\n\027com.ytfs.service.packetb\006prot" +
-      "o3"
+      "\005\022\014\n\004type\030\006 \001(\005\032,\n\013P2PLocation\022\016\n\006nodeId" +
+      "\030\001 \001(\t\022\r\n\005addrs\030\002 \003(\tB\031\n\027com.ytfs.servic" +
+      "e.packetb\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -2088,7 +2152,7 @@ public final class MessageRebuild {
     internal_static_TaskDescription_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_TaskDescription_descriptor,
-        new java.lang.String[] { "Id", "DataHash", "ParityHash", "Locations", "RecoverId", });
+        new java.lang.String[] { "Id", "DataHash", "ParityHash", "Locations", "RecoverId", "Type", });
     internal_static_TaskDescription_P2PLocation_descriptor =
       internal_static_TaskDescription_descriptor.getNestedTypes().get(0);
     internal_static_TaskDescription_P2PLocation_fieldAccessorTable = new
