@@ -1,18 +1,20 @@
 package com.ytfs.service.packet.s3;
 
+import com.ytfs.service.packet.s3.entities.FileMetaMsg;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class ListObjectResp {
 
-    private List<Object> objects = new ArrayList<>();
 
+    private List<FileMetaMsg> fileMetaMsgList = new ArrayList<>();
 
-    public List<Object> getObjects() {
-        return objects;
+    public List<FileMetaMsg> getFileMetaMsgList() {
+        return fileMetaMsgList;
     }
 
-    public void setObjects(List<Object> objects) {
-        this.objects = objects;
+    public void setFileMetaMsgList(List<FileMetaMsg> fileMetaMsgList) {
+        this.fileMetaMsgList = fileMetaMsgList;
     }
 }
