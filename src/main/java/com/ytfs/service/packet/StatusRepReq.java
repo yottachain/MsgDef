@@ -12,6 +12,7 @@ public class StatusRepReq {
     private long assignedSpace;
     private long usedSpace;
     private List<String> addrs;
+    private boolean relay;
 
     /**
      * @return the id
@@ -123,6 +124,20 @@ public class StatusRepReq {
      */
     public void setAddrs(List<String> addrs) {
         this.addrs = addrs;
+    }
+
+    /**
+     * @return the relay
+     */
+    public boolean isRelay() {
+        return relay;
+    }
+
+    /**
+     * @param relay the relay to set
+     */
+    public void setRelay(boolean relay) {
+        this.relay = relay;
     }
 
 }

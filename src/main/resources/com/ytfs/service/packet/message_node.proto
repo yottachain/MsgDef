@@ -7,13 +7,15 @@ message NodeRegReq {
    string nodeid= 1;                           
    string owner=2;                              
    uint64 maxDataSpace=3;                 
-   repeated string addrs=4;                  
+   repeated string addrs=4;     
+   bool relay=5;             
 }
 
 //msgid=0xfb92
 message NodeRegResp {                       
    uint32 id= 1;                                    
-   uint64 assignedSpace=2;         
+   uint64 assignedSpace=2;    
+   string relayUrl=3;     
 }
 
 //msgid=0xc9a9
@@ -25,10 +27,12 @@ message StatusRepReq {
    uint64 maxDataSpace=5;                   
    uint64 assignedSpace=6;                   
    uint64 usedSpace=7;                       
-   repeated string addrs=8;             
+   repeated string addrs=8;  
+   bool relay=9;                        
 }
 
 //msgid=0xfa09
 message StatusRepResp {
-   uint64 productiveSpace=1;               
+   uint64 productiveSpace=1; 
+   string relayUrl=2;                   
 }
