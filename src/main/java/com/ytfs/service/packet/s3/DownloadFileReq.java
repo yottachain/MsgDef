@@ -1,9 +1,21 @@
 package com.ytfs.service.packet.s3;
 
+import org.bson.types.ObjectId;
+
 public class DownloadFileReq {
 
     private String bucketname;
     private String fileName;
+    private ObjectId versionId;
+
+
+    public ObjectId getVersionId() {
+        return versionId;
+    }
+
+    public void setVersionId(ObjectId versionId) {
+        this.versionId = versionId;
+    }
 
     /**
      * @return the bucketname
