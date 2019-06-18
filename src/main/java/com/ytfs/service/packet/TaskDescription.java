@@ -1,8 +1,12 @@
 package com.ytfs.service.packet;
 
+import com.ytfs.common.SerializationStrategy;
+import io.protostuff.runtime.DefaultIdStrategy;
+import io.protostuff.runtime.IdStrategy;
+import io.protostuff.runtime.RuntimeEnv;
 import java.util.List;
 
-public class TaskDescription {
+public class TaskDescription implements SerializationStrategy {
 
     private long id;
     private List<byte[]> dataHash;
@@ -78,5 +82,12 @@ public class TaskDescription {
      */
     public void setRecoverId(List<Integer> recoverId) {
         this.recoverId = recoverId;
+    }
+
+    @Override
+    public IdStrategy getIdStrategy() {
+        DefaultIdStrategy idStrategy = ((DefaultIdStrategy) RuntimeEnv.ID_STRATEGY);
+        idStrategy.registerDelegate(new TaskDelegate());
+        return idStrategy;
     }
 }

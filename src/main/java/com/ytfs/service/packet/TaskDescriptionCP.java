@@ -1,8 +1,12 @@
 package com.ytfs.service.packet;
 
+import com.ytfs.common.SerializationStrategy;
+import io.protostuff.runtime.DefaultIdStrategy;
+import io.protostuff.runtime.IdStrategy;
+import io.protostuff.runtime.RuntimeEnv;
 import java.util.List;
 
-public class TaskDescriptionCP {
+public class TaskDescriptionCP implements SerializationStrategy {
 
     private long id;
     private byte[] dataHash;
@@ -48,6 +52,13 @@ public class TaskDescriptionCP {
      */
     public void setLocations(List<P2PLocation> locations) {
         this.locations = locations;
+    }
+
+    @Override
+    public IdStrategy getIdStrategy() {
+        DefaultIdStrategy idStrategy = ((DefaultIdStrategy) RuntimeEnv.ID_STRATEGY);
+        idStrategy.registerDelegate(new TaskDelegate());
+        return idStrategy;
     }
 
 }

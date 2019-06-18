@@ -1326,6 +1326,904 @@ public final class MessageRebuild {
 
   }
 
+  public interface TaskDescriptionCPOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:TaskDescriptionCP)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>int64 id = 1;</code>
+     */
+    long getId();
+
+    /**
+     * <code>bytes dataHash = 2;</code>
+     */
+    com.google.protobuf.ByteString getDataHash();
+
+    /**
+     * <code>repeated .P2PLocation locations = 3;</code>
+     */
+    java.util.List<com.ytfs.service.packet.MessageRebuild.P2PLocation> 
+        getLocationsList();
+    /**
+     * <code>repeated .P2PLocation locations = 3;</code>
+     */
+    com.ytfs.service.packet.MessageRebuild.P2PLocation getLocations(int index);
+    /**
+     * <code>repeated .P2PLocation locations = 3;</code>
+     */
+    int getLocationsCount();
+    /**
+     * <code>repeated .P2PLocation locations = 3;</code>
+     */
+    java.util.List<? extends com.ytfs.service.packet.MessageRebuild.P2PLocationOrBuilder> 
+        getLocationsOrBuilderList();
+    /**
+     * <code>repeated .P2PLocation locations = 3;</code>
+     */
+    com.ytfs.service.packet.MessageRebuild.P2PLocationOrBuilder getLocationsOrBuilder(
+        int index);
+  }
+  /**
+   * <pre>
+   *msgid=0xc258
+   * </pre>
+   *
+   * Protobuf type {@code TaskDescriptionCP}
+   */
+  public  static final class TaskDescriptionCP extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:TaskDescriptionCP)
+      TaskDescriptionCPOrBuilder {
+  private static final long serialVersionUID = 0L;
+    // Use TaskDescriptionCP.newBuilder() to construct.
+    private TaskDescriptionCP(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private TaskDescriptionCP() {
+      id_ = 0L;
+      dataHash_ = com.google.protobuf.ByteString.EMPTY;
+      locations_ = java.util.Collections.emptyList();
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private TaskDescriptionCP(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 8: {
+
+              id_ = input.readInt64();
+              break;
+            }
+            case 18: {
+
+              dataHash_ = input.readBytes();
+              break;
+            }
+            case 26: {
+              if (!((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
+                locations_ = new java.util.ArrayList<com.ytfs.service.packet.MessageRebuild.P2PLocation>();
+                mutable_bitField0_ |= 0x00000004;
+              }
+              locations_.add(
+                  input.readMessage(com.ytfs.service.packet.MessageRebuild.P2PLocation.parser(), extensionRegistry));
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        if (((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
+          locations_ = java.util.Collections.unmodifiableList(locations_);
+        }
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.ytfs.service.packet.MessageRebuild.internal_static_TaskDescriptionCP_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.ytfs.service.packet.MessageRebuild.internal_static_TaskDescriptionCP_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.ytfs.service.packet.MessageRebuild.TaskDescriptionCP.class, com.ytfs.service.packet.MessageRebuild.TaskDescriptionCP.Builder.class);
+    }
+
+    private int bitField0_;
+    public static final int ID_FIELD_NUMBER = 1;
+    private long id_;
+    /**
+     * <code>int64 id = 1;</code>
+     */
+    public long getId() {
+      return id_;
+    }
+
+    public static final int DATAHASH_FIELD_NUMBER = 2;
+    private com.google.protobuf.ByteString dataHash_;
+    /**
+     * <code>bytes dataHash = 2;</code>
+     */
+    public com.google.protobuf.ByteString getDataHash() {
+      return dataHash_;
+    }
+
+    public static final int LOCATIONS_FIELD_NUMBER = 3;
+    private java.util.List<com.ytfs.service.packet.MessageRebuild.P2PLocation> locations_;
+    /**
+     * <code>repeated .P2PLocation locations = 3;</code>
+     */
+    public java.util.List<com.ytfs.service.packet.MessageRebuild.P2PLocation> getLocationsList() {
+      return locations_;
+    }
+    /**
+     * <code>repeated .P2PLocation locations = 3;</code>
+     */
+    public java.util.List<? extends com.ytfs.service.packet.MessageRebuild.P2PLocationOrBuilder> 
+        getLocationsOrBuilderList() {
+      return locations_;
+    }
+    /**
+     * <code>repeated .P2PLocation locations = 3;</code>
+     */
+    public int getLocationsCount() {
+      return locations_.size();
+    }
+    /**
+     * <code>repeated .P2PLocation locations = 3;</code>
+     */
+    public com.ytfs.service.packet.MessageRebuild.P2PLocation getLocations(int index) {
+      return locations_.get(index);
+    }
+    /**
+     * <code>repeated .P2PLocation locations = 3;</code>
+     */
+    public com.ytfs.service.packet.MessageRebuild.P2PLocationOrBuilder getLocationsOrBuilder(
+        int index) {
+      return locations_.get(index);
+    }
+
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (id_ != 0L) {
+        output.writeInt64(1, id_);
+      }
+      if (!dataHash_.isEmpty()) {
+        output.writeBytes(2, dataHash_);
+      }
+      for (int i = 0; i < locations_.size(); i++) {
+        output.writeMessage(3, locations_.get(i));
+      }
+      unknownFields.writeTo(output);
+    }
+
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (id_ != 0L) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(1, id_);
+      }
+      if (!dataHash_.isEmpty()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(2, dataHash_);
+      }
+      for (int i = 0; i < locations_.size(); i++) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeMessageSize(3, locations_.get(i));
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof com.ytfs.service.packet.MessageRebuild.TaskDescriptionCP)) {
+        return super.equals(obj);
+      }
+      com.ytfs.service.packet.MessageRebuild.TaskDescriptionCP other = (com.ytfs.service.packet.MessageRebuild.TaskDescriptionCP) obj;
+
+      boolean result = true;
+      result = result && (getId()
+          == other.getId());
+      result = result && getDataHash()
+          .equals(other.getDataHash());
+      result = result && getLocationsList()
+          .equals(other.getLocationsList());
+      result = result && unknownFields.equals(other.unknownFields);
+      return result;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (37 * hash) + ID_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+          getId());
+      hash = (37 * hash) + DATAHASH_FIELD_NUMBER;
+      hash = (53 * hash) + getDataHash().hashCode();
+      if (getLocationsCount() > 0) {
+        hash = (37 * hash) + LOCATIONS_FIELD_NUMBER;
+        hash = (53 * hash) + getLocationsList().hashCode();
+      }
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static com.ytfs.service.packet.MessageRebuild.TaskDescriptionCP parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.ytfs.service.packet.MessageRebuild.TaskDescriptionCP parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.ytfs.service.packet.MessageRebuild.TaskDescriptionCP parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.ytfs.service.packet.MessageRebuild.TaskDescriptionCP parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.ytfs.service.packet.MessageRebuild.TaskDescriptionCP parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.ytfs.service.packet.MessageRebuild.TaskDescriptionCP parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.ytfs.service.packet.MessageRebuild.TaskDescriptionCP parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.ytfs.service.packet.MessageRebuild.TaskDescriptionCP parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.ytfs.service.packet.MessageRebuild.TaskDescriptionCP parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static com.ytfs.service.packet.MessageRebuild.TaskDescriptionCP parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.ytfs.service.packet.MessageRebuild.TaskDescriptionCP parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.ytfs.service.packet.MessageRebuild.TaskDescriptionCP parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(com.ytfs.service.packet.MessageRebuild.TaskDescriptionCP prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * <pre>
+     *msgid=0xc258
+     * </pre>
+     *
+     * Protobuf type {@code TaskDescriptionCP}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:TaskDescriptionCP)
+        com.ytfs.service.packet.MessageRebuild.TaskDescriptionCPOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.ytfs.service.packet.MessageRebuild.internal_static_TaskDescriptionCP_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.ytfs.service.packet.MessageRebuild.internal_static_TaskDescriptionCP_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.ytfs.service.packet.MessageRebuild.TaskDescriptionCP.class, com.ytfs.service.packet.MessageRebuild.TaskDescriptionCP.Builder.class);
+      }
+
+      // Construct using com.ytfs.service.packet.MessageRebuild.TaskDescriptionCP.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+          getLocationsFieldBuilder();
+        }
+      }
+      public Builder clear() {
+        super.clear();
+        id_ = 0L;
+
+        dataHash_ = com.google.protobuf.ByteString.EMPTY;
+
+        if (locationsBuilder_ == null) {
+          locations_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000004);
+        } else {
+          locationsBuilder_.clear();
+        }
+        return this;
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.ytfs.service.packet.MessageRebuild.internal_static_TaskDescriptionCP_descriptor;
+      }
+
+      public com.ytfs.service.packet.MessageRebuild.TaskDescriptionCP getDefaultInstanceForType() {
+        return com.ytfs.service.packet.MessageRebuild.TaskDescriptionCP.getDefaultInstance();
+      }
+
+      public com.ytfs.service.packet.MessageRebuild.TaskDescriptionCP build() {
+        com.ytfs.service.packet.MessageRebuild.TaskDescriptionCP result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.ytfs.service.packet.MessageRebuild.TaskDescriptionCP buildPartial() {
+        com.ytfs.service.packet.MessageRebuild.TaskDescriptionCP result = new com.ytfs.service.packet.MessageRebuild.TaskDescriptionCP(this);
+        int from_bitField0_ = bitField0_;
+        int to_bitField0_ = 0;
+        result.id_ = id_;
+        result.dataHash_ = dataHash_;
+        if (locationsBuilder_ == null) {
+          if (((bitField0_ & 0x00000004) == 0x00000004)) {
+            locations_ = java.util.Collections.unmodifiableList(locations_);
+            bitField0_ = (bitField0_ & ~0x00000004);
+          }
+          result.locations_ = locations_;
+        } else {
+          result.locations_ = locationsBuilder_.build();
+        }
+        result.bitField0_ = to_bitField0_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.ytfs.service.packet.MessageRebuild.TaskDescriptionCP) {
+          return mergeFrom((com.ytfs.service.packet.MessageRebuild.TaskDescriptionCP)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.ytfs.service.packet.MessageRebuild.TaskDescriptionCP other) {
+        if (other == com.ytfs.service.packet.MessageRebuild.TaskDescriptionCP.getDefaultInstance()) return this;
+        if (other.getId() != 0L) {
+          setId(other.getId());
+        }
+        if (other.getDataHash() != com.google.protobuf.ByteString.EMPTY) {
+          setDataHash(other.getDataHash());
+        }
+        if (locationsBuilder_ == null) {
+          if (!other.locations_.isEmpty()) {
+            if (locations_.isEmpty()) {
+              locations_ = other.locations_;
+              bitField0_ = (bitField0_ & ~0x00000004);
+            } else {
+              ensureLocationsIsMutable();
+              locations_.addAll(other.locations_);
+            }
+            onChanged();
+          }
+        } else {
+          if (!other.locations_.isEmpty()) {
+            if (locationsBuilder_.isEmpty()) {
+              locationsBuilder_.dispose();
+              locationsBuilder_ = null;
+              locations_ = other.locations_;
+              bitField0_ = (bitField0_ & ~0x00000004);
+              locationsBuilder_ = 
+                com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
+                   getLocationsFieldBuilder() : null;
+            } else {
+              locationsBuilder_.addAllMessages(other.locations_);
+            }
+          }
+        }
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.ytfs.service.packet.MessageRebuild.TaskDescriptionCP parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.ytfs.service.packet.MessageRebuild.TaskDescriptionCP) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+      private int bitField0_;
+
+      private long id_ ;
+      /**
+       * <code>int64 id = 1;</code>
+       */
+      public long getId() {
+        return id_;
+      }
+      /**
+       * <code>int64 id = 1;</code>
+       */
+      public Builder setId(long value) {
+        
+        id_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>int64 id = 1;</code>
+       */
+      public Builder clearId() {
+        
+        id_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      private com.google.protobuf.ByteString dataHash_ = com.google.protobuf.ByteString.EMPTY;
+      /**
+       * <code>bytes dataHash = 2;</code>
+       */
+      public com.google.protobuf.ByteString getDataHash() {
+        return dataHash_;
+      }
+      /**
+       * <code>bytes dataHash = 2;</code>
+       */
+      public Builder setDataHash(com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        dataHash_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>bytes dataHash = 2;</code>
+       */
+      public Builder clearDataHash() {
+        
+        dataHash_ = getDefaultInstance().getDataHash();
+        onChanged();
+        return this;
+      }
+
+      private java.util.List<com.ytfs.service.packet.MessageRebuild.P2PLocation> locations_ =
+        java.util.Collections.emptyList();
+      private void ensureLocationsIsMutable() {
+        if (!((bitField0_ & 0x00000004) == 0x00000004)) {
+          locations_ = new java.util.ArrayList<com.ytfs.service.packet.MessageRebuild.P2PLocation>(locations_);
+          bitField0_ |= 0x00000004;
+         }
+      }
+
+      private com.google.protobuf.RepeatedFieldBuilderV3<
+          com.ytfs.service.packet.MessageRebuild.P2PLocation, com.ytfs.service.packet.MessageRebuild.P2PLocation.Builder, com.ytfs.service.packet.MessageRebuild.P2PLocationOrBuilder> locationsBuilder_;
+
+      /**
+       * <code>repeated .P2PLocation locations = 3;</code>
+       */
+      public java.util.List<com.ytfs.service.packet.MessageRebuild.P2PLocation> getLocationsList() {
+        if (locationsBuilder_ == null) {
+          return java.util.Collections.unmodifiableList(locations_);
+        } else {
+          return locationsBuilder_.getMessageList();
+        }
+      }
+      /**
+       * <code>repeated .P2PLocation locations = 3;</code>
+       */
+      public int getLocationsCount() {
+        if (locationsBuilder_ == null) {
+          return locations_.size();
+        } else {
+          return locationsBuilder_.getCount();
+        }
+      }
+      /**
+       * <code>repeated .P2PLocation locations = 3;</code>
+       */
+      public com.ytfs.service.packet.MessageRebuild.P2PLocation getLocations(int index) {
+        if (locationsBuilder_ == null) {
+          return locations_.get(index);
+        } else {
+          return locationsBuilder_.getMessage(index);
+        }
+      }
+      /**
+       * <code>repeated .P2PLocation locations = 3;</code>
+       */
+      public Builder setLocations(
+          int index, com.ytfs.service.packet.MessageRebuild.P2PLocation value) {
+        if (locationsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureLocationsIsMutable();
+          locations_.set(index, value);
+          onChanged();
+        } else {
+          locationsBuilder_.setMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .P2PLocation locations = 3;</code>
+       */
+      public Builder setLocations(
+          int index, com.ytfs.service.packet.MessageRebuild.P2PLocation.Builder builderForValue) {
+        if (locationsBuilder_ == null) {
+          ensureLocationsIsMutable();
+          locations_.set(index, builderForValue.build());
+          onChanged();
+        } else {
+          locationsBuilder_.setMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .P2PLocation locations = 3;</code>
+       */
+      public Builder addLocations(com.ytfs.service.packet.MessageRebuild.P2PLocation value) {
+        if (locationsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureLocationsIsMutable();
+          locations_.add(value);
+          onChanged();
+        } else {
+          locationsBuilder_.addMessage(value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .P2PLocation locations = 3;</code>
+       */
+      public Builder addLocations(
+          int index, com.ytfs.service.packet.MessageRebuild.P2PLocation value) {
+        if (locationsBuilder_ == null) {
+          if (value == null) {
+            throw new NullPointerException();
+          }
+          ensureLocationsIsMutable();
+          locations_.add(index, value);
+          onChanged();
+        } else {
+          locationsBuilder_.addMessage(index, value);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .P2PLocation locations = 3;</code>
+       */
+      public Builder addLocations(
+          com.ytfs.service.packet.MessageRebuild.P2PLocation.Builder builderForValue) {
+        if (locationsBuilder_ == null) {
+          ensureLocationsIsMutable();
+          locations_.add(builderForValue.build());
+          onChanged();
+        } else {
+          locationsBuilder_.addMessage(builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .P2PLocation locations = 3;</code>
+       */
+      public Builder addLocations(
+          int index, com.ytfs.service.packet.MessageRebuild.P2PLocation.Builder builderForValue) {
+        if (locationsBuilder_ == null) {
+          ensureLocationsIsMutable();
+          locations_.add(index, builderForValue.build());
+          onChanged();
+        } else {
+          locationsBuilder_.addMessage(index, builderForValue.build());
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .P2PLocation locations = 3;</code>
+       */
+      public Builder addAllLocations(
+          java.lang.Iterable<? extends com.ytfs.service.packet.MessageRebuild.P2PLocation> values) {
+        if (locationsBuilder_ == null) {
+          ensureLocationsIsMutable();
+          com.google.protobuf.AbstractMessageLite.Builder.addAll(
+              values, locations_);
+          onChanged();
+        } else {
+          locationsBuilder_.addAllMessages(values);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .P2PLocation locations = 3;</code>
+       */
+      public Builder clearLocations() {
+        if (locationsBuilder_ == null) {
+          locations_ = java.util.Collections.emptyList();
+          bitField0_ = (bitField0_ & ~0x00000004);
+          onChanged();
+        } else {
+          locationsBuilder_.clear();
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .P2PLocation locations = 3;</code>
+       */
+      public Builder removeLocations(int index) {
+        if (locationsBuilder_ == null) {
+          ensureLocationsIsMutable();
+          locations_.remove(index);
+          onChanged();
+        } else {
+          locationsBuilder_.remove(index);
+        }
+        return this;
+      }
+      /**
+       * <code>repeated .P2PLocation locations = 3;</code>
+       */
+      public com.ytfs.service.packet.MessageRebuild.P2PLocation.Builder getLocationsBuilder(
+          int index) {
+        return getLocationsFieldBuilder().getBuilder(index);
+      }
+      /**
+       * <code>repeated .P2PLocation locations = 3;</code>
+       */
+      public com.ytfs.service.packet.MessageRebuild.P2PLocationOrBuilder getLocationsOrBuilder(
+          int index) {
+        if (locationsBuilder_ == null) {
+          return locations_.get(index);  } else {
+          return locationsBuilder_.getMessageOrBuilder(index);
+        }
+      }
+      /**
+       * <code>repeated .P2PLocation locations = 3;</code>
+       */
+      public java.util.List<? extends com.ytfs.service.packet.MessageRebuild.P2PLocationOrBuilder> 
+           getLocationsOrBuilderList() {
+        if (locationsBuilder_ != null) {
+          return locationsBuilder_.getMessageOrBuilderList();
+        } else {
+          return java.util.Collections.unmodifiableList(locations_);
+        }
+      }
+      /**
+       * <code>repeated .P2PLocation locations = 3;</code>
+       */
+      public com.ytfs.service.packet.MessageRebuild.P2PLocation.Builder addLocationsBuilder() {
+        return getLocationsFieldBuilder().addBuilder(
+            com.ytfs.service.packet.MessageRebuild.P2PLocation.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .P2PLocation locations = 3;</code>
+       */
+      public com.ytfs.service.packet.MessageRebuild.P2PLocation.Builder addLocationsBuilder(
+          int index) {
+        return getLocationsFieldBuilder().addBuilder(
+            index, com.ytfs.service.packet.MessageRebuild.P2PLocation.getDefaultInstance());
+      }
+      /**
+       * <code>repeated .P2PLocation locations = 3;</code>
+       */
+      public java.util.List<com.ytfs.service.packet.MessageRebuild.P2PLocation.Builder> 
+           getLocationsBuilderList() {
+        return getLocationsFieldBuilder().getBuilderList();
+      }
+      private com.google.protobuf.RepeatedFieldBuilderV3<
+          com.ytfs.service.packet.MessageRebuild.P2PLocation, com.ytfs.service.packet.MessageRebuild.P2PLocation.Builder, com.ytfs.service.packet.MessageRebuild.P2PLocationOrBuilder> 
+          getLocationsFieldBuilder() {
+        if (locationsBuilder_ == null) {
+          locationsBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
+              com.ytfs.service.packet.MessageRebuild.P2PLocation, com.ytfs.service.packet.MessageRebuild.P2PLocation.Builder, com.ytfs.service.packet.MessageRebuild.P2PLocationOrBuilder>(
+                  locations_,
+                  ((bitField0_ & 0x00000004) == 0x00000004),
+                  getParentForChildren(),
+                  isClean());
+          locations_ = null;
+        }
+        return locationsBuilder_;
+      }
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFieldsProto3(unknownFields);
+      }
+
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:TaskDescriptionCP)
+    }
+
+    // @@protoc_insertion_point(class_scope:TaskDescriptionCP)
+    private static final com.ytfs.service.packet.MessageRebuild.TaskDescriptionCP DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new com.ytfs.service.packet.MessageRebuild.TaskDescriptionCP();
+    }
+
+    public static com.ytfs.service.packet.MessageRebuild.TaskDescriptionCP getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<TaskDescriptionCP>
+        PARSER = new com.google.protobuf.AbstractParser<TaskDescriptionCP>() {
+      public TaskDescriptionCP parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new TaskDescriptionCP(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<TaskDescriptionCP> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<TaskDescriptionCP> getParserForType() {
+      return PARSER;
+    }
+
+    public com.ytfs.service.packet.MessageRebuild.TaskDescriptionCP getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
   public interface P2PLocationOrBuilder extends
       // @@protoc_insertion_point(interface_extends:P2PLocation)
       com.google.protobuf.MessageOrBuilder {
@@ -2045,16 +2943,549 @@ public final class MessageRebuild {
 
   }
 
+  public interface TaskOpResultOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:TaskOpResult)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>int64 id = 1;</code>
+     */
+    long getId();
+
+    /**
+     * <code>int32 RES = 2;</code>
+     */
+    int getRES();
+  }
+  /**
+   * <pre>
+   *msgid=0x16f3
+   * </pre>
+   *
+   * Protobuf type {@code TaskOpResult}
+   */
+  public  static final class TaskOpResult extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:TaskOpResult)
+      TaskOpResultOrBuilder {
+  private static final long serialVersionUID = 0L;
+    // Use TaskOpResult.newBuilder() to construct.
+    private TaskOpResult(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private TaskOpResult() {
+      id_ = 0L;
+      rES_ = 0;
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private TaskOpResult(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 8: {
+
+              id_ = input.readInt64();
+              break;
+            }
+            case 16: {
+
+              rES_ = input.readInt32();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.ytfs.service.packet.MessageRebuild.internal_static_TaskOpResult_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.ytfs.service.packet.MessageRebuild.internal_static_TaskOpResult_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.ytfs.service.packet.MessageRebuild.TaskOpResult.class, com.ytfs.service.packet.MessageRebuild.TaskOpResult.Builder.class);
+    }
+
+    public static final int ID_FIELD_NUMBER = 1;
+    private long id_;
+    /**
+     * <code>int64 id = 1;</code>
+     */
+    public long getId() {
+      return id_;
+    }
+
+    public static final int RES_FIELD_NUMBER = 2;
+    private int rES_;
+    /**
+     * <code>int32 RES = 2;</code>
+     */
+    public int getRES() {
+      return rES_;
+    }
+
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (id_ != 0L) {
+        output.writeInt64(1, id_);
+      }
+      if (rES_ != 0) {
+        output.writeInt32(2, rES_);
+      }
+      unknownFields.writeTo(output);
+    }
+
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (id_ != 0L) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(1, id_);
+      }
+      if (rES_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(2, rES_);
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof com.ytfs.service.packet.MessageRebuild.TaskOpResult)) {
+        return super.equals(obj);
+      }
+      com.ytfs.service.packet.MessageRebuild.TaskOpResult other = (com.ytfs.service.packet.MessageRebuild.TaskOpResult) obj;
+
+      boolean result = true;
+      result = result && (getId()
+          == other.getId());
+      result = result && (getRES()
+          == other.getRES());
+      result = result && unknownFields.equals(other.unknownFields);
+      return result;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (37 * hash) + ID_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+          getId());
+      hash = (37 * hash) + RES_FIELD_NUMBER;
+      hash = (53 * hash) + getRES();
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static com.ytfs.service.packet.MessageRebuild.TaskOpResult parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.ytfs.service.packet.MessageRebuild.TaskOpResult parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.ytfs.service.packet.MessageRebuild.TaskOpResult parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.ytfs.service.packet.MessageRebuild.TaskOpResult parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.ytfs.service.packet.MessageRebuild.TaskOpResult parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.ytfs.service.packet.MessageRebuild.TaskOpResult parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.ytfs.service.packet.MessageRebuild.TaskOpResult parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.ytfs.service.packet.MessageRebuild.TaskOpResult parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.ytfs.service.packet.MessageRebuild.TaskOpResult parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static com.ytfs.service.packet.MessageRebuild.TaskOpResult parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.ytfs.service.packet.MessageRebuild.TaskOpResult parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.ytfs.service.packet.MessageRebuild.TaskOpResult parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(com.ytfs.service.packet.MessageRebuild.TaskOpResult prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * <pre>
+     *msgid=0x16f3
+     * </pre>
+     *
+     * Protobuf type {@code TaskOpResult}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:TaskOpResult)
+        com.ytfs.service.packet.MessageRebuild.TaskOpResultOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.ytfs.service.packet.MessageRebuild.internal_static_TaskOpResult_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.ytfs.service.packet.MessageRebuild.internal_static_TaskOpResult_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.ytfs.service.packet.MessageRebuild.TaskOpResult.class, com.ytfs.service.packet.MessageRebuild.TaskOpResult.Builder.class);
+      }
+
+      // Construct using com.ytfs.service.packet.MessageRebuild.TaskOpResult.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      public Builder clear() {
+        super.clear();
+        id_ = 0L;
+
+        rES_ = 0;
+
+        return this;
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.ytfs.service.packet.MessageRebuild.internal_static_TaskOpResult_descriptor;
+      }
+
+      public com.ytfs.service.packet.MessageRebuild.TaskOpResult getDefaultInstanceForType() {
+        return com.ytfs.service.packet.MessageRebuild.TaskOpResult.getDefaultInstance();
+      }
+
+      public com.ytfs.service.packet.MessageRebuild.TaskOpResult build() {
+        com.ytfs.service.packet.MessageRebuild.TaskOpResult result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.ytfs.service.packet.MessageRebuild.TaskOpResult buildPartial() {
+        com.ytfs.service.packet.MessageRebuild.TaskOpResult result = new com.ytfs.service.packet.MessageRebuild.TaskOpResult(this);
+        result.id_ = id_;
+        result.rES_ = rES_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.ytfs.service.packet.MessageRebuild.TaskOpResult) {
+          return mergeFrom((com.ytfs.service.packet.MessageRebuild.TaskOpResult)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.ytfs.service.packet.MessageRebuild.TaskOpResult other) {
+        if (other == com.ytfs.service.packet.MessageRebuild.TaskOpResult.getDefaultInstance()) return this;
+        if (other.getId() != 0L) {
+          setId(other.getId());
+        }
+        if (other.getRES() != 0) {
+          setRES(other.getRES());
+        }
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.ytfs.service.packet.MessageRebuild.TaskOpResult parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.ytfs.service.packet.MessageRebuild.TaskOpResult) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+
+      private long id_ ;
+      /**
+       * <code>int64 id = 1;</code>
+       */
+      public long getId() {
+        return id_;
+      }
+      /**
+       * <code>int64 id = 1;</code>
+       */
+      public Builder setId(long value) {
+        
+        id_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>int64 id = 1;</code>
+       */
+      public Builder clearId() {
+        
+        id_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      private int rES_ ;
+      /**
+       * <code>int32 RES = 2;</code>
+       */
+      public int getRES() {
+        return rES_;
+      }
+      /**
+       * <code>int32 RES = 2;</code>
+       */
+      public Builder setRES(int value) {
+        
+        rES_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>int32 RES = 2;</code>
+       */
+      public Builder clearRES() {
+        
+        rES_ = 0;
+        onChanged();
+        return this;
+      }
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFieldsProto3(unknownFields);
+      }
+
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:TaskOpResult)
+    }
+
+    // @@protoc_insertion_point(class_scope:TaskOpResult)
+    private static final com.ytfs.service.packet.MessageRebuild.TaskOpResult DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new com.ytfs.service.packet.MessageRebuild.TaskOpResult();
+    }
+
+    public static com.ytfs.service.packet.MessageRebuild.TaskOpResult getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<TaskOpResult>
+        PARSER = new com.google.protobuf.AbstractParser<TaskOpResult>() {
+      public TaskOpResult parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new TaskOpResult(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<TaskOpResult> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<TaskOpResult> getParserForType() {
+      return PARSER;
+    }
+
+    public com.ytfs.service.packet.MessageRebuild.TaskOpResult getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_TaskDescription_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_TaskDescription_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_TaskDescriptionCP_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_TaskDescriptionCP_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_P2PLocation_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_P2PLocation_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_TaskOpResult_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_TaskOpResult_fieldAccessorTable;
 
   public static com.google.protobuf.Descriptors.FileDescriptor
       getDescriptor() {
@@ -2067,9 +3498,12 @@ public final class MessageRebuild {
       "\n\025message_rebuild.proto\"w\n\017TaskDescripti" +
       "on\022\n\n\002id\030\001 \001(\003\022\020\n\010dataHash\030\002 \003(\014\022\022\n\npari" +
       "tyHash\030\003 \003(\014\022\037\n\tlocations\030\004 \003(\0132\014.P2PLoc" +
-      "ation\022\021\n\trecoverId\030\005 \003(\005\",\n\013P2PLocation\022" +
-      "\016\n\006nodeId\030\001 \001(\t\022\r\n\005addrs\030\002 \003(\tB\031\n\027com.yt" +
-      "fs.service.packetb\006proto3"
+      "ation\022\021\n\trecoverId\030\005 \003(\005\"R\n\021TaskDescript" +
+      "ionCP\022\n\n\002id\030\001 \001(\003\022\020\n\010dataHash\030\002 \001(\014\022\037\n\tl" +
+      "ocations\030\003 \003(\0132\014.P2PLocation\",\n\013P2PLocat" +
+      "ion\022\016\n\006nodeId\030\001 \001(\t\022\r\n\005addrs\030\002 \003(\t\"\'\n\014Ta" +
+      "skOpResult\022\n\n\002id\030\001 \001(\003\022\013\n\003RES\030\002 \001(\005B\031\n\027c" +
+      "om.ytfs.service.packetb\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -2089,12 +3523,24 @@ public final class MessageRebuild {
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_TaskDescription_descriptor,
         new java.lang.String[] { "Id", "DataHash", "ParityHash", "Locations", "RecoverId", });
-    internal_static_P2PLocation_descriptor =
+    internal_static_TaskDescriptionCP_descriptor =
       getDescriptor().getMessageTypes().get(1);
+    internal_static_TaskDescriptionCP_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_TaskDescriptionCP_descriptor,
+        new java.lang.String[] { "Id", "DataHash", "Locations", });
+    internal_static_P2PLocation_descriptor =
+      getDescriptor().getMessageTypes().get(2);
     internal_static_P2PLocation_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_P2PLocation_descriptor,
         new java.lang.String[] { "NodeId", "Addrs", });
+    internal_static_TaskOpResult_descriptor =
+      getDescriptor().getMessageTypes().get(3);
+    internal_static_TaskOpResult_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_TaskOpResult_descriptor,
+        new java.lang.String[] { "Id", "RES", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

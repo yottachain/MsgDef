@@ -61,6 +61,11 @@ public final class MessageNode {
      */
     com.google.protobuf.ByteString
         getAddrsBytes(int index);
+
+    /**
+     * <code>bool relay = 5;</code>
+     */
+    boolean getRelay();
   }
   /**
    * <pre>
@@ -83,6 +88,7 @@ public final class MessageNode {
       owner_ = "";
       maxDataSpace_ = 0L;
       addrs_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      relay_ = false;
     }
 
     @java.lang.Override
@@ -140,6 +146,11 @@ public final class MessageNode {
                 mutable_bitField0_ |= 0x00000008;
               }
               addrs_.add(s);
+              break;
+            }
+            case 40: {
+
+              relay_ = input.readBool();
               break;
             }
           }
@@ -276,6 +287,15 @@ public final class MessageNode {
       return addrs_.getByteString(index);
     }
 
+    public static final int RELAY_FIELD_NUMBER = 5;
+    private boolean relay_;
+    /**
+     * <code>bool relay = 5;</code>
+     */
+    public boolean getRelay() {
+      return relay_;
+    }
+
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
@@ -299,6 +319,9 @@ public final class MessageNode {
       }
       for (int i = 0; i < addrs_.size(); i++) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 4, addrs_.getRaw(i));
+      }
+      if (relay_ != false) {
+        output.writeBool(5, relay_);
       }
       unknownFields.writeTo(output);
     }
@@ -326,6 +349,10 @@ public final class MessageNode {
         size += dataSize;
         size += 1 * getAddrsList().size();
       }
+      if (relay_ != false) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(5, relay_);
+      }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
@@ -350,6 +377,8 @@ public final class MessageNode {
           == other.getMaxDataSpace());
       result = result && getAddrsList()
           .equals(other.getAddrsList());
+      result = result && (getRelay()
+          == other.getRelay());
       result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
@@ -372,6 +401,9 @@ public final class MessageNode {
         hash = (37 * hash) + ADDRS_FIELD_NUMBER;
         hash = (53 * hash) + getAddrsList().hashCode();
       }
+      hash = (37 * hash) + RELAY_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
+          getRelay());
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -513,6 +545,8 @@ public final class MessageNode {
 
         addrs_ = com.google.protobuf.LazyStringArrayList.EMPTY;
         bitField0_ = (bitField0_ & ~0x00000008);
+        relay_ = false;
+
         return this;
       }
 
@@ -545,6 +579,7 @@ public final class MessageNode {
           bitField0_ = (bitField0_ & ~0x00000008);
         }
         result.addrs_ = addrs_;
+        result.relay_ = relay_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -607,6 +642,9 @@ public final class MessageNode {
             addrs_.addAll(other.addrs_);
           }
           onChanged();
+        }
+        if (other.getRelay() != false) {
+          setRelay(other.getRelay());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -893,6 +931,32 @@ public final class MessageNode {
         onChanged();
         return this;
       }
+
+      private boolean relay_ ;
+      /**
+       * <code>bool relay = 5;</code>
+       */
+      public boolean getRelay() {
+        return relay_;
+      }
+      /**
+       * <code>bool relay = 5;</code>
+       */
+      public Builder setRelay(boolean value) {
+        
+        relay_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>bool relay = 5;</code>
+       */
+      public Builder clearRelay() {
+        
+        relay_ = false;
+        onChanged();
+        return this;
+      }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.setUnknownFieldsProto3(unknownFields);
@@ -955,6 +1019,16 @@ public final class MessageNode {
      * <code>uint64 assignedSpace = 2;</code>
      */
     long getAssignedSpace();
+
+    /**
+     * <code>string relayUrl = 3;</code>
+     */
+    java.lang.String getRelayUrl();
+    /**
+     * <code>string relayUrl = 3;</code>
+     */
+    com.google.protobuf.ByteString
+        getRelayUrlBytes();
   }
   /**
    * <pre>
@@ -975,6 +1049,7 @@ public final class MessageNode {
     private NodeRegResp() {
       id_ = 0;
       assignedSpace_ = 0L;
+      relayUrl_ = "";
     }
 
     @java.lang.Override
@@ -1016,6 +1091,12 @@ public final class MessageNode {
             case 16: {
 
               assignedSpace_ = input.readUInt64();
+              break;
+            }
+            case 26: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              relayUrl_ = s;
               break;
             }
           }
@@ -1060,6 +1141,40 @@ public final class MessageNode {
       return assignedSpace_;
     }
 
+    public static final int RELAYURL_FIELD_NUMBER = 3;
+    private volatile java.lang.Object relayUrl_;
+    /**
+     * <code>string relayUrl = 3;</code>
+     */
+    public java.lang.String getRelayUrl() {
+      java.lang.Object ref = relayUrl_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        relayUrl_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string relayUrl = 3;</code>
+     */
+    public com.google.protobuf.ByteString
+        getRelayUrlBytes() {
+      java.lang.Object ref = relayUrl_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        relayUrl_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
@@ -1078,6 +1193,9 @@ public final class MessageNode {
       if (assignedSpace_ != 0L) {
         output.writeUInt64(2, assignedSpace_);
       }
+      if (!getRelayUrlBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 3, relayUrl_);
+      }
       unknownFields.writeTo(output);
     }
 
@@ -1093,6 +1211,9 @@ public final class MessageNode {
       if (assignedSpace_ != 0L) {
         size += com.google.protobuf.CodedOutputStream
           .computeUInt64Size(2, assignedSpace_);
+      }
+      if (!getRelayUrlBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(3, relayUrl_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -1114,6 +1235,8 @@ public final class MessageNode {
           == other.getId());
       result = result && (getAssignedSpace()
           == other.getAssignedSpace());
+      result = result && getRelayUrl()
+          .equals(other.getRelayUrl());
       result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
@@ -1130,6 +1253,8 @@ public final class MessageNode {
       hash = (37 * hash) + ASSIGNEDSPACE_FIELD_NUMBER;
       hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
           getAssignedSpace());
+      hash = (37 * hash) + RELAYURL_FIELD_NUMBER;
+      hash = (53 * hash) + getRelayUrl().hashCode();
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -1267,6 +1392,8 @@ public final class MessageNode {
 
         assignedSpace_ = 0L;
 
+        relayUrl_ = "";
+
         return this;
       }
 
@@ -1291,6 +1418,7 @@ public final class MessageNode {
         com.ytfs.service.packet.MessageNode.NodeRegResp result = new com.ytfs.service.packet.MessageNode.NodeRegResp(this);
         result.id_ = id_;
         result.assignedSpace_ = assignedSpace_;
+        result.relayUrl_ = relayUrl_;
         onBuilt();
         return result;
       }
@@ -1337,6 +1465,10 @@ public final class MessageNode {
         }
         if (other.getAssignedSpace() != 0L) {
           setAssignedSpace(other.getAssignedSpace());
+        }
+        if (!other.getRelayUrl().isEmpty()) {
+          relayUrl_ = other.relayUrl_;
+          onChanged();
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -1413,6 +1545,75 @@ public final class MessageNode {
       public Builder clearAssignedSpace() {
         
         assignedSpace_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object relayUrl_ = "";
+      /**
+       * <code>string relayUrl = 3;</code>
+       */
+      public java.lang.String getRelayUrl() {
+        java.lang.Object ref = relayUrl_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          relayUrl_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string relayUrl = 3;</code>
+       */
+      public com.google.protobuf.ByteString
+          getRelayUrlBytes() {
+        java.lang.Object ref = relayUrl_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          relayUrl_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string relayUrl = 3;</code>
+       */
+      public Builder setRelayUrl(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        relayUrl_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string relayUrl = 3;</code>
+       */
+      public Builder clearRelayUrl() {
+        
+        relayUrl_ = getDefaultInstance().getRelayUrl();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string relayUrl = 3;</code>
+       */
+      public Builder setRelayUrlBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        relayUrl_ = value;
         onChanged();
         return this;
       }
@@ -1522,6 +1723,11 @@ public final class MessageNode {
      */
     com.google.protobuf.ByteString
         getAddrsBytes(int index);
+
+    /**
+     * <code>bool relay = 9;</code>
+     */
+    boolean getRelay();
   }
   /**
    * <pre>
@@ -1548,6 +1754,7 @@ public final class MessageNode {
       assignedSpace_ = 0L;
       usedSpace_ = 0L;
       addrs_ = com.google.protobuf.LazyStringArrayList.EMPTY;
+      relay_ = false;
     }
 
     @java.lang.Override
@@ -1623,6 +1830,11 @@ public final class MessageNode {
                 mutable_bitField0_ |= 0x00000080;
               }
               addrs_.add(s);
+              break;
+            }
+            case 72: {
+
+              relay_ = input.readBool();
               break;
             }
           }
@@ -1745,6 +1957,15 @@ public final class MessageNode {
       return addrs_.getByteString(index);
     }
 
+    public static final int RELAY_FIELD_NUMBER = 9;
+    private boolean relay_;
+    /**
+     * <code>bool relay = 9;</code>
+     */
+    public boolean getRelay() {
+      return relay_;
+    }
+
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
@@ -1780,6 +2001,9 @@ public final class MessageNode {
       }
       for (int i = 0; i < addrs_.size(); i++) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 8, addrs_.getRaw(i));
+      }
+      if (relay_ != false) {
+        output.writeBool(9, relay_);
       }
       unknownFields.writeTo(output);
     }
@@ -1825,6 +2049,10 @@ public final class MessageNode {
         size += dataSize;
         size += 1 * getAddrsList().size();
       }
+      if (relay_ != false) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(9, relay_);
+      }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
@@ -1857,6 +2085,8 @@ public final class MessageNode {
           == other.getUsedSpace());
       result = result && getAddrsList()
           .equals(other.getAddrsList());
+      result = result && (getRelay()
+          == other.getRelay());
       result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
@@ -1889,6 +2119,9 @@ public final class MessageNode {
         hash = (37 * hash) + ADDRS_FIELD_NUMBER;
         hash = (53 * hash) + getAddrsList().hashCode();
       }
+      hash = (37 * hash) + RELAY_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
+          getRelay());
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -2038,6 +2271,8 @@ public final class MessageNode {
 
         addrs_ = com.google.protobuf.LazyStringArrayList.EMPTY;
         bitField0_ = (bitField0_ & ~0x00000080);
+        relay_ = false;
+
         return this;
       }
 
@@ -2074,6 +2309,7 @@ public final class MessageNode {
           bitField0_ = (bitField0_ & ~0x00000080);
         }
         result.addrs_ = addrs_;
+        result.relay_ = relay_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -2146,6 +2382,9 @@ public final class MessageNode {
             addrs_.addAll(other.addrs_);
           }
           onChanged();
+        }
+        if (other.getRelay() != false) {
+          setRelay(other.getRelay());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -2450,6 +2689,32 @@ public final class MessageNode {
         onChanged();
         return this;
       }
+
+      private boolean relay_ ;
+      /**
+       * <code>bool relay = 9;</code>
+       */
+      public boolean getRelay() {
+        return relay_;
+      }
+      /**
+       * <code>bool relay = 9;</code>
+       */
+      public Builder setRelay(boolean value) {
+        
+        relay_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>bool relay = 9;</code>
+       */
+      public Builder clearRelay() {
+        
+        relay_ = false;
+        onChanged();
+        return this;
+      }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.setUnknownFieldsProto3(unknownFields);
@@ -2507,6 +2772,16 @@ public final class MessageNode {
      * <code>uint64 productiveSpace = 1;</code>
      */
     long getProductiveSpace();
+
+    /**
+     * <code>string relayUrl = 2;</code>
+     */
+    java.lang.String getRelayUrl();
+    /**
+     * <code>string relayUrl = 2;</code>
+     */
+    com.google.protobuf.ByteString
+        getRelayUrlBytes();
   }
   /**
    * <pre>
@@ -2526,6 +2801,7 @@ public final class MessageNode {
     }
     private StatusRepResp() {
       productiveSpace_ = 0L;
+      relayUrl_ = "";
     }
 
     @java.lang.Override
@@ -2564,6 +2840,12 @@ public final class MessageNode {
               productiveSpace_ = input.readUInt64();
               break;
             }
+            case 18: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              relayUrl_ = s;
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -2597,6 +2879,40 @@ public final class MessageNode {
       return productiveSpace_;
     }
 
+    public static final int RELAYURL_FIELD_NUMBER = 2;
+    private volatile java.lang.Object relayUrl_;
+    /**
+     * <code>string relayUrl = 2;</code>
+     */
+    public java.lang.String getRelayUrl() {
+      java.lang.Object ref = relayUrl_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        relayUrl_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string relayUrl = 2;</code>
+     */
+    public com.google.protobuf.ByteString
+        getRelayUrlBytes() {
+      java.lang.Object ref = relayUrl_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        relayUrl_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
@@ -2612,6 +2928,9 @@ public final class MessageNode {
       if (productiveSpace_ != 0L) {
         output.writeUInt64(1, productiveSpace_);
       }
+      if (!getRelayUrlBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, relayUrl_);
+      }
       unknownFields.writeTo(output);
     }
 
@@ -2623,6 +2942,9 @@ public final class MessageNode {
       if (productiveSpace_ != 0L) {
         size += com.google.protobuf.CodedOutputStream
           .computeUInt64Size(1, productiveSpace_);
+      }
+      if (!getRelayUrlBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, relayUrl_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -2642,6 +2964,8 @@ public final class MessageNode {
       boolean result = true;
       result = result && (getProductiveSpace()
           == other.getProductiveSpace());
+      result = result && getRelayUrl()
+          .equals(other.getRelayUrl());
       result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
@@ -2656,6 +2980,8 @@ public final class MessageNode {
       hash = (37 * hash) + PRODUCTIVESPACE_FIELD_NUMBER;
       hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
           getProductiveSpace());
+      hash = (37 * hash) + RELAYURL_FIELD_NUMBER;
+      hash = (53 * hash) + getRelayUrl().hashCode();
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -2791,6 +3117,8 @@ public final class MessageNode {
         super.clear();
         productiveSpace_ = 0L;
 
+        relayUrl_ = "";
+
         return this;
       }
 
@@ -2814,6 +3142,7 @@ public final class MessageNode {
       public com.ytfs.service.packet.MessageNode.StatusRepResp buildPartial() {
         com.ytfs.service.packet.MessageNode.StatusRepResp result = new com.ytfs.service.packet.MessageNode.StatusRepResp(this);
         result.productiveSpace_ = productiveSpace_;
+        result.relayUrl_ = relayUrl_;
         onBuilt();
         return result;
       }
@@ -2857,6 +3186,10 @@ public final class MessageNode {
         if (other == com.ytfs.service.packet.MessageNode.StatusRepResp.getDefaultInstance()) return this;
         if (other.getProductiveSpace() != 0L) {
           setProductiveSpace(other.getProductiveSpace());
+        }
+        if (!other.getRelayUrl().isEmpty()) {
+          relayUrl_ = other.relayUrl_;
+          onChanged();
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -2907,6 +3240,75 @@ public final class MessageNode {
       public Builder clearProductiveSpace() {
         
         productiveSpace_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object relayUrl_ = "";
+      /**
+       * <code>string relayUrl = 2;</code>
+       */
+      public java.lang.String getRelayUrl() {
+        java.lang.Object ref = relayUrl_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          relayUrl_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string relayUrl = 2;</code>
+       */
+      public com.google.protobuf.ByteString
+          getRelayUrlBytes() {
+        java.lang.Object ref = relayUrl_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          relayUrl_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string relayUrl = 2;</code>
+       */
+      public Builder setRelayUrl(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        relayUrl_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string relayUrl = 2;</code>
+       */
+      public Builder clearRelayUrl() {
+        
+        relayUrl_ = getDefaultInstance().getRelayUrl();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string relayUrl = 2;</code>
+       */
+      public Builder setRelayUrlBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        relayUrl_ = value;
         onChanged();
         return this;
       }
@@ -2988,16 +3390,18 @@ public final class MessageNode {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\022message_node.proto\"P\n\nNodeRegReq\022\016\n\006no" +
+      "\n\022message_node.proto\"_\n\nNodeRegReq\022\016\n\006no" +
       "deid\030\001 \001(\t\022\r\n\005owner\030\002 \001(\t\022\024\n\014maxDataSpac" +
-      "e\030\003 \001(\004\022\r\n\005addrs\030\004 \003(\t\"0\n\013NodeRegResp\022\n\n" +
-      "\002id\030\001 \001(\r\022\025\n\rassignedSpace\030\002 \001(\004\"\231\001\n\014Sta" +
-      "tusRepReq\022\n\n\002id\030\001 \001(\r\022\013\n\003cpu\030\002 \001(\r\022\016\n\006me" +
-      "mory\030\003 \001(\r\022\021\n\tbandwidth\030\004 \001(\r\022\024\n\014maxData" +
-      "Space\030\005 \001(\004\022\025\n\rassignedSpace\030\006 \001(\004\022\021\n\tus" +
-      "edSpace\030\007 \001(\004\022\r\n\005addrs\030\010 \003(\t\"(\n\rStatusRe" +
-      "pResp\022\027\n\017productiveSpace\030\001 \001(\004B\031\n\027com.yt" +
-      "fs.service.packetb\006proto3"
+      "e\030\003 \001(\004\022\r\n\005addrs\030\004 \003(\t\022\r\n\005relay\030\005 \001(\010\"B\n" +
+      "\013NodeRegResp\022\n\n\002id\030\001 \001(\r\022\025\n\rassignedSpac" +
+      "e\030\002 \001(\004\022\020\n\010relayUrl\030\003 \001(\t\"\250\001\n\014StatusRepR" +
+      "eq\022\n\n\002id\030\001 \001(\r\022\013\n\003cpu\030\002 \001(\r\022\016\n\006memory\030\003 " +
+      "\001(\r\022\021\n\tbandwidth\030\004 \001(\r\022\024\n\014maxDataSpace\030\005" +
+      " \001(\004\022\025\n\rassignedSpace\030\006 \001(\004\022\021\n\tusedSpace" +
+      "\030\007 \001(\004\022\r\n\005addrs\030\010 \003(\t\022\r\n\005relay\030\t \001(\010\":\n\r" +
+      "StatusRepResp\022\027\n\017productiveSpace\030\001 \001(\004\022\020" +
+      "\n\010relayUrl\030\002 \001(\tB\031\n\027com.ytfs.service.pac" +
+      "ketb\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -3016,25 +3420,25 @@ public final class MessageNode {
     internal_static_NodeRegReq_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_NodeRegReq_descriptor,
-        new java.lang.String[] { "Nodeid", "Owner", "MaxDataSpace", "Addrs", });
+        new java.lang.String[] { "Nodeid", "Owner", "MaxDataSpace", "Addrs", "Relay", });
     internal_static_NodeRegResp_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_NodeRegResp_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_NodeRegResp_descriptor,
-        new java.lang.String[] { "Id", "AssignedSpace", });
+        new java.lang.String[] { "Id", "AssignedSpace", "RelayUrl", });
     internal_static_StatusRepReq_descriptor =
       getDescriptor().getMessageTypes().get(2);
     internal_static_StatusRepReq_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_StatusRepReq_descriptor,
-        new java.lang.String[] { "Id", "Cpu", "Memory", "Bandwidth", "MaxDataSpace", "AssignedSpace", "UsedSpace", "Addrs", });
+        new java.lang.String[] { "Id", "Cpu", "Memory", "Bandwidth", "MaxDataSpace", "AssignedSpace", "UsedSpace", "Addrs", "Relay", });
     internal_static_StatusRepResp_descriptor =
       getDescriptor().getMessageTypes().get(3);
     internal_static_StatusRepResp_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_StatusRepResp_descriptor,
-        new java.lang.String[] { "ProductiveSpace", });
+        new java.lang.String[] { "ProductiveSpace", "RelayUrl", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)

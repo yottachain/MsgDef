@@ -4,9 +4,7 @@ import com.ytfs.service.packet.ErrorMessage;
 import io.protostuff.LinkedBuffer;
 import io.protostuff.ProtostuffIOUtil;
 import io.protostuff.Schema;
-import io.protostuff.runtime.DefaultIdStrategy;
-import io.protostuff.runtime.Delegate;
-import io.protostuff.runtime.RuntimeEnv;
+import io.protostuff.runtime.IdStrategy;
 import io.protostuff.runtime.RuntimeSchema;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -18,32 +16,28 @@ public class SerializationUtil {
     private static final ThreadLocal<LinkedBuffer> BUFFER_THREAD_LOCAL = ThreadLocal
             .withInitial(() -> LinkedBuffer.allocate(512));
 
-    public static byte[] serialize(Object obj) {
-        return serialize(obj, null);
-    }
-
     /**
      * 序列化对象
      *
      * @param obj
-     * @param delegate
      * @return byte[]
      */
-    public static byte[] serialize(Object obj, Delegate delegate) {
+    public static byte[] serialize(Object obj) {
         if (obj == null) {
             throw new IllegalArgumentException();
         }
         if (obj instanceof ServiceException) {
             obj = ((ServiceException) obj).toErrMessage();
         }
-
+        IdStrategy idStrategy = null;
+        if (obj instanceof SerializationStrategy) {
+            idStrategy = ((SerializationStrategy) obj).getIdStrategy();
+        }
         @SuppressWarnings("unchecked")
         Schema schema;
-        if (delegate == null) {
+        if (idStrategy == null) {
             schema = RuntimeSchema.getSchema(obj.getClass());
         } else {
-            DefaultIdStrategy idStrategy = ((DefaultIdStrategy) RuntimeEnv.ID_STRATEGY);
-            idStrategy.registerDelegate(delegate);
             schema = RuntimeSchema.createFrom(obj.getClass(), idStrategy);
         }
         LinkedBuffer buffer = BUFFER_THREAD_LOCAL.get();
@@ -61,10 +55,6 @@ public class SerializationUtil {
         }
     }
 
-    public static Object deserialize(byte[] paramArrayOfByte) {
-        return deserialize(paramArrayOfByte, null);
-    }
-
     /**
      * 反序列化
      *
@@ -73,7 +63,7 @@ public class SerializationUtil {
      * @return
      */
     @SuppressWarnings("unchecked")
-    public static Object deserialize(byte[] paramArrayOfByte, Delegate delegate) {
+    public static Object deserialize(byte[] paramArrayOfByte) {
         if (paramArrayOfByte == null || paramArrayOfByte.length == 0) {
             throw new IllegalArgumentException();
         }
@@ -85,12 +75,14 @@ public class SerializationUtil {
         } catch (InstantiationException | IllegalAccessException e) {
             throw new RuntimeException(e);
         }
+        IdStrategy idStrategy = null;
+        if (instance instanceof SerializationStrategy) {
+            idStrategy = ((SerializationStrategy) instance).getIdStrategy();
+        }    
         Schema schema;
-        if (delegate == null) {
+        if (idStrategy == null) {
             schema = RuntimeSchema.getSchema(targetClass);
         } else {
-            DefaultIdStrategy idStrategy = ((DefaultIdStrategy) RuntimeEnv.ID_STRATEGY);
-            idStrategy.registerDelegate(delegate);
             schema = RuntimeSchema.createFrom(targetClass, idStrategy);
         }
         ProtostuffIOUtil.mergeFrom(paramArrayOfByte, 2, paramArrayOfByte.length - 2, instance, schema);
