@@ -27,7 +27,12 @@ public class EOSRequest {
 
     private static int getRandomInteger() {
         int ii = args.incrementAndGet();
-        return ((short) ii) & 0xFFFF;
+        ii = ii % 1000;
+        if (ii < 0) {
+            return Math.abs(ii);
+        } else {
+            return ii;
+        }
     }
 
     private static byte[] encodeSignArg(SignArg req) throws JsonProcessingException {
