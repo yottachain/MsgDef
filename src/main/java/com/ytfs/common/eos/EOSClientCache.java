@@ -11,13 +11,26 @@ public class EOSClientCache {
     private static final long MAX_SIZE = 100000;
     public static final long EXPIRED_TIME = 120;
 
+    private static final Cache<String, Long> userBanlance = CacheBuilder.newBuilder()
+            .expireAfterWrite(30, TimeUnit.SECONDS)
+            .maximumSize(MAX_SIZE)
+            .build();
+
+    public static long getBalance(String username) throws Throwable {
+        Long l = userBanlance.getIfPresent(username);
+        if (l == null) {
+            l = EOSClient.getBalance(username);
+            userBanlance.put(username, l);
+        }
+        return l;
+    }
+
     private static final Cache<ObjectId, EosApi> clients = CacheBuilder.newBuilder()
             .expireAfterWrite(EXPIRED_TIME, TimeUnit.SECONDS)
             .expireAfterAccess(EXPIRED_TIME, TimeUnit.SECONDS)
             .maximumSize(MAX_SIZE)
             .build();
 
-  
     public static void putClient(ObjectId key, EosApi value) {
         clients.put(key, value);
     }

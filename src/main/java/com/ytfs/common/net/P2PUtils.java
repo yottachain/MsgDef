@@ -147,7 +147,7 @@ public class P2PUtils {
         return res;
     }
 
-    private static String getAddrString(List<String> ls) {
+    public static String getAddrString(List<String> ls) {
         StringBuilder res = null;
         for (String s : ls) {
             if (res == null) {
