@@ -2,20 +2,35 @@ package com.ytfs.service.packet;
 
 import com.google.protobuf.ByteString;
 import com.ytfs.common.SerializationUtil;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import org.apache.commons.codec.binary.Hex;
+import sun.misc.IOUtils;
 
 public class ProtobufTest {
 
     public static void main(String[] args) throws IOException {
         //taskDescriptionTest();
-        taskCheckTest();
+        //taskCheckTest();
+        File f=new File("e:\\task.dat");
+        InputStream s=new FileInputStream(f);
+        
+        byte[] bs=IOUtils.readFully(s, (int)f.length(), true);
+        
+        SpotCheckTaskList req1 = (SpotCheckTaskList) SerializationUtil.deserialize(bs);
+        
+        System.out.println();
+        
+        
     }
 
     public static void taskCheckTest() throws IOException {
         MessageCheck.SpotCheckTaskList.Builder builder = MessageCheck.SpotCheckTaskList.newBuilder();
         builder.setTaskId("sdsdds");
+        builder.setSnid(1);
         MessageCheck.SpotCheckTask.Builder a = MessageCheck.SpotCheckTask.newBuilder();
         a.setId(1);
         a.setNodeId("dff");
@@ -37,6 +52,7 @@ public class ProtobufTest {
 
         SpotCheckTaskList req = new SpotCheckTaskList();
         req.setTaskId("sdsdds");
+        req.setSnid(1);
         req.setTaskList(new ArrayList());
         SpotCheckTask t1 = new SpotCheckTask();
         t1.setId(1);

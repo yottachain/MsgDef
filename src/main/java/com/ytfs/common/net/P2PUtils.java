@@ -120,10 +120,10 @@ public class P2PUtils {
                 default:
                     bs = YottaP2P.sendToNodeMsg(key, data);
                     break;
-            }
+            }           
         } catch (Throwable e) {
             String oldaddrString = CONNECTS.get(key);
-            LOG.error("INTERNAL_ERROR:" + (oldaddrString == null ? ("[" + e.getMessage() + "]") : oldaddrString) + ",ID:" + key);
+            LOG.error("INTERNAL_ERROR:" + (oldaddrString == null ? ("[" + e.getMessage() + "]") : oldaddrString));
             String newaddrString = getAddrString(addr);
             synchronized (CONNECTS) {
                 if (CONNECTS.containsKey(key)) {

@@ -5,7 +5,8 @@ option java_package = "com.ytfs.service.packet";
 //msgid=0x903a
 message SpotCheckTaskList{
     string taskId = 1; 
-    repeated SpotCheckTask taskList=2;
+    int32 snid=2;
+    repeated SpotCheckTask taskList=3;
 }
 
 message SpotCheckTask{

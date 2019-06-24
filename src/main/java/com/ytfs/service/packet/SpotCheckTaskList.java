@@ -9,7 +9,22 @@ import java.util.List;
 public class SpotCheckTaskList implements SerializationStrategy {
 
     private String taskId;
+    private int snid;
     private List<SpotCheckTask> taskList;
+
+    /**
+     * @return the snid
+     */
+    public int getSnid() {
+        return snid;
+    }
+
+    /**
+     * @param snid the snid to set
+     */
+    public void setSnid(int snid) {
+        this.snid = snid;
+    }
 
     /**
      * @return the taskId

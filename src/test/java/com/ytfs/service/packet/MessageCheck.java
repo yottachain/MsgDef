@@ -29,25 +29,30 @@ public final class MessageCheck {
         getTaskIdBytes();
 
     /**
-     * <code>repeated .SpotCheckTask taskList = 2;</code>
+     * <code>int32 snid = 2;</code>
+     */
+    int getSnid();
+
+    /**
+     * <code>repeated .SpotCheckTask taskList = 3;</code>
      */
     java.util.List<com.ytfs.service.packet.MessageCheck.SpotCheckTask> 
         getTaskListList();
     /**
-     * <code>repeated .SpotCheckTask taskList = 2;</code>
+     * <code>repeated .SpotCheckTask taskList = 3;</code>
      */
     com.ytfs.service.packet.MessageCheck.SpotCheckTask getTaskList(int index);
     /**
-     * <code>repeated .SpotCheckTask taskList = 2;</code>
+     * <code>repeated .SpotCheckTask taskList = 3;</code>
      */
     int getTaskListCount();
     /**
-     * <code>repeated .SpotCheckTask taskList = 2;</code>
+     * <code>repeated .SpotCheckTask taskList = 3;</code>
      */
     java.util.List<? extends com.ytfs.service.packet.MessageCheck.SpotCheckTaskOrBuilder> 
         getTaskListOrBuilderList();
     /**
-     * <code>repeated .SpotCheckTask taskList = 2;</code>
+     * <code>repeated .SpotCheckTask taskList = 3;</code>
      */
     com.ytfs.service.packet.MessageCheck.SpotCheckTaskOrBuilder getTaskListOrBuilder(
         int index);
@@ -70,6 +75,7 @@ public final class MessageCheck {
     }
     private SpotCheckTaskList() {
       taskId_ = "";
+      snid_ = 0;
       taskList_ = java.util.Collections.emptyList();
     }
 
@@ -110,10 +116,15 @@ public final class MessageCheck {
               taskId_ = s;
               break;
             }
-            case 18: {
-              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+            case 16: {
+
+              snid_ = input.readInt32();
+              break;
+            }
+            case 26: {
+              if (!((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
                 taskList_ = new java.util.ArrayList<com.ytfs.service.packet.MessageCheck.SpotCheckTask>();
-                mutable_bitField0_ |= 0x00000002;
+                mutable_bitField0_ |= 0x00000004;
               }
               taskList_.add(
                   input.readMessage(com.ytfs.service.packet.MessageCheck.SpotCheckTask.parser(), extensionRegistry));
@@ -127,7 +138,7 @@ public final class MessageCheck {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
-        if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
+        if (((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
           taskList_ = java.util.Collections.unmodifiableList(taskList_);
         }
         this.unknownFields = unknownFields.build();
@@ -181,35 +192,44 @@ public final class MessageCheck {
       }
     }
 
-    public static final int TASKLIST_FIELD_NUMBER = 2;
+    public static final int SNID_FIELD_NUMBER = 2;
+    private int snid_;
+    /**
+     * <code>int32 snid = 2;</code>
+     */
+    public int getSnid() {
+      return snid_;
+    }
+
+    public static final int TASKLIST_FIELD_NUMBER = 3;
     private java.util.List<com.ytfs.service.packet.MessageCheck.SpotCheckTask> taskList_;
     /**
-     * <code>repeated .SpotCheckTask taskList = 2;</code>
+     * <code>repeated .SpotCheckTask taskList = 3;</code>
      */
     public java.util.List<com.ytfs.service.packet.MessageCheck.SpotCheckTask> getTaskListList() {
       return taskList_;
     }
     /**
-     * <code>repeated .SpotCheckTask taskList = 2;</code>
+     * <code>repeated .SpotCheckTask taskList = 3;</code>
      */
     public java.util.List<? extends com.ytfs.service.packet.MessageCheck.SpotCheckTaskOrBuilder> 
         getTaskListOrBuilderList() {
       return taskList_;
     }
     /**
-     * <code>repeated .SpotCheckTask taskList = 2;</code>
+     * <code>repeated .SpotCheckTask taskList = 3;</code>
      */
     public int getTaskListCount() {
       return taskList_.size();
     }
     /**
-     * <code>repeated .SpotCheckTask taskList = 2;</code>
+     * <code>repeated .SpotCheckTask taskList = 3;</code>
      */
     public com.ytfs.service.packet.MessageCheck.SpotCheckTask getTaskList(int index) {
       return taskList_.get(index);
     }
     /**
-     * <code>repeated .SpotCheckTask taskList = 2;</code>
+     * <code>repeated .SpotCheckTask taskList = 3;</code>
      */
     public com.ytfs.service.packet.MessageCheck.SpotCheckTaskOrBuilder getTaskListOrBuilder(
         int index) {
@@ -231,8 +251,11 @@ public final class MessageCheck {
       if (!getTaskIdBytes().isEmpty()) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 1, taskId_);
       }
+      if (snid_ != 0) {
+        output.writeInt32(2, snid_);
+      }
       for (int i = 0; i < taskList_.size(); i++) {
-        output.writeMessage(2, taskList_.get(i));
+        output.writeMessage(3, taskList_.get(i));
       }
       unknownFields.writeTo(output);
     }
@@ -245,9 +268,13 @@ public final class MessageCheck {
       if (!getTaskIdBytes().isEmpty()) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, taskId_);
       }
+      if (snid_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(2, snid_);
+      }
       for (int i = 0; i < taskList_.size(); i++) {
         size += com.google.protobuf.CodedOutputStream
-          .computeMessageSize(2, taskList_.get(i));
+          .computeMessageSize(3, taskList_.get(i));
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -267,6 +294,8 @@ public final class MessageCheck {
       boolean result = true;
       result = result && getTaskId()
           .equals(other.getTaskId());
+      result = result && (getSnid()
+          == other.getSnid());
       result = result && getTaskListList()
           .equals(other.getTaskListList());
       result = result && unknownFields.equals(other.unknownFields);
@@ -282,6 +311,8 @@ public final class MessageCheck {
       hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + TASKID_FIELD_NUMBER;
       hash = (53 * hash) + getTaskId().hashCode();
+      hash = (37 * hash) + SNID_FIELD_NUMBER;
+      hash = (53 * hash) + getSnid();
       if (getTaskListCount() > 0) {
         hash = (37 * hash) + TASKLIST_FIELD_NUMBER;
         hash = (53 * hash) + getTaskListList().hashCode();
@@ -422,9 +453,11 @@ public final class MessageCheck {
         super.clear();
         taskId_ = "";
 
+        snid_ = 0;
+
         if (taskListBuilder_ == null) {
           taskList_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000002);
+          bitField0_ = (bitField0_ & ~0x00000004);
         } else {
           taskListBuilder_.clear();
         }
@@ -453,10 +486,11 @@ public final class MessageCheck {
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
         result.taskId_ = taskId_;
+        result.snid_ = snid_;
         if (taskListBuilder_ == null) {
-          if (((bitField0_ & 0x00000002) == 0x00000002)) {
+          if (((bitField0_ & 0x00000004) == 0x00000004)) {
             taskList_ = java.util.Collections.unmodifiableList(taskList_);
-            bitField0_ = (bitField0_ & ~0x00000002);
+            bitField0_ = (bitField0_ & ~0x00000004);
           }
           result.taskList_ = taskList_;
         } else {
@@ -508,11 +542,14 @@ public final class MessageCheck {
           taskId_ = other.taskId_;
           onChanged();
         }
+        if (other.getSnid() != 0) {
+          setSnid(other.getSnid());
+        }
         if (taskListBuilder_ == null) {
           if (!other.taskList_.isEmpty()) {
             if (taskList_.isEmpty()) {
               taskList_ = other.taskList_;
-              bitField0_ = (bitField0_ & ~0x00000002);
+              bitField0_ = (bitField0_ & ~0x00000004);
             } else {
               ensureTaskListIsMutable();
               taskList_.addAll(other.taskList_);
@@ -525,7 +562,7 @@ public final class MessageCheck {
               taskListBuilder_.dispose();
               taskListBuilder_ = null;
               taskList_ = other.taskList_;
-              bitField0_ = (bitField0_ & ~0x00000002);
+              bitField0_ = (bitField0_ & ~0x00000004);
               taskListBuilder_ = 
                 com.google.protobuf.GeneratedMessageV3.alwaysUseFieldBuilders ?
                    getTaskListFieldBuilder() : null;
@@ -631,12 +668,38 @@ public final class MessageCheck {
         return this;
       }
 
+      private int snid_ ;
+      /**
+       * <code>int32 snid = 2;</code>
+       */
+      public int getSnid() {
+        return snid_;
+      }
+      /**
+       * <code>int32 snid = 2;</code>
+       */
+      public Builder setSnid(int value) {
+        
+        snid_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>int32 snid = 2;</code>
+       */
+      public Builder clearSnid() {
+        
+        snid_ = 0;
+        onChanged();
+        return this;
+      }
+
       private java.util.List<com.ytfs.service.packet.MessageCheck.SpotCheckTask> taskList_ =
         java.util.Collections.emptyList();
       private void ensureTaskListIsMutable() {
-        if (!((bitField0_ & 0x00000002) == 0x00000002)) {
+        if (!((bitField0_ & 0x00000004) == 0x00000004)) {
           taskList_ = new java.util.ArrayList<com.ytfs.service.packet.MessageCheck.SpotCheckTask>(taskList_);
-          bitField0_ |= 0x00000002;
+          bitField0_ |= 0x00000004;
          }
       }
 
@@ -644,7 +707,7 @@ public final class MessageCheck {
           com.ytfs.service.packet.MessageCheck.SpotCheckTask, com.ytfs.service.packet.MessageCheck.SpotCheckTask.Builder, com.ytfs.service.packet.MessageCheck.SpotCheckTaskOrBuilder> taskListBuilder_;
 
       /**
-       * <code>repeated .SpotCheckTask taskList = 2;</code>
+       * <code>repeated .SpotCheckTask taskList = 3;</code>
        */
       public java.util.List<com.ytfs.service.packet.MessageCheck.SpotCheckTask> getTaskListList() {
         if (taskListBuilder_ == null) {
@@ -654,7 +717,7 @@ public final class MessageCheck {
         }
       }
       /**
-       * <code>repeated .SpotCheckTask taskList = 2;</code>
+       * <code>repeated .SpotCheckTask taskList = 3;</code>
        */
       public int getTaskListCount() {
         if (taskListBuilder_ == null) {
@@ -664,7 +727,7 @@ public final class MessageCheck {
         }
       }
       /**
-       * <code>repeated .SpotCheckTask taskList = 2;</code>
+       * <code>repeated .SpotCheckTask taskList = 3;</code>
        */
       public com.ytfs.service.packet.MessageCheck.SpotCheckTask getTaskList(int index) {
         if (taskListBuilder_ == null) {
@@ -674,7 +737,7 @@ public final class MessageCheck {
         }
       }
       /**
-       * <code>repeated .SpotCheckTask taskList = 2;</code>
+       * <code>repeated .SpotCheckTask taskList = 3;</code>
        */
       public Builder setTaskList(
           int index, com.ytfs.service.packet.MessageCheck.SpotCheckTask value) {
@@ -691,7 +754,7 @@ public final class MessageCheck {
         return this;
       }
       /**
-       * <code>repeated .SpotCheckTask taskList = 2;</code>
+       * <code>repeated .SpotCheckTask taskList = 3;</code>
        */
       public Builder setTaskList(
           int index, com.ytfs.service.packet.MessageCheck.SpotCheckTask.Builder builderForValue) {
@@ -705,7 +768,7 @@ public final class MessageCheck {
         return this;
       }
       /**
-       * <code>repeated .SpotCheckTask taskList = 2;</code>
+       * <code>repeated .SpotCheckTask taskList = 3;</code>
        */
       public Builder addTaskList(com.ytfs.service.packet.MessageCheck.SpotCheckTask value) {
         if (taskListBuilder_ == null) {
@@ -721,7 +784,7 @@ public final class MessageCheck {
         return this;
       }
       /**
-       * <code>repeated .SpotCheckTask taskList = 2;</code>
+       * <code>repeated .SpotCheckTask taskList = 3;</code>
        */
       public Builder addTaskList(
           int index, com.ytfs.service.packet.MessageCheck.SpotCheckTask value) {
@@ -738,7 +801,7 @@ public final class MessageCheck {
         return this;
       }
       /**
-       * <code>repeated .SpotCheckTask taskList = 2;</code>
+       * <code>repeated .SpotCheckTask taskList = 3;</code>
        */
       public Builder addTaskList(
           com.ytfs.service.packet.MessageCheck.SpotCheckTask.Builder builderForValue) {
@@ -752,7 +815,7 @@ public final class MessageCheck {
         return this;
       }
       /**
-       * <code>repeated .SpotCheckTask taskList = 2;</code>
+       * <code>repeated .SpotCheckTask taskList = 3;</code>
        */
       public Builder addTaskList(
           int index, com.ytfs.service.packet.MessageCheck.SpotCheckTask.Builder builderForValue) {
@@ -766,7 +829,7 @@ public final class MessageCheck {
         return this;
       }
       /**
-       * <code>repeated .SpotCheckTask taskList = 2;</code>
+       * <code>repeated .SpotCheckTask taskList = 3;</code>
        */
       public Builder addAllTaskList(
           java.lang.Iterable<? extends com.ytfs.service.packet.MessageCheck.SpotCheckTask> values) {
@@ -781,12 +844,12 @@ public final class MessageCheck {
         return this;
       }
       /**
-       * <code>repeated .SpotCheckTask taskList = 2;</code>
+       * <code>repeated .SpotCheckTask taskList = 3;</code>
        */
       public Builder clearTaskList() {
         if (taskListBuilder_ == null) {
           taskList_ = java.util.Collections.emptyList();
-          bitField0_ = (bitField0_ & ~0x00000002);
+          bitField0_ = (bitField0_ & ~0x00000004);
           onChanged();
         } else {
           taskListBuilder_.clear();
@@ -794,7 +857,7 @@ public final class MessageCheck {
         return this;
       }
       /**
-       * <code>repeated .SpotCheckTask taskList = 2;</code>
+       * <code>repeated .SpotCheckTask taskList = 3;</code>
        */
       public Builder removeTaskList(int index) {
         if (taskListBuilder_ == null) {
@@ -807,14 +870,14 @@ public final class MessageCheck {
         return this;
       }
       /**
-       * <code>repeated .SpotCheckTask taskList = 2;</code>
+       * <code>repeated .SpotCheckTask taskList = 3;</code>
        */
       public com.ytfs.service.packet.MessageCheck.SpotCheckTask.Builder getTaskListBuilder(
           int index) {
         return getTaskListFieldBuilder().getBuilder(index);
       }
       /**
-       * <code>repeated .SpotCheckTask taskList = 2;</code>
+       * <code>repeated .SpotCheckTask taskList = 3;</code>
        */
       public com.ytfs.service.packet.MessageCheck.SpotCheckTaskOrBuilder getTaskListOrBuilder(
           int index) {
@@ -824,7 +887,7 @@ public final class MessageCheck {
         }
       }
       /**
-       * <code>repeated .SpotCheckTask taskList = 2;</code>
+       * <code>repeated .SpotCheckTask taskList = 3;</code>
        */
       public java.util.List<? extends com.ytfs.service.packet.MessageCheck.SpotCheckTaskOrBuilder> 
            getTaskListOrBuilderList() {
@@ -835,14 +898,14 @@ public final class MessageCheck {
         }
       }
       /**
-       * <code>repeated .SpotCheckTask taskList = 2;</code>
+       * <code>repeated .SpotCheckTask taskList = 3;</code>
        */
       public com.ytfs.service.packet.MessageCheck.SpotCheckTask.Builder addTaskListBuilder() {
         return getTaskListFieldBuilder().addBuilder(
             com.ytfs.service.packet.MessageCheck.SpotCheckTask.getDefaultInstance());
       }
       /**
-       * <code>repeated .SpotCheckTask taskList = 2;</code>
+       * <code>repeated .SpotCheckTask taskList = 3;</code>
        */
       public com.ytfs.service.packet.MessageCheck.SpotCheckTask.Builder addTaskListBuilder(
           int index) {
@@ -850,7 +913,7 @@ public final class MessageCheck {
             index, com.ytfs.service.packet.MessageCheck.SpotCheckTask.getDefaultInstance());
       }
       /**
-       * <code>repeated .SpotCheckTask taskList = 2;</code>
+       * <code>repeated .SpotCheckTask taskList = 3;</code>
        */
       public java.util.List<com.ytfs.service.packet.MessageCheck.SpotCheckTask.Builder> 
            getTaskListBuilderList() {
@@ -863,7 +926,7 @@ public final class MessageCheck {
           taskListBuilder_ = new com.google.protobuf.RepeatedFieldBuilderV3<
               com.ytfs.service.packet.MessageCheck.SpotCheckTask, com.ytfs.service.packet.MessageCheck.SpotCheckTask.Builder, com.ytfs.service.packet.MessageCheck.SpotCheckTaskOrBuilder>(
                   taskList_,
-                  ((bitField0_ & 0x00000002) == 0x00000002),
+                  ((bitField0_ & 0x00000004) == 0x00000004),
                   getParentForChildren(),
                   isClean());
           taskList_ = null;
@@ -2507,13 +2570,14 @@ public final class MessageCheck {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\023message_check.proto\"E\n\021SpotCheckTaskLi" +
-      "st\022\016\n\006taskId\030\001 \001(\t\022 \n\010taskList\030\002 \003(\0132\016.S" +
-      "potCheckTask\"F\n\rSpotCheckTask\022\n\n\002id\030\001 \001(" +
-      "\005\022\016\n\006nodeId\030\002 \001(\t\022\014\n\004addr\030\003 \001(\t\022\013\n\003VHF\030\004" +
-      " \001(\014\"K\n\017SpotCheckStatus\022\016\n\006taskId\030\001 \001(\t\022" +
-      "\017\n\007percent\030\002 \001(\005\022\027\n\017invalidNodeList\030\003 \003(" +
-      "\005B\031\n\027com.ytfs.service.packetb\006proto3"
+      "\n\023message_check.proto\"S\n\021SpotCheckTaskLi" +
+      "st\022\016\n\006taskId\030\001 \001(\t\022\014\n\004snid\030\002 \001(\005\022 \n\010task" +
+      "List\030\003 \003(\0132\016.SpotCheckTask\"F\n\rSpotCheckT" +
+      "ask\022\n\n\002id\030\001 \001(\005\022\016\n\006nodeId\030\002 \001(\t\022\014\n\004addr\030" +
+      "\003 \001(\t\022\013\n\003VHF\030\004 \001(\014\"K\n\017SpotCheckStatus\022\016\n" +
+      "\006taskId\030\001 \001(\t\022\017\n\007percent\030\002 \001(\005\022\027\n\017invali" +
+      "dNodeList\030\003 \003(\005B\031\n\027com.ytfs.service.pack" +
+      "etb\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -2532,7 +2596,7 @@ public final class MessageCheck {
     internal_static_SpotCheckTaskList_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_SpotCheckTaskList_descriptor,
-        new java.lang.String[] { "TaskId", "TaskList", });
+        new java.lang.String[] { "TaskId", "Snid", "TaskList", });
     internal_static_SpotCheckTask_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_SpotCheckTask_fieldAccessorTable = new

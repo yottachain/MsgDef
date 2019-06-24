@@ -85,7 +85,7 @@ public class NodeManager {
         List<Node> lss = YottaNodeMgmt.getNodes(nodeids);
         return lss;
     }
-
+    
     public static int getNodeIDByPubKey(String key) throws NodeMgmtException {
         return YottaNodeMgmt.getNodeIDByPubKey(key);
     }
@@ -93,33 +93,4 @@ public class NodeManager {
     public static int getSuperNodeIDByPubKey(String key) throws NodeMgmtException {
         return YottaNodeMgmt.getSuperNodeIDByPubKey(key);
     }
-
-    /**
-     * 节点吊线,需要惩罚
-     *
-     * @param nodeid
-     */
-    public static void punishNode(int nodeid) {
-    }
-
-    /**
-     * 通报节点空间不足
-     *
-     * @param nodeid
-     */
-    public static void noSpace(int nodeid) {
-
-    }
-
-    /**
-     * 向该存储节点对应的超级节点BPM发送消息,BPM记录该存储节点已经存储了VHF数据分片，
-     * 相应增加该存储节点的已使用空间计数数据存储容量，但无需增加该存储节点的单位收益每周期收益
-     *
-     * @param nodeid
-     * @param VHF
-     */
-    public static void recodeBPM(int nodeid, byte[] VHF) {
-
-    }
-
 }
