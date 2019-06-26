@@ -1,9 +1,10 @@
 package com.ytfs.common.node;
 
+import com.ytfs.common.Function;
 import com.ytfs.common.conf.UserConfig;
 import com.ytfs.common.net.P2PUtils;
-import com.ytfs.service.packet.ListSuperNodeReq;
-import com.ytfs.service.packet.ListSuperNodeResp;
+import com.ytfs.service.packet.user.ListSuperNodeReq;
+import com.ytfs.service.packet.user.ListSuperNodeResp;
 import io.yottachain.nodemgmt.core.vo.SuperNode;
 import org.apache.log4j.Logger;
 
@@ -105,7 +106,8 @@ public class SuperNodeList {
      */
     public static SuperNode getUserSuperNode(int userid) {
         SuperNode[] nodes = getSuperNodeList();
-        int index = userid % nodes.length;
+        long uid = Function.inttolong(userid);
+        int index = (int) (uid % (long) nodes.length);
         return nodes[index];
     }
 }

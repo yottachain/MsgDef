@@ -18,7 +18,6 @@ public class LogConfigurator {
     public synchronized static void configPath(File path, String lv) throws IOException {
         if (handler == null) {
             handler = new JdkLogHandler();
-
             PropertyConfigurator configurator = new PropertyConfigurator();
             Properties logproperties = new Properties();
             logproperties.load(LogConfigurator.class.getResourceAsStream("/log4j.properties"));

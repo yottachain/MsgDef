@@ -9,7 +9,7 @@ public class NodeRegReq {
     private long maxDataSpace;
     private List<String> addrs;
     private boolean relay;
-    
+    private int id;
 
     /**
      * @return the nodeid
@@ -79,6 +79,20 @@ public class NodeRegReq {
      */
     public void setRelay(boolean relay) {
         this.relay = relay;
+    }
+
+    /**
+     * @return the id
+     */
+    public int getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(int id) {
+        this.id = id;
     }
 
 }

@@ -50,6 +50,10 @@ public class Function {
         return num;
     }
 
+    public static long inttolong(int ii){
+        byte[] bs=Function.int2bytes(ii);
+        return Function.bytes2Integer(bs, 0, 4);
+    }
 
     /**
      * short->byte[]

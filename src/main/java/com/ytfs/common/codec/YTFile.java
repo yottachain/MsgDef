@@ -64,7 +64,7 @@ public class YTFile {
 
     public YTFile(String path) throws IOException {
         File file = new File(path);
-        digest(new FileInputStream(file));
+        digest(new FileInputStream(file));                
         is = new BackableBufferedInputSteam(new FileInputStream(file), Default_Block_Size);
         length = file.length();
         inMemory = file.length() < Max_Memory_Usage;

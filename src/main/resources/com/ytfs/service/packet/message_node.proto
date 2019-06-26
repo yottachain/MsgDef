@@ -8,7 +8,8 @@ message NodeRegReq {
    string owner=2;                              
    uint64 maxDataSpace=3;                 
    repeated string addrs=4;     
-   bool relay=5;             
+   bool relay=5;     
+   uint32 id=6;
 }
 
 //msgid=0xfb92

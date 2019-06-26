@@ -1,4 +1,4 @@
-package com.ytfs.service.packet;
+package com.ytfs.service.packet.user;
 
 import java.util.List;
 

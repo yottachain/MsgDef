@@ -27,7 +27,6 @@ public class EOSClientCache {
 
     private static final Cache<ObjectId, EosApi> clients = CacheBuilder.newBuilder()
             .expireAfterWrite(EXPIRED_TIME, TimeUnit.SECONDS)
-            .expireAfterAccess(EXPIRED_TIME, TimeUnit.SECONDS)
             .maximumSize(MAX_SIZE)
             .build();
 
@@ -39,6 +38,23 @@ public class EOSClientCache {
         EosApi api = clients.getIfPresent(key);
         if (api != null) {
             clients.invalidate(key);
+        }
+        return api;
+    }
+
+    private static final Cache<String, EosApi> clients_Reg = CacheBuilder.newBuilder()
+            .expireAfterWrite(EXPIRED_TIME, TimeUnit.SECONDS)
+            .maximumSize(MAX_SIZE)
+            .build();
+
+    public static void putClient(String key, EosApi value) {
+        clients_Reg.put(key, value);
+    }
+
+    public static EosApi getClient(String key) {
+        EosApi api = clients_Reg.getIfPresent(key);
+        if (api != null) {
+            clients_Reg.invalidate(key);
         }
         return api;
     }

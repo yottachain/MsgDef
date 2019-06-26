@@ -1,5 +1,6 @@
-package com.ytfs.service.packet;
+package com.ytfs.service.packet.bp;
 
+import com.ytfs.service.packet.ObjectRefer;
 import java.util.List;
 
 public class QueryObjectMetaResp {

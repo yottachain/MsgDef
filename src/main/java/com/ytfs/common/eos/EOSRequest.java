@@ -62,10 +62,49 @@ public class EOSRequest {
         return encodeSignArg(arg);
     }
 
+    public static byte[] createEosClient(String pubkey) throws JsonProcessingException {
+        EosApi eosApi = EosApiFactory.create(ServerConfig.eosURI);
+        SignArg arg = eosApi.getSignArg((int) EOSClientCache.EXPIRED_TIME);
+        EOSClientCache.putClient(pubkey, eosApi);
+        return encodeSignArg(arg);
+    }
+
     public static PushedTransaction request(byte[] reqdata, ObjectId id) throws IOException {
         EosApi eosApi = EOSClientCache.getClient(id);
         PushTransactionRequest req = decodeRequest(reqdata);
         return eosApi.pushTransaction(req);
+    }
+
+    public static PushedTransaction request(byte[] reqdata, String pubkey) throws IOException {
+        EosApi eosApi = EOSClientCache.getClient(pubkey);
+        PushTransactionRequest req = decodeRequest(reqdata);
+        return eosApi.pushTransaction(req);
+    }
+
+    public static byte[] makeGetBalanceRequest(byte[] signarg, String username, String privateKey,String contractAccount) throws JsonProcessingException, IOException {
+        SignArg arg = decodeSignArg(signarg);
+        Raw raw = new Raw();
+        raw.packName(username);
+        raw.packUint8(1);
+        raw.packName(username);
+        String transferData = raw.toHex();
+        List<TransactionAuthorization> authorizations = Arrays.asList(new TransactionAuthorization(username, "active"));
+        List<TransactionAction> actions = Arrays.asList(
+                new TransactionAction(contractAccount, "getbalance", authorizations, transferData)
+        );
+        PackedTransaction packedTransaction = new PackedTransaction();
+        packedTransaction.setExpiration(arg.getHeadBlockTime().plusSeconds(getRandomInteger() + arg.getExpiredSecond()));
+        packedTransaction.setRefBlockNum(arg.getLastIrreversibleBlockNum());
+        packedTransaction.setRefBlockPrefix(arg.getRefBlockPrefix());
+        packedTransaction.setMaxNetUsageWords(0);
+        packedTransaction.setMaxCpuUsageMs(0);
+        packedTransaction.setDelaySec(0);
+        packedTransaction.setActions(actions);
+        String hash = sign(privateKey, arg, packedTransaction);
+        PushTransactionRequest req = new PushTransactionRequest();
+        req.setTransaction(packedTransaction);
+        req.setSignatures(Arrays.asList(hash));
+        return encodeRequest(req);
     }
 
     public static byte[] makeSubBalanceRequest(byte[] signarg, String from, String privateKey, String contractAccount, long cost) throws JsonProcessingException, IOException {
