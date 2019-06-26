@@ -98,6 +98,13 @@ public class SuperNodeList {
         return nodes[id];
     }
 
+    public static SuperNode getDNISuperNode(int id) {
+        SuperNode[] nodes = getSuperNodeList();
+        long uid = Function.inttolong(id);
+        int index = (int) (uid % (long) nodes.length);
+        return nodes[index];
+    }
+
     /**
      * 获取管理该用户的超级节点
      *

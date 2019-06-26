@@ -2,7 +2,8 @@ package com.ytfs.service.packet.bp;
 
 import io.yottachain.nodemgmt.core.vo.Node;
 
-public class NodeInfoResp {
+public class NodeSyncReq {
+
 
     private Node node;
 

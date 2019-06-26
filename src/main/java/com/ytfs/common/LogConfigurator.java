@@ -31,8 +31,8 @@ public class LogConfigurator {
                 lv = "INFO";
             }
             if (path == null) {
-                logproperties.replace("log4j.rootCategory", lv + ",stdout");
-                logproperties.replace("log4j.rootLogger", lv + ",stdout");
+                logproperties.replace("log4j.rootCategory", lv + ",logDailyFile,stdout");
+                logproperties.replace("log4j.rootLogger", lv + ",logDailyFile,stdout");
             } else {
                 logproperties.replace("log4j.rootCategory", lv + ",logDailyFile,stdout");
                 logproperties.replace("log4j.rootLogger", lv + ",logDailyFile,stdout");

@@ -59,7 +59,6 @@ public class SerializationUtil {
      * 反序列化
      *
      * @param paramArrayOfByte
-     * @param delegate
      * @return
      */
     @SuppressWarnings("unchecked")
