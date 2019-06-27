@@ -1,6 +1,7 @@
 package com.ytfs.common.eos;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.ytfs.common.Function;
 import com.ytfs.common.conf.ServerConfig;
 import io.jafka.jeos.EosApi;
 import io.jafka.jeos.EosApiFactory;
@@ -81,7 +82,7 @@ public class EOSRequest {
         return eosApi.pushTransaction(req);
     }
 
-    public static byte[] makeGetBalanceRequest(byte[] signarg, String username, String privateKey,String contractAccount) throws JsonProcessingException, IOException {
+    public static byte[] makeGetBalanceRequest(byte[] signarg, String username, String privateKey, String contractAccount) throws JsonProcessingException, IOException {
         SignArg arg = decodeSignArg(signarg);
         Raw raw = new Raw();
         raw.packName(username);
@@ -107,11 +108,12 @@ public class EOSRequest {
         return encodeRequest(req);
     }
 
-    public static byte[] makeSubBalanceRequest(byte[] signarg, String from, String privateKey, String contractAccount, long cost) throws JsonProcessingException, IOException {
+    public static byte[] makeSubBalanceRequest(byte[] signarg, String from, String privateKey, String contractAccount, long cost,int id) throws JsonProcessingException, IOException {
         SignArg arg = decodeSignArg(signarg);
         Raw raw = new Raw();
         raw.packName(from);
         raw.packUint64(cost);
+        raw.packUint64(Function.inttolong(id));
         String transferData = raw.toHex();
         List<TransactionAuthorization> authorizations = Arrays.asList(new TransactionAuthorization(from, "active"));
         List<TransactionAction> actions = Arrays.asList(
@@ -164,11 +166,12 @@ public class EOSRequest {
         return req;
     }
 
-    public static PushTransactionRequest makeAddUsedSpaceRequest(SignArg arg, long length, String username) throws JsonProcessingException, IOException {
+    public static PushTransactionRequest makeAddUsedSpaceRequest(SignArg arg, long length, String username, int id) throws JsonProcessingException, IOException {
         Raw raw = new Raw();
         raw.packName(username);
         raw.packUint64(length);
         raw.packName(ServerConfig.BPAccount);
+        raw.packUint64(Function.inttolong(id));
         String transferData = raw.toHex();
         List<TransactionAuthorization> authorizations = Arrays.asList(new TransactionAuthorization(ServerConfig.BPAccount, "active"));
         List<TransactionAction> actions = Arrays.asList(
@@ -189,11 +192,12 @@ public class EOSRequest {
         return req;
     }
 
-    public static PushTransactionRequest makeSetHfeeRequest(SignArg arg, long cost, String username) throws JsonProcessingException, IOException {
+    public static PushTransactionRequest makeSetHfeeRequest(SignArg arg, long cost, String username, int id) throws JsonProcessingException, IOException {
         Raw raw = new Raw();
         raw.packName(username);
         raw.packUint64(cost);
         raw.packName(ServerConfig.BPAccount);
+        raw.packUint64(Function.inttolong(id));
         String transferData = raw.toHex();
         List<TransactionAuthorization> authorizations = Arrays.asList(new TransactionAuthorization(ServerConfig.BPAccount, "active"));
         List<TransactionAction> actions = Arrays.asList(

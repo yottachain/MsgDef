@@ -60,12 +60,13 @@ public class EOSClient {
      *
      * @param length
      * @param username
+     * @param id
      * @throws Throwable
      */
-    public static void addUsedSpace(long length, String username) throws Throwable {
+    public static void addUsedSpace(long length, String username,int id) throws Throwable {
         EosApi eosApi = EosApiFactory.create(ServerConfig.eosURI);
         SignArg arg = eosApi.getSignArg((int) EOSClientCache.EXPIRED_TIME);
-        PushTransactionRequest req = makeAddUsedSpaceRequest(arg, length, username);
+        PushTransactionRequest req = makeAddUsedSpaceRequest(arg, length, username,id);
         eosApi.pushTransaction(req);
     }
 
@@ -74,12 +75,13 @@ public class EOSClient {
      *
      * @param cost
      * @param username
+     * @param id
      * @throws Throwable
      */
-    public static void setUserFee(long cost, String username) throws Throwable {
+    public static void setUserFee(long cost, String username,int id) throws Throwable {
         EosApi eosApi = EosApiFactory.create(ServerConfig.eosURI);
         SignArg arg = eosApi.getSignArg((int) EOSClientCache.EXPIRED_TIME);
-        PushTransactionRequest req = makeSetHfeeRequest(arg, cost, username);
+        PushTransactionRequest req = makeSetHfeeRequest(arg, cost, username,id);
         eosApi.pushTransaction(req);
     }
 

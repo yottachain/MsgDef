@@ -4,6 +4,7 @@ public class UploadObjectEndResp {
 
     private byte[] signArg;
     private long firstCost;
+    private int userid;
 
     /**
      * @return the signArg
@@ -33,5 +34,18 @@ public class UploadObjectEndResp {
         this.firstCost = firstCost;
     }
 
-    
+    /**
+     * @return the userid
+     */
+    public int getUserid() {
+        return userid;
+    }
+
+    /**
+     * @param userid the userid to set
+     */
+    public void setUserid(int userid) {
+        this.userid = userid;
+    }
+
 }

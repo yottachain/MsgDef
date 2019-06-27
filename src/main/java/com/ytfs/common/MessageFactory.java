@@ -44,7 +44,7 @@ public class MessageFactory {
     public static Class getMessageType(short commandid) {
         Class cls = id_class_Map.get(commandid);
         if (cls == null) {
-            throw new RuntimeException("Invalid instruction.");
+            throw new RuntimeException("Invalid instruction:" + commandid);
         } else {
             return cls;
         }
