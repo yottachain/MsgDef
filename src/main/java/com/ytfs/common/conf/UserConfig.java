@@ -19,7 +19,7 @@ public class UserConfig {
     public final static int Default_Shard_Size = 1024 * 16;  //PFL
 
     //最多容许掉线分片数量　
-    public final static int Default_PND = 16;
+    public final static int Default_PND = 32;
 
     //小于PL2的数据块，直接记录在元数据库中
     public final static int PL2 = 256;
