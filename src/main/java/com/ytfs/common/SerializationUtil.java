@@ -77,7 +77,7 @@ public class SerializationUtil {
         IdStrategy idStrategy = null;
         if (instance instanceof SerializationStrategy) {
             idStrategy = ((SerializationStrategy) instance).getIdStrategy();
-        }    
+        }
         Schema schema;
         if (idStrategy == null) {
             schema = RuntimeSchema.getSchema(targetClass);
@@ -172,6 +172,16 @@ public class SerializationUtil {
          */
         public void setValues(List<T> values) {
             this.values = values;
+        }
+
+        public void toMap(Map<String, T> map) {
+            if (keys == null || values == null) {
+                return;
+            }
+            int len = keys.size();
+            for (int ii = 0; ii < len; ii++) {
+                map.put(keys.get(ii), values.get(ii));
+            }
         }
 
         public Map<String, T> toMap() {
