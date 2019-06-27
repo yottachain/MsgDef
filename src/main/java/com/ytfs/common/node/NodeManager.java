@@ -13,12 +13,12 @@ public class NodeManager {
 
     private static final Logger LOG = Logger.getLogger(NodeManager.class);
 
-    public synchronized static void start(List<ServerAddress> addrs, String eos, String bpuser, String bpkey, String contractAccount,int id) throws NodeMgmtException {
+    public synchronized static void start(List<ServerAddress> addrs, String eos, String bpuser, String bpkey, String contractAccount, int id) throws NodeMgmtException {
         try {
             LOG.info("NodeManager init...");
             ServerAddress serverAddress = addrs.get(0);
             String addr = "mongodb://" + serverAddress.getHost() + ":" + serverAddress.getPort();
-            YottaNodeMgmt.start(addr, eos, bpuser, bpkey, contractAccount,id);
+            YottaNodeMgmt.start(addr, eos, bpuser, bpkey, contractAccount, id);
             LOG.info("NodeManager init OK!");
         } catch (NodeMgmtException ne) {
             try {
@@ -38,6 +38,9 @@ public class NodeManager {
     public static SuperNode[] getSuperNode() throws NodeMgmtException {
         try {
             List<SuperNode> ls = YottaNodeMgmt.getSuperNodes();
+            if (ls == null || ls.isEmpty()) {
+                throw new Exception("GetSuperNode ERR.");
+            }
             SuperNode[] sn = new SuperNode[ls.size()];
             for (SuperNode n : ls) {
                 sn[n.getId()] = n;
@@ -49,17 +52,7 @@ public class NodeManager {
         }
     }
 
-    /**
-     * 获取超级节点对应的私钥,一般超级节点对数据进行签名时需要
-     *
-     * @param id
-     * @return byte[]
-     * @throws io.yottachain.nodemgmt.core.exception.NodeMgmtException
-     */
-    public static byte[] getSuperNodePrivateKey(int id) throws NodeMgmtException {
-        String str = YottaNodeMgmt.getSuperNodePrivateKey(id);
-        return Base58.decode(str);
-    }
+ 
 
     /**
      * 获取存储节点
@@ -85,7 +78,7 @@ public class NodeManager {
         List<Node> lss = YottaNodeMgmt.getNodes(nodeids);
         return lss;
     }
-    
+
     public static int getNodeIDByPubKey(String key) throws NodeMgmtException {
         return YottaNodeMgmt.getNodeIDByPubKey(key);
     }
