@@ -39,9 +39,6 @@ public class UserConfig {
     public static byte[] AESKey;
     public static String privateKey; //用户私钥
 
-    //合约账户名
-    public static String contractAccount;
-
     //用户对应的超级节点
     public static SuperNode superNode;
 

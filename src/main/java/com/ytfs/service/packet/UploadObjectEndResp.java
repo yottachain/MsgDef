@@ -3,9 +3,11 @@ package com.ytfs.service.packet;
 public class UploadObjectEndResp {
 
     private byte[] signArg;
+    private String contractAccount;
     private long firstCost;
     private int userid;
 
+    
     /**
      * @return the signArg
      */
@@ -46,6 +48,20 @@ public class UploadObjectEndResp {
      */
     public void setUserid(int userid) {
         this.userid = userid;
+    }
+
+    /**
+     * @return the contractAccount
+     */
+    public String getContractAccount() {
+        return contractAccount;
+    }
+
+    /**
+     * @param contractAccount the contractAccount to set
+     */
+    public void setContractAccount(String contractAccount) {
+        this.contractAccount = contractAccount;
     }
 
 }
