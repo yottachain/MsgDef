@@ -1,7 +1,6 @@
 package com.ytfs.common.node;
 
 import com.mongodb.ServerAddress;
-import io.jafka.jeos.util.Base58;
 import io.yottachain.nodemgmt.YottaNodeMgmt;
 import io.yottachain.nodemgmt.core.exception.NodeMgmtException;
 import io.yottachain.nodemgmt.core.vo.Node;
@@ -13,12 +12,12 @@ public class NodeManager {
 
     private static final Logger LOG = Logger.getLogger(NodeManager.class);
 
-    public synchronized static void start(List<ServerAddress> addrs, String eos, String bpuser, String bpkey, String contractAccount, int id) throws NodeMgmtException {
+    public synchronized static void start(List<ServerAddress> addrs, String eos, String bpuser, String bpkey, String contractAccount, String contractAccountD, int id) throws NodeMgmtException {
         try {
             LOG.info("NodeManager init...");
             ServerAddress serverAddress = addrs.get(0);
             String addr = "mongodb://" + serverAddress.getHost() + ":" + serverAddress.getPort();
-            YottaNodeMgmt.start(addr, eos, bpuser, bpkey, contractAccount, id);
+            YottaNodeMgmt.start(addr, eos, bpuser, bpkey, contractAccount, contractAccountD, id);
             LOG.info("NodeManager init OK!");
         } catch (NodeMgmtException ne) {
             try {
@@ -51,8 +50,6 @@ public class NodeManager {
             throw new NodeMgmtException(t.getMessage());
         }
     }
-
- 
 
     /**
      * 获取存储节点

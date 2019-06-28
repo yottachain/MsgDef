@@ -40,6 +40,7 @@ public class ServerConfig {
     public static String BPAccount;
     public static String BPPriKey;
     public static String contractAccount;
+    public static String contractOwnerD;
 
     //端口
     public static int httpPort = 8080;
