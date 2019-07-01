@@ -12,9 +12,12 @@ import io.jafka.jeos.core.common.SignArg;
 import io.jafka.jeos.core.request.chain.transaction.PushTransactionRequest;
 import io.jafka.jeos.core.response.chain.transaction.PushedTransaction;
 import java.util.Map;
+import org.apache.log4j.Logger;
 import org.bson.types.ObjectId;
 
 public class EOSClient {
+
+    private static final Logger LOG = Logger.getLogger(EOSClient.class);
 
     /**
      * 该用户是否有足够的HDD用于存储该数据最短存储时间PMS（例如60天）
@@ -26,6 +29,7 @@ public class EOSClient {
      */
     public static boolean hasSpace(long length, String username) throws Throwable {
         long balance = EOSClientCache.getBalance(username);
+        LOG.info("Get [" + username + "] balance:" + balance);
         long unitcount = length / UserConfig.Default_Shard_Size;
         long remain = length % UserConfig.Default_Shard_Size > 0 ? 1 : 0;
         long needcost = ServerConfig.unitcost * (unitcount + remain);
@@ -63,10 +67,10 @@ public class EOSClient {
      * @param id
      * @throws Throwable
      */
-    public static void addUsedSpace(long length, String username,int id) throws Throwable {
+    public static void addUsedSpace(long length, String username, int id) throws Throwable {
         EosApi eosApi = EosApiFactory.create(ServerConfig.eosURI);
         SignArg arg = eosApi.getSignArg((int) EOSClientCache.EXPIRED_TIME);
-        PushTransactionRequest req = makeAddUsedSpaceRequest(arg, length, username,id);
+        PushTransactionRequest req = makeAddUsedSpaceRequest(arg, length, username, id);
         eosApi.pushTransaction(req);
     }
 
@@ -78,10 +82,10 @@ public class EOSClient {
      * @param id
      * @throws Throwable
      */
-    public static void setUserFee(long cost, String username,int id) throws Throwable {
+    public static void setUserFee(long cost, String username, int id) throws Throwable {
         EosApi eosApi = EosApiFactory.create(ServerConfig.eosURI);
         SignArg arg = eosApi.getSignArg((int) EOSClientCache.EXPIRED_TIME);
-        PushTransactionRequest req = makeSetHfeeRequest(arg, cost, username,id);
+        PushTransactionRequest req = makeSetHfeeRequest(arg, cost, username, id);
         eosApi.pushTransaction(req);
     }
 
