@@ -33,6 +33,11 @@ public class Block {
         this.realSize = doc.getInteger("realSize");
     }
 
+    public Block(byte[] data, long originalSize) {
+        this(data);
+        this.originalSize = originalSize;
+    }
+
     public Block(byte[] data) {
         this.data = data;
         this.realSize = data.length;
@@ -171,5 +176,5 @@ public class Block {
     public void setRealSize(int realSize) {
         this.realSize = realSize;
     }
- 
+
 }
