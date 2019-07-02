@@ -3,6 +3,7 @@ package com.ytfs.common.node;
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
 import io.yottachain.nodemgmt.core.exception.NodeMgmtException;
+import io.yottachain.nodemgmt.core.vo.SuperNode;
 import java.util.concurrent.TimeUnit;
 
 public class NodeCache {
@@ -25,8 +26,22 @@ public class NodeCache {
     public static int getSuperNodeId(String key) throws NodeMgmtException {
         Integer id = superNodes.getIfPresent(key);
         if (id == null) {
-            id = NodeManager.getSuperNodeIDByPubKey(key);
-            superNodes.put(key, id);
+            SuperNode[] superList = SuperNodeList.getSuperNodeList();
+            for (SuperNode sn : superList) {
+                String pkey = sn.getPubkey();
+                if (pkey.startsWith("EOS")) {
+                    pkey = pkey.substring(3);
+                }
+                if (pkey.equals(key)) {
+                    id = sn.getId();
+                    break;
+                }
+            }
+            if (id != null) {
+                superNodes.put(key, id);
+            } else {
+                throw new NodeMgmtException("");
+            }
         }
         return id;
     }

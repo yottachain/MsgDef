@@ -25,10 +25,10 @@ public class UserConfig {
     public final static int PL2 = 256;
 
     //上传线程数
-    public final static int UPLOADSHARDTHREAD = 50;
+    public final static int UPLOADSHARDTHREAD = 200;
 
     //下载线程数
-    public final static int DOWNLOADSHARDTHREAD = 50;
+    public final static int DOWNLOADSHARDTHREAD = 200;
 
     //**************************可配置参数********************************
     //用户钱包账户名
