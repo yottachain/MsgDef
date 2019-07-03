@@ -1,13 +1,5 @@
 package com.ytfs.common.codec;
 
-import com.ytfs.common.codec.BlockAESEncryptor;
-import com.ytfs.common.codec.ShardRSEncoder;
-import com.ytfs.common.codec.BlockAESDecryptor;
-import com.ytfs.common.codec.BlockEncrypted;
-import com.ytfs.common.codec.KeyStoreCoder;
-import com.ytfs.common.codec.ShardRSDecoder;
-import com.ytfs.common.codec.Shard;
-import com.ytfs.common.codec.Block;
 import java.security.MessageDigest;
 import java.util.List;
 import org.apache.commons.codec.binary.Hex;
@@ -18,7 +10,7 @@ public class TestShardCoder {
 
     public static void main(String[] args) throws Exception {
         //middleBlock();
-        smallBlock();
+        //smallBlock();
     }
 
     private static void middleBlock() throws Exception {
@@ -43,7 +35,7 @@ public class TestShardCoder {
         ShardRSDecoder decoder = new ShardRSDecoder(shards, encryptedBlockSize);
         BlockEncrypted b = decoder.decode();
 
-        BlockAESDecryptor aesdecoder = new BlockAESDecryptor(b.getData(),   key);
+        BlockAESDecryptor aesdecoder = new BlockAESDecryptor(b.getData(), key);
         aesdecoder.decrypt();
 
         block = new Block(aesdecoder.getSrcData());
@@ -66,7 +58,7 @@ public class TestShardCoder {
 
         ShardRSEncoder encoder = new ShardRSEncoder(aes.getBlockEncrypted());
         encoder.encode();
-         List<Shard> shards = encoder.getShardList();
+        List<Shard> shards = encoder.getShardList();
         deleteDataShard(shards);
         deleteParityShard(shards);
         ShardRSDecoder decoder = new ShardRSDecoder(shards, encryptedBlockSize);
