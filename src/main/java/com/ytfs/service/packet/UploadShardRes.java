@@ -7,6 +7,7 @@ public class UploadShardRes {
     public static final int RES_BAD_REQUEST = 100;
     public static final int RES_NO_SPACE = 101;
     public static final int RES_VNF_EXISTS = 102;
+    public static final int RES_REP_ERR = 104;
 
     private int SHARDID; //分片索引
     private int NODEID;

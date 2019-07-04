@@ -1,8 +1,10 @@
 package com.ytfs.common.codec;
 
+import static com.ytfs.common.conf.UserConfig.KUSp;
 import io.yottachain.p2phost.utils.Base58;
 import io.yottachain.ytcrypto.YTCrypto;
 import java.security.SecureRandom;
+import java.util.Arrays;
 import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
@@ -26,7 +28,7 @@ public class KeyStoreCoder {
         return generateRandomKey(bs);
     }
 
-    public static byte[] generateRandomKey(byte[] pwd) {
+    private static byte[] generateRandomKey(byte[] pwd) {
         try {
             KeyGenerator kgen = KeyGenerator.getInstance("AES");
             kgen.init(256, new SecureRandom(pwd));
@@ -35,6 +37,21 @@ public class KeyStoreCoder {
             return enCodeFormat;
         } catch (Exception e) {
             throw new IllegalArgumentException(e.getMessage());
+        }
+    }
+
+    public static byte[] generateUserKey(byte[] KUSp) {
+        if (KUSp.length > 32) {
+            byte[] bs = new byte[32];
+            System.arraycopy(KUSp, 0, bs, 0, 32);
+            return bs;
+        } else if (KUSp.length == 32) {
+            return KUSp;
+        } else {
+            byte[] bs = new byte[32];
+            Arrays.fill(bs, (byte) 0);
+            System.arraycopy(KUSp, 0, bs, 0, KUSp.length);
+            return bs;
         }
     }
 
@@ -48,7 +65,7 @@ public class KeyStoreCoder {
     public static byte[] aesEncryped(byte[] data, byte[] kd) {
         try {
             SecretKeySpec skeySpec = new SecretKeySpec(kd, "AES");
-            Cipher cipher = Cipher.getInstance("AES");
+            Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");
             cipher.init(Cipher.ENCRYPT_MODE, skeySpec);
             byte[] bs = cipher.doFinal(data);
             byte[] res = new byte[32];
@@ -69,14 +86,14 @@ public class KeyStoreCoder {
     public static byte[] aesDecryped(byte[] data, byte[] kd) {
         try {
             SecretKeySpec skeySpec1 = new SecretKeySpec(kd, "AES");
-            Cipher cipher1 = Cipher.getInstance("AES");
+            Cipher cipher1 = Cipher.getInstance("AES/ECB/PKCS5Padding");
             cipher1.init(Cipher.ENCRYPT_MODE, skeySpec1);
             byte[] end = cipher1.doFinal();
             byte[] srcdata = new byte[data.length + 16];
             System.arraycopy(data, 0, srcdata, 0, data.length);
             System.arraycopy(end, 0, srcdata, data.length, 16);
             SecretKeySpec skeySpec = new SecretKeySpec(kd, "AES");
-            Cipher cipher = Cipher.getInstance("AES");
+            Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");
             cipher.init(Cipher.DECRYPT_MODE, skeySpec);
             return cipher.doFinal(srcdata);
         } catch (Exception r) {
