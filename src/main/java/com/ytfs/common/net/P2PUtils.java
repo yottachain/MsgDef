@@ -49,10 +49,20 @@ public class P2PUtils {
     public static final int MSG_2NODE = 2;
 
     public static Object requestBPU(Object obj, SuperNode node) throws ServiceException {
+        return requestBPU(obj, node, null);
+    }
+
+    public static Object requestBPU(Object obj, SuperNode node, String log_prefix) throws ServiceException {
+        String log_pre = log_prefix == null
+                ? ("[" + obj.getClass().getSimpleName() + "] ")
+                : ("[" + log_prefix + "][" + obj.getClass().getSimpleName() + "] ");
         ServiceException err = null;
         for (int ii = 0; ii < 3; ii++) {
             try {
-                return request(obj, node.getAddrs(), node.getNodeid(), MSG_2BPU);
+                if (ii > 0) {
+                    LOG.info(log_pre + "Retry...");
+                }
+                return request(obj, node.getAddrs(), node.getNodeid(), MSG_2BPU, log_pre);
             } catch (ServiceException r) {
                 if (!(r.getErrorCode() == INTERNAL_ERROR || r.getErrorCode() == SERVER_ERROR)) {
                     throw r;
@@ -68,10 +78,20 @@ public class P2PUtils {
     }
 
     public static Object requestBP(Object obj, SuperNode node) throws ServiceException {
+        return requestBP(obj, node, null);
+    }
+
+    public static Object requestBP(Object obj, SuperNode node, String log_prefix) throws ServiceException {
+        String log_pre = log_prefix == null
+                ? ("[" + obj.getClass().getSimpleName() + "] ")
+                : ("[" + log_prefix + "][" + obj.getClass().getSimpleName() + "] ");
         ServiceException err = null;
         for (int ii = 0; ii < 3; ii++) {
             try {
-                return request(obj, node.getAddrs(), node.getNodeid(), MSG_2BP);
+                if (ii > 0) {
+                    LOG.info(log_pre + "Retry...");
+                }
+                return request(obj, node.getAddrs(), node.getNodeid(), MSG_2BP, log_pre);
             } catch (ServiceException r) {
                 if (!(r.getErrorCode() == INTERNAL_ERROR || r.getErrorCode() == SERVER_ERROR)) {
                     throw r;
@@ -87,10 +107,17 @@ public class P2PUtils {
     }
 
     public static Object requestNode(Object obj, Node node) throws ServiceException {
-        return request(obj, node.getAddrs(), node.getNodeid(), MSG_2NODE);
+        return requestNode(obj, node, null);
     }
 
-    public static Object request(Object obj, List<String> addr, String key, int type) throws ServiceException {
+    public static Object requestNode(Object obj, Node node, String log_prefix) throws ServiceException {
+        String log_pre = log_prefix == null
+                ? ("[" + obj.getClass().getSimpleName() + "] ")
+                : ("[" + log_prefix + "][" + obj.getClass().getSimpleName() + "] ");
+        return request(obj, node.getAddrs(), node.getNodeid(), MSG_2NODE, log_pre);
+    }
+
+    private static Object request(Object obj, List<String> addr, String key, int type, String log_pre) throws ServiceException {
         if (!CONNECTS.containsKey(key)) {
             synchronized (CONNECTS) {
                 if (!CONNECTS.containsKey(key)) {
@@ -101,7 +128,7 @@ public class P2PUtils {
                         YottaP2P.connect(key, strs);
                         CONNECTS.put(key, addstr);
                     } catch (P2pHostException ex) {
-                        LOG.info("Connect " + addstr + " Err.");
+                        LOG.info(log_pre + "Connect " + addstr + " Err.");
                         throw new ServiceException(INTERNAL_ERROR, ex.getMessage());
                     }
                 }
@@ -120,10 +147,10 @@ public class P2PUtils {
                 default:
                     bs = YottaP2P.sendToNodeMsg(key, data);
                     break;
-            }           
+            }
         } catch (Throwable e) {
             String oldaddrString = CONNECTS.get(key);
-            LOG.error("INTERNAL_ERROR:" + (oldaddrString == null ? ("[" + e.getMessage() + "]") : oldaddrString));
+            LOG.error(log_pre + "INTERNAL_ERROR:" + (oldaddrString == null ? ("[" + e.getMessage() + "]") : oldaddrString));
             String newaddrString = getAddrString(addr);
             synchronized (CONNECTS) {
                 if (CONNECTS.containsKey(key)) {
@@ -135,7 +162,8 @@ public class P2PUtils {
                 }
             }
             if (oldaddrString == null || !oldaddrString.equals(newaddrString)) {
-                return request(obj, addr, key, type);
+                LOG.info(log_pre + "Retry...");
+                return request(obj, addr, key, type, log_pre);
             } else {
                 throw new ServiceException(INTERNAL_ERROR, e.getMessage());
             }
