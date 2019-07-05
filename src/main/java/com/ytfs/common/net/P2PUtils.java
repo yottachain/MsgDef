@@ -55,7 +55,7 @@ public class P2PUtils {
     public static Object requestBPU(Object obj, SuperNode node, String log_prefix) throws ServiceException {
         String log_pre = log_prefix == null
                 ? ("[" + obj.getClass().getSimpleName() + "][" + node.getId() + "]")
-                : ("[" + log_prefix + "][" + obj.getClass().getSimpleName() + "][" + node.getId() + "]");
+                : ("[" + obj.getClass().getSimpleName() + "][" + node.getId() + "][" + log_prefix + "]");
         ServiceException err = null;
         for (int ii = 0; ii < 3; ii++) {
             try {
@@ -84,7 +84,7 @@ public class P2PUtils {
     public static Object requestBP(Object obj, SuperNode node, String log_prefix) throws ServiceException {
         String log_pre = log_prefix == null
                 ? ("[" + obj.getClass().getSimpleName() + "][" + node.getId() + "]")
-                : ("[" + log_prefix + "][" + obj.getClass().getSimpleName() + "][" + node.getId() + "]");
+                : ("[" + obj.getClass().getSimpleName() + "][" + node.getId() + "][" + log_prefix + "]");
         ServiceException err = null;
         for (int ii = 0; ii < 3; ii++) {
             try {
@@ -113,7 +113,7 @@ public class P2PUtils {
     public static Object requestNode(Object obj, Node node, String log_prefix) throws ServiceException {
         String log_pre = log_prefix == null
                 ? ("[" + obj.getClass().getSimpleName() + "][" + node.getId() + "]")
-                : ("[" + log_prefix + "][" + obj.getClass().getSimpleName() + "][" + node.getId() + "]");
+                : ("[" + obj.getClass().getSimpleName() + "][" + node.getId() + "][" + log_prefix + "]");
         return request(obj, node.getAddrs(), node.getNodeid(), MSG_2NODE, log_pre);
     }
 
