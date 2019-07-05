@@ -13,7 +13,8 @@ public class StatusRepReq {
     private long usedSpace;
     private List<String> addrs;
     private boolean relay;
-
+    private int version;
+    
     /**
      * @return the id
      */
@@ -138,6 +139,20 @@ public class StatusRepReq {
      */
     public void setRelay(boolean relay) {
         this.relay = relay;
+    }
+
+    /**
+     * @return the version
+     */
+    public int getVersion() {
+        return version;
+    }
+
+    /**
+     * @param version the version to set
+     */
+    public void setVersion(int version) {
+        this.version = version;
     }
 
 }
