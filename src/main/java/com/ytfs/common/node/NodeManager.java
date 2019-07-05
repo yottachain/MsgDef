@@ -55,11 +55,12 @@ public class NodeManager {
      * 获取存储节点
      *
      * @param shardCount 根据某种算法分配shardCount个存储节点用来存储分片
+     * @param errids
      * @return
      * @throws io.yottachain.nodemgmt.core.exception.NodeMgmtException
      */
-    public static Node[] getNode(int shardCount) throws NodeMgmtException {
-        List<Node> ls = YottaNodeMgmt.allocNodes(shardCount);
+    public static Node[] getNode(int shardCount,int[] errids) throws NodeMgmtException {
+        List<Node> ls = YottaNodeMgmt.allocNodes(shardCount,errids);
         Node[] sn = new Node[ls.size()];
         return ls.toArray(sn);
     }
