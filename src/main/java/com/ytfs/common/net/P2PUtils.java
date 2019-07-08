@@ -150,7 +150,7 @@ public class P2PUtils {
             }
         } catch (Throwable e) {
             String oldaddrString = CONNECTS.get(key);
-            LOG.error(log_pre + "INTERNAL_ERROR:" + (oldaddrString == null ? ("[" + e.getMessage() + "]") : oldaddrString));
+            LOG.error(log_pre + "COMM_ERROR:" + (oldaddrString == null ? ("[" + e.getMessage() + "]") : oldaddrString));
             String newaddrString = getAddrString(addr);
             synchronized (CONNECTS) {
                 if (CONNECTS.containsKey(key)) {
