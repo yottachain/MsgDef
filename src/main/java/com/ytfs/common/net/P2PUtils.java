@@ -1,7 +1,6 @@
 package com.ytfs.common.net;
 
 import com.ytfs.common.SerializationUtil;
-import static com.ytfs.common.ServiceErrorCode.INTERNAL_ERROR;
 import static com.ytfs.common.ServiceErrorCode.SERVER_ERROR;
 import com.ytfs.common.ServiceException;
 import io.yottachain.nodemgmt.core.vo.Node;
@@ -15,6 +14,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.apache.log4j.Logger;
+import static com.ytfs.common.ServiceErrorCode.COMM_ERROR;
 
 public class P2PUtils {
 
@@ -64,7 +64,7 @@ public class P2PUtils {
                 }
                 return request(obj, node.getAddrs(), node.getNodeid(), MSG_2BPU, log_pre);
             } catch (ServiceException r) {
-                if (!(r.getErrorCode() == INTERNAL_ERROR || r.getErrorCode() == SERVER_ERROR)) {
+                if (!(r.getErrorCode() == COMM_ERROR || r.getErrorCode() == SERVER_ERROR)) {
                     throw r;
                 }
                 err = r;
@@ -93,7 +93,7 @@ public class P2PUtils {
                 }
                 return request(obj, node.getAddrs(), node.getNodeid(), MSG_2BP, log_pre);
             } catch (ServiceException r) {
-                if (!(r.getErrorCode() == INTERNAL_ERROR || r.getErrorCode() == SERVER_ERROR)) {
+                if (!(r.getErrorCode() == COMM_ERROR || r.getErrorCode() == SERVER_ERROR)) {
                     throw r;
                 }
                 err = r;
@@ -129,7 +129,7 @@ public class P2PUtils {
                         CONNECTS.put(key, addstr);
                     } catch (P2pHostException ex) {
                         LOG.info(log_pre + "Connect " + addstr + " Err.");
-                        throw new ServiceException(INTERNAL_ERROR, ex.getMessage());
+                        throw new ServiceException(COMM_ERROR, ex.getMessage());
                     }
                 }
             }
@@ -165,7 +165,7 @@ public class P2PUtils {
                 LOG.info(log_pre + "Retry...");
                 return request(obj, addr, key, type, log_pre);
             } else {
-                throw new ServiceException(INTERNAL_ERROR, e.getMessage());
+                throw new ServiceException(COMM_ERROR, e.getMessage());
             }
         }
         Object res = SerializationUtil.deserialize(bs);

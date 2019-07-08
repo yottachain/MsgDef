@@ -5,7 +5,7 @@ public class ServiceErrorCode {
     public static final int SERVER_ERROR = 0x00;
     public static final int INVALID_USER_ID = 0x01;
     public static final int NOT_ENOUGH_DHH = 0x02;
-    public static final int INTERNAL_ERROR = 0x03;
+    public static final int COMM_ERROR = 0x03;
     public static final int INVALID_UPLOAD_ID = 0x04;
     public static final int TOO_MANY_SHARDS = 0x05;
     public static final int ILLEGAL_VHP_NODEID = 0x06;
