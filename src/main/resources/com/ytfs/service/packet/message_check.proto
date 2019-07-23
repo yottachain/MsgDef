@@ -19,6 +19,5 @@ message SpotCheckTask{
 //msgid=0xa583
 message SpotCheckStatus{
     string taskId = 1; 
-    int32 percent=2;
-    repeated int32 invalidNodeList=3;
+    repeated int32 invalidNodeList=2;
 }

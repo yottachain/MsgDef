@@ -4,7 +4,6 @@ import java.util.List;
 
 public class SpotCheckStatus {
     private String taskId;
-    private int percent;
     private List<Integer> invalidNodeList; 
 
     /**
@@ -19,20 +18,6 @@ public class SpotCheckStatus {
      */
     public void setTaskId(String taskId) {
         this.taskId = taskId;
-    }
-
-    /**
-     * @return the percent
-     */
-    public int getPercent() {
-        return percent;
-    }
-
-    /**
-     * @param percent the percent to set
-     */
-    public void setPercent(int percent) {
-        this.percent = percent;
     }
 
     /**
