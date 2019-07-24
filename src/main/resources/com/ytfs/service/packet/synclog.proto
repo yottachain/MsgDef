@@ -2,5 +2,5 @@ syntax = "proto3";
  
 message SyncDBLog {
    uint32 opName=1; 
-   repeated string params=2;  
+   repeated bytes params=2; 
 }
