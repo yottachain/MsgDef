@@ -12,6 +12,7 @@ public class FileMetaMsg {
     private ObjectId bucketId;
     private String fileName;
     private ObjectId versionId;//对应上传文件ID:VNU
+    private boolean latest;
     private byte[] meta;
     private byte[] acl;
 
@@ -154,4 +155,11 @@ public class FileMetaMsg {
         this.acl = acl;
     }
 
+    public boolean isLatest() {
+        return latest;
+    }
+
+    public void setLatest(boolean latest) {
+        this.latest = latest;
+    }
 }
