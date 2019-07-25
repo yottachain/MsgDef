@@ -22,6 +22,44 @@ public class SerializationUtil {
      * @param obj
      * @return byte[]
      */
+    public static byte[] serializeWriteObject(Object obj) {
+        if (obj == null) {
+            throw new IllegalArgumentException();
+        }
+        @SuppressWarnings("unchecked")
+        Schema schema = RuntimeSchema.getSchema(obj.getClass());
+        LinkedBuffer buffer = BUFFER_THREAD_LOCAL.get();
+        try {
+            return ProtostuffIOUtil.toByteArray(obj, schema, buffer);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        } finally {
+            buffer.clear();
+        }
+    }
+
+    /**
+     * 反序列化
+     *
+     * @param paramArrayOfByte
+     * @param instance
+     */
+    @SuppressWarnings("unchecked")
+    public static void deserializeWriteObject(byte[] paramArrayOfByte, Object instance) {
+        if (paramArrayOfByte == null || paramArrayOfByte.length == 0) {
+            throw new IllegalArgumentException();
+        }
+        Class targetClass = instance.getClass();
+        Schema schema = RuntimeSchema.getSchema(targetClass);
+        ProtostuffIOUtil.mergeFrom(paramArrayOfByte, instance, schema);
+    }
+
+    /**
+     * 序列化对象
+     *
+     * @param obj
+     * @return byte[]
+     */
     public static byte[] serialize(Object obj) {
         if (obj == null) {
             throw new IllegalArgumentException();
