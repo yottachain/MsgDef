@@ -59,6 +59,10 @@ public class YTFileEncoder {
 
     public Block handle() throws IOException {
         if (isFinished()) {
+            try {
+                is.close();
+            } catch (Exception e) {
+            }
             return null;
         }
         try {
@@ -66,6 +70,12 @@ public class YTFileEncoder {
             if (readTotal > 0) {
                 is.skip(readTotal * -1);
                 pack(is);
+            }
+            if (isFinished()) {
+                try {
+                    is.close();
+                } catch (Exception e) {
+                }
             }
             return curBlock;
         } catch (IOException e) {

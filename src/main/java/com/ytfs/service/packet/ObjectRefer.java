@@ -7,26 +7,31 @@ import java.util.List;
 
 public class ObjectRefer {
 
-    /**
-     * 解析
-     *
-     * @param bs
-     * @return
-     */
-    public static List<ObjectRefer> parse(byte[] bs) {
+    public static List<ObjectRefer> parse(byte[] bs, byte[][] blks) {
+        if (blks != null) {
+            return parse(blks);
+        } else {
+            return parse(bs);
+        }
+    }
+
+    private static List<ObjectRefer> parse(byte[] bs) {
         List<ObjectRefer> ls = new ArrayList();
         int len = bs.length / 52;
         for (int ii = 0; ii < len; ii++) {
-            ObjectRefer refer = new ObjectRefer();
+            byte[] blkbs = new byte[52];
+            System.arraycopy(bs, ii * 52, blkbs, 0, 52);
+            ObjectRefer refer = new ObjectRefer(blkbs);
             ls.add(refer);
-            refer.VBI = bytes2Integer(bs, ii * 52, 8);
-            refer.superID = bs[ii * 52 + 8];
-            refer.originalSize = bytes2Integer(bs, ii * 52 + 9, 6);
-            refer.realSize = (int) bytes2Integer(bs, ii * 52 + 15, 3);
-            byte[] bbs = new byte[32];
-            System.arraycopy(bs, ii * 52 + 18, bbs, 0, 32);
-            refer.KEU = bbs;
-            refer.id = (short) bytes2Integer(bs, ii * 52 + 50, 2);
+        }
+        return ls;
+    }
+
+    private static List<ObjectRefer> parse(byte[][] blks) {
+        List<ObjectRefer> ls = new ArrayList();
+        for (byte[] bs : blks) {
+            ObjectRefer refer = new ObjectRefer(bs);
+            ls.add(refer);
         }
         return ls;
     }
@@ -37,29 +42,28 @@ public class ObjectRefer {
      * @param ls
      * @return
      */
-    public static byte[] merge(List<ObjectRefer> ls) {
+    public static byte[][] mergeList(List<ObjectRefer> ls) {
+        byte[][] blks = new byte[ls.size()][];
+        int index = 0;
+        for (ObjectRefer refer : ls) {
+            blks[index++] = refer.toBytes();
+        }
+        return blks;
+    }
+
+    /**
+     * 合并
+     *
+     * @param ls
+     * @return
+     */
+    public static byte[] mergeBytes(List<ObjectRefer> ls) {
         byte[] bs = new byte[52 * ls.size()];
         int pos = 0;
         for (ObjectRefer refer : ls) {
-            long2bytes(refer.getVBI(), bs, pos);
-            pos = pos + 8;
-            bs[pos++] = refer.getSuperID();
-
-            bs[pos++] = (byte) (refer.getOriginalSize() >>> 40);
-            bs[pos++] = (byte) (refer.getOriginalSize() >>> 32);
-            bs[pos++] = (byte) (refer.getOriginalSize() >>> 24);
-            bs[pos++] = (byte) (refer.getOriginalSize() >>> 16);
-            bs[pos++] = (byte) (refer.getOriginalSize() >>> 8);
-            bs[pos++] = (byte) (refer.getOriginalSize());
-
-            bs[pos++] = (byte) (refer.getRealSize() >>> 16);
-            bs[pos++] = (byte) (refer.getRealSize() >>> 8);
-            bs[pos++] = (byte) (refer.getRealSize());
-
-            System.arraycopy(refer.KEU, 0, bs, pos, 32);
-            pos = pos + 32;
-            bs[pos++] = (byte) (refer.getId() >>> 8);
-            bs[pos++] = (byte) (refer.getId());
+            byte[] blkbs = refer.toBytes();
+            System.arraycopy(blkbs, 0, bs, pos, 52);
+            pos = pos + 52;
         }
         return bs;
     }
@@ -70,6 +74,43 @@ public class ObjectRefer {
     private int realSize;  //实际长度    3字节   
     private byte[] KEU;  //32
     private short id;
+
+    public ObjectRefer() {
+    }
+
+    public ObjectRefer(byte[] bs) {
+        this.VBI = bytes2Integer(bs, 0, 8);
+        this.superID = bs[8];
+        this.originalSize = bytes2Integer(bs, 9, 6);
+        this.realSize = (int) bytes2Integer(bs, 15, 3);
+        byte[] bbs = new byte[32];
+        System.arraycopy(bs, 18, bbs, 0, 32);
+        this.KEU = bbs;
+        this.id = (short) bytes2Integer(bs, 50, 2);
+    }
+
+    public byte[] toBytes() {
+        byte[] bs = new byte[52];
+        int pos = 0;
+        long2bytes(this.getVBI(), bs, pos);
+        pos = pos + 8;
+        bs[pos++] = this.getSuperID();
+        bs[pos++] = (byte) (this.getOriginalSize() >>> 40);
+        bs[pos++] = (byte) (this.getOriginalSize() >>> 32);
+        bs[pos++] = (byte) (this.getOriginalSize() >>> 24);
+        bs[pos++] = (byte) (this.getOriginalSize() >>> 16);
+        bs[pos++] = (byte) (this.getOriginalSize() >>> 8);
+        bs[pos++] = (byte) (this.getOriginalSize());
+
+        bs[pos++] = (byte) (this.getRealSize() >>> 16);
+        bs[pos++] = (byte) (this.getRealSize() >>> 8);
+        bs[pos++] = (byte) (this.getRealSize());
+        System.arraycopy(this.KEU, 0, bs, pos, 32);
+        pos = pos + 32;
+        bs[pos++] = (byte) (this.getId() >>> 8);
+        bs[pos++] = (byte) (this.getId());
+        return bs;
+    }
 
     /**
      * @return the VBI

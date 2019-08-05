@@ -124,6 +124,10 @@ public class YTFile {
                 throw e;
             }
         }
+        try{
+            is.close();
+        }catch(Exception e){
+        }
         writeEnd();
     }
 

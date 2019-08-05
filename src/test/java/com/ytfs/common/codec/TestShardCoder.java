@@ -1,5 +1,6 @@
 package com.ytfs.common.codec;
 
+import java.io.FileOutputStream;
 import java.security.MessageDigest;
 import java.util.List;
 import org.apache.commons.codec.binary.Hex;
@@ -9,7 +10,7 @@ public class TestShardCoder {
     private static byte[] key = KeyStoreCoder.generateRandomKey();
 
     public static void main(String[] args) throws Exception {
-        //middleBlock();
+        middleBlock();
         //smallBlock();
     }
 
@@ -17,23 +18,35 @@ public class TestShardCoder {
         MessageDigest sha256 = MessageDigest.getInstance("SHA-256");
         key = sha256.digest(key);
 
-        Block block = new Block("d:\\20190701170156.png");
+        Block block = new Block("d:\\test.gif");
         block.load();
 
         BlockAESEncryptor aes = new BlockAESEncryptor(block, key);
         aes.encrypt();
         int encryptedBlockSize = aes.getBlockEncrypted().getEncryptedBlockSize();
 
+        FileOutputStream fos = new FileOutputStream("d:/test.dat");
+        fos.write(aes.getBlockEncrypted().getData());
+        fos.close();
+
         ShardRSEncoder encoder = new ShardRSEncoder(aes.getBlockEncrypted());
         encoder.encode();
 
         List<Shard> shards = encoder.getShardList();
+        for (int ii = 0; ii < shards.size(); ii++) {
+            FileOutputStream foss = new FileOutputStream("d:/test" + ii + ".dat");
+            foss.write(shards.get(ii).getData());
+            foss.close();
+        }
 
         deleteDataShard(shards);
         deleteParityShard(shards);
-
         ShardRSDecoder decoder = new ShardRSDecoder(shards, encryptedBlockSize);
         BlockEncrypted b = decoder.decode();
+
+        FileOutputStream fos1 = new FileOutputStream("d:/test.dat.bak");
+        fos1.write(b.getData());
+        fos1.close();
 
         BlockAESDecryptor aesdecoder = new BlockAESDecryptor(b.getData(), key);
         aesdecoder.decrypt();

@@ -2,21 +2,36 @@ package com.ytfs.service.packet;
 
 public class DownloadObjectInitResp {
 
-    private byte[] refers;
-    private long length;
+    private byte[][] refers;
+    private byte[] oldRefers;
+    private long length; 
 
     /**
      * @return the refers
      */
-    public byte[] getRefers() {
+    public byte[][] getRefers() {
         return refers;
     }
 
     /**
      * @param refers the refers to set
      */
-    public void setRefers(byte[] refers) {
+    public void setRefers(byte[][] refers) {
         this.refers = refers;
+    }
+
+    /**
+     * @return the oldRefers
+     */
+    public byte[] getOldRefers() {
+        return oldRefers;
+    }
+
+    /**
+     * @param oldRefers the oldRefers to set
+     */
+    public void setOldRefers(byte[] oldRefers) {
+        this.oldRefers = oldRefers;
     }
 
     /**
@@ -32,5 +47,6 @@ public class DownloadObjectInitResp {
     public void setLength(long length) {
         this.length = length;
     }
-
+    
+    
 }

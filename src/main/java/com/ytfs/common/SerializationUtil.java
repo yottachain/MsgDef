@@ -22,7 +22,7 @@ public class SerializationUtil {
      * @param obj
      * @return byte[]
      */
-    public static byte[] serializeWriteObject(Object obj) {
+    public static byte[] serializeNoID(Object obj) {
         if (obj == null) {
             throw new IllegalArgumentException();
         }
@@ -45,7 +45,7 @@ public class SerializationUtil {
      * @param instance
      */
     @SuppressWarnings("unchecked")
-    public static void deserializeWriteObject(byte[] paramArrayOfByte, Object instance) {
+    public static void deserializeNoID(byte[] paramArrayOfByte, Object instance) {
         if (paramArrayOfByte == null || paramArrayOfByte.length == 0) {
             throw new IllegalArgumentException();
         }

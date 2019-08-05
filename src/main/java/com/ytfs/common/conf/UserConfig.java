@@ -26,6 +26,9 @@ public class UserConfig {
 
     //上传线程数
     public final static int UPLOADSHARDTHREAD = 200;
+    
+    //上传块线程数
+    public final static int UPLOADBLOCKTHREAD = 5;
 
     //下载线程数
     public final static int DOWNLOADSHARDTHREAD = 200;
