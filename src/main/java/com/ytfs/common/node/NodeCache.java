@@ -50,7 +50,7 @@ public class NodeCache {
         Integer id = nodes.getIfPresent(key);
         if (id == null) {
             id = NodeManager.getNodeIDByPubKey(key);
-            superNodes.put(key, id);
+            nodes.put(key, id);
         }
         return id;
     }
