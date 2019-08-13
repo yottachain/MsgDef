@@ -93,7 +93,7 @@ public class SuperNodeList {
      * @param id
      * @return 0-32;
      */
-    public static SuperNode getBlockSuperNode(int id) {
+    public static SuperNode getSuperNode(int id) {
         SuperNode[] nodes = getSuperNodeList();
         return nodes[id];
     }

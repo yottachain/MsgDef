@@ -5,20 +5,20 @@ public class TaskOpResult {
     public static final int RES_OK = 0;
     public static final int RES_ERR = 100;
 
-    private long id;
+    private byte[] id;
     private int RES;
 
     /**
      * @return the id
      */
-    public long getId() {
+    public byte[] getId() {
         return id;
     }
 
     /**
      * @param id the id to set
      */
-    public void setId(long id) {
+    public void setId(byte[] id) {
         this.id = id;
     }
 

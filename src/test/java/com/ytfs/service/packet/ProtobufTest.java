@@ -105,7 +105,7 @@ public class ProtobufTest {
 
         MessageRebuild.TaskDescription task1 = MessageRebuild.TaskDescription.parseFrom(result);
         System.out.println(task1);
-
+/*
         TaskDescription req = new TaskDescription();
         req.setId(5);
         req.setDataHash(new ArrayList());
@@ -116,7 +116,7 @@ public class ProtobufTest {
         req.getParityHash().add("eeee".getBytes("utf-8"));
         req.getParityHash().add("ffff".getBytes("utf-8"));
         req.getParityHash().add("gggg".getBytes("utf-8"));
-
+*/
         P2PLocation loa = new P2PLocation();
         loa.setAddrs(new ArrayList());
         loa.getAddrs().add("1111111");
@@ -127,6 +127,7 @@ public class ProtobufTest {
         loaa.getAddrs().add("22222222");
         loaa.getAddrs().add("public Timestamp readFrom(Input input)");
         loaa.setNodeId("        output.writeFixed64(number, value.getTime(), repeated);");
+        /*
         req.setLocations(new ArrayList());
         req.getLocations().add(loa);
         req.getLocations().add(loaa);
@@ -143,6 +144,6 @@ public class ProtobufTest {
         System.arraycopy(result1, 2, res, 0, res.length);
         MessageRebuild.TaskDescription task = MessageRebuild.TaskDescription.parseFrom(res);
         System.out.println(task);
-
+*/
     }
 }

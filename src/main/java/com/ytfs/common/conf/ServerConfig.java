@@ -22,7 +22,10 @@ public class ServerConfig {
     public final static int PNF = 3;
 
     //上传DNI
-    public final static int SENDDNITHREAD = 10;
+    public final static int SENDDNITHREAD = 50;
+
+    //重建
+    public final static int REBULIDTHREAD = 50;
 
     //**************************可配置参数********************************
     //服务端超级节点编号,本服务节点编号

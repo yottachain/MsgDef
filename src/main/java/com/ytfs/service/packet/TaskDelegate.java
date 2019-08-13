@@ -51,5 +51,4 @@ public class TaskDelegate implements Delegate<P2PLocation> {
     public Class<?> typeClass() {
         return P2PLocation.class;
     }
-
 }

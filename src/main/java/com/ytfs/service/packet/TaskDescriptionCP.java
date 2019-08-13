@@ -8,21 +8,21 @@ import java.util.List;
 
 public class TaskDescriptionCP implements SerializationStrategy {
 
-    private long id;
+    private byte[] id;
     private byte[] dataHash;
     private List<P2PLocation> locations;
 
     /**
      * @return the id
      */
-    public long getId() {
+    public byte[] getId() {
         return id;
     }
 
     /**
      * @param id the id to set
      */
-    public void setId(long id) {
+    public void setId(byte[] id) {
         this.id = id;
     }
 

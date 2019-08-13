@@ -8,52 +8,45 @@ import java.util.List;
 
 public class TaskDescription implements SerializationStrategy {
 
-    private long id;
-    private List<byte[]> dataHash;
-    private List<byte[]> parityHash;
+    private byte[] id;
+    private List<byte[]> hashs;
     private List<P2PLocation> locations;
-    private List<Integer> recoverId;
+    private int parityShardCount;
+    private int recoverId;
+
+    @Override
+    public IdStrategy getIdStrategy() {
+        DefaultIdStrategy idStrategy = ((DefaultIdStrategy) RuntimeEnv.ID_STRATEGY);
+        idStrategy.registerDelegate(new TaskDelegate());
+        return idStrategy;
+    }
 
     /**
      * @return the id
      */
-    public long getId() {
+    public byte[] getId() {
         return id;
     }
 
     /**
      * @param id the id to set
      */
-    public void setId(long id) {
+    public void setId(byte[] id) {
         this.id = id;
     }
 
     /**
-     * @return the dataHash
+     * @return the hashs
      */
-    public List<byte[]> getDataHash() {
-        return dataHash;
+    public List<byte[]> getHashs() {
+        return hashs;
     }
 
     /**
-     * @param dataHash the dataHash to set
+     * @param hashs the hashs to set
      */
-    public void setDataHash(List<byte[]> dataHash) {
-        this.dataHash = dataHash;
-    }
-
-    /**
-     * @return the parityHash
-     */
-    public List<byte[]> getParityHash() {
-        return parityHash;
-    }
-
-    /**
-     * @param parityHash the parityHash to set
-     */
-    public void setParityHash(List<byte[]> parityHash) {
-        this.parityHash = parityHash;
+    public void setHashs(List<byte[]> hashs) {
+        this.hashs = hashs;
     }
 
     /**
@@ -73,21 +66,28 @@ public class TaskDescription implements SerializationStrategy {
     /**
      * @return the recoverId
      */
-    public List<Integer> getRecoverId() {
+    public int getRecoverId() {
         return recoverId;
     }
 
     /**
      * @param recoverId the recoverId to set
      */
-    public void setRecoverId(List<Integer> recoverId) {
+    public void setRecoverId(int recoverId) {
         this.recoverId = recoverId;
     }
 
-    @Override
-    public IdStrategy getIdStrategy() {
-        DefaultIdStrategy idStrategy = ((DefaultIdStrategy) RuntimeEnv.ID_STRATEGY);
-        idStrategy.registerDelegate(new TaskDelegate());
-        return idStrategy;
+    /**
+     * @return the parityShardCount
+     */
+    public int getParityShardCount() {
+        return parityShardCount;
+    }
+
+    /**
+     * @param parityShardCount the parityShardCount to set
+     */
+    public void setParityShardCount(int parityShardCount) {
+        this.parityShardCount = parityShardCount;
     }
 }
