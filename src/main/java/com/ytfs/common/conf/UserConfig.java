@@ -24,15 +24,6 @@ public class UserConfig {
     //小于PL2的数据块，直接记录在元数据库中
     public final static int PL2 = 256;
 
-    //上传线程数
-    public final static int UPLOADSHARDTHREAD = 400;
-    
-    //上传块线程数
-    public final static int UPLOADBLOCKTHREAD = 3;
-
-    //下载线程数
-    public final static int DOWNLOADSHARDTHREAD = 200;
-
     //**************************可配置参数********************************
     //用户钱包账户名
     public static String username;
@@ -47,5 +38,14 @@ public class UserConfig {
 
     //缓存路径
     public static File tmpFilePath;
+
+    //上传线程数
+    public static int UPLOADSHARDTHREAD = 400;
+
+    //上传块线程数
+    public static int UPLOADBLOCKTHREAD = 3;
+
+    //下载线程数
+    public static int DOWNLOADSHARDTHREAD = 200;
 
 }

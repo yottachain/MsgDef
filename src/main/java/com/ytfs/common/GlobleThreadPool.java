@@ -9,7 +9,7 @@ import org.apache.log4j.Logger;
 public class GlobleThreadPool {
 
     private static final Logger log = Logger.getLogger(GlobleThreadPool.class);
-    private static final int MAXIMUN_POOLSIZE = 2000;
+    private static final int MAXIMUN_POOLSIZE = 3000;
     private static final ThreadPoolExecutor POOL;
 
     static {
