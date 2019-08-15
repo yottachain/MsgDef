@@ -19,7 +19,7 @@ import static com.ytfs.common.ServiceErrorCode.COMM_ERROR;
 public class P2PUtils {
 
     private static final Logger LOG = Logger.getLogger(P2PUtils.class);
-    private static final Map<String, String> CONNECTS = new HashMap();
+    private static final Map<String, P2PClient> CONNECTS = new HashMap<>();
 
     /**
      * 初始化P2P工具
@@ -118,61 +118,17 @@ public class P2PUtils {
     }
 
     private static Object request(Object obj, List<String> addr, String key, int type, String log_pre) throws ServiceException {
-        if (!CONNECTS.containsKey(key)) {
+        P2PClient client = CONNECTS.get(key);
+        if (client == null) {
             synchronized (CONNECTS) {
-                if (!CONNECTS.containsKey(key)) {
-                    String addstr = getAddrString(addr);
-                    try {
-                        String[] strs = new String[addr.size()];
-                        strs = addr.toArray(strs);
-                        YottaP2P.connect(key, strs);
-                        CONNECTS.put(key, addstr);
-                    } catch (P2pHostException ex) {
-                        LOG.info(log_pre + "Connect " + addstr + " Err.");
-                        throw new ServiceException(COMM_ERROR, ex.getMessage());
-                    }
+                client = CONNECTS.get(key);
+                if (client == null) {
+                    client = new P2PClient(key);
+                    CONNECTS.put(key, client);
                 }
             }
         }
-        byte[] data = SerializationUtil.serialize(obj);
-        byte[] bs = null;
-        try {                    //访问p2p网络
-            switch (type) {
-                case MSG_2BPU:
-                    bs = YottaP2P.sendToBPUMsg(key, data);
-                    break;
-                case MSG_2BP:
-                    bs = YottaP2P.sendToBPMsg(key, data);
-                    break;
-                default:
-                    bs = YottaP2P.sendToNodeMsg(key, data);
-                    break;
-            }
-        } catch (Throwable e) {
-            String oldaddrString = CONNECTS.get(key);
-            LOG.error(log_pre + "COMM_ERROR:" + (oldaddrString == null ? ("[" + e.getMessage() + "]") : oldaddrString));
-            String newaddrString = getAddrString(addr);
-            synchronized (CONNECTS) {
-                if (CONNECTS.containsKey(key)) {
-                    CONNECTS.remove(key);
-                    try {
-                        YottaP2P.disconnect(key);
-                    } catch (P2pHostException r) {
-                    }
-                }
-            }
-            if (oldaddrString == null || !oldaddrString.equals(newaddrString)) {
-                LOG.info(log_pre + "Retry...");
-                return request(obj, addr, key, type, log_pre);
-            } else {
-                throw new ServiceException(COMM_ERROR, e.getMessage());
-            }
-        }
-        Object res = SerializationUtil.deserialize(bs);
-        if (res instanceof ServiceException) {
-            throw (ServiceException) res;
-        }
-        return res;
+        return client.request(obj, addr, type, log_pre);
     }
 
     public static String getAddrString(List<String> ls) {
