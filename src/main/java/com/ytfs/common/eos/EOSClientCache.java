@@ -3,6 +3,8 @@ package com.ytfs.common.eos;
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
 import io.jafka.jeos.EosApi;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import org.bson.types.ObjectId;
 
@@ -17,12 +19,16 @@ public class EOSClientCache {
             .build();
 
     public static long getBalance(String username) throws Throwable {
-        Long l = userBanlance.getIfPresent(username);
-        if (l == null) {
-            l = EOSClient.getBalance(username);
-            userBanlance.put(username, l);
+        try {
+            return userBanlance.get(username, new Callable() {
+                @Override
+                public Object call() throws Exception {
+                    return EOSClient.getBalance(username);
+                }
+            });
+        } catch (ExecutionException e) {
+            throw e.getCause();
         }
-        return l;
     }
 
     private static final Cache<ObjectId, EosApi> clients = CacheBuilder.newBuilder()

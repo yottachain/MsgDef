@@ -36,7 +36,7 @@ public class EOSClient {
         return balance > needcost;
     }
 
-    public static long getBalance(String username) throws Throwable {
+    public static long getBalance(String username) throws Exception {
         EosApi eosApi = EosApiFactory.create(ServerConfig.eosURI);
         SignArg arg = eosApi.getSignArg((int) EOSClientCache.EXPIRED_TIME);
         PushTransactionRequest req = makeGetBalanceRequest(arg, username);

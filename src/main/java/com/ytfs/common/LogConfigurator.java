@@ -34,8 +34,8 @@ public class LogConfigurator {
                 logproperties.replace("log4j.rootCategory", lv + ",stdout");
                 logproperties.replace("log4j.rootLogger", lv + ",stdout");
             } else {
-                logproperties.replace("log4j.rootCategory", lv + ",logDailyFile,stdout");
-                logproperties.replace("log4j.rootLogger", lv + ",logDailyFile,stdout");
+                logproperties.replace("log4j.rootCategory", lv + ",logDailyFile");
+                logproperties.replace("log4j.rootLogger", lv + ",logDailyFile");
                 logproperties.replace("log4j.appender.logDailyFile.Threshold", lv);
                 logproperties.put("log4j.appender.logDailyFile.File", path.getAbsolutePath());
             }
