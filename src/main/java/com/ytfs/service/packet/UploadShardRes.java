@@ -1,5 +1,7 @@
 package com.ytfs.service.packet;
 
+import com.ytfs.common.conf.ServerConfig;
+
 public class UploadShardRes {
 
     public static final int RES_OK = 0;
@@ -8,6 +10,14 @@ public class UploadShardRes {
     public static final int RES_NO_SPACE = 101;
     public static final int RES_VNF_EXISTS = 102;
     public static final int RES_REP_ERR = 104;
+    public static final UploadShardRes NeedExcessNodeSign;
+
+    static {
+        NeedExcessNodeSign = new UploadShardRes();
+        NeedExcessNodeSign.SHARDID = ServerConfig.Excess_Shard_Index;
+        NeedExcessNodeSign.RES = RES_OK;
+        NeedExcessNodeSign.NODEID = 0;
+    }
 
     private int SHARDID; //分片索引
     private int NODEID;

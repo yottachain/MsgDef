@@ -11,7 +11,7 @@ import org.bson.types.ObjectId;
 public class EOSClientCache {
 
     private static final long MAX_SIZE = 100000;
-    public static final long EXPIRED_TIME = 120;
+    public static final long EXPIRED_TIME = 180;
 
     private static final Cache<String, Long> userBanlance = CacheBuilder.newBuilder()
             .expireAfterWrite(30, TimeUnit.SECONDS)

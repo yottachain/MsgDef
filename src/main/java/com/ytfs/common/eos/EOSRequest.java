@@ -2,6 +2,8 @@ package com.ytfs.common.eos;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.ytfs.common.Function;
+import static com.ytfs.common.ServiceErrorCode.INVALID_SESSION;
+import com.ytfs.common.ServiceException;
 import com.ytfs.common.conf.ServerConfig;
 import io.jafka.jeos.EosApi;
 import io.jafka.jeos.EosApiFactory;
@@ -70,8 +72,11 @@ public class EOSRequest {
         return encodeSignArg(arg);
     }
 
-    public static PushedTransaction request(byte[] reqdata, ObjectId id) throws IOException {
+    public static PushedTransaction request(byte[] reqdata, ObjectId id) throws IOException, ServiceException {
         EosApi eosApi = EOSClientCache.getClient(id);
+        if (eosApi == null) {
+            throw new ServiceException(INVALID_SESSION);
+        }
         PushTransactionRequest req = decodeRequest(reqdata);
         return eosApi.pushTransaction(req);
     }
@@ -108,7 +113,7 @@ public class EOSRequest {
         return encodeRequest(req);
     }
 
-    public static byte[] makeSubBalanceRequest(byte[] signarg, String from, String privateKey, String contractAccount, long cost,int id) throws JsonProcessingException, IOException {
+    public static byte[] makeSubBalanceRequest(byte[] signarg, String from, String privateKey, String contractAccount, long cost, int id) throws JsonProcessingException, IOException {
         SignArg arg = decodeSignArg(signarg);
         Raw raw = new Raw();
         raw.packName(from);
