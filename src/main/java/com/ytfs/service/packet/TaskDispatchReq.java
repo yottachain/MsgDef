@@ -1,9 +1,10 @@
 package com.ytfs.service.packet;
 
-public class TaskQueryReq {
+public class TaskDispatchReq {
 
     private byte[] DNI;
     private int nodeId;
+    private int execNodeId;
 
     /**
      * @return the DNI
@@ -31,6 +32,20 @@ public class TaskQueryReq {
      */
     public void setNodeId(int nodeId) {
         this.nodeId = nodeId;
+    }
+
+    /**
+     * @return the execNodeId
+     */
+    public int getExecNodeId() {
+        return execNodeId;
+    }
+
+    /**
+     * @param execNodeId the execNodeId to set
+     */
+    public void setExecNodeId(int execNodeId) {
+        this.execNodeId = execNodeId;
     }
 
 }

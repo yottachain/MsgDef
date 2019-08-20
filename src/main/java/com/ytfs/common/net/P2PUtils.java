@@ -1,6 +1,5 @@
 package com.ytfs.common.net;
 
-import com.ytfs.common.SerializationUtil;
 import static com.ytfs.common.ServiceErrorCode.SERVER_ERROR;
 import com.ytfs.common.ServiceException;
 import io.yottachain.nodemgmt.core.vo.Node;
@@ -69,7 +68,9 @@ public class P2PUtils {
                 }
                 err = r;
                 try {
-                    Thread.sleep(10000);
+                    if (ii > 0) {
+                        Thread.sleep(10000);
+                    }
                 } catch (InterruptedException ex) {
                 }
             }
@@ -98,7 +99,9 @@ public class P2PUtils {
                 }
                 err = r;
                 try {
-                    Thread.sleep(10000);
+                    if (ii > 0) {
+                        Thread.sleep(10000);
+                    }
                 } catch (InterruptedException ex) {
                 }
             }

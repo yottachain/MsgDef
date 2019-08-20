@@ -25,7 +25,7 @@ public class ServerConfig {
     public final static int SENDDNITHREAD = 500;
 
     //重建
-    public final static int REBULIDTHREAD = 50;
+    public final static int REBULIDTHREAD = 100;
     
     public static final int Excess_Shard_Index=256;
 
