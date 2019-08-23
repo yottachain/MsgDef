@@ -17,6 +17,7 @@ public class P2PClient {
     private String addrString;
     private final String key;
     private boolean isConnected = false;
+  //  private final AtomicLong activeTime = new AtomicLong(System.currentTimeMillis());
 
     public P2PClient(String key) {
         this.key = key;
@@ -32,6 +33,7 @@ public class P2PClient {
                         strs = addr.toArray(strs);
                         YottaP2P.connect(key, strs);
                         isConnected = true;
+                     //   activeTime.set(System.currentTimeMillis());
                         addrString = addstr;
                         LOG.info(log_pre + "Connect " + addstr + " OK.");
                     } catch (P2pHostException ex) {
@@ -55,6 +57,7 @@ public class P2PClient {
                     bs = YottaP2P.sendToNodeMsg(key, data);
                     break;
             }
+           // activeTime.set(System.currentTimeMillis());
         } catch (Throwable e) {
             LOG.error(log_pre + "COMM_ERROR:" + addrString);
             String newaddrString = getAddrString(addr);

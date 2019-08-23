@@ -30,10 +30,10 @@ public class P2PUtils {
     public static void start(int port, String privateKey) throws Exception {
         YottaP2P.start(port, privateKey);
         LOG.info("P2P initialization completed, port " + port);
-        LOG.info("Super NodeID:" + YottaP2P.id());
+        LOG.info("NodeID:" + YottaP2P.id());
         String[] addrs = YottaP2P.addrs();
         for (int ii = 0; ii < addrs.length; ii++) {
-            LOG.info("Super Node Addrs " + ii + ":" + addrs[ii]);
+            LOG.info("Node Addrs " + ii + ":" + addrs[ii]);
         }
     }
 

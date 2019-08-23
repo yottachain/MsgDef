@@ -9,6 +9,7 @@ public class UploadShardReq {
     private byte[] DAT;      //分片数据
     private byte[] VHF;      //分片hash
     private byte[] USERSIGN; //用户对VHF和SHARDID,NODEID,VBI的签名
+    private String allocId;
 
     /**
      * @return the BPDID
@@ -107,4 +108,19 @@ public class UploadShardReq {
     public void setSHARDID(int SHARDID) {
         this.SHARDID = SHARDID;
     }
+
+    /**
+     * @return the allocId
+     */
+    public String getAllocId() {
+        return allocId;
+    }
+
+    /**
+     * @param allocId the allocId to set
+     */
+    public void setAllocId(String allocId) {
+        this.allocId = allocId;
+    }
+
 }

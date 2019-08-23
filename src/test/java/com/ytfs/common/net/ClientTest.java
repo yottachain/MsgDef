@@ -6,15 +6,34 @@ import com.ytfs.service.packet.UploadShardReq;
 import com.ytfs.service.packet.UploadShardResp;
 import io.yottachain.p2phost.YottaP2P;
 import io.yottachain.p2phost.core.exception.P2pHostException;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.apache.commons.codec.binary.Hex;
 
 public class ClientTest {
 
-    public static void main(String[] args) throws P2pHostException {
+    public static void main(String[] args) throws P2pHostException, IOException {
         YottaP2P.start(5555, "5KQKydL7TuRwjzaFSK4ezH9RUXWuYHW1yYDp5CmQfsfTuu9MBLZ");
-        String[] serverAddrs = {"/p2p-circuit",
-            "/ip4/152.136.11.202/tcp/9999"};
-        YottaP2P.connect("16Uiu2HAm4ejSpUiVYEYc2pCk7RUa3ScdswM6cXGwzTZziSKcAYwi", serverAddrs);
+        String[] serverAddrs = {"/ip4/127.0.0.1/tcp/8888"};
+        YottaP2P.connect("16Uiu2HAm44FX3YuzGXJgHMqnyMM5zCzeT6PUoBNZkz66LutfRREM", serverAddrs);
+        YottaP2P.disconnect("16Uiu2HAm44FX3YuzGXJgHMqnyMM5zCzeT6PUoBNZkz66LutfRREM");
+                YottaP2P.connect("16Uiu2HAm44FX3YuzGXJgHMqnyMM5zCzeT6PUoBNZkz66LutfRREM", serverAddrs);
+        YottaP2P.disconnect("16Uiu2HAm44FX3YuzGXJgHMqnyMM5zCzeT6PUoBNZkz66LutfRREM");
+                YottaP2P.connect("16Uiu2HAm44FX3YuzGXJgHMqnyMM5zCzeT6PUoBNZkz66LutfRREM", serverAddrs);
+        YottaP2P.disconnect("16Uiu2HAm44FX3YuzGXJgHMqnyMM5zCzeT6PUoBNZkz66LutfRREM");
+                YottaP2P.connect("16Uiu2HAm44FX3YuzGXJgHMqnyMM5zCzeT6PUoBNZkz66LutfRREM", serverAddrs);
+        YottaP2P.disconnect("16Uiu2HAm44FX3YuzGXJgHMqnyMM5zCzeT6PUoBNZkz66LutfRREM");
+       // for(int ii=0;ii<5;ii++){
+        //    Thread t=new Thread(new Test());
+        //    t.start();
+      //  }
+
+        System.in.read();
+       // YottaP2P.disconnect("16Uiu2HAm44FX3YuzGXJgHMqnyMM5zCzeT6PUoBNZkz66LutfRREM");
+    }
+
+    private static void send() throws P2pHostException {
         UploadShardReq req = new UploadShardReq();
         req.setSHARDID(5);
         req.setBPDID(1);
@@ -36,7 +55,26 @@ public class ClientTest {
             ServiceException se = (ServiceException) obj;
             System.out.println(se.getErrorCode());
         }
+    }
 
-        YottaP2P.disconnect("16Uiu2HAm44FX3YuzGXJgHMqnyMM5zCzeT6PUoBNZkz66LutfRREM");
+    private static class Test implements Runnable {
+
+        @Override
+        public void run() {
+            for(int ii=0;ii<10000;ii++){
+                try{
+                    send();
+                }catch(Exception r){
+                    r.printStackTrace();
+                    try {
+                        Thread.sleep(10000);
+                    } catch (InterruptedException ex) {
+                        break;
+                    }
+                }
+            }
+
+        }
+
     }
 }

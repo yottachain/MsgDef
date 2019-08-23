@@ -2,6 +2,17 @@ syntax = "proto3";
 
 option java_package = "com.ytfs.service.packet"; 
 
+//msgid=0xc487
+message NodeCapacityRequest{ 
+}
+
+//msgid=0xe684
+message NodeCapacityResponse { 
+    bool writable=1;
+    string allocId=2;
+}
+
+
 //msgid=0xCB05
 message UploadShardRequest  { 
    int32 SHARDID=1;
@@ -11,6 +22,7 @@ message UploadShardRequest  {
    bytes DAT=5; 
    bytes VHF=6; 
    bytes USERSIGN=7; 
+   string allocId=8;
 }
 
 //msgid=0x870B

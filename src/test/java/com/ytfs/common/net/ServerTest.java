@@ -10,6 +10,11 @@ import io.yottachain.p2phost.interfaces.BPNodeCallback;
 import io.yottachain.p2phost.interfaces.NodeCallback;
 import io.yottachain.p2phost.interfaces.UserCallback;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ServerTest {
 
@@ -38,6 +43,13 @@ public class ServerTest {
                 UploadShardResp resp = new UploadShardResp();
                 resp.setRES(101);
                 resp.setVBI(0);
+               // try { 
+                   // URL url=new URL("www.sohu.com");
+                  //  URLConnection con= url.openConnection();
+                     
+              //  } catch (Exception ex) {
+                     
+               // }
                 return SerializationUtil.serialize(resp);
             } else {
                 ServiceException se = new ServiceException(1000);

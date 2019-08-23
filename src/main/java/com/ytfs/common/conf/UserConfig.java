@@ -47,5 +47,5 @@ public class UserConfig {
 
     //下载线程数
     public static int DOWNLOADSHARDTHREAD = 200;
-
+    
 }
