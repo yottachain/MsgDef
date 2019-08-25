@@ -12,7 +12,7 @@ public class NodeManager {
 
     private static final Logger LOG = Logger.getLogger(NodeManager.class);
 
-    public synchronized static void start(List<ServerAddress> addrs, String eos, String bpuser, String bpkey, String contractAccount, String contractAccountD, int id) throws NodeMgmtException {
+    public synchronized static void start(List<ServerAddress> addrs, String auth, String eos, String bpuser, String bpkey, String contractAccount, String contractAccountD, int id) throws NodeMgmtException {
         try {
             LOG.info("NodeManager init...");
             ServerAddress serverAddress = addrs.get(0);
@@ -59,8 +59,13 @@ public class NodeManager {
      * @return
      * @throws io.yottachain.nodemgmt.core.exception.NodeMgmtException
      */
-    public static Node[] getNode(int shardCount,int[] errids) throws NodeMgmtException {
-        List<Node> ls = YottaNodeMgmt.allocNodes(shardCount,errids);
+    public static Node[] getNode(int shardCount, int[] errids) throws NodeMgmtException {
+        List<Node> ls;
+        try {
+            ls = YottaNodeMgmt.allocNodes(shardCount, errids);
+        } catch (Exception r) {
+            ls = YottaNodeMgmt.allocNodes(shardCount, null);
+        }
         Node[] sn = new Node[ls.size()];
         return ls.toArray(sn);
     }

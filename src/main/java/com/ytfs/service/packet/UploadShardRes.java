@@ -10,6 +10,7 @@ public class UploadShardRes {
     public static final int RES_NO_SPACE = 101;
     public static final int RES_VNF_EXISTS = 102;
     public static final int RES_REP_ERR = 104;
+    public static final int RES_CACHE_FILL = 105;
     public static final UploadShardRes NeedExcessNodeSign;
 
     static {
