@@ -58,14 +58,14 @@ public class P2PClient {
         } catch (Throwable e) {
             LOG.error(log_pre + "COMM_ERROR:" + addrString);
             String newaddrString = getAddrString(addr);
-            synchronized (this) {
-                try {
-                    YottaP2P.disconnect(key);
-                } catch (P2pHostException r) {
-                }
-                isConnected = false;
-            }
             if (!newaddrString.equals(addrString)) {
+                synchronized (this) {
+                    try {
+                        YottaP2P.disconnect(key);
+                    } catch (P2pHostException r) {
+                    }
+                    isConnected = false;
+                }
                 LOG.info(log_pre + "Retry...");
                 return request(obj, addr, type, log_pre);
             } else {

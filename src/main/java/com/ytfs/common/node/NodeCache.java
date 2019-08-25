@@ -13,12 +13,10 @@ public class NodeCache {
     private static final long EXPIRED_TIME = 5;
 
     private static final Cache<String, Integer> superNodes = CacheBuilder.newBuilder()
-            .expireAfterWrite(SUP_EXPIRED_TIME, TimeUnit.MINUTES)
             .expireAfterAccess(SUP_EXPIRED_TIME, TimeUnit.MINUTES)
             .maximumSize(MAX_SIZE)
             .build();
     private static final Cache<String, Integer> nodes = CacheBuilder.newBuilder()
-            .expireAfterWrite(EXPIRED_TIME, TimeUnit.MINUTES)
             .expireAfterAccess(EXPIRED_TIME, TimeUnit.MINUTES)
             .maximumSize(MAX_SIZE)
             .build();
