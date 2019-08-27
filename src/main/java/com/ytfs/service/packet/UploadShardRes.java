@@ -1,7 +1,5 @@
 package com.ytfs.service.packet;
 
-import com.ytfs.common.conf.ServerConfig;
-
 public class UploadShardRes {
 
     public static final int RES_OK = 0;
@@ -9,20 +7,12 @@ public class UploadShardRes {
     public static final int RES_BAD_REQUEST = 100;
     public static final int RES_NO_SPACE = 101;
     public static final int RES_VNF_EXISTS = 102;
-    public static final int RES_REP_ERR = 104;
     public static final int RES_CACHE_FILL = 105;
-    public static final UploadShardRes NeedExcessNodeSign;
-
-    static {
-        NeedExcessNodeSign = new UploadShardRes();
-        NeedExcessNodeSign.SHARDID = ServerConfig.Excess_Shard_Index;
-        NeedExcessNodeSign.RES = RES_OK;
-        NeedExcessNodeSign.NODEID = 0;
-    }
 
     private int SHARDID; //分片索引
     private int NODEID;
-    private int RES;     // 0成功  100 bad request  101  空间不足  
+    private byte[] VHF;
+    private String DNSIGN;
 
     /**
      * @return the NODEID
@@ -53,17 +43,31 @@ public class UploadShardRes {
     }
 
     /**
-     * @return the RES
+     * @return the VHF
      */
-    public int getRES() {
-        return RES;
+    public byte[] getVHF() {
+        return VHF;
     }
 
     /**
-     * @param RES the RES to set
+     * @param VHF the VHF to set
      */
-    public void setRES(int RES) {
-        this.RES = RES;
+    public void setVHF(byte[] VHF) {
+        this.VHF = VHF;
+    }
+
+    /**
+     * @return the DNSIGN
+     */
+    public String getDNSIGN() {
+        return DNSIGN;
+    }
+
+    /**
+     * @param DNSIGN the DNSIGN to set
+     */
+    public void setDNSIGN(String DNSIGN) {
+        this.DNSIGN = DNSIGN;
     }
 
 }

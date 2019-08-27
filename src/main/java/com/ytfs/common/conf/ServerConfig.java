@@ -26,8 +26,6 @@ public class ServerConfig {
 
     //重建
     public final static int REBULIDTHREAD = 100;
-    
-    public static final int Excess_Shard_Index=256;
 
     //**************************可配置参数********************************
     //服务端超级节点编号,本服务节点编号

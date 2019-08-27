@@ -1,5 +1,8 @@
 package com.ytfs.service.packet;
 
+import java.util.List;
+import org.bson.types.ObjectId;
+
 public class UploadBlockEndReq {
 
     private short id;
@@ -10,8 +13,11 @@ public class UploadBlockEndReq {
     private long originalSize;  //编码前长度  6字节
     private int realSize;
     private long VBI;
+    private ObjectId VNU; //upload id
     private boolean rsShard;
-
+    private List<UploadShardRes> okList;
+       
+    
     /**
      * @return the id
      */
@@ -136,5 +142,33 @@ public class UploadBlockEndReq {
      */
     public void setRsShard(boolean rsShard) {
         this.rsShard = rsShard;
+    }
+
+    /**
+     * @return the okList
+     */
+    public List<UploadShardRes> getOkList() {
+        return okList;
+    }
+
+    /**
+     * @param okList the okList to set
+     */
+    public void setOkList(List<UploadShardRes> okList) {
+        this.okList = okList;
+    }
+
+    /**
+     * @return the VNU
+     */
+    public ObjectId getVNU() {
+        return VNU;
+    }
+
+    /**
+     * @param VNU the VNU to set
+     */
+    public void setVNU(ObjectId VNU) {
+        this.VNU = VNU;
     }
 }

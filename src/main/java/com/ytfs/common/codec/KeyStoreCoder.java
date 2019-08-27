@@ -1,7 +1,5 @@
 package com.ytfs.common.codec;
 
-import static com.ytfs.common.conf.UserConfig.KUSp;
-import io.yottachain.p2phost.utils.Base58;
 import io.yottachain.ytcrypto.YTCrypto;
 import java.security.SecureRandom;
 import java.util.Arrays;
@@ -100,27 +98,4 @@ public class KeyStoreCoder {
             throw new IllegalArgumentException(r.getMessage());
         }
     }
-
-    static String prefix = "SIG_K1_";
-
-    public static byte[] ecdsaSign(byte[] data, String prikey) {
-        try {
-            String sign = YTCrypto.sign(prikey, data);
-            sign = sign.substring(7);
-            return Base58.decode(sign);
-        } catch (Exception r) {
-            throw new IllegalArgumentException(r.getMessage());
-        }
-    }
-
-    public static boolean ecdsaVerify(byte[] data, byte[] sign, String pubkey) {
-        try {
-            String signstr = Base58.encode(sign);
-            signstr = prefix + signstr;
-            return YTCrypto.verify(pubkey, data, signstr);
-        } catch (Exception r) {
-            throw new IllegalArgumentException(r.getMessage());
-        }
-    }
-
 }

@@ -3,6 +3,7 @@ package com.ytfs.service.packet;
 public class UploadShard2CResp {
 
     private int RES;  //0成功  100 bad request  101  空间不足 
+    private String DNSIGN;
 
     /**
      * @return the RES
@@ -18,4 +19,17 @@ public class UploadShard2CResp {
         this.RES = RES;
     }
 
+    /**
+     * @return the DNSIGN
+     */
+    public String getDNSIGN() {
+        return DNSIGN;
+    }
+
+    /**
+     * @param DNSIGN the DNSIGN to set
+     */
+    public void setDNSIGN(String DNSIGN) {
+        this.DNSIGN = DNSIGN;
+    }
 }

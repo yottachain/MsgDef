@@ -3,6 +3,7 @@ package com.ytfs.service.packet;
 public class UploadBlockInitResp {
 
     private ShardNode[] nodes;
+    private ShardNode[] excessNodes;
     private long VBI = 0;
 
     /**
@@ -31,5 +32,19 @@ public class UploadBlockInitResp {
      */
     public void setNodes(ShardNode[] nodes) {
         this.nodes = nodes;
+    }
+
+    /**
+     * @return the excessNodes
+     */
+    public ShardNode[] getExcessNodes() {
+        return excessNodes;
+    }
+
+    /**
+     * @param excessNodes the excessNodes to set
+     */
+    public void setExcessNodes(ShardNode[] excessNodes) {
+        this.excessNodes = excessNodes;
     }
 }

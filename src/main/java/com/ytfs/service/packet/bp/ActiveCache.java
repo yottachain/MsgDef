@@ -1,21 +1,23 @@
 package com.ytfs.service.packet.bp;
 
+import org.bson.types.ObjectId;
+
 public class ActiveCache {
 
-    private long VBI;
+    private ObjectId VNU; //upload id
 
     /**
-     * @return the VBI
+     * @return the VNU
      */
-    public long getVBI() {
-        return VBI;
+    public ObjectId getVNU() {
+        return VNU;
     }
 
     /**
-     * @param VBI the VBI to set
+     * @param VNU the VNU to set
      */
-    public void setVBI(long VBI) {
-        this.VBI = VBI;
+    public void setVNU(ObjectId VNU) {
+        this.VNU = VNU;
     }
 
 }

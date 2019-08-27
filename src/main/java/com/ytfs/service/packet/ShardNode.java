@@ -5,8 +5,6 @@ import java.util.Arrays;
 
 public class ShardNode {
 
-    //分片索引
-    private int shardid;
     //节点ID
     private int nodeId;
     //地址列表
@@ -24,25 +22,6 @@ public class ShardNode {
         String[] addrs = new String[node.getAddrs().size()];
         this.addr = node.getAddrs().toArray(addrs);
         this.key = node.getNodeid();
-    }
-
-    public ShardNode(int id, Node node) {
-        this(node);
-        this.shardid = id;
-    }
-
-    /**
-     * @return the shardid
-     */
-    public int getShardid() {
-        return shardid;
-    }
-
-    /**
-     * @param shardid the shardid to set
-     */
-    public void setShardid(int shardid) {
-        this.shardid = shardid;
     }
 
     /**
