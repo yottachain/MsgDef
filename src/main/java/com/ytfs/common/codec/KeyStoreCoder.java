@@ -1,6 +1,5 @@
 package com.ytfs.common.codec;
 
-import io.yottachain.ytcrypto.YTCrypto;
 import java.security.SecureRandom;
 import java.util.Arrays;
 import javax.crypto.Cipher;
