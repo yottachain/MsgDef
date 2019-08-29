@@ -56,7 +56,7 @@ public class P2PClient {
                     break;
             }
         } catch (Throwable e) {
-            LOG.error(log_pre + "COMM_ERROR:" + addrString);
+            LOG.error(log_pre + "COMM_ERROR:" + addrString + e.getMessage());
             String newaddrString = getAddrString(addr);
             synchronized (this) {
                 try {

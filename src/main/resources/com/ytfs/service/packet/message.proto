@@ -4,6 +4,8 @@ option java_package = "com.ytfs.service.packet";
 
 //msgid=0xc487
 message NodeCapacityRequest{ 
+    int64 startTime=1;
+    int32 retryTimes=2;
 }
 
 //msgid=0xe684
