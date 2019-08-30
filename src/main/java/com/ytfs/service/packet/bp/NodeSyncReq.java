@@ -1,23 +1,23 @@
 package com.ytfs.service.packet.bp;
 
 import io.yottachain.nodemgmt.core.vo.Node;
+import java.util.List;
 
 public class NodeSyncReq {
 
-
-    private Node node;
+    private List<Node> node;
 
     /**
      * @return the node
      */
-    public Node getNode() {
+    public List<Node> getNode() {
         return node;
     }
 
     /**
      * @param node the node to set
      */
-    public void setNode(Node node) {
+    public void setNode(List<Node> node) {
         this.node = node;
     }
 

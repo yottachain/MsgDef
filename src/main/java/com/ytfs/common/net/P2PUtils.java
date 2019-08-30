@@ -69,7 +69,7 @@ public class P2PUtils {
                 err = r;
                 try {
                     if (ii > 0) {
-                        Thread.sleep(10000);
+                        Thread.sleep(5000);
                     }
                 } catch (InterruptedException ex) {
                 }
@@ -100,7 +100,7 @@ public class P2PUtils {
                 err = r;
                 try {
                     if (ii > 0) {
-                        Thread.sleep(10000);
+                        Thread.sleep(5000);
                     }
                 } catch (InterruptedException ex) {
                 }
