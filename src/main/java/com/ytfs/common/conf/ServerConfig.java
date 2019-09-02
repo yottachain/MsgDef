@@ -22,7 +22,7 @@ public class ServerConfig {
     public final static int PNF = 3;
 
     //上传DNI
-    public final static int SENDDNI_QUEUE = 500;
+    public final static int SENDDNI_QUEUE = 5000;
 
     //重建
     public final static int REBULIDTHREAD = 100;
