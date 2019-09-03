@@ -86,27 +86,7 @@ public class P2PUtils {
         String log_pre = log_prefix == null
                 ? ("[" + obj.getClass().getSimpleName() + "][" + node.getId() + "]")
                 : ("[" + obj.getClass().getSimpleName() + "][" + node.getId() + "][" + log_prefix + "]");
-        ServiceException err = null;
-        for (int ii = 0; ii < 3; ii++) {
-            try {
-                if (ii > 0) {
-                    LOG.info(log_pre + "Retry...");
-                }
-                return request(obj, node.getAddrs(), node.getNodeid(), MSG_2BP, log_pre);
-            } catch (ServiceException r) {
-                if (!(r.getErrorCode() == COMM_ERROR || r.getErrorCode() == SERVER_ERROR)) {
-                    throw r;
-                }
-                err = r;
-                try {
-                    if (ii > 0) {
-                        Thread.sleep(5000);
-                    }
-                } catch (InterruptedException ex) {
-                }
-            }
-        }
-        throw err;
+        return request(obj, node.getAddrs(), node.getNodeid(), MSG_2BP, log_pre);
     }
 
     public static Object requestNode(Object obj, Node node) throws ServiceException {
