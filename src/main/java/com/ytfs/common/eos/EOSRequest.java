@@ -28,13 +28,13 @@ public class EOSRequest {
 
     private static final AtomicInteger args = new AtomicInteger(1);
 
-    private static int getRandomInteger() {
+    private static long getRandomInteger(SignArg arg) {
+        long nanos = (long)arg.getExpiredSecond() * 1000L * 1000L * 1000L;
         int ii = args.incrementAndGet();
-        ii = ii % 1000;
         if (ii < 0) {
-            return Math.abs(ii);
+            return Math.abs(ii) + nanos;
         } else {
-            return ii;
+            return ii + nanos;
         }
     }
 
@@ -59,14 +59,16 @@ public class EOSRequest {
     }
 
     public static byte[] createEosClient(ObjectId id) throws JsonProcessingException {
-        EosApi eosApi = EosApiFactory.create(ServerConfig.eosURI);
+        BpList.EOSURI uri = BpList.getEOSURI();
+        EosApi eosApi = EosApiFactory.create(uri.url);
         SignArg arg = eosApi.getSignArg((int) EOSClientCache.EXPIRED_TIME);
         EOSClientCache.putClient(id, eosApi);
         return encodeSignArg(arg);
     }
 
     public static byte[] createEosClient(String pubkey) throws JsonProcessingException {
-        EosApi eosApi = EosApiFactory.create(ServerConfig.eosURI);
+        BpList.EOSURI uri = BpList.getEOSURI();
+        EosApi eosApi = EosApiFactory.create(uri.url);
         SignArg arg = eosApi.getSignArg((int) EOSClientCache.EXPIRED_TIME);
         EOSClientCache.putClient(pubkey, eosApi);
         return encodeSignArg(arg);
@@ -99,7 +101,7 @@ public class EOSRequest {
                 new TransactionAction(contractAccount, "getbalance", authorizations, transferData)
         );
         PackedTransaction packedTransaction = new PackedTransaction();
-        packedTransaction.setExpiration(arg.getHeadBlockTime().plusSeconds(getRandomInteger() + arg.getExpiredSecond()));
+        packedTransaction.setExpiration(arg.getHeadBlockTime().plusNanos(getRandomInteger(arg)));
         packedTransaction.setRefBlockNum(arg.getLastIrreversibleBlockNum());
         packedTransaction.setRefBlockPrefix(arg.getRefBlockPrefix());
         packedTransaction.setMaxNetUsageWords(0);
@@ -125,7 +127,7 @@ public class EOSRequest {
                 new TransactionAction(contractAccount, "subbalance", authorizations, transferData)
         );
         PackedTransaction packedTransaction = new PackedTransaction();
-        packedTransaction.setExpiration(arg.getHeadBlockTime().plusSeconds(getRandomInteger() + arg.getExpiredSecond()));
+        packedTransaction.setExpiration(arg.getHeadBlockTime().plusNanos(getRandomInteger(arg)));
         packedTransaction.setRefBlockNum(arg.getLastIrreversibleBlockNum());
         packedTransaction.setRefBlockPrefix(arg.getRefBlockPrefix());
         packedTransaction.setMaxNetUsageWords(0);
@@ -157,7 +159,7 @@ public class EOSRequest {
                 new TransactionAction(ServerConfig.contractAccount, "getbalance", authorizations, transferData)
         );
         PackedTransaction packedTransaction = new PackedTransaction();
-        packedTransaction.setExpiration(arg.getHeadBlockTime().plusSeconds(getRandomInteger() + arg.getExpiredSecond()));
+        packedTransaction.setExpiration(arg.getHeadBlockTime().plusNanos(getRandomInteger(arg)));
         packedTransaction.setRefBlockNum(arg.getLastIrreversibleBlockNum());
         packedTransaction.setRefBlockPrefix(arg.getRefBlockPrefix());
         packedTransaction.setMaxNetUsageWords(0);
@@ -183,7 +185,7 @@ public class EOSRequest {
                 new TransactionAction(ServerConfig.contractAccount, "addhspace", authorizations, transferData)
         );
         PackedTransaction packedTransaction = new PackedTransaction();
-        packedTransaction.setExpiration(arg.getHeadBlockTime().plusSeconds(getRandomInteger() + arg.getExpiredSecond()));
+        packedTransaction.setExpiration(arg.getHeadBlockTime().plusNanos(getRandomInteger(arg)));
         packedTransaction.setRefBlockNum(arg.getLastIrreversibleBlockNum());
         packedTransaction.setRefBlockPrefix(arg.getRefBlockPrefix());
         packedTransaction.setMaxNetUsageWords(0);
@@ -209,7 +211,7 @@ public class EOSRequest {
                 new TransactionAction(ServerConfig.contractAccount, "sethfee", authorizations, transferData)
         );
         PackedTransaction packedTransaction = new PackedTransaction();
-        packedTransaction.setExpiration(arg.getHeadBlockTime().plusSeconds(getRandomInteger() + arg.getExpiredSecond()));
+        packedTransaction.setExpiration(arg.getHeadBlockTime().plusNanos(getRandomInteger(arg)));
         packedTransaction.setRefBlockNum(arg.getLastIrreversibleBlockNum());
         packedTransaction.setRefBlockPrefix(arg.getRefBlockPrefix());
         packedTransaction.setMaxNetUsageWords(0);

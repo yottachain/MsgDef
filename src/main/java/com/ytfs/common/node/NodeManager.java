@@ -41,9 +41,9 @@ public class NodeManager {
                 throw new Exception("GetSuperNode ERR.");
             }
             SuperNode[] sn = new SuperNode[ls.size()];
-            for (SuperNode n : ls) {
+            ls.stream().forEach((n) -> {
                 sn[n.getId()] = n;
-            }
+            });
             return sn;
         } catch (Throwable t) {
             LOG.info("", t);

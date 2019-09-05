@@ -3,6 +3,7 @@ package com.ytfs.common.eos;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ytfs.common.conf.ServerConfig;
 import com.ytfs.common.conf.UserConfig;
+import com.ytfs.common.eos.BpList.EOSURI;
 import static com.ytfs.common.eos.EOSRequest.makeAddUsedSpaceRequest;
 import static com.ytfs.common.eos.EOSRequest.makeGetBalanceRequest;
 import static com.ytfs.common.eos.EOSRequest.makeSetHfeeRequest;
@@ -37,15 +38,27 @@ public class EOSClient {
     }
 
     public static long getBalance(String username) throws Exception {
-        EosApi eosApi = EosApiFactory.create(ServerConfig.eosURI);
-        SignArg arg = eosApi.getSignArg((int) EOSClientCache.EXPIRED_TIME);
-        PushTransactionRequest req = makeGetBalanceRequest(arg, username);
-        PushedTransaction pts = eosApi.pushTransaction(req);
-        String console = pts.getProcessed().getActionTraces().get(0).getConsole();
-        ObjectMapper mapper = new ObjectMapper();
-        Map readValue = mapper.readValue(console, Map.class);
-        Object obj = readValue.get("balance");
-        return (obj instanceof Integer) ? (int) obj : (long) obj;
+        Exception err = null;
+        for (int ii = 0; ii < 3; ii++) {
+            EOSURI uri = BpList.getEOSURI();
+            try {
+                EosApi eosApi = EosApiFactory.create(uri.url);
+                SignArg arg = eosApi.getSignArg((int) EOSClientCache.EXPIRED_TIME);
+                PushTransactionRequest req = makeGetBalanceRequest(arg, username);
+                PushedTransaction pts = eosApi.pushTransaction(req);
+                String console = pts.getProcessed().getActionTraces().get(0).getConsole();
+                ObjectMapper mapper = new ObjectMapper();
+                Map readValue = mapper.readValue(console, Map.class);
+                Object obj = readValue.get("balance");
+                return (obj instanceof Integer) ? (int) obj : (long) obj;
+            } catch (Exception r) {
+                err = r;
+                if (!uri.setErr(r)) {
+                    throw r;
+                }
+            }
+        }
+        throw err;
     }
 
     /**
@@ -68,10 +81,23 @@ public class EOSClient {
      * @throws Throwable
      */
     public static void addUsedSpace(long length, String username, int id) throws Throwable {
-        EosApi eosApi = EosApiFactory.create(ServerConfig.eosURI);
-        SignArg arg = eosApi.getSignArg((int) EOSClientCache.EXPIRED_TIME);
-        PushTransactionRequest req = makeAddUsedSpaceRequest(arg, length, username, id);
-        eosApi.pushTransaction(req);
+        Exception err = null;
+        for (int ii = 0; ii < 3; ii++) {
+            EOSURI uri = BpList.getEOSURI();
+            try {
+                EosApi eosApi = EosApiFactory.create(uri.url);
+                SignArg arg = eosApi.getSignArg((int) EOSClientCache.EXPIRED_TIME);
+                PushTransactionRequest req = makeAddUsedSpaceRequest(arg, length, username, id);
+                eosApi.pushTransaction(req);
+                return;
+            } catch (Exception r) {
+                err = r;
+                if (!uri.setErr(r)) {
+                    throw r;
+                }
+            }
+        }
+        throw err;
     }
 
     /**
@@ -83,10 +109,23 @@ public class EOSClient {
      * @throws Throwable
      */
     public static void setUserFee(long cost, String username, int id) throws Throwable {
-        EosApi eosApi = EosApiFactory.create(ServerConfig.eosURI);
-        SignArg arg = eosApi.getSignArg((int) EOSClientCache.EXPIRED_TIME);
-        PushTransactionRequest req = makeSetHfeeRequest(arg, cost, username, id);
-        eosApi.pushTransaction(req);
+        Exception err = null;
+        for (int ii = 0; ii < 3; ii++) {
+            EOSURI uri = BpList.getEOSURI();
+            try {
+                EosApi eosApi = EosApiFactory.create(uri.url);
+                SignArg arg = eosApi.getSignArg((int) EOSClientCache.EXPIRED_TIME);
+                PushTransactionRequest req = makeSetHfeeRequest(arg, cost, username, id);
+                eosApi.pushTransaction(req);
+                return;
+            } catch (Exception r) {
+                err = r;
+                if (!uri.setErr(r)) {
+                    throw r;
+                }
+            }
+        }
+        throw err;
     }
 
 }
