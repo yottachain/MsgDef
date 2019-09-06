@@ -57,7 +57,6 @@ public class EOSRequest {
         LocalApi localApi = EosApiFactory.createLocalApi();
         return localApi.getObjectMapper().readValue(bs, PushTransactionRequest.class);
     }
-
     public static byte[] createEosClient(ObjectId id) throws JsonProcessingException {
         BpList.EOSURI uri = BpList.getEOSURI();
         EosApi eosApi = EosApiFactory.create(uri.url);
