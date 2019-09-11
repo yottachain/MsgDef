@@ -7,6 +7,7 @@ public class RegUserResp {
     private int superNodeNum;   //超级节点编号 (0-31)
     private String superNodeID;  //超级节点id !=null trim
     private List<String> superNodeAddrs;  //超级节点地址
+    private int userId;
 
     /**
      * @return the superNodeNum
@@ -48,5 +49,19 @@ public class RegUserResp {
      */
     public void setSuperNodeAddrs(List<String> superNodeAddrs) {
         this.superNodeAddrs = superNodeAddrs;
+    }
+
+    /**
+     * @return the userId
+     */
+    public int getUserId() {
+        return userId;
+    }
+
+    /**
+     * @param userId the userId to set
+     */
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 }

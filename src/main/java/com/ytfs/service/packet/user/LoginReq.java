@@ -1,22 +1,9 @@
 package com.ytfs.service.packet.user;
 
 public class LoginReq {
-    private String userPubkey;
+
+    private int userId;
     private String signData;
-
-    /**
-     * @return the userPubkey
-     */
-    public String getUserPubkey() {
-        return userPubkey;
-    }
-
-    /**
-     * @param userPubkey the userPubkey to set
-     */
-    public void setUserPubkey(String userPubkey) {
-        this.userPubkey = userPubkey;
-    }
 
     /**
      * @return the signData
@@ -31,5 +18,19 @@ public class LoginReq {
     public void setSignData(String signData) {
         this.signData = signData;
     }
-       
+
+    /**
+     * @return the userId
+     */
+    public int getUserId() {
+        return userId;
+    }
+
+    /**
+     * @param userId the userId to set
+     */
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
 }

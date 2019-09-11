@@ -4,6 +4,7 @@ public class QueryUserReq {
 
     private String pubkey;
     private String username;
+    private String cacheKey;
     private int UserId = -1;
 
     /**
@@ -46,6 +47,20 @@ public class QueryUserReq {
      */
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    /**
+     * @return the cacheKey
+     */
+    public String getCacheKey() {
+        return cacheKey;
+    }
+
+    /**
+     * @param cacheKey the cacheKey to set
+     */
+    public void setCacheKey(String cacheKey) {
+        this.cacheKey = cacheKey;
     }
 
 }

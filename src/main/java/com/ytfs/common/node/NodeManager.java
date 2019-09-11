@@ -70,6 +70,10 @@ public class NodeManager {
         return ls.toArray(sn);
     }
 
+    public static List<Node> preAllocNode(int shardCount) throws NodeMgmtException {
+        return YottaNodeMgmt.allocNodes(shardCount, null);
+    }
+
     /**
      * 获取节点
      *

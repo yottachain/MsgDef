@@ -14,11 +14,17 @@ import java.util.List;
 import java.util.Map;
 import org.apache.log4j.Logger;
 import static com.ytfs.common.ServiceErrorCode.COMM_ERROR;
+import static com.ytfs.common.ServiceErrorCode.NEED_LOGIN;
 
 public class P2PUtils {
 
     private static final Logger LOG = Logger.getLogger(P2PUtils.class);
     private static final Map<String, P2PClient> CONNECTS = new HashMap<>();
+    private static LoginCaller logincaller = null;
+
+    public static void regLoginCaller(LoginCaller caller) {
+        logincaller = caller;
+    }
 
     /**
      * 初始化P2P工具
@@ -55,22 +61,33 @@ public class P2PUtils {
         String log_pre = log_prefix == null
                 ? ("[" + obj.getClass().getSimpleName() + "][" + node.getId() + "]")
                 : ("[" + obj.getClass().getSimpleName() + "][" + node.getId() + "][" + log_prefix + "]");
+        int retryTimes = 0;
         ServiceException err = null;
-        for (int ii = 0; ii < 3; ii++) {
+        while (true) {
             try {
-                if (ii > 0) {
+                if (retryTimes > 0) {
                     LOG.info(log_pre + "Retry...");
                 }
                 return request(obj, node.getAddrs(), node.getNodeid(), MSG_2BPU, log_pre);
             } catch (ServiceException r) {
+                if (retryTimes >= 3) {
+                    break;
+                }
+                if (r.getErrorCode() == NEED_LOGIN) {
+                    if (logincaller == null) {
+                        throw r;
+                    } else {
+                        logincaller.login(node);
+                        continue;
+                    }
+                }
                 if (!(r.getErrorCode() == COMM_ERROR || r.getErrorCode() == SERVER_ERROR)) {
                     throw r;
                 }
+                retryTimes++;
                 err = r;
                 try {
-                    if (ii > 0) {
-                        Thread.sleep(5000);
-                    }
+                    Thread.sleep(5000);
                 } catch (InterruptedException ex) {
                 }
             }
@@ -112,6 +129,12 @@ public class P2PUtils {
             }
         }
         return client.request(obj, addr, type, log_pre);
+    }
+
+    public static void remove(String key) {
+        synchronized (CONNECTS) {
+            CONNECTS.remove(key);
+        }
     }
 
     public static String getAddrString(List<String> ls) {

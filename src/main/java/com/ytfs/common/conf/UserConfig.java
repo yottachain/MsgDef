@@ -26,6 +26,7 @@ public class UserConfig {
 
     //**************************可配置参数********************************
     //用户钱包账户名
+    public static int userId;
     public static String username;
 
     //用户私钥
@@ -47,5 +48,10 @@ public class UserConfig {
 
     //下载线程数
     public static int DOWNLOADSHARDTHREAD = 200;
-    
+
+    //预分配矿机数目
+    public static int PNN = 320;
+
+    //预分配矿机失效时长
+    public static int PTR = 1000 * 60 * 3;
 }
