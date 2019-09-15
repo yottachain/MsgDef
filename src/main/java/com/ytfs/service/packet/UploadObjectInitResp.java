@@ -7,7 +7,8 @@ public class UploadObjectInitResp {
     private boolean repeat = false;
     private ObjectId VNU = null;
     private short[] blocks = null;
-    private byte[] signArg;
+    private String signArg;
+    private long stamp;
 
     public UploadObjectInitResp() {
 
@@ -67,14 +68,28 @@ public class UploadObjectInitResp {
     /**
      * @return the signArg
      */
-    public byte[] getSignArg() {
+    public String getSignArg() {
         return signArg;
     }
 
     /**
      * @param signArg the signArg to set
      */
-    public void setSignArg(byte[] signArg) {
+    public void setSignArg(String signArg) {
         this.signArg = signArg;
+    }
+
+    /**
+     * @return the stamp
+     */
+    public long getStamp() {
+        return stamp;
+    }
+
+    /**
+     * @param stamp the stamp to set
+     */
+    public void setStamp(long stamp) {
+        this.stamp = stamp;
     }
 }

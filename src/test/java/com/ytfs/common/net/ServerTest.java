@@ -3,18 +3,12 @@ package com.ytfs.common.net;
 import com.ytfs.common.SerializationUtil;
 import com.ytfs.common.ServiceException;
 import com.ytfs.service.packet.UploadShardReq;
-import com.ytfs.service.packet.UploadShardResp;
 import io.yottachain.p2phost.YottaP2P;
 import io.yottachain.p2phost.core.exception.P2pHostException;
 import io.yottachain.p2phost.interfaces.BPNodeCallback;
 import io.yottachain.p2phost.interfaces.NodeCallback;
 import io.yottachain.p2phost.interfaces.UserCallback;
 import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLConnection;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class ServerTest {
 
@@ -40,9 +34,7 @@ public class ServerTest {
             if (obj instanceof UploadShardReq) {
                 UploadShardReq req = (UploadShardReq) obj;
                 System.out.println(req.getBPDID());
-                UploadShardResp resp = new UploadShardResp();
-                resp.setRES(101);
-                resp.setVBI(0);
+             
                // try { 
                    // URL url=new URL("www.sohu.com");
                   //  URLConnection con= url.openConnection();
@@ -50,7 +42,8 @@ public class ServerTest {
               //  } catch (Exception ex) {
                      
                // }
-                return SerializationUtil.serialize(resp);
+               // return SerializationUtil.serialize(resp);
+                return null;
             } else {
                 ServiceException se = new ServiceException(1000);
                 return SerializationUtil.serialize(se);

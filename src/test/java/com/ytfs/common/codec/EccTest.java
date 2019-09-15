@@ -1,6 +1,7 @@
 package com.ytfs.common.codec;
 
 import io.jafka.jeos.util.KeyUtil;
+import io.yottachain.ytcrypto.YTCrypto;
 import java.nio.ByteBuffer;
 import org.apache.commons.codec.binary.Hex;
 
@@ -43,8 +44,8 @@ public class EccTest {
         String pubkey = KeyUtil.toPublicKey(prikey);
         pubkey = pubkey.substring(3);
         byte[] data = "dsfaaaaaafgdhytjtrjrytuj".getBytes();
-        byte[] signbs = KeyStoreCoder.ecdsaSign(data, prikey);
-        boolean b = KeyStoreCoder.ecdsaVerify(data, signbs, pubkey);
+        String signbs = YTCrypto.sign(prikey, data);
+        boolean b = YTCrypto.verify(pubkey, data, signbs);
         System.out.println(b);
     }
 

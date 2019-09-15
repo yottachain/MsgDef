@@ -3,12 +3,9 @@ package com.ytfs.common.net;
 import com.ytfs.common.SerializationUtil;
 import com.ytfs.common.ServiceException;
 import com.ytfs.service.packet.UploadShardReq;
-import com.ytfs.service.packet.UploadShardResp;
 import io.yottachain.p2phost.YottaP2P;
 import io.yottachain.p2phost.core.exception.P2pHostException;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.apache.commons.codec.binary.Hex;
 
 public class ClientTest {
@@ -48,13 +45,13 @@ public class ClientTest {
 
         byte[] ret = YottaP2P.sendToBPUMsg("16Uiu2HAm44FX3YuzGXJgHMqnyMM5zCzeT6PUoBNZkz66LutfRREM", result1);
         Object obj = SerializationUtil.deserialize(ret);
-        if (obj instanceof UploadShardResp) {
-            UploadShardResp resp = (UploadShardResp) obj;
-            System.out.println(resp.getRES());
-        } else {
-            ServiceException se = (ServiceException) obj;
-            System.out.println(se.getErrorCode());
-        }
+        //if (obj instanceof UploadShardResp) {
+        //    UploadShardResp resp = (UploadShardResp) obj;
+        //    System.out.println(resp.getRES());
+        //} else {
+        //    ServiceException se = (ServiceException) obj;
+        //    System.out.println(se.getErrorCode());
+       // }
     }
 
     private static class Test implements Runnable {

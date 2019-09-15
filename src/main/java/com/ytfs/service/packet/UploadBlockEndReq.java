@@ -12,7 +12,6 @@ public class UploadBlockEndReq {
     private byte[] KED;
     private long originalSize;  //编码前长度  6字节
     private int realSize;
-    private long VBI;
     private ObjectId VNU; //upload id
     private boolean rsShard;
     private List<UploadShardRes> okList;
@@ -116,19 +115,6 @@ public class UploadBlockEndReq {
         this.realSize = realSize;
     }
 
-    /**
-     * @return the VBI
-     */
-    public long getVBI() {
-        return VBI;
-    }
-
-    /**
-     * @param VBI the VBI to set
-     */
-    public void setVBI(long VBI) {
-        this.VBI = VBI;
-    }
 
     /**
      * @return the rsShard

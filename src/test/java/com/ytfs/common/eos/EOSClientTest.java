@@ -1,8 +1,6 @@
 package com.ytfs.common.eos;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.ytfs.common.conf.ServerConfig;
-import static com.ytfs.common.eos.EOSRequest.makeAddUsedSpaceRequest;
 import io.jafka.jeos.EosApi;
 import io.jafka.jeos.EosApiFactory;
 import io.jafka.jeos.LocalApi;

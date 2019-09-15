@@ -2,49 +2,27 @@ package com.ytfs.service.packet;
 
 public class UploadBlockInitResp {
 
-    private ShardNode[] nodes;
-    private ShardNode[] excessNodes;
-    private long VBI = 0;
+    private long startTime;
 
-    /**
-     * @return the VBI
-     */
-    public long getVBI() {
-        return VBI;
+    public UploadBlockInitResp() {
+    }
+
+    public UploadBlockInitResp(long startTime) {
+        this.startTime = startTime;
     }
 
     /**
-     * @param VBI the VBI to set
+     * @return the startTime
      */
-    public void setVBI(long VBI) {
-        this.VBI = VBI;
+    public long getStartTime() {
+        return startTime;
     }
 
     /**
-     * @return the nodes
+     * @param startTime the startTime to set
      */
-    public ShardNode[] getNodes() {
-        return nodes;
+    public void setStartTime(long startTime) {
+        this.startTime = startTime;
     }
 
-    /**
-     * @param nodes the nodes to set
-     */
-    public void setNodes(ShardNode[] nodes) {
-        this.nodes = nodes;
-    }
-
-    /**
-     * @return the excessNodes
-     */
-    public ShardNode[] getExcessNodes() {
-        return excessNodes;
-    }
-
-    /**
-     * @param excessNodes the excessNodes to set
-     */
-    public void setExcessNodes(ShardNode[] excessNodes) {
-        this.excessNodes = excessNodes;
-    }
 }

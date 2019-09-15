@@ -54,10 +54,14 @@ public class P2PUtils {
     public static final int MSG_2NODE = 2;
 
     public static Object requestBPU(Object obj, SuperNode node) throws ServiceException {
-        return requestBPU(obj, node, null);
+        return requestBPU(obj, node, null, 3);
     }
 
-    public static Object requestBPU(Object obj, SuperNode node, String log_prefix) throws ServiceException {
+    public static Object requestBPU(Object obj, SuperNode node, int retry) throws ServiceException {
+        return requestBPU(obj, node, null, retry);
+    }
+
+    public static Object requestBPU(Object obj, SuperNode node, String log_prefix, int retry) throws ServiceException {
         String log_pre = log_prefix == null
                 ? ("[" + obj.getClass().getSimpleName() + "][" + node.getId() + "]")
                 : ("[" + obj.getClass().getSimpleName() + "][" + node.getId() + "][" + log_prefix + "]");
@@ -70,7 +74,7 @@ public class P2PUtils {
                 }
                 return request(obj, node.getAddrs(), node.getNodeid(), MSG_2BPU, log_pre);
             } catch (ServiceException r) {
-                if (retryTimes >= 3) {
+                if (retryTimes >= retry) {
                     break;
                 }
                 if (r.getErrorCode() == NEED_LOGIN) {
@@ -87,7 +91,7 @@ public class P2PUtils {
                 retryTimes++;
                 err = r;
                 try {
-                    Thread.sleep(5000);
+                    Thread.sleep(10000);
                 } catch (InterruptedException ex) {
                 }
             }

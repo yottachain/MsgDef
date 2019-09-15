@@ -2,27 +2,14 @@ package com.ytfs.service.packet;
 
 import com.google.protobuf.ByteString;
 import com.ytfs.common.SerializationUtil;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import org.apache.commons.codec.binary.Hex;
-import sun.misc.IOUtils;
 
 public class ProtobufTest {
 
     public static void main(String[] args) throws IOException {
-        //taskDescriptionTest();
-        //taskCheckTest();
-        File f=new File("e:\\task.dat");
-        InputStream s=new FileInputStream(f);
-        
-        byte[] bs=IOUtils.readFully(s, (int)f.length(), true);
-        
-        SpotCheckTaskList req1 = (SpotCheckTaskList) SerializationUtil.deserialize(bs);
-        
-        System.out.println();
+ 
         
         
     }

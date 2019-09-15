@@ -1,6 +1,7 @@
 package com.ytfs.service.packet.user;
 
 import io.yottachain.nodemgmt.core.vo.Node;
+import java.util.Arrays;
 import java.util.List;
 
 public class PreAllocNode {
@@ -21,6 +22,13 @@ public class PreAllocNode {
         this.pubkey = node.getPubkey();
         this.addrs = node.getAddrs();
         this.timestamp = System.currentTimeMillis();
+    }
+
+    public final Node getNode() {
+        Node node = new Node(this.getId(), null, null, null);
+        node.setNodeid(this.nodeid);
+        node.setAddrs(this.addrs);
+        return node;
     }
 
     /**
