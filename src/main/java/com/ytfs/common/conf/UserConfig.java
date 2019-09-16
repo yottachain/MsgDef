@@ -53,5 +53,8 @@ public class UserConfig {
     public static int PNN = 320;
 
     //预分配矿机失效时长
-    public static int PTR = 1000 * 60 * 3;
+    public static int PTR = 1000 * 60 * 2;
+
+    //重试次数
+    public static int RETRYTIMES = 500;
 }
