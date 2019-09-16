@@ -1,7 +1,6 @@
 package com.ytfs.service.packet.user;
 
 import io.yottachain.nodemgmt.core.vo.Node;
-import java.util.Arrays;
 import java.util.List;
 
 public class PreAllocNode {
