@@ -57,4 +57,6 @@ public class UserConfig {
 
     //重试次数
     public static int RETRYTIMES = 500;
+
+    public static String zipkinServer;
 }
