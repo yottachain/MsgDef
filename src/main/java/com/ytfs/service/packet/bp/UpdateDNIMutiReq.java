@@ -3,25 +3,25 @@ package com.ytfs.service.packet.bp;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AddDNIMutiReq {
+public class UpdateDNIMutiReq {
 
-    private List<AddDNIReq> list;
+    private List<UpdateDNIReq> list;
 
     /**
      * @return the list
      */
-    public List<AddDNIReq> getList() {
+    public List<UpdateDNIReq> getList() {
         return list;
     }
 
     /**
      * @param list the list to set
      */
-    public void setList(List<AddDNIReq> list) {
+    public void setList(List<UpdateDNIReq> list) {
         this.list = list;
     }
 
-    public void addList(List<AddDNIReq> list) {
+    public void addList(List<UpdateDNIReq> list) {
         this.list = new ArrayList(list);
     }
 
