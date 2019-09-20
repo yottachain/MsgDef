@@ -74,6 +74,7 @@ public class P2PUtils {
                 }
                 return request(obj, node.getAddrs(), node.getNodeid(), MSG_2BPU, log_pre);
             } catch (ServiceException r) {
+                err = r;
                 if (retryTimes >= retry) {
                     break;
                 }
@@ -89,7 +90,6 @@ public class P2PUtils {
                     throw r;
                 }
                 retryTimes++;
-                err = r;
                 try {
                     Thread.sleep(10000);
                 } catch (InterruptedException ex) {

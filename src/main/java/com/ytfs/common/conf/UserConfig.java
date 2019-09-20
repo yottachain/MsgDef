@@ -24,6 +24,9 @@ public class UserConfig {
     //小于PL2的数据块，直接记录在元数据库中
     public final static int PL2 = 256;
 
+    //重试SN次数，5分钟
+    public final static int SN_RETRYTIMES = 6 * 5;
+
     //**************************可配置参数********************************
     //用户钱包账户名
     public static int userId;

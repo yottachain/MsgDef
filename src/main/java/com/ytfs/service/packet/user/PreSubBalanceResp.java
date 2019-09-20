@@ -1,13 +1,12 @@
-package com.ytfs.service.packet;
+package com.ytfs.service.packet.user;
 
-public class UploadObjectEndResp {
+public class PreSubBalanceResp {
 
     private byte[] signArg;
     private String contractAccount;
     private long firstCost;
     private int userid;
 
-    
     /**
      * @return the signArg
      */
