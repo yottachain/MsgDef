@@ -1,22 +1,17 @@
-package com.ytfs.service.packet;
+package com.ytfs.service.packet.user;
 
-import java.util.List;
 import org.bson.types.ObjectId;
 
-public class UploadBlockEndReq {
+public class UploadBlockDupReq {
 
     private short id;
+    private ObjectId VNU;
     private byte[] VHP;
     private byte[] VHB;
     private byte[] KEU;
-    private byte[] KED;
     private long originalSize;  //编码前长度  6字节
-    private int realSize;
-    private ObjectId VNU; //upload id
-    private boolean rsShard;
-    private List<UploadShardRes> okList;
-       
-    
+    private int realSize;  //实际长度    3字节   
+
     /**
      * @return the id
      */
@@ -74,20 +69,6 @@ public class UploadBlockEndReq {
     }
 
     /**
-     * @return the KED
-     */
-    public byte[] getKED() {
-        return KED;
-    }
-
-    /**
-     * @param KED the KED to set
-     */
-    public void setKED(byte[] KED) {
-        this.KED = KED;
-    }
-
-    /**
      * @return the originalSize
      */
     public long getOriginalSize() {
@@ -115,46 +96,18 @@ public class UploadBlockEndReq {
         this.realSize = realSize;
     }
 
-
     /**
-     * @return the rsShard
-     */
-    public boolean isRsShard() {
-        return rsShard;
-    }
-
-    /**
-     * @param rsShard the rsShard to set
-     */
-    public void setRsShard(boolean rsShard) {
-        this.rsShard = rsShard;
-    }
-
-    /**
-     * @return the okList
-     */
-    public List<UploadShardRes> getOkList() {
-        return okList;
-    }
-
-    /**
-     * @param okList the okList to set
-     */
-    public void setOkList(List<UploadShardRes> okList) {
-        this.okList = okList;
-    }
-
-    /**
-     * @return the VNU
+     * @return the VUN
      */
     public ObjectId getVNU() {
         return VNU;
     }
 
     /**
-     * @param VNU the VNU to set
+     * @param VUN the VUN to set
      */
-    public void setVNU(ObjectId VNU) {
-        this.VNU = VNU;
+    public void setVNU(ObjectId VUN) {
+        this.VNU = VUN;
     }
+
 }

@@ -1,8 +1,11 @@
 package com.ytfs.service.packet.user;
 
+import java.util.List;
+
 public class PreAllocNodeReq {
 
     private int count;
+    private int[] excludes;
 
     /**
      * @return the count
@@ -16,6 +19,20 @@ public class PreAllocNodeReq {
      */
     public void setCount(int count) {
         this.count = count;
+    }
+
+    /**
+     * @return the excludes
+     */
+    public int[] getExcludes() {
+        return excludes;
+    }
+
+    /**
+     * @param excludes the excludes to set
+     */
+    public void setExcludes(int[] excludes) {
+        this.excludes = excludes;
     }
 
 }

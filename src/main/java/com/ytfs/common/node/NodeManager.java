@@ -59,19 +59,12 @@ public class NodeManager {
      * @return
      * @throws io.yottachain.nodemgmt.core.exception.NodeMgmtException
      */
-    public static Node[] getNode(int shardCount, int[] errids) throws NodeMgmtException {
-        List<Node> ls;
+    public static List<Node> getNode(int shardCount, int[] errids) throws NodeMgmtException {
         try {
-            ls = YottaNodeMgmt.allocNodes(shardCount, errids);
+            return YottaNodeMgmt.allocNodes(shardCount, errids);
         } catch (Exception r) {
-            ls = YottaNodeMgmt.allocNodes(shardCount, null);
+            return YottaNodeMgmt.allocNodes(shardCount, null);
         }
-        Node[] sn = new Node[ls.size()];
-        return ls.toArray(sn);
-    }
-
-    public static List<Node> preAllocNode(int shardCount) throws NodeMgmtException {
-        return YottaNodeMgmt.allocNodes(shardCount, null);
     }
 
     /**

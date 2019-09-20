@@ -1,18 +1,23 @@
-package com.ytfs.service.packet;
+package com.ytfs.service.packet.user;
 
+import com.ytfs.service.packet.UploadShardRes;
+import java.util.List;
 import org.bson.types.ObjectId;
 
-public class UploadBlockDBReq {
+public class UploadBlockEndReq {
 
     private short id;
-    private ObjectId VNU;
     private byte[] VHP;
     private byte[] VHB;
     private byte[] KEU;
     private byte[] KED;
     private long originalSize;  //编码前长度  6字节
-    private byte[] data;
-
+    private int realSize;
+    private ObjectId VNU; //upload id
+    private boolean rsShard;
+    private List<UploadShardRes> okList;
+       
+    
     /**
      * @return the id
      */
@@ -25,20 +30,6 @@ public class UploadBlockDBReq {
      */
     public void setId(short id) {
         this.id = id;
-    }
-
-    /**
-     * @return the VNU
-     */
-    public ObjectId getVNU() {
-        return VNU;
-    }
-
-    /**
-     * @param VNU the VNU to set
-     */
-    public void setVNU(ObjectId VNU) {
-        this.VNU = VNU;
     }
 
     /**
@@ -84,6 +75,20 @@ public class UploadBlockDBReq {
     }
 
     /**
+     * @return the KED
+     */
+    public byte[] getKED() {
+        return KED;
+    }
+
+    /**
+     * @param KED the KED to set
+     */
+    public void setKED(byte[] KED) {
+        this.KED = KED;
+    }
+
+    /**
      * @return the originalSize
      */
     public long getOriginalSize() {
@@ -98,31 +103,59 @@ public class UploadBlockDBReq {
     }
 
     /**
-     * @return the data
+     * @return the realSize
      */
-    public byte[] getData() {
-        return data;
+    public int getRealSize() {
+        return realSize;
     }
 
     /**
-     * @param data the data to set
+     * @param realSize the realSize to set
      */
-    public void setData(byte[] data) {
-        this.data = data;
+    public void setRealSize(int realSize) {
+        this.realSize = realSize;
+    }
+
+
+    /**
+     * @return the rsShard
+     */
+    public boolean isRsShard() {
+        return rsShard;
     }
 
     /**
-     * @return the KED
+     * @param rsShard the rsShard to set
      */
-    public byte[] getKED() {
-        return KED;
+    public void setRsShard(boolean rsShard) {
+        this.rsShard = rsShard;
     }
 
     /**
-     * @param KED the KED to set
+     * @return the okList
      */
-    public void setKED(byte[] KED) {
-        this.KED = KED;
+    public List<UploadShardRes> getOkList() {
+        return okList;
     }
 
+    /**
+     * @param okList the okList to set
+     */
+    public void setOkList(List<UploadShardRes> okList) {
+        this.okList = okList;
+    }
+
+    /**
+     * @return the VNU
+     */
+    public ObjectId getVNU() {
+        return VNU;
+    }
+
+    /**
+     * @param VNU the VNU to set
+     */
+    public void setVNU(ObjectId VNU) {
+        this.VNU = VNU;
+    }
 }

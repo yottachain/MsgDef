@@ -1,16 +1,17 @@
-package com.ytfs.service.packet;
+package com.ytfs.service.packet.user;
 
 import org.bson.types.ObjectId;
 
-public class UploadBlockDupReq {
+public class UploadBlockDBReq {
 
     private short id;
     private ObjectId VNU;
     private byte[] VHP;
     private byte[] VHB;
     private byte[] KEU;
+    private byte[] KED;
     private long originalSize;  //编码前长度  6字节
-    private int realSize;  //实际长度    3字节   
+    private byte[] data;
 
     /**
      * @return the id
@@ -24,6 +25,20 @@ public class UploadBlockDupReq {
      */
     public void setId(short id) {
         this.id = id;
+    }
+
+    /**
+     * @return the VNU
+     */
+    public ObjectId getVNU() {
+        return VNU;
+    }
+
+    /**
+     * @param VNU the VNU to set
+     */
+    public void setVNU(ObjectId VNU) {
+        this.VNU = VNU;
     }
 
     /**
@@ -83,31 +98,31 @@ public class UploadBlockDupReq {
     }
 
     /**
-     * @return the realSize
+     * @return the data
      */
-    public int getRealSize() {
-        return realSize;
+    public byte[] getData() {
+        return data;
     }
 
     /**
-     * @param realSize the realSize to set
+     * @param data the data to set
      */
-    public void setRealSize(int realSize) {
-        this.realSize = realSize;
+    public void setData(byte[] data) {
+        this.data = data;
     }
 
     /**
-     * @return the VUN
+     * @return the KED
      */
-    public ObjectId getVNU() {
-        return VNU;
+    public byte[] getKED() {
+        return KED;
     }
 
     /**
-     * @param VUN the VUN to set
+     * @param KED the KED to set
      */
-    public void setVNU(ObjectId VUN) {
-        this.VNU = VUN;
+    public void setKED(byte[] KED) {
+        this.KED = KED;
     }
 
 }
