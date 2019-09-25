@@ -137,7 +137,10 @@ public class P2PUtils {
 
     public static void remove(String key) {
         synchronized (CONNECTS) {
-            CONNECTS.remove(key);
+            P2PClient client = CONNECTS.remove(key);
+            if (client != null) {
+                client.disconnect();
+            }
         }
     }
 

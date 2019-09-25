@@ -17,6 +17,7 @@ public class P2PClient {
     private String addrString;
     private final String key;
     private boolean isConnected = false;
+    private boolean isDestroy = false;
 
     public P2PClient(String key) {
         this.key = key;
@@ -25,7 +26,7 @@ public class P2PClient {
     public Object request(Object obj, List<String> addr, int type, String log_pre) throws ServiceException {
         if (!isConnected) {
             synchronized (this) {
-                if (!isConnected) {
+                if (!isConnected && !isDestroy) {
                     String addstr = getAddrString(addr);
                     try {
                         String[] strs = new String[addr.size()];
@@ -33,7 +34,6 @@ public class P2PClient {
                         YottaP2P.connect(key, strs);
                         isConnected = true;
                         addrString = addstr;
-                        //LOG.debug(log_pre + "Connect " + addstr + " OK.");
                     } catch (P2pHostException ex) {
                         LOG.info(log_pre + "Connect " + addstr + " Err:" + ex.getMessage());
                         throw new ServiceException(COMM_ERROR, ex.getMessage());
@@ -58,16 +58,15 @@ public class P2PClient {
         } catch (Throwable e) {
             LOG.error(log_pre + "COMM_ERROR:" + addrString + e.getMessage());
             String newaddrString = getAddrString(addr);
-            synchronized (this) {
-                try {
-                    YottaP2P.disconnect(key);
-                } catch (P2pHostException r) {
+            if (!newaddrString.equals(addrString) || (e.getMessage() != null && e.getMessage().contains("no addresses"))) {
+                if (isDestroy) {
+                    throw new ServiceException(COMM_ERROR, e.getMessage());
+                } else {
+                    synchronized (this) {
+                        isConnected = false;
+                    }
+                    return request(obj, addr, type, log_pre);
                 }
-                isConnected = false;
-            }
-            if (!newaddrString.equals(addrString)) {
-                LOG.info(log_pre + "Retry...");
-                return request(obj, addr, type, log_pre);
             } else {
                 throw new ServiceException(COMM_ERROR, e.getMessage());
             }
@@ -77,5 +76,13 @@ public class P2PClient {
             throw (ServiceException) res;
         }
         return res;
+    }
+
+    void disconnect() {
+        isDestroy = true;
+        try {
+            YottaP2P.disconnect(key);
+        } catch (P2pHostException r) {
+        }
     }
 }
