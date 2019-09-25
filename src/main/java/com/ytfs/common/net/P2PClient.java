@@ -57,19 +57,10 @@ public class P2PClient {
             }
         } catch (Throwable e) {
             LOG.error(log_pre + "COMM_ERROR:" + addrString + e.getMessage());
-            String newaddrString = getAddrString(addr);
-            if (!newaddrString.equals(addrString) || (e.getMessage() != null && e.getMessage().contains("no addresses"))) {
-                if (isDestroy) {
-                    throw new ServiceException(COMM_ERROR, e.getMessage());
-                } else {
-                    synchronized (this) {
-                        isConnected = false;
-                    }
-                    return request(obj, addr, type, log_pre);
-                }
-            } else {
-                throw new ServiceException(COMM_ERROR, e.getMessage());
+            synchronized (this) {
+                isConnected = false;
             }
+            throw new ServiceException(COMM_ERROR, e.getMessage());
         }
         Object res = SerializationUtil.deserialize(bs);
         if (res instanceof ServiceException) {
