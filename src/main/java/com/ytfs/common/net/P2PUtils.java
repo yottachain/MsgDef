@@ -19,8 +19,9 @@ import static com.ytfs.common.ServiceErrorCode.NEED_LOGIN;
 public class P2PUtils {
 
     private static final Logger LOG = Logger.getLogger(P2PUtils.class);
-    private static final Map<String, P2PClient> CONNECTS = new HashMap<>();
+    static final Map<String, P2PClient> CONNECTS = new HashMap<>();
     private static LoginCaller logincaller = null;
+    static P2PClientChecker checker = null;
 
     public static void regLoginCaller(LoginCaller caller) {
         logincaller = caller;
@@ -41,6 +42,8 @@ public class P2PUtils {
         for (int ii = 0; ii < addrs.length; ii++) {
             LOG.info("Node Addrs " + ii + ":" + addrs[ii]);
         }
+        checker = new P2PClientChecker();
+        checker.start();
     }
 
     public static void register(UserCallback userCallback, BPNodeCallback bPNodeCallback, NodeCallback nodeCallback) {
@@ -160,6 +163,10 @@ public class P2PUtils {
      * 销毁
      */
     public static void stop() {
+        if (checker != null) {
+            checker.interrupt();
+            checker = null;
+        }
         try {
             YottaP2P.close();
         } catch (P2pHostException ex) {

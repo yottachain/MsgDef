@@ -3,12 +3,14 @@ package com.ytfs.common.net;
 import com.ytfs.common.SerializationUtil;
 import static com.ytfs.common.ServiceErrorCode.COMM_ERROR;
 import com.ytfs.common.ServiceException;
+import static com.ytfs.common.conf.UserConfig.CONN_EXPIRED;
 import static com.ytfs.common.net.P2PUtils.MSG_2BP;
 import static com.ytfs.common.net.P2PUtils.MSG_2BPU;
 import static com.ytfs.common.net.P2PUtils.getAddrString;
 import io.yottachain.p2phost.YottaP2P;
 import io.yottachain.p2phost.core.exception.P2pHostException;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicLong;
 import org.apache.log4j.Logger;
 
 public class P2PClient {
@@ -18,9 +20,14 @@ public class P2PClient {
     private final String key;
     private boolean isConnected = false;
     private boolean isDestroy = false;
+    private final AtomicLong lasttime = new AtomicLong(System.currentTimeMillis());
 
     public P2PClient(String key) {
         this.key = key;
+    }
+
+    public boolean isActive() {
+        return System.currentTimeMillis() - lasttime.get() <= CONN_EXPIRED;
     }
 
     public Object request(Object obj, List<String> addr, int type, String log_pre) throws ServiceException {
@@ -31,7 +38,7 @@ public class P2PClient {
                     try {
                         String[] strs = new String[addr.size()];
                         strs = addr.toArray(strs);
-                        YottaP2P.connect(key, strs);
+                        YottaP2P.connect(getKey(), strs);
                         isConnected = true;
                         addrString = addstr;
                     } catch (P2pHostException ex) {
@@ -41,18 +48,19 @@ public class P2PClient {
                 }
             }
         }
+        lasttime.set(System.currentTimeMillis());
         byte[] data = SerializationUtil.serialize(obj);
         byte[] bs = null;
         try {                    //访问p2p网络
             switch (type) {
                 case MSG_2BPU:
-                    bs = YottaP2P.sendToBPUMsg(key, data);
+                    bs = YottaP2P.sendToBPUMsg(getKey(), data);
                     break;
                 case MSG_2BP:
-                    bs = YottaP2P.sendToBPMsg(key, data);
+                    bs = YottaP2P.sendToBPMsg(getKey(), data);
                     break;
                 default:
-                    bs = YottaP2P.sendToNodeMsg(key, data);
+                    bs = YottaP2P.sendToNodeMsg(getKey(), data);
                     break;
             }
         } catch (Throwable e) {
@@ -72,8 +80,22 @@ public class P2PClient {
     void disconnect() {
         isDestroy = true;
         try {
-            YottaP2P.disconnect(key);
+            YottaP2P.disconnect(getKey());
         } catch (P2pHostException r) {
         }
+    }
+
+    /**
+     * @return the key
+     */
+    public String getKey() {
+        return key;
+    }
+
+    /**
+     * @return the addrString
+     */
+    public String getAddrs() {
+        return addrString;
     }
 }

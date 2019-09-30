@@ -52,6 +52,9 @@ public class UserConfig {
     //下载线程数
     public static int DOWNLOADSHARDTHREAD = 200;
 
+    
+    public static int CONN_EXPIRED = 1000 * 60 * 3;
+
     //预分配矿机数目
     public static int PNN = 320;
 
