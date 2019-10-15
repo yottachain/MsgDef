@@ -31,7 +31,7 @@ public class P2PClientChecker extends Thread {
         List<P2PClient> ls = new ArrayList(CONNECTS.values());
         ls.stream().filter((client) -> (!client.isActive())).forEach((client) -> {
             P2PUtils.remove(client.getKey());
-            LOG.info("Connection expired is recycled：" + client.getAddrs());
+            LOG.info("Connection expired is recycled:" + client.getAddrs());
         });
     }
 }
