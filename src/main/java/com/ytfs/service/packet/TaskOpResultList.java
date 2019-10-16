@@ -1,38 +1,37 @@
 package com.ytfs.service.packet;
 
-public class TaskOpResult {
+import java.util.List;
 
-    public static final int RES_OK = 0;
-    public static final int RES_ERR = 1;
+public class TaskOpResultList {
 
-    private byte[] id;
-    private int RES;
+    private List<byte[]> id;
+    private int[] RES;
 
     /**
      * @return the id
      */
-    public byte[] getId() {
+    public List<byte[]> getId() {
         return id;
     }
 
     /**
      * @param id the id to set
      */
-    public void setId(byte[] id) {
+    public void setId(List<byte[]> id) {
         this.id = id;
     }
 
     /**
      * @return the RES
      */
-    public int getRES() {
+    public int[] getRES() {
         return RES;
     }
 
     /**
      * @param RES the RES to set
      */
-    public void setRES(int RES) {
+    public void setRES(int[] RES) {
         this.RES = RES;
     }
 

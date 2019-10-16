@@ -2,6 +2,13 @@ syntax = "proto3";
 
 option java_package = "com.ytfs.service.packet"; 
 
+//重建任务
+//msgid=2cb0
+message MultiTaskDescription{
+    repeated bytes tasklist=1;
+}
+//tasklist列表可能包含rs和副本集两种类型任务，按msgid再解析一次
+
 //RS编码重建任务
 //msgid=0xd761
 message TaskDescription{
@@ -52,3 +59,12 @@ message TaskOpResult{
 
 //暂定：RES=0 成功，RES=1 失败
 //矿机收到结果回复VoidResp
+
+
+//批量向任务发起方SN返回结果，注意所有结果必须是属于同一SN
+//MessageID:1b31
+message MultiTaskOpResult{
+    repeated bytes id = 1; 
+    repeated int32 RES=2;
+}
+

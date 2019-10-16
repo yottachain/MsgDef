@@ -5,13 +5,14 @@ import io.yottachain.nodemgmt.YottaNodeMgmt;
 import io.yottachain.nodemgmt.core.exception.NodeMgmtException;
 import io.yottachain.nodemgmt.core.vo.Node;
 import io.yottachain.nodemgmt.core.vo.SuperNode;
+import java.util.ArrayList;
 import java.util.List;
 import org.apache.log4j.Logger;
 
 public class NodeManager {
-
+    
     private static final Logger LOG = Logger.getLogger(NodeManager.class);
-
+    
     public synchronized static void start(List<ServerAddress> addrs, String auth, String eos, String bpuser, String bpkey, String contractAccount, String contractAccountD, int id) throws NodeMgmtException {
         try {
             LOG.info("NodeManager init...");
@@ -62,7 +63,10 @@ public class NodeManager {
     public static List<Node> getNode(int shardCount, int[] errids) throws NodeMgmtException {
         try {
             return YottaNodeMgmt.allocNodes(shardCount, errids);
-        } catch (Exception r) {
+        } catch (NodeMgmtException r) {
+            if (errids == null || errids.length == 0) {
+                throw r;
+            }
             return YottaNodeMgmt.allocNodes(shardCount, null);
         }
     }
@@ -78,11 +82,21 @@ public class NodeManager {
         List<Node> lss = YottaNodeMgmt.getNodes(nodeids);
         return lss;
     }
-
+    
+    public static Node getNode(int nodeid) throws NodeMgmtException {
+        List<Integer> id = new ArrayList();
+        id.add(nodeid);
+        List<Node> lss = YottaNodeMgmt.getNodes(id);
+        if (lss == null || lss.isEmpty()) {
+            return null;
+        }
+        return lss.get(0);
+    }
+    
     public static int getNodeIDByPubKey(String key) throws NodeMgmtException {
         return YottaNodeMgmt.getNodeIDByPubKey(key);
     }
-
+    
     public static int getSuperNodeIDByPubKey(String key) throws NodeMgmtException {
         return YottaNodeMgmt.getSuperNodeIDByPubKey(key);
     }
