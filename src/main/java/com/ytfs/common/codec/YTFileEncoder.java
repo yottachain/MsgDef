@@ -57,6 +57,15 @@ public class YTFileEncoder {
         length = file.length();
     }
 
+    public void closeFile() {
+        try {
+            if (is != null) {
+                is.close();
+            }
+        } catch (Exception e) {
+        }
+    }
+
     public Block handle() throws IOException {
         if (isFinished()) {
             try {
