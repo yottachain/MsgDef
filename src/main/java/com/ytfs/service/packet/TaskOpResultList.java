@@ -5,7 +5,7 @@ import java.util.List;
 public class TaskOpResultList {
 
     private List<byte[]> id;
-    private int[] RES;
+    private List<Integer> RES;
 
     /**
      * @return the id
@@ -24,14 +24,14 @@ public class TaskOpResultList {
     /**
      * @return the RES
      */
-    public int[] getRES() {
+    public List<Integer> getRES() {
         return RES;
     }
 
     /**
      * @param RES the RES to set
      */
-    public void setRES(int[] RES) {
+    public void setRES(List<Integer> RES) {
         this.RES = RES;
     }
 

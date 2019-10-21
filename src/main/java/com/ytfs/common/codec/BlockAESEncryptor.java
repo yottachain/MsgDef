@@ -28,6 +28,7 @@ public class BlockAESEncryptor {
             IvParameterSpec iv = new IvParameterSpec(IVParameter);
             cipher.init(Cipher.ENCRYPT_MODE, skeySpec, iv);
         } catch (Exception r) {
+            r.printStackTrace();
             throw new IllegalArgumentException(r.getMessage());
         }
     }
