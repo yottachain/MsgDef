@@ -10,17 +10,20 @@ import java.util.List;
 import org.apache.log4j.Logger;
 
 public class NodeManager {
-    
+
     private static final Logger LOG = Logger.getLogger(NodeManager.class);
-    
-    public synchronized static void start(List<ServerAddress> addrs, String auth, String eos, String bpuser, String bpkey, String contractAccount, String contractAccountD, int id) throws NodeMgmtException {
+
+    public synchronized static void start(List<ServerAddress> addrs, String auth,
+            String eos, String bpuser, String bpkey, String contractAccount,
+            String contractAccountD, int id) throws Throwable {
         try {
             LOG.info("NodeManager init...");
             ServerAddress serverAddress = addrs.get(0);
             String addr = "mongodb://" + serverAddress.getHost() + ":" + serverAddress.getPort();
             YottaNodeMgmt.start(addr, eos, bpuser, bpkey, contractAccount, contractAccountD, id);
             LOG.info("NodeManager init OK!");
-        } catch (NodeMgmtException ne) {
+        } catch (Throwable ne) {
+            LOG.error("NodeManager init error:" + ne);
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException ex) {
@@ -82,7 +85,7 @@ public class NodeManager {
         List<Node> lss = YottaNodeMgmt.getNodes(nodeids);
         return lss;
     }
-    
+
     public static Node getNode(int nodeid) throws NodeMgmtException {
         List<Integer> id = new ArrayList();
         id.add(nodeid);
@@ -92,11 +95,11 @@ public class NodeManager {
         }
         return lss.get(0);
     }
-    
+
     public static int getNodeIDByPubKey(String key) throws NodeMgmtException {
         return YottaNodeMgmt.getNodeIDByPubKey(key);
     }
-    
+
     public static int getSuperNodeIDByPubKey(String key) throws NodeMgmtException {
         return YottaNodeMgmt.getSuperNodeIDByPubKey(key);
     }
