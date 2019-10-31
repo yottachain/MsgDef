@@ -3,6 +3,7 @@ package com.ytfs.common.node;
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
 import io.yottachain.nodemgmt.core.exception.NodeMgmtException;
+import io.yottachain.nodemgmt.core.vo.Node;
 import io.yottachain.nodemgmt.core.vo.SuperNode;
 import java.util.concurrent.TimeUnit;
 
@@ -16,7 +17,8 @@ public class NodeCache {
             .expireAfterAccess(SUP_EXPIRED_TIME, TimeUnit.MINUTES)
             .maximumSize(MAX_SIZE)
             .build();
-    private static final Cache<String, Integer> nodes = CacheBuilder.newBuilder()
+
+    private static final Cache<String, NodeInfo> nodes = CacheBuilder.newBuilder()
             .expireAfterAccess(EXPIRED_TIME, TimeUnit.MINUTES)
             .maximumSize(MAX_SIZE)
             .build();
@@ -44,12 +46,33 @@ public class NodeCache {
         return id;
     }
 
-    public static int getNodeId(String key) throws NodeMgmtException {
-        Integer id = nodes.getIfPresent(key);
-        if (id == null) {
-            id = NodeManager.getNodeIDByPubKey(key);
-            nodes.put(key, id);
+    public static NodeInfo getNode(String key) throws NodeMgmtException {
+        NodeInfo n = nodes.getIfPresent(key);
+        if (n == null) {
+            int id = NodeManager.getNodeIDByPubKey(key);
+            Node node = NodeManager.getNode(id);
+            n = new NodeInfo();
+            n.setId(node.getId());
+            n.setPeerId(node.getNodeid());
+            nodes.put(key, n);
+
         }
-        return id;
+        return n;
+    }
+
+    public static String getNodePeerId(String key) throws NodeMgmtException {
+        NodeInfo n = getNode(key);
+        if (n == null) {
+            return null;
+        }
+        return n.getPeerId();
+    }
+
+    public static int getNodeId(String key) throws NodeMgmtException {
+        NodeInfo n = getNode(key);
+        if (n == null) {
+            return -1;
+        }
+        return n.getId();
     }
 }

@@ -1,5 +1,7 @@
 package com.ytfs.common.net;
 
+import com.ytfs.common.SerializationUtil;
+import static com.ytfs.common.ServiceErrorCode.COMM_ERROR;
 import static com.ytfs.common.ServiceErrorCode.SERVER_ERROR;
 import com.ytfs.common.ServiceException;
 import io.yottachain.nodemgmt.core.vo.Node;
@@ -13,7 +15,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.apache.log4j.Logger;
-import static com.ytfs.common.ServiceErrorCode.COMM_ERROR;
 import static com.ytfs.common.ServiceErrorCode.NEED_LOGIN;
 
 public class P2PUtils {
@@ -122,6 +123,28 @@ public class P2PUtils {
                 ? ("[" + obj.getClass().getSimpleName() + "][" + node.getId() + "]")
                 : ("[" + obj.getClass().getSimpleName() + "][" + node.getId() + "][" + log_prefix + "]");
         return request(obj, node.getAddrs(), node.getNodeid(), MSG_2NODE, log_pre);
+    }
+
+    public static Object requestNode(Object obj, String peerId, int id) throws ServiceException {
+        String log_pre = "[" + obj.getClass().getSimpleName() + "][" + id + "]";
+        return requestNode(obj, peerId, log_pre);
+    }
+
+    public static Object requestNode(Object obj, String peerId, String log_prefix) throws ServiceException {
+        byte[] data = SerializationUtil.serialize(obj);
+        byte[] bs = null;
+        try {                    //访问p2p网络
+            bs = YottaP2P.sendToNodeMsg(peerId, data);
+        } catch (Throwable e) {
+            LOG.error(log_prefix + "COMM_ERROR:" + e.getMessage());
+            throw new ServiceException(COMM_ERROR, e.getMessage());
+        }
+        Object res = SerializationUtil.deserialize(bs);
+        if (res instanceof ServiceException) {
+            throw (ServiceException) res;
+        }
+        return res;
+
     }
 
     private static Object request(Object obj, List<String> addr, String key, int type, String log_pre) throws ServiceException {
