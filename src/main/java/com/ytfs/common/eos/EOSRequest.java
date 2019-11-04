@@ -29,7 +29,7 @@ public class EOSRequest {
     private static final AtomicInteger args = new AtomicInteger(1);
 
     private static long getRandomInteger(SignArg arg) {
-        long nanos = (long)arg.getExpiredSecond() * 1000L * 1000L * 1000L;
+        long nanos = (long) arg.getExpiredSecond() * 1000L * 1000L * 1000L;
         int ii = args.incrementAndGet();
         if (ii < 0) {
             return Math.abs(ii) + nanos;
@@ -57,13 +57,6 @@ public class EOSRequest {
         LocalApi localApi = EosApiFactory.createLocalApi();
         return localApi.getObjectMapper().readValue(bs, PushTransactionRequest.class);
     }
-    public static byte[] createEosClient(ObjectId id) throws JsonProcessingException {
-        BpList.EOSURI uri = BpList.getEOSURI();
-        EosApi eosApi = EosApiFactory.create(uri.url);
-        SignArg arg = eosApi.getSignArg((int) EOSClientCache.EXPIRED_TIME);
-        EOSClientCache.putClient(id, eosApi);
-        return encodeSignArg(arg);
-    }
 
     public static byte[] createEosClient(String pubkey) throws JsonProcessingException {
         BpList.EOSURI uri = BpList.getEOSURI();
@@ -71,15 +64,6 @@ public class EOSRequest {
         SignArg arg = eosApi.getSignArg((int) EOSClientCache.EXPIRED_TIME);
         EOSClientCache.putClient(pubkey, eosApi);
         return encodeSignArg(arg);
-    }
-
-    public static PushedTransaction request(byte[] reqdata, ObjectId id) throws IOException, ServiceException {
-        EosApi eosApi = EOSClientCache.getClient(id);
-        if (eosApi == null) {
-            throw new ServiceException(INVALID_SESSION);
-        }
-        PushTransactionRequest req = decodeRequest(reqdata);
-        return eosApi.pushTransaction(req);
     }
 
     public static PushedTransaction request(byte[] reqdata, String pubkey) throws IOException {
@@ -114,16 +98,17 @@ public class EOSRequest {
         return encodeRequest(req);
     }
 
-    public static byte[] makeSubBalanceRequest(byte[] signarg, String from, String privateKey, String contractAccount, long cost, int id) throws JsonProcessingException, IOException {
-        SignArg arg = decodeSignArg(signarg);
+    public static PushTransactionRequest makeSubBalanceRequest(SignArg arg, String from, long cost, int id) throws JsonProcessingException, IOException {
         Raw raw = new Raw();
         raw.packName(from);
         raw.packUint64(cost);
         raw.packUint64(Function.inttolong(id));
+        raw.packUint8(2);
+        raw.packName(ServerConfig.BPAccount);
         String transferData = raw.toHex();
-        List<TransactionAuthorization> authorizations = Arrays.asList(new TransactionAuthorization(from, "active"));
+        List<TransactionAuthorization> authorizations = Arrays.asList(new TransactionAuthorization(ServerConfig.BPAccount, "active"));
         List<TransactionAction> actions = Arrays.asList(
-                new TransactionAction(contractAccount, "subbalance", authorizations, transferData)
+                new TransactionAction(ServerConfig.contractAccount, "subbalance", authorizations, transferData)
         );
         PackedTransaction packedTransaction = new PackedTransaction();
         packedTransaction.setExpiration(arg.getHeadBlockTime().plusNanos(getRandomInteger(arg)));
@@ -133,11 +118,11 @@ public class EOSRequest {
         packedTransaction.setMaxCpuUsageMs(0);
         packedTransaction.setDelaySec(0);
         packedTransaction.setActions(actions);
-        String hash = sign(privateKey, arg, packedTransaction);
+        String hash = sign(ServerConfig.BPPriKey, arg, packedTransaction);
         PushTransactionRequest req = new PushTransactionRequest();
         req.setTransaction(packedTransaction);
         req.setSignatures(Arrays.asList(hash));
-        return encodeRequest(req);
+        return req;
     }
 
     private static String sign(String privateKey, SignArg arg, PackedTransaction t) {

@@ -14,7 +14,6 @@ import io.jafka.jeos.core.request.chain.transaction.PushTransactionRequest;
 import io.jafka.jeos.core.response.chain.transaction.PushedTransaction;
 import java.util.Map;
 import org.apache.log4j.Logger;
-import org.bson.types.ObjectId;
 
 public class EOSClient {
 
@@ -64,12 +63,29 @@ public class EOSClient {
     /**
      * 扣除初始费用
      *
-     * @param reqdata
+     * @param firstCost
+     * @param username
      * @param id
      * @throws Throwable
      */
-    public static void deductHDD(byte[] reqdata, ObjectId id) throws Throwable {
-        EOSRequest.request(reqdata, id);
+    public static void deductHDD(long firstCost, String username, int id) throws Throwable {
+        Exception err = null;
+        for (int ii = 0; ii < 3; ii++) {
+            EOSURI uri = BpList.getEOSURI();
+            try {
+                EosApi eosApi = EosApiFactory.create(uri.url);
+                SignArg arg = eosApi.getSignArg((int) EOSClientCache.EXPIRED_TIME);
+                PushTransactionRequest req = EOSRequest.makeSubBalanceRequest(arg, username, firstCost, id);
+                eosApi.pushTransaction(req);
+                return;
+            } catch (Exception r) {
+                err = r;
+                if (!uri.setErr(r)) {
+                    throw r;
+                }
+            }
+        }
+        throw err;
     }
 
     /**
