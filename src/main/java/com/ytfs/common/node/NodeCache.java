@@ -55,7 +55,6 @@ public class NodeCache {
             n.setId(node.getId());
             n.setPeerId(node.getNodeid());
             nodes.put(key, n);
-
         }
         return n;
     }

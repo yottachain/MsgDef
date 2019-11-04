@@ -1,5 +1,10 @@
 package com.ytfs.common.codec.erasure;
 
+/**
+ *
+ * Backblaze/JavaReedSolomon is licensed under the MIT License
+ * https://github.com/Backblaze/JavaReedSolomon
+ */
 public class ReedSolomon {
 
     private final int dataShardCount;

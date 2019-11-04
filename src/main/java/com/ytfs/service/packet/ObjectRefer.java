@@ -7,27 +7,7 @@ import java.util.List;
 
 public class ObjectRefer {
 
-    public static List<ObjectRefer> parse(byte[] bs, byte[][] blks) {
-        if (blks != null) {
-            return parse(blks);
-        } else {
-            return parse(bs);
-        }
-    }
-
-    private static List<ObjectRefer> parse(byte[] bs) {
-        List<ObjectRefer> ls = new ArrayList();
-        int len = bs.length / 52;
-        for (int ii = 0; ii < len; ii++) {
-            byte[] blkbs = new byte[52];
-            System.arraycopy(bs, ii * 52, blkbs, 0, 52);
-            ObjectRefer refer = new ObjectRefer(blkbs);
-            ls.add(refer);
-        }
-        return ls;
-    }
-
-    private static List<ObjectRefer> parse(byte[][] blks) {
+    public static List<ObjectRefer> parse(byte[][] blks) {
         List<ObjectRefer> ls = new ArrayList();
         for (byte[] bs : blks) {
             ObjectRefer refer = new ObjectRefer(bs);
@@ -49,23 +29,6 @@ public class ObjectRefer {
             blks[index++] = refer.toBytes();
         }
         return blks;
-    }
-
-    /**
-     * 合并
-     *
-     * @param ls
-     * @return
-     */
-    public static byte[] mergeBytes(List<ObjectRefer> ls) {
-        byte[] bs = new byte[52 * ls.size()];
-        int pos = 0;
-        for (ObjectRefer refer : ls) {
-            byte[] blkbs = refer.toBytes();
-            System.arraycopy(blkbs, 0, bs, pos, 52);
-            pos = pos + 52;
-        }
-        return bs;
     }
 
     private long VBI;  //8
