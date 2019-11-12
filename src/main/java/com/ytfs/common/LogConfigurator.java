@@ -46,11 +46,13 @@ public class LogConfigurator {
             while (lognames.hasMoreElements()) {
                 String name = lognames.nextElement();
                 java.util.logging.Logger logger = java.util.logging.LogManager.getLogManager().getLogger(name);
-                java.util.logging.Handler[] handlers = logger.getHandlers();
-                for (java.util.logging.Handler h : handlers) {
-                    logger.removeHandler(h);
+                if (logger != null) {
+                    java.util.logging.Handler[] handlers = logger.getHandlers();
+                    for (java.util.logging.Handler h : handlers) {
+                        logger.removeHandler(h);
+                    }
+                    logger.addHandler(handler);
                 }
-                logger.addHandler(handler);
             }
         }
     }
