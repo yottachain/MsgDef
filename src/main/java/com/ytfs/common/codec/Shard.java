@@ -15,8 +15,8 @@ public class Shard {
         this.VHF = VHF;
     }
 
-    public boolean isRsShard() {
-        return getData()[0] != (byte) 0xFF;
+    public boolean isCopyShard() {
+        return getData()[0] == (byte) 0xFF;
     }
 
     public int getShardIndex() {

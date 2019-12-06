@@ -8,13 +8,13 @@ public class BlockRefer {
 
     public static List<BlockRefer> parse(byte[] bs) {
         List<BlockRefer> ls = new ArrayList();
-        int len = bs.length / 40;
+        int len = bs.length / 24;
         ByteBuffer buf = ByteBuffer.wrap(bs);
         for (int ii = 0; ii < len; ii++) {
             BlockRefer refer = new BlockRefer();
             refer.shardid = buf.getInt();
             refer.nodeid = buf.getInt();
-            refer.VHF = new byte[32];
+            refer.VHF = new byte[16];
             buf.get(refer.VHF);
             ls.add(refer);
         }
@@ -22,7 +22,7 @@ public class BlockRefer {
     }
 
     public static byte[] merge(List<BlockRefer> ls) {
-        ByteBuffer buf = ByteBuffer.allocate(40 * ls.size());
+        ByteBuffer buf = ByteBuffer.allocate(24 * ls.size());
         for (BlockRefer refer : ls) {
             buf.putInt(refer.shardid);
             buf.putInt(refer.nodeid);
@@ -74,7 +74,7 @@ public class BlockRefer {
         this.nodeid = nodeid;
     }
 
-    private int shardid;  
+    private int shardid;
     private byte[] VHF;
     private int nodeid;
 

@@ -26,6 +26,17 @@ message TaskDescription{
 //recoverId:需要恢复的分片索引,从0开始,相当于hashs[recoverId]需要恢复
 
 
+//LRC编码重建任务
+//msgid=0x68b3
+message TaskDescription{
+    bytes id = 1; 
+    repeated bytes hashs=2;
+    repeated P2PLocation locations=3;
+    int32 parityShardCount=4;
+    int32 recoverId=5;
+}
+
+
 副本集编码重建任务
 //msgid=0xc258
 message TaskDescriptionCP{

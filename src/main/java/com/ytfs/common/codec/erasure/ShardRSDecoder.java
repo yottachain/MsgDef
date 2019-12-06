@@ -1,5 +1,7 @@
-package com.ytfs.common.codec;
+package com.ytfs.common.codec.erasure;
 
+import com.ytfs.common.codec.BlockEncrypted;
+import com.ytfs.common.codec.Shard;
 import com.ytfs.common.codec.erasure.ReedSolomon;
 import static com.ytfs.common.conf.UserConfig.Default_PND;
 import java.util.List;
@@ -24,7 +26,7 @@ public class ShardRSDecoder {
 
     public BlockEncrypted decode() {
         Shard shard = copyShard == null ? shards.get(0) : copyShard;
-        if (!shard.isRsShard()) {
+        if (shard.isCopyShard()) {
             byte[] data = new byte[encryptedBlockSize];
             System.arraycopy(shard.getData(), 1, data, 0, encryptedBlockSize);
             BlockEncrypted b = new BlockEncrypted();

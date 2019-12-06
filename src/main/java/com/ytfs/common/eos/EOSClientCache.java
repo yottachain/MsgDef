@@ -5,7 +5,6 @@ import com.google.common.cache.CacheBuilder;
 import io.jafka.jeos.EosApi;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
-import org.bson.types.ObjectId;
 
 public class EOSClientCache {
 

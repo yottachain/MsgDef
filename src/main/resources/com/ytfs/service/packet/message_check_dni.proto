@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+option java_package = "com.ytfs.service.packet.node"; 
+
+//msgid=0x4bc6
+message ListDNIReq{
+    bytes nextid= 1; 
+    int32 count=2;
+}
+
+//msgid=0xd6cb
+message ListDNIResp{
+    repeated bytes vnflist=1;
+    bytes nextid= 2; 
+}
+
+
+//矿机每隔一段时间向SN请求(ListDNIReq)下载count个新的分片Hash,nextid是上一次请求返回的标记,如果第一次下载,nextid填null
+//SN收到请求后,回应(ListDNIResp),返回给矿机若干个Hash对列(vnflist),并告诉矿机,下一次从nextid开始下载
+
+//如果矿机请求1000个分片,SN返回了1000个分片，表示SN端还有需要下载的分片，矿机可以不用间隔，再次请求下载
+//如果矿机请求1000个分片,SN返回少于1000个分片，表示SN端可能没有新的分片,矿机可以根据情况等一段时间再请求下载
+//注意：count的设置值范围暂定(100-5000)

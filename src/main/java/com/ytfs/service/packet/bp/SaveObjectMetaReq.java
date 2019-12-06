@@ -8,7 +8,7 @@ public class SaveObjectMetaReq {
     private int userID;
     private ObjectId VNU;
     private ObjectRefer refer;
-    private long nlink;
+    private long usedSpace;
    
 
     /**
@@ -56,15 +56,15 @@ public class SaveObjectMetaReq {
     /**
      * @return the nlink
      */
-    public long getNlink() {
-        return nlink;
+    public long getUsedSpace() {
+        return usedSpace;
     }
 
     /**
-     * @param nlink the nlink to set
+     * @param usedSpace the nlink to set
      */
-    public void setNlink(long nlink) {
-        this.nlink = nlink;
+    public void setUsedSpace(long usedSpace) {
+        this.usedSpace = usedSpace;
     }
 
 }

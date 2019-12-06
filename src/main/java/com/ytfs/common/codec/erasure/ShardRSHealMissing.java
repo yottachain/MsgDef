@@ -1,6 +1,7 @@
-package com.ytfs.common.codec;
+package com.ytfs.common.codec.erasure;
 
-import com.ytfs.common.codec.erasure.ReedSolomon;
+import com.ytfs.common.codec.Shard;
+import com.ytfs.common.codec.ShardEncoder;
 import static com.ytfs.common.conf.UserConfig.Default_PND;
 import java.io.IOException;
 import java.util.List;
@@ -17,7 +18,7 @@ public class ShardRSHealMissing {
 
     public void heal() throws IOException {
         Shard shard = getShards().get(0);
-        if (!shard.isRsShard()) {
+        if (shard.isCopyShard()) {
             getShards().clear();
             for (int ii = 0; ii < Default_PND + 1; ii++) {
                 getShards().add(shard);
@@ -46,7 +47,7 @@ public class ShardRSHealMissing {
             reedSolomon.decodeMissing(datas, shardPresent, 1, shardsize);
             for (int ii = 0; ii < reedSolomon.getTotalShardCount(); ii++) {
                 if (shardPresent[ii] == false) {
-                    Shard shd = new Shard(datas[ii], ShardRSEncoder.sha(datas[ii]));
+                    Shard shd = new Shard(datas[ii], ShardEncoder.sha(datas[ii]));
                     shards.add(shd);
                 }
             }

@@ -10,7 +10,10 @@ public class ServerConfig {
     public static long unitcost = 4;
 
     //计费周期如:1天
-    public static long PPC = 1000 * 60 * 60 * 24;
+    public final static long PPC = 1000 * 60 * 60 * 24;
+
+    //周期费用统计间隔
+    public static long CostSumCycle = PPC * 7;
 
     //元数据空间
     public final static long PCM = 16 * 1024;
@@ -21,8 +24,7 @@ public class ServerConfig {
     //存储节点验签失败,拒绝存储,超过3次,惩罚
     public final static int PNF = 3;
 
-    //上传DNI
-    public final static int SENDDNI_QUEUE = 2000;
+    public final static int PFL = 1024 * 16;  //PFL
 
     //重建
     public final static int REBULIDTHREAD = 50;
@@ -44,7 +46,8 @@ public class ServerConfig {
     //eos ADD
     public static String eosURI;
     public static String BPAccount;
-    public static String BPPriKey;
+    public static String ShadowAccount;
+    public static String ShadowPriKey;
     public static String contractAccount;
     public static String contractOwnerD;
 

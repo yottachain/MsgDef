@@ -14,13 +14,13 @@ public class NodeManager {
     private static final Logger LOG = Logger.getLogger(NodeManager.class);
 
     public synchronized static void start(List<ServerAddress> addrs, String auth,
-            String eos, String bpuser, String bpkey, String contractAccount,
+            String eos, String bpuser, String sduser, String sdkey, String contractAccount,
             String contractAccountD, int id) throws Throwable {
         try {
             LOG.info("NodeManager init...");
             ServerAddress serverAddress = addrs.get(0);
             String addr = "mongodb://" + serverAddress.getHost() + ":" + serverAddress.getPort();
-            YottaNodeMgmt.start(addr, eos, bpuser, bpkey, contractAccount, contractAccountD, id);
+            YottaNodeMgmt.start(addr, eos, bpuser, sdkey, contractAccount, contractAccountD, sduser, id);
             LOG.info("NodeManager init OK!");
         } catch (Throwable ne) {
             LOG.error("NodeManager init error:" + ne);

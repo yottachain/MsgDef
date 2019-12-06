@@ -6,17 +6,15 @@ public class UploadBlockInitReq {
 
     private byte[] VHP;//该数据块的明文SHA256摘要
     private ObjectId VNU; //upload id
-    private int shardCount = 0;//需要返回存储分片的节点个数
     private short id;
 
     public UploadBlockInitReq() {
     }
 
-    public UploadBlockInitReq(ObjectId VNU, byte[] VHP, int shardcount, short id) {
+    public UploadBlockInitReq(ObjectId VNU, byte[] VHP, short id) {
         this.VNU = VNU;
         this.VHP = VHP;
         this.id = id;
-        this.shardCount = shardcount;
     }
 
     /**
@@ -31,20 +29,6 @@ public class UploadBlockInitReq {
      */
     public final void setVHP(byte[] VHP) {
         this.VHP = VHP;
-    }
-
-    /**
-     * @return the shardCount
-     */
-    public int getShardCount() {
-        return shardCount;
-    }
-
-    /**
-     * @param shardCount the shardCount to set
-     */
-    public final void setShardCount(int shardCount) {
-        this.shardCount = shardCount;
     }
 
     /**

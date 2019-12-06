@@ -70,6 +70,8 @@
                 <includes>
                     <include>**/*.properties</include>
                     <include>**/*.html</include>
+                    <include>**/*.so</include>
+                    <include>**/*.dll</include>
                     <include>**/*.js</include>
                 </includes>
                 <filtering>false</filtering>

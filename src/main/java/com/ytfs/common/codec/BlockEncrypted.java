@@ -1,7 +1,6 @@
 package com.ytfs.common.codec;
 
 import com.ytfs.common.conf.UserConfig;
-import static com.ytfs.common.conf.UserConfig.Default_PND;
 import static com.ytfs.common.conf.UserConfig.Default_Shard_Size;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -12,7 +11,6 @@ public class BlockEncrypted {
     private int encryptedBlockSize;
     private byte[] data;
     private boolean copyMode = false;
-    private int shardCount;
 
     public BlockEncrypted() {
     }
@@ -25,17 +23,11 @@ public class BlockEncrypted {
         } else {
             encryptedBlockSize = blocksize + (16 - remain);
         }
-        if (encryptedBlockSize <= UserConfig.PL2) {
-            shardCount = 0;
-        } else {
+        if (encryptedBlockSize >= UserConfig.PL2) {
             int shardsize = Default_Shard_Size - 1;
             int dataShardCount = encryptedBlockSize / shardsize;
-            int remainSize = encryptedBlockSize % shardsize;
             if (dataShardCount == 0) {//副本
-                shardCount = Default_PND;
                 copyMode = true;
-            } else {
-                shardCount = dataShardCount + (remainSize > 0 ? 1 : 0) + Default_PND;
             }
         }
     }
@@ -118,17 +110,4 @@ public class BlockEncrypted {
         this.copyMode = copyMode;
     }
 
-    /**
-     * @return the shardCount
-     */
-    public int getShardCount() {
-        return shardCount;
-    }
-
-    /**
-     * @param shardCount the shardCount to set
-     */
-    public void setShardCount(int shardCount) {
-        this.shardCount = shardCount;
-    }
 }

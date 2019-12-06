@@ -1,28 +1,24 @@
-package com.ytfs.common.codec;
+package com.ytfs.common.codec.erasure;
 
-import com.ytfs.common.codec.erasure.ReedSolomon;
+import com.ytfs.common.codec.BlockEncrypted;
+import com.ytfs.common.codec.Shard;
+import com.ytfs.common.codec.ShardEncoder;
 import static com.ytfs.common.conf.UserConfig.Default_PND;
 import static com.ytfs.common.conf.UserConfig.Default_Shard_Size;
 import java.io.IOException;
-import java.security.MessageDigest;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
-public class ShardRSEncoder {
-
-    private final BlockEncrypted encryptedBlock;
-    private List<Shard> shardList;
+public class ShardRSEncoder extends ShardEncoder {
 
     public ShardRSEncoder(BlockEncrypted block) {
-        this.encryptedBlock = block;
+        super(block);
     }
 
+    @Override
     public void encode() throws IOException {
         if (!encryptedBlock.needEncode()) {
             return;
         }
-        shardList = new ArrayList();
         int shardsize = Default_Shard_Size - 1;
         int dataShardCount = encryptedBlock.getEncryptedBlockSize() / shardsize;
         int remainSize = encryptedBlock.getEncryptedBlockSize() % shardsize;
@@ -36,7 +32,6 @@ public class ShardRSEncoder {
                 getShardList().add(shard);
             }
             encryptedBlock.setCopyMode(true);
-            encryptedBlock.setShardCount(Default_PND);
         } else {
             ReedSolomon reedSolomon = ReedSolomon.create(dataShardCount + (remainSize > 0 ? 1 : 0), Default_PND);
             byte[][] out = new byte[reedSolomon.getTotalShardCount()][Default_Shard_Size];
@@ -58,40 +53,7 @@ public class ShardRSEncoder {
                 Shard shard = new Shard(out1, sha(out1));
                 getShardList().add(shard);
             }
-            encryptedBlock.setShardCount(reedSolomon.getTotalShardCount());
+            this.dataCount = dataShardCount + (remainSize > 0 ? 1 : 0);
         }
-    }
-
-    /**
-     * @return the shardList
-     */
-    public List<Shard> getShardList() {
-        return shardList;
-    }
-
-    static byte[] sha(byte[] data) {
-        try {
-            MessageDigest sha = MessageDigest.getInstance("SHA-256");
-            return sha.digest(data);
-        } catch (Exception r) {
-            throw new IllegalArgumentException(r.getMessage());
-        }
-    }
-
-    public byte[] makeVHB() {
-        try {
-            MessageDigest md5 = MessageDigest.getInstance("MD5");
-            if (shardList.get(0).isRsShard()) {
-                for (Shard s : shardList) {
-                    md5.update(s.getVHF());
-                }
-            } else {
-                md5.update(shardList.get(0).getVHF());
-            }
-            return md5.digest();
-        } catch (Exception r) {
-            throw new IllegalArgumentException(r.getMessage());
-        }
-
     }
 }

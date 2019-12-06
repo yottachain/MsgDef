@@ -16,16 +16,25 @@ public class UserConfig {
     public final static int Compress_Reserve_Size = 16 * 1024;
 
     //数据分片大小
-    public final static int Default_Shard_Size = 1024 * 16;  //PFL
+    public final static int Default_Shard_Size = 16 * 1024;  //PFL
+
+    //使用LRC编码
+    public final static boolean useLRCCoder = true;
+
+    //最大分片数
+    public final static short Max_Shard_Count = 128;
 
     //最多容许掉线分片数量　
-    public final static int Default_PND = 32;
+    public final static short Default_PND = 36;
 
     //小于PL2的数据块，直接记录在元数据库中
     public final static int PL2 = 256;
 
     //重试SN次数，5分钟
     public final static int SN_RETRYTIMES = 6 * 5;
+
+    //LRC
+    public final static short LRCMAXHANDLERS = 50;
 
     //**************************可配置参数********************************
     //用户钱包账户名
@@ -52,11 +61,10 @@ public class UserConfig {
     //下载线程数
     public static int DOWNLOADSHARDTHREAD = 200;
 
-    
     public static int CONN_EXPIRED = 1000 * 60 * 3;
 
     //预分配矿机数目
-    public static int PNN = 320;
+    public static int PNN = (Max_Shard_Count + Default_PND) * 2;
 
     //预分配矿机失效时长
     public static int PTR = 1000 * 60 * 2;

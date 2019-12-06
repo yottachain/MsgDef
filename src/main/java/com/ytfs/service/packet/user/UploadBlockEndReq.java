@@ -14,7 +14,7 @@ public class UploadBlockEndReq {
     private long originalSize;  //编码前长度  6字节
     private int realSize;
     private ObjectId VNU; //upload id
-    private boolean rsShard;
+    private int AR;
     private List<UploadShardRes> okList;
        
     
@@ -118,20 +118,6 @@ public class UploadBlockEndReq {
 
 
     /**
-     * @return the rsShard
-     */
-    public boolean isRsShard() {
-        return rsShard;
-    }
-
-    /**
-     * @param rsShard the rsShard to set
-     */
-    public void setRsShard(boolean rsShard) {
-        this.rsShard = rsShard;
-    }
-
-    /**
      * @return the okList
      */
     public List<UploadShardRes> getOkList() {
@@ -157,5 +143,19 @@ public class UploadBlockEndReq {
      */
     public void setVNU(ObjectId VNU) {
         this.VNU = VNU;
+    }
+
+    /**
+     * @return the AR
+     */
+    public int getAR() {
+        return AR;
+    }
+
+    /**
+     * @param AR the AR to set
+     */
+    public void setAR(int AR) {
+        this.AR = AR;
     }
 }

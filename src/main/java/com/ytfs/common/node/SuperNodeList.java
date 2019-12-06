@@ -6,6 +6,7 @@ import com.ytfs.common.net.P2PUtils;
 import com.ytfs.service.packet.user.ListSuperNodeReq;
 import com.ytfs.service.packet.user.ListSuperNodeResp;
 import io.yottachain.nodemgmt.core.vo.SuperNode;
+import java.math.BigInteger;
 import org.apache.log4j.Logger;
 
 public class SuperNodeList {
@@ -65,6 +66,33 @@ public class SuperNodeList {
         SuperNode[] nodes = getSuperNodeList();
         int index = value % nodes.length;
         return nodes[index];
+    }
+
+    public static BigInteger stringToName(String str) {
+        BigInteger b = BigInteger.ZERO;
+        byte[] strbytes = str.getBytes();
+        for (int i = 0; i < strbytes.length; i++) {
+            int t = charToSymbol(strbytes[i]) & 0x1f;
+            b = b.or(BigInteger.valueOf(t).shiftLeft(64 - 5 * (i + 1)));
+        }
+        return b;
+    }
+
+    public static int charToSymbol(byte c) {
+        if (c >= 0x61 && c <= 0x7a) {
+            return (c - 0x61) + 6;
+        }
+        if (c >= 0x31 && c <= 0x35) {
+            return (c - 0x31) + 1;
+        }
+        return 0;
+    }
+
+    public static SuperNode getUserRegSuperNode(String str) {
+        BigInteger bi = stringToName(str);
+        SuperNode[] nodes = getSuperNodeList();
+        BigInteger index = bi.mod(BigInteger.valueOf(nodes.length));
+        return nodes[index.intValue()];
     }
 
     /**

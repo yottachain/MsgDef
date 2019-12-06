@@ -2,8 +2,6 @@ package com.ytfs.common.eos;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.ytfs.common.Function;
-import static com.ytfs.common.ServiceErrorCode.INVALID_SESSION;
-import com.ytfs.common.ServiceException;
 import com.ytfs.common.conf.ServerConfig;
 import io.jafka.jeos.EosApi;
 import io.jafka.jeos.EosApiFactory;
@@ -22,7 +20,6 @@ import java.nio.ByteBuffer;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
-import org.bson.types.ObjectId;
 
 public class EOSRequest {
 
@@ -106,7 +103,7 @@ public class EOSRequest {
         raw.packUint8(2);
         raw.packName(ServerConfig.BPAccount);
         String transferData = raw.toHex();
-        List<TransactionAuthorization> authorizations = Arrays.asList(new TransactionAuthorization(ServerConfig.BPAccount, "active"));
+        List<TransactionAuthorization> authorizations = Arrays.asList(new TransactionAuthorization(ServerConfig.ShadowAccount, "active"));
         List<TransactionAction> actions = Arrays.asList(
                 new TransactionAction(ServerConfig.contractAccount, "subbalance", authorizations, transferData)
         );
@@ -118,7 +115,7 @@ public class EOSRequest {
         packedTransaction.setMaxCpuUsageMs(0);
         packedTransaction.setDelaySec(0);
         packedTransaction.setActions(actions);
-        String hash = sign(ServerConfig.BPPriKey, arg, packedTransaction);
+        String hash = sign(ServerConfig.ShadowPriKey, arg, packedTransaction);
         PushTransactionRequest req = new PushTransactionRequest();
         req.setTransaction(packedTransaction);
         req.setSignatures(Arrays.asList(hash));
@@ -138,7 +135,7 @@ public class EOSRequest {
         raw.packUint8(2);
         raw.packName(ServerConfig.BPAccount);
         String transferData = raw.toHex();
-        List<TransactionAuthorization> authorizations = Arrays.asList(new TransactionAuthorization(ServerConfig.BPAccount, "active"));
+        List<TransactionAuthorization> authorizations = Arrays.asList(new TransactionAuthorization(ServerConfig.ShadowAccount, "active"));
         List<TransactionAction> actions = Arrays.asList(
                 new TransactionAction(ServerConfig.contractAccount, "getbalance", authorizations, transferData)
         );
@@ -150,7 +147,7 @@ public class EOSRequest {
         packedTransaction.setMaxCpuUsageMs(0);
         packedTransaction.setDelaySec(0);
         packedTransaction.setActions(actions);
-        String hash = sign(ServerConfig.BPPriKey, arg, packedTransaction);
+        String hash = sign(ServerConfig.ShadowPriKey, arg, packedTransaction);
         PushTransactionRequest req = new PushTransactionRequest();
         req.setTransaction(packedTransaction);
         req.setSignatures(Arrays.asList(hash));
@@ -164,7 +161,7 @@ public class EOSRequest {
         raw.packName(ServerConfig.BPAccount);
         raw.packUint64(Function.inttolong(id));
         String transferData = raw.toHex();
-        List<TransactionAuthorization> authorizations = Arrays.asList(new TransactionAuthorization(ServerConfig.BPAccount, "active"));
+        List<TransactionAuthorization> authorizations = Arrays.asList(new TransactionAuthorization(ServerConfig.ShadowAccount, "active"));
         List<TransactionAction> actions = Arrays.asList(
                 new TransactionAction(ServerConfig.contractAccount, "addhspace", authorizations, transferData)
         );
@@ -176,7 +173,7 @@ public class EOSRequest {
         packedTransaction.setMaxCpuUsageMs(0);
         packedTransaction.setDelaySec(0);
         packedTransaction.setActions(actions);
-        String hash = sign(ServerConfig.BPPriKey, arg, packedTransaction);
+        String hash = sign(ServerConfig.ShadowPriKey, arg, packedTransaction);
         PushTransactionRequest req = new PushTransactionRequest();
         req.setTransaction(packedTransaction);
         req.setSignatures(Arrays.asList(hash));
@@ -190,7 +187,7 @@ public class EOSRequest {
         raw.packName(ServerConfig.BPAccount);
         raw.packUint64(Function.inttolong(id));
         String transferData = raw.toHex();
-        List<TransactionAuthorization> authorizations = Arrays.asList(new TransactionAuthorization(ServerConfig.BPAccount, "active"));
+        List<TransactionAuthorization> authorizations = Arrays.asList(new TransactionAuthorization(ServerConfig.ShadowAccount, "active"));
         List<TransactionAction> actions = Arrays.asList(
                 new TransactionAction(ServerConfig.contractAccount, "sethfee", authorizations, transferData)
         );
@@ -202,7 +199,7 @@ public class EOSRequest {
         packedTransaction.setMaxCpuUsageMs(0);
         packedTransaction.setDelaySec(0);
         packedTransaction.setActions(actions);
-        String hash = sign(ServerConfig.BPPriKey, arg, packedTransaction);
+        String hash = sign(ServerConfig.ShadowPriKey, arg, packedTransaction);
         PushTransactionRequest req = new PushTransactionRequest();
         req.setTransaction(packedTransaction);
         req.setSignatures(Arrays.asList(hash));

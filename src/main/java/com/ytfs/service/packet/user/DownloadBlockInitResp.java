@@ -8,6 +8,8 @@ public class DownloadBlockInitResp {
     private int VNF;
     private byte[][] VHF;
     private int[] nodeids;
+    private int AR;
+      
 
     /**
      * @return the VHF
@@ -63,6 +65,20 @@ public class DownloadBlockInitResp {
      */
     public void setNodeids(int[] nodeids) {
         this.nodeids = nodeids;
+    }
+
+    /**
+     * @return the AR
+     */
+    public int getAR() {
+        return AR;
+    }
+
+    /**
+     * @param AR the AR to set
+     */
+    public void setAR(int AR) {
+        this.AR = AR;
     }
 
 }
