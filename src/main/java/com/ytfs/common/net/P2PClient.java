@@ -1,11 +1,11 @@
 package com.ytfs.common.net;
 
+import com.ytfs.common.Function;
+import com.ytfs.common.MessageFactory;
 import com.ytfs.common.SerializationUtil;
 import static com.ytfs.common.ServiceErrorCode.COMM_ERROR;
 import com.ytfs.common.ServiceException;
 import static com.ytfs.common.conf.UserConfig.CONN_EXPIRED;
-import static com.ytfs.common.net.P2PUtils.MSG_2BP;
-import static com.ytfs.common.net.P2PUtils.MSG_2BPU;
 import static com.ytfs.common.net.P2PUtils.getAddrString;
 import io.yottachain.p2phost.YottaP2P;
 import io.yottachain.p2phost.core.exception.P2pHostException;
@@ -49,20 +49,13 @@ public class P2PClient {
             }
         }
         lasttime.set(System.currentTimeMillis());
-        byte[] data = SerializationUtil.serialize(obj);
+        short id = MessageFactory.getMessageID(obj.getClass());
+        byte[] msgType = new byte[2];
+        Function.short2bytes(id, msgType, 0);
+        byte[] data = SerializationUtil.serializeNoID(obj);
         byte[] bs = null;
         try {                    //访问p2p网络
-            switch (type) {
-                case MSG_2BPU:
-                    bs = YottaP2P.sendToBPUMsg(getKey(), data);
-                    break;
-                case MSG_2BP:
-                    bs = YottaP2P.sendToBPMsg(getKey(), data);
-                    break;
-                default:
-                    bs = YottaP2P.sendToNodeMsg(getKey(), data);
-                    break;
-            }
+            bs = YottaP2P.sendMsg(getKey(), msgType, data);
         } catch (Throwable e) {
             LOG.error(log_pre + "COMM_ERROR:" + addrString + e.getMessage());
             synchronized (this) {

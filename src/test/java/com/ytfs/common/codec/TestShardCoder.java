@@ -23,7 +23,7 @@ public class TestShardCoder {
         MessageDigest sha256 = MessageDigest.getInstance("SHA-256");
         key = sha256.digest(key);
 
-        Block block = new Block("d:\\aa.zip");
+        Block block = new Block("d:\\test.rar");
         block.load();
 
         BlockAESEncryptor aes = new BlockAESEncryptor(block, key);
@@ -40,9 +40,9 @@ public class TestShardCoder {
 
         List<Shard> shards = encoder.getShardList();
         for (int ii = 0; ii < shards.size(); ii++) {
-           // FileOutputStream foss = new FileOutputStream("d:/test" + ii + ".dat");
-           // foss.write(shards.get(ii).getData());
-           // foss.close();
+            FileOutputStream foss = new FileOutputStream("d:/test" + ii + ".dat");
+            foss.write(shards.get(ii).getData());
+            foss.close();
         }
 
         deleteDataShard(shards);
@@ -65,7 +65,7 @@ public class TestShardCoder {
         aesdecoder.decrypt();
 
         block = new Block(aesdecoder.getSrcData());
-        block.save("d:\\test.0.zip");
+        block.save("d:\\test.0.rar");
 
     }
    

@@ -17,28 +17,6 @@ public class SerializationUtil {
             .withInitial(() -> LinkedBuffer.allocate(512));
 
     /**
-     * 序列化对象
-     *
-     * @param obj
-     * @return byte[]
-     */
-    public static byte[] serializeNoID(Object obj) {
-        if (obj == null) {
-            throw new IllegalArgumentException();
-        }
-        @SuppressWarnings("unchecked")
-        Schema schema = RuntimeSchema.getSchema(obj.getClass());
-        LinkedBuffer buffer = BUFFER_THREAD_LOCAL.get();
-        try {
-            return ProtostuffIOUtil.toByteArray(obj, schema, buffer);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        } finally {
-            buffer.clear();
-        }
-    }
-
-    /**
      * 反序列化
      *
      * @param paramArrayOfByte
@@ -52,6 +30,41 @@ public class SerializationUtil {
         Class targetClass = instance.getClass();
         Schema schema = RuntimeSchema.getSchema(targetClass);
         ProtostuffIOUtil.mergeFrom(paramArrayOfByte, instance, schema);
+    }
+
+    /**
+     * 序列化对象
+     *
+     * @param obj
+     * @return byte[]
+     */
+    public static byte[] serializeNoID(Object obj) {
+        if (obj == null) {
+            throw new IllegalArgumentException();
+        }
+        if (obj instanceof ServiceException) {
+            obj = ((ServiceException) obj).toErrMessage();
+        }
+        IdStrategy idStrategy = null;
+        if (obj instanceof SerializationStrategy) {
+            idStrategy = ((SerializationStrategy) obj).getIdStrategy();
+        }
+        @SuppressWarnings("unchecked")
+        Schema schema;
+        if (idStrategy == null) {
+            schema = RuntimeSchema.getSchema(obj.getClass());
+        } else {
+            schema = RuntimeSchema.createFrom(obj.getClass(), idStrategy);
+        }
+        LinkedBuffer buffer = BUFFER_THREAD_LOCAL.get();
+        try {
+            byte[] protostuff = ProtostuffIOUtil.toByteArray(obj, schema, buffer);
+            return protostuff;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        } finally {
+            buffer.clear();
+        }
     }
 
     /**

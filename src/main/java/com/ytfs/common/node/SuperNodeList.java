@@ -5,6 +5,7 @@ import com.ytfs.common.conf.UserConfig;
 import com.ytfs.common.net.P2PUtils;
 import com.ytfs.service.packet.user.ListSuperNodeReq;
 import com.ytfs.service.packet.user.ListSuperNodeResp;
+import static io.jafka.jeos.util.Raw.charidx;
 import io.yottachain.nodemgmt.core.vo.SuperNode;
 import java.math.BigInteger;
 import org.apache.log4j.Logger;
@@ -68,24 +69,19 @@ public class SuperNodeList {
         return nodes[index];
     }
 
-    public static BigInteger stringToName(String str) {
-        BigInteger b = BigInteger.ZERO;
-        byte[] strbytes = str.getBytes();
-        for (int i = 0; i < strbytes.length; i++) {
-            int t = charToSymbol(strbytes[i]) & 0x1f;
-            b = b.or(BigInteger.valueOf(t).shiftLeft(64 - 5 * (i + 1)));
+    public static BigInteger stringToName(String n) {
+        StringBuilder bits = new StringBuilder(64);
+        for (int i = 0; i <= 12; i++) {
+            int c = i < n.length() ? charidx(n.charAt(i)) : 0;
+            int bitlen = i < 12 ? 5 : 4;
+            String _b = Integer.toBinaryString(c);
+            for (int j = 0; j < bitlen - _b.length(); j++) {
+                bits.append('0');
+            }
+            bits.append(_b);
         }
-        return b;
-    }
-
-    public static int charToSymbol(byte c) {
-        if (c >= 0x61 && c <= 0x7a) {
-            return (c - 0x61) + 6;
-        }
-        if (c >= 0x31 && c <= 0x35) {
-            return (c - 0x31) + 1;
-        }
-        return 0;
+        BigInteger vname = new BigInteger(bits.toString(), 2);
+        return vname;
     }
 
     public static SuperNode getUserRegSuperNode(String str) {

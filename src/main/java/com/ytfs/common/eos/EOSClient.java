@@ -65,17 +65,16 @@ public class EOSClient {
      *
      * @param firstCost
      * @param username
-     * @param id
      * @throws Throwable
      */
-    public static void deductHDD(long firstCost, String username, int id) throws Throwable {
+    public static void deductHDD(long firstCost, String username) throws Throwable {
         Exception err = null;
         for (int ii = 0; ii < 3; ii++) {
             EOSURI uri = BpList.getEOSURI();
             try {
                 EosApi eosApi = EosApiFactory.create(uri.url);
                 SignArg arg = eosApi.getSignArg((int) EOSClientCache.EXPIRED_TIME);
-                PushTransactionRequest req = EOSRequest.makeSubBalanceRequest(arg, username, firstCost, id);
+                PushTransactionRequest req = EOSRequest.makeSubBalanceRequest(arg, username, firstCost);
                 eosApi.pushTransaction(req);
                 return;
             } catch (Exception r) {
@@ -93,17 +92,16 @@ public class EOSClient {
      *
      * @param length
      * @param username
-     * @param id
      * @throws Throwable
      */
-    public static void addUsedSpace(long length, String username, int id) throws Throwable {
+    public static void addUsedSpace(long length, String username) throws Throwable {
         Exception err = null;
         for (int ii = 0; ii < 3; ii++) {
             EOSURI uri = BpList.getEOSURI();
             try {
                 EosApi eosApi = EosApiFactory.create(uri.url);
                 SignArg arg = eosApi.getSignArg((int) EOSClientCache.EXPIRED_TIME);
-                PushTransactionRequest req = makeAddUsedSpaceRequest(arg, length, username, id);
+                PushTransactionRequest req = makeAddUsedSpaceRequest(arg, length, username);
                 eosApi.pushTransaction(req);
                 return;
             } catch (Exception r) {
@@ -121,17 +119,16 @@ public class EOSClient {
      *
      * @param cost
      * @param username
-     * @param id
      * @throws Throwable
      */
-    public static void setUserFee(long cost, String username, int id) throws Throwable {
+    public static void setUserFee(long cost, String username) throws Throwable {
         Exception err = null;
         for (int ii = 0; ii < 3; ii++) {
             EOSURI uri = BpList.getEOSURI();
             try {
                 EosApi eosApi = EosApiFactory.create(uri.url);
                 SignArg arg = eosApi.getSignArg((int) EOSClientCache.EXPIRED_TIME);
-                PushTransactionRequest req = makeSetHfeeRequest(arg, cost, username, id);
+                PushTransactionRequest req = makeSetHfeeRequest(arg, cost, username);
                 eosApi.pushTransaction(req);
                 return;
             } catch (Exception r) {

@@ -1,5 +1,7 @@
 package com.ytfs.common.net;
 
+import com.ytfs.common.Function;
+import com.ytfs.common.MessageFactory;
 import com.ytfs.common.SerializationUtil;
 import static com.ytfs.common.ServiceErrorCode.COMM_ERROR;
 import static com.ytfs.common.ServiceErrorCode.SERVER_ERROR;
@@ -8,14 +10,12 @@ import io.yottachain.nodemgmt.core.vo.Node;
 import io.yottachain.nodemgmt.core.vo.SuperNode;
 import io.yottachain.p2phost.YottaP2P;
 import io.yottachain.p2phost.core.exception.P2pHostException;
-import io.yottachain.p2phost.interfaces.BPNodeCallback;
-import io.yottachain.p2phost.interfaces.NodeCallback;
-import io.yottachain.p2phost.interfaces.UserCallback;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import org.apache.log4j.Logger;
 import static com.ytfs.common.ServiceErrorCode.NEED_LOGIN;
+import io.yottachain.p2phost.interfaces.Callback;
 
 public class P2PUtils {
 
@@ -47,10 +47,8 @@ public class P2PUtils {
         checker.start();
     }
 
-    public static void register(UserCallback userCallback, BPNodeCallback bPNodeCallback, NodeCallback nodeCallback) {
-        YottaP2P.registerUserCallback(userCallback);
-        YottaP2P.registerBPNodeCallback(bPNodeCallback);
-        YottaP2P.registerNodeCallback(nodeCallback);
+    public static void register(Callback callback) {
+        YottaP2P.registerCallback(callback);
     }
 
     public static final int MSG_2BPU = 0;
@@ -131,10 +129,13 @@ public class P2PUtils {
     }
 
     public static Object requestNode(Object obj, String peerId, String log_prefix) throws ServiceException {
-        byte[] data = SerializationUtil.serialize(obj);
+        byte[] data = SerializationUtil.serializeNoID(obj);
+        short id = MessageFactory.getMessageID(obj.getClass());
+        byte[] msgType = new byte[2];
+        Function.short2bytes(id, msgType, 0);
         byte[] bs = null;
         try {                    //访问p2p网络
-            bs = YottaP2P.sendToNodeMsg(peerId, data);
+            bs = YottaP2P.sendMsg(peerId, msgType, data);
         } catch (Throwable e) {
             LOG.error(log_prefix + "COMM_ERROR:" + e.getMessage());
             throw new ServiceException(COMM_ERROR, e.getMessage());

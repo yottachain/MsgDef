@@ -2,7 +2,6 @@ package com.ytfs.service.packet.s3;
 
 import org.bson.types.ObjectId;
 
-import java.util.Map;
 
 public class ListObjectReq {
     private String bucketName;

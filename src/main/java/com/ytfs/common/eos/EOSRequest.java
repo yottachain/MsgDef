@@ -95,11 +95,12 @@ public class EOSRequest {
         return encodeRequest(req);
     }
 
-    public static PushTransactionRequest makeSubBalanceRequest(SignArg arg, String from, long cost, int id) throws JsonProcessingException, IOException {
+    //void subbalance(name user, int64_t balance, uint8_t acc_type, name caller)
+    public static PushTransactionRequest makeSubBalanceRequest(SignArg arg, String from, long cost) throws JsonProcessingException, IOException {
         Raw raw = new Raw();
         raw.packName(from);
         raw.packUint64(cost);
-        raw.packUint64(Function.inttolong(id));
+        //raw.packUint64(Function.inttolong(id));
         raw.packUint8(2);
         raw.packName(ServerConfig.BPAccount);
         String transferData = raw.toHex();
@@ -154,12 +155,13 @@ public class EOSRequest {
         return req;
     }
 
-    public static PushTransactionRequest makeAddUsedSpaceRequest(SignArg arg, long length, String username, int id) throws JsonProcessingException, IOException {
+    //void addhspace(name user, uint64_t space, name caller);
+    public static PushTransactionRequest makeAddUsedSpaceRequest(SignArg arg, long length, String username) throws JsonProcessingException, IOException {
         Raw raw = new Raw();
         raw.packName(username);
         raw.packUint64(length);
         raw.packName(ServerConfig.BPAccount);
-        raw.packUint64(Function.inttolong(id));
+        //raw.packUint64(Function.inttolong(id));
         String transferData = raw.toHex();
         List<TransactionAuthorization> authorizations = Arrays.asList(new TransactionAuthorization(ServerConfig.ShadowAccount, "active"));
         List<TransactionAction> actions = Arrays.asList(
@@ -180,12 +182,13 @@ public class EOSRequest {
         return req;
     }
 
-    public static PushTransactionRequest makeSetHfeeRequest(SignArg arg, long cost, String username, int id) throws JsonProcessingException, IOException {
+    //void subhspace(name user, uint64_t space, name caller);
+    public static PushTransactionRequest makeSetHfeeRequest(SignArg arg, long cost, String username) throws JsonProcessingException, IOException {
         Raw raw = new Raw();
         raw.packName(username);
         raw.packUint64(cost);
         raw.packName(ServerConfig.BPAccount);
-        raw.packUint64(Function.inttolong(id));
+        //raw.packUint64(Function.inttolong(id));
         String transferData = raw.toHex();
         List<TransactionAuthorization> authorizations = Arrays.asList(new TransactionAuthorization(ServerConfig.ShadowAccount, "active"));
         List<TransactionAction> actions = Arrays.asList(
