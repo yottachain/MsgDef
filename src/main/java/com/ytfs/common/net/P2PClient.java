@@ -34,15 +34,14 @@ public class P2PClient {
         if (!isConnected) {
             synchronized (this) {
                 if (!isConnected && !isDestroy) {
-                    String addstr = getAddrString(addr);
+                    addrString = getAddrString(addr);
                     try {
                         String[] strs = new String[addr.size()];
                         strs = addr.toArray(strs);
                         YottaP2P.connect(getKey(), strs);
-                        isConnected = true;
-                        addrString = addstr;
+                        isConnected = true;                    
                     } catch (P2pHostException ex) {
-                        LOG.info(log_pre + "Connect " + addstr + " Err:" + ex.getMessage());
+                        LOG.info(log_pre + "Connect " + addrString + " Err:" + ex.getMessage());
                         throw new ServiceException(COMM_ERROR, ex.getMessage());
                     }
                 }

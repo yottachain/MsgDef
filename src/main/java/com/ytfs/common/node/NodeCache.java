@@ -54,6 +54,7 @@ public class NodeCache {
             n = new NodeInfo();
             n.setId(node.getId());
             n.setPeerId(node.getNodeid());
+            n.setAddr(node.getAddrs());
             nodes.put(key, n);
         }
         return n;

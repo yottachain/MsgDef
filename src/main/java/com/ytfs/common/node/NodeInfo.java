@@ -1,10 +1,22 @@
 package com.ytfs.common.node;
 
+import io.yottachain.nodemgmt.core.vo.Node;
+import java.util.List;
+
 public class NodeInfo {
 
     private int id;
     private String peerId;
-    private long sendSpotTaskTime=0;
+    private long sendSpotTaskTime = 0;
+    private List<String> addr;
+
+    public Node getNode() {
+        Node node = new Node();
+        node.setAddrs(addr);
+        node.setId(id);
+        node.setNodeid(peerId);
+        return node;
+    }
 
     /**
      * @return the id
@@ -46,6 +58,20 @@ public class NodeInfo {
      */
     public void setSendSpotTaskTime(long sendSpotTaskTime) {
         this.sendSpotTaskTime = sendSpotTaskTime;
+    }
+
+    /**
+     * @return the addr
+     */
+    public List<String> getAddr() {
+        return addr;
+    }
+
+    /**
+     * @param addr the addr to set
+     */
+    public void setAddr(List<String> addr) {
+        this.addr = addr;
     }
 
 }
