@@ -4,37 +4,46 @@ import com.ytfs.common.Function;
 import com.ytfs.common.MessageFactory;
 import com.ytfs.common.SerializationUtil;
 import com.ytfs.common.ServiceException;
+import com.ytfs.service.packet.DownloadShardReq;
+import com.ytfs.service.packet.DownloadShardResp;
 import com.ytfs.service.packet.UploadShardReq;
 import com.ytfs.service.packet.node.GetNodeCapacityReq;
 import com.ytfs.service.packet.node.GetNodeCapacityResp;
+import io.jafka.jeos.util.Base58;
 import io.yottachain.nodemgmt.core.vo.Node;
 import io.yottachain.p2phost.YottaP2P;
 import io.yottachain.p2phost.core.exception.P2pHostException;
 import java.io.IOException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import org.apache.commons.codec.binary.Hex;
 
 public class ClientTest {
 
-    public static void main(String[] args) throws P2pHostException, IOException, InterruptedException, ServiceException {
+    public static void main(String[] args) throws P2pHostException, IOException, InterruptedException, ServiceException, NoSuchAlgorithmException {
+        String VHF = "6uCp6wH17Lv8agLDDwqkgp";
+        System.out.println(VHF);
+        byte[] md5 = Base58.decode(VHF);
         YottaP2P.start(5555, "5KQKydL7TuRwjzaFSK4ezH9RUXWuYHW1yYDp5CmQfsfTuu9MBLZ");
 
         ///ip4/49.233.91.148/tcp/9001/p2p/16Uiu2HAmVcPnpzde3TKCcJkDLKkHYqxfAW99ao5u372BR2Tusioi
-        String[] serverAddrs = {"/ip4/49.233.91.148/tcp/9001"};
-        YottaP2P.connect("16Uiu2HAmVcPnpzde3TKCcJkDLKkHYqxfAW99ao5u372BR2Tusioi", serverAddrs);
+        String[] serverAddrs = {"/ip4/49.233.90.7/tcp/9001"};
+        YottaP2P.connect("16Uiu2HAmLDz6ErTiBCJzsycZdBexhWXTftLitFWzeWmSQ2Bt7Fhs", serverAddrs);
 
-        GetNodeCapacityReq ctlreq = new GetNodeCapacityReq();
-        ctlreq.setRetryTimes(1);
-        ctlreq.setStartTime(System.currentTimeMillis());
+        DownloadShardReq req = new DownloadShardReq();
+        req.setVHF(md5);
 
-        short id = MessageFactory.getMessageID(ctlreq.getClass());
+        short id = MessageFactory.getMessageID(req.getClass());
 
         byte[] msgType = new byte[2];
         Function.short2bytes(id, msgType, 0);
-        byte[] data = SerializationUtil.serializeNoID(ctlreq);
-        byte[] data1 =YottaP2P.sendMsg("16Uiu2HAmVcPnpzde3TKCcJkDLKkHYqxfAW99ao5u372BR2Tusioi", msgType, data);
-        
-         GetNodeCapacityResp resp=(GetNodeCapacityResp)SerializationUtil.deserialize(data1);
-        System.out.println(id);
+        byte[] data = SerializationUtil.serializeNoID(req);
+        byte[] data1 = YottaP2P.sendMsg("16Uiu2HAmLDz6ErTiBCJzsycZdBexhWXTftLitFWzeWmSQ2Bt7Fhs", msgType, data);
+
+        DownloadShardResp resp = (DownloadShardResp) SerializationUtil.deserialize(data1);
+        MessageDigest md51 = MessageDigest.getInstance("MD5");
+        byte[] bs = md51.digest(resp.getData());
+        System.out.println(Base58.encode(bs));
 
         System.in.read();
         // YottaP2P.disconnect("16Uiu2HAm44FX3YuzGXJgHMqnyMM5zCzeT6PUoBNZkz66LutfRREM");
