@@ -9,7 +9,6 @@ public class DownloadBlockInitResp {
     private byte[][] VHF;
     private int[] nodeids;
     private int AR;
-      
 
     /**
      * @return the VHF

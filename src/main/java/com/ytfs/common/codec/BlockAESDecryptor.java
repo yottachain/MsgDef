@@ -1,6 +1,8 @@
 package com.ytfs.common.codec;
 
 import static com.ytfs.common.codec.AESIVParameter.IVParameter;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import javax.crypto.Cipher;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
@@ -21,12 +23,11 @@ public class BlockAESDecryptor {
             SecretKeySpec skeySpec = new SecretKeySpec(key, "AES");
             cipher = Cipher.getInstance("AES/CBC/PKCS5Padding");
             IvParameterSpec iv = new IvParameterSpec(IVParameter);
-            cipher.init(Cipher.DECRYPT_MODE, skeySpec,iv);
+            cipher.init(Cipher.DECRYPT_MODE, skeySpec, iv);
         } catch (Exception r) {
             throw new IllegalArgumentException(r.getMessage());
         }
     }
-
 
     public void decrypt() {
         try {

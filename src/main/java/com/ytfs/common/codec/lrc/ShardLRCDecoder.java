@@ -14,6 +14,7 @@ public class ShardLRCDecoder {
     private Pointer data;
     private List<Pointer> shards = new ArrayList();
     private short encodeShardCount = 0;
+    private int count = 0;
 
     public ShardLRCDecoder(int encryptedBlockSize) throws Exception {
         this.encryptedBlockSize = encryptedBlockSize;
@@ -36,6 +37,7 @@ public class ShardLRCDecoder {
                 shard.write(0, bs, 0, Default_Shard_Size);
                 shards.add(shard);
                 encodeShardCount = LRCLibaray.INSTANCE.DecodeLRC(handler, shard);
+                count++;
                 if (encodeShardCount < 0) {
                     throw new Throwable("LRC Decode ERR.");
                 } else if (encodeShardCount > 0) {
@@ -47,6 +49,10 @@ public class ShardLRCDecoder {
             free();
             throw t;
         }
+    }
+
+    public int shardCount() {
+        return count;
     }
 
     public void free() {

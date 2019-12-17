@@ -26,11 +26,6 @@ public class ServerConfig {
 
     public final static int PFL = 1024 * 16;  //PFL
 
-    //重建
-    public final static int REBULIDTHREAD = 50;
-
-    //抽查
-    public final static int CHECKTHREAD = 50;
 
     //**************************可配置参数********************************
     //服务端超级节点编号,本服务节点编号
