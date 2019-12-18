@@ -1,7 +1,5 @@
 package com.ytfs.service.packet.user;
 
-import java.util.List;
-
 public class PreAllocNodeReq {
 
     private int count;

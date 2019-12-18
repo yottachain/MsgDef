@@ -1,4 +1,4 @@
-package com.ytfs.service.packet.user;
+package com.ytfs.service.packet.bp;
 
 public class UserSpaceResp {
 

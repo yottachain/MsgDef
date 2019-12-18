@@ -1,12 +1,30 @@
 package com.ytfs.service.packet.bp;
 
+import com.fasterxml.jackson.databind.node.ObjectNode;
+
 public class TotalResp {
 
-    private long fileTotal;
-    private long spaceTotal;
-    private long usedspace;
-    private long bkTotal;
-    private long actualBkTotal;
+    private long fileTotal = 0;
+    private long spaceTotal = 0;
+    private long usedspace = 0;
+    private long bkTotal = 0;
+    private long actualBkTotal = 0;
+
+    public void addTotalResp(TotalResp response) {
+        this.addActualBkTotal(response.actualBkTotal);
+        this.addBkTotal(response.bkTotal);
+        this.addFileTotal(response.fileTotal);
+        this.addSpaceTotal(response.spaceTotal);
+        this.addUsedspace(response.usedspace);
+    }
+
+    public void putNode(ObjectNode node) {
+        node.put("fileTotal", fileTotal);
+        node.put("spaceTotal", spaceTotal);
+        node.put("usedspace", usedspace);
+        node.put("bkTotal", bkTotal);
+        node.put("actualBkTotal", actualBkTotal);
+    }
 
     /**
      * @return the fileTotal
@@ -20,6 +38,10 @@ public class TotalResp {
      */
     public void setFileTotal(long fileTotal) {
         this.fileTotal = fileTotal;
+    }
+
+    public void addFileTotal(long total) {
+        this.fileTotal = this.fileTotal + total;
     }
 
     /**
@@ -36,6 +58,10 @@ public class TotalResp {
         this.spaceTotal = spaceTotal;
     }
 
+    public void addSpaceTotal(long total) {
+        this.spaceTotal = this.spaceTotal + total;
+    }
+
     /**
      * @return the usedspace
      */
@@ -48,6 +74,10 @@ public class TotalResp {
      */
     public void setUsedspace(long usedspace) {
         this.usedspace = usedspace;
+    }
+
+    public void addUsedspace(long space) {
+        this.usedspace = this.usedspace + space;
     }
 
     /**
@@ -64,6 +94,10 @@ public class TotalResp {
         this.bkTotal = bkTotal;
     }
 
+    public void addBkTotal(long total) {
+        this.bkTotal = this.bkTotal + total;
+    }
+
     /**
      * @return the actualBkTotal
      */
@@ -76,6 +110,10 @@ public class TotalResp {
      */
     public void setActualBkTotal(long actualBkTotal) {
         this.actualBkTotal = actualBkTotal;
+    }
+
+    public void addActualBkTotal(long total) {
+        this.actualBkTotal = this.actualBkTotal + total;
     }
 
 }
