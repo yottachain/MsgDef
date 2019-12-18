@@ -26,11 +26,12 @@ public class ServerConfig {
 
     public final static int PFL = 1024 * 16;  //PFL
 
-
     //**************************可配置参数********************************
     //服务端超级节点编号,本服务节点编号
     public static int superNodeID;
 
+    //去重分配系数
+    public static int space_factor = 100;
     //超级节点私钥
     public static String privateKey;
     public static byte[] SNDSP;
@@ -48,8 +49,5 @@ public class ServerConfig {
 
     //端口
     public static int httpPort = 8080;
-
-    //http绑定ip
-    public static String httpBindip = "";
-
+    public static String httpRemoteIp = "";
 }

@@ -26,8 +26,16 @@ public class AESCoder {
         return cipher.update(bs);
     }
 
+    public byte[] update(byte[] bs, int off, int len) {
+        return cipher.update(bs, off, len);
+    }
+
     public byte[] doFinal(byte[] bs) throws IllegalBlockSizeException, BadPaddingException {
         return cipher.doFinal(bs);
+    }
+
+    public byte[] doFinal(byte[] bs, int off, int len) throws IllegalBlockSizeException, BadPaddingException {
+        return cipher.doFinal(bs, off, len);
     }
 
     public byte[] doFinal() throws IllegalBlockSizeException, BadPaddingException {
@@ -47,12 +55,10 @@ public class AESCoder {
 
         byte[] data3 = code.doFinal();
         bs.write(data3);
-        
-        
+
         AESCoder code1 = new AESCoder(Cipher.DECRYPT_MODE);
-        byte[] data=code1.doFinal(bs.toByteArray());
+        byte[] data = code1.doFinal(bs.toByteArray());
         System.out.println(new String(data));
-                
 
     }
 }

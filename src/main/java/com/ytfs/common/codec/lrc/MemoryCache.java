@@ -14,7 +14,7 @@ public class MemoryCache {
 
     public static void init() throws IOException {
         short parityCount = UserConfig.Default_PND - 23;
-        short ret = LRCLibaray.INSTANCE.InitialLRC(parityCount, UserConfig.LRCMAXHANDLERS);
+        short ret = LRCLibaray.INSTANCE.LRC_Initial(parityCount, UserConfig.LRCMAXHANDLERS);
         if (ret == 0) {
             throw new IOException("LRCLibaray init Err.");
         }

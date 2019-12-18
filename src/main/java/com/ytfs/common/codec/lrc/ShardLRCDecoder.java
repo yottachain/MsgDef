@@ -23,7 +23,7 @@ public class ShardLRCDecoder {
         int remainSize = encryptedBlockSize % shardsize;
         this.dataShardCount = shardCount + (remainSize > 0 ? 1 : 0);
         data = MemoryCache.getBlockMemory();
-        this.handler = LRCLibaray.INSTANCE.BeginDecode((short) dataShardCount, Default_Shard_Size, data);
+        this.handler = LRCLibaray.INSTANCE.LRC_BeginDecode((short) dataShardCount, Default_Shard_Size, data);
         if (handler < 0) {
             MemoryCache.freeBlockMemory(data);
             throw new Exception("LRC BeginDecode ERR.");
@@ -36,12 +36,10 @@ public class ShardLRCDecoder {
                 Pointer shard = MemoryCache.getShardMemory();
                 shard.write(0, bs, 0, Default_Shard_Size);
                 shards.add(shard);
-                encodeShardCount = LRCLibaray.INSTANCE.DecodeLRC(handler, shard);
+                encodeShardCount = LRCLibaray.INSTANCE.LRC_Decode(handler, shard);
                 count++;
                 if (encodeShardCount < 0) {
                     throw new Throwable("LRC Decode ERR.");
-                } else if (encodeShardCount > 0) {
-                    handler = -1;
                 }
             }
             return encodeShardCount > 0;
@@ -61,7 +59,7 @@ public class ShardLRCDecoder {
         MemoryCache.freeShardMemory(shards);
         shards = null;
         if (handler >= 0) {
-            LRCLibaray.INSTANCE.FreeHandle(handler);
+            LRCLibaray.INSTANCE.LRC_FreeHandle(handler);
             handler = -1;
         }
     }

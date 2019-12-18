@@ -55,7 +55,7 @@ public class ShardLRCEncoder extends ShardEncoder {
                     datas[ii].write(0, out[ii], 0, Default_Shard_Size);
                 }
                 parityOut = MemoryCache.getParityMemory();
-                short res = LRCLibaray.INSTANCE.EncodeLRC(datas, (short) (datas.length), Default_Shard_Size, parityOut);
+                short res = LRCLibaray.INSTANCE.LRC_Encode(datas, (short) (datas.length), Default_Shard_Size, parityOut);
                 if (res <= 0) {
                     throw new IOException("LRC encode ERR.");
                 }
