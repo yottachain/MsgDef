@@ -4,6 +4,7 @@ public class UploadBlockDupResp {
 
     private byte[][] VHB;//每个加密后的数据分片的SHA256摘要，连接在一起后再计算出的MD5摘要
     private byte[][] KED;//去重密钥
+    private int[] AR;
     private long startTime;
 
     /**
@@ -19,6 +20,7 @@ public class UploadBlockDupResp {
     public void setStartTime(long startTime) {
         this.startTime = startTime;
     }
+        
 
     /**
      * @return the VHB
@@ -47,5 +49,21 @@ public class UploadBlockDupResp {
     public void setKED(byte[][] KED) {
         this.KED = KED;
     }
+
+    /**
+     * @return the AR
+     */
+    public int[] getAR() {
+        return AR;
+    }
+
+    /**
+     * @param AR the AR to set
+     */
+    public void setAR(int[] AR) {
+        this.AR = AR;
+    }
+
+ 
 
 }
