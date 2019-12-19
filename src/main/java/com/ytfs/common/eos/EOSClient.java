@@ -30,9 +30,7 @@ public class EOSClient {
     public static boolean hasSpace(long length, String username) throws Throwable {
         long balance = EOSClientCache.getBalance(username);
         LOG.info("Get [" + username + "] balance:" + balance);
-        long unitcount = length / UserConfig.Default_Shard_Size;
-        long remain = length % UserConfig.Default_Shard_Size > 0 ? 1 : 0;
-        long needcost = ServerConfig.unitcost * (unitcount + remain);
+        long needcost = ServerConfig.unitFirstCost * length / ServerConfig.unitSpace;
         return balance > needcost;
     }
 

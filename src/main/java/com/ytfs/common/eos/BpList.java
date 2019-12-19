@@ -40,36 +40,20 @@ public class BpList {
         return localURI;
     }
 
-    public static void init(SuperNode[] snlist) {
+    public static void init(List<String> addrs) {
         localURI = new EOSURI();
         localURI.url = ServerConfig.eosURI;
         try {
             URL url = new URL(ServerConfig.eosURI);
             String localIp = url.getHost();
-            for (SuperNode sn : snlist) {
-                parseUrl(sn.getAddrs(), localIp);
+            for (String addr : addrs) {
+                String urll = ServerConfig.eosURI.replace(localIp, addr);
+                EOSURI uri = new EOSURI();
+                uri.url = urll;
+                bplist.add(uri);
             }
             Collections.shuffle(bplist);
         } catch (MalformedURLException ex) {
-        }
-    }
-
-    private static void parseUrl(List<String> addrs, String localIp) {
-        for (String addr : addrs) {
-            if (addr.toLowerCase().startsWith("/ip4/")) {
-                addr = addr.substring(5);
-                int index = addr.indexOf("/");
-                if (index > 0) {
-                    addr = addr.substring(0, index);
-                    if (!localIp.equalsIgnoreCase(addr)) {
-                        String url = ServerConfig.eosURI.replace(localIp, addr);
-                        EOSURI uri = new EOSURI();
-                        uri.url = url;
-                        bplist.add(uri);
-                        break;
-                    }
-                }
-            }
         }
     }
 

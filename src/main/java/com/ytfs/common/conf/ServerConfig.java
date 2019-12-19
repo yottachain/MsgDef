@@ -3,14 +3,15 @@ package com.ytfs.common.conf;
 public class ServerConfig {
 
     //*************************不可配置参数*************************************
-    //每个文件在上传后必须存储的最短周期，如60个周期
+    //每个文件在上传后最短天数
     public final static long PMS = 60;
-
-    //单位空间（如16K）周期费用，如100000000 nHDD=1G使用365天，如果每周期1天
-    public static long unitcost = 4;
 
     //计费周期如:1天
     public final static long PPC = 1000 * 60 * 60 * 24;
+
+    public static long unitCycleCost = 100000000L * PPC / 365L;
+    public static long unitFirstCost = 100000000L * PMS / 365L;
+    public static long unitSpace = 1024 * 1024 * 1024;
 
     //周期费用统计间隔
     public static long CostSumCycle = PPC * 7;
