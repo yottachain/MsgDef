@@ -43,17 +43,19 @@ public class BpList {
     public static void init(List<String> addrs) {
         localURI = new EOSURI();
         localURI.url = ServerConfig.eosURI;
-        try {
-            URL url = new URL(ServerConfig.eosURI);
-            String localIp = url.getHost();
-            for (String addr : addrs) {
-                String urll = ServerConfig.eosURI.replace(localIp, addr);
-                EOSURI uri = new EOSURI();
-                uri.url = urll;
-                bplist.add(uri);
+        if (addrs != null) {
+            try {
+                URL url = new URL(ServerConfig.eosURI);
+                String localIp = url.getHost();
+                for (String addr : addrs) {
+                    String urll = ServerConfig.eosURI.replace(localIp, addr);
+                    EOSURI uri = new EOSURI();
+                    uri.url = urll;
+                    bplist.add(uri);
+                }
+                Collections.shuffle(bplist);
+            } catch (MalformedURLException ex) {
             }
-            Collections.shuffle(bplist);
-        } catch (MalformedURLException ex) {
         }
     }
 

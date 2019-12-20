@@ -1,8 +1,6 @@
 package com.ytfs.common.codec;
 
 import static com.ytfs.common.codec.AESIVParameter.IVParameter;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import javax.crypto.Cipher;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
