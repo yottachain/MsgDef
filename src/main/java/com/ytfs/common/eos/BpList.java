@@ -1,7 +1,6 @@
 package com.ytfs.common.eos;
 
 import com.ytfs.common.conf.ServerConfig;
-import io.yottachain.nodemgmt.core.vo.SuperNode;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -66,9 +65,18 @@ public class BpList {
         public AtomicLong errTime = new AtomicLong(0);
 
         public boolean setErr(Exception r) {
-            if (r.getMessage() != null && (r.getMessage().contains("java.net.ConnectException") || r.getMessage().contains("java.net.SocketTimeoutException"))) {
-                err.set(true);
-                errTime.set(System.currentTimeMillis());
+            if (r.getMessage() != null && (r.getMessage().contains("java.net.ConnectException")
+                    || r.getMessage().contains("Duplicate transaction")
+                    || r.getMessage().contains("java.net.SocketTimeoutException"))) {
+                if (!r.getMessage().contains("Duplicate transaction")) {
+                    err.set(true);
+                    errTime.set(System.currentTimeMillis());
+                } else {
+                    try {
+                        Thread.sleep(10);
+                    } catch (InterruptedException ex) {
+                    }
+                }
                 return true;
             }
             return false;

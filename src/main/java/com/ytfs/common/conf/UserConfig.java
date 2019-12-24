@@ -61,8 +61,6 @@ public class UserConfig {
     //下载线程数
     public static int DOWNLOADSHARDTHREAD = 200;
 
-    public static int CONN_EXPIRED = 1000 * 60 * 3;
-
     //预分配矿机数目
     public static int PNN = (Max_Shard_Count + Default_PND) * 2;
 
@@ -73,4 +71,6 @@ public class UserConfig {
     public static int RETRYTIMES = 500;
 
     public static String zipkinServer;
+
+    public static int CONN_EXPIRED = PTR * 3;
 }

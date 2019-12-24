@@ -67,7 +67,7 @@ public class EOSClient {
      */
     public static void deductHDD(long firstCost, String username) throws Throwable {
         Exception err = null;
-        for (int ii = 0; ii < 3; ii++) {
+        for (int ii = 0; ii < 8; ii++) {
             EOSURI uri = BpList.getEOSURI();
             try {
                 EosApi eosApi = EosApiFactory.create(uri.url);
@@ -94,7 +94,7 @@ public class EOSClient {
      */
     public static void addUsedSpace(long length, String username) throws Throwable {
         Exception err = null;
-        for (int ii = 0; ii < 3; ii++) {
+        for (int ii = 0; ii < 8; ii++) {
             EOSURI uri = BpList.getEOSURI();
             try {
                 EosApi eosApi = EosApiFactory.create(uri.url);
@@ -121,7 +121,7 @@ public class EOSClient {
      */
     public static void setUserFee(long cost, String username) throws Throwable {
         Exception err = null;
-        for (int ii = 0; ii < 3; ii++) {
+        for (int ii = 0; ii < 8; ii++) {
             EOSURI uri = BpList.getEOSURI();
             try {
                 EosApi eosApi = EosApiFactory.create(uri.url);

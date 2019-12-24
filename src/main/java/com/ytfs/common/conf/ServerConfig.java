@@ -4,7 +4,7 @@ public class ServerConfig {
 
     //*************************不可配置参数*************************************
     //每个文件在上传后最短天数
-    public final static long PMS = 60;
+    public final static long PMS = 90;
 
     //计费周期如:1天
     public final static long PPC = 1000 * 60 * 60 * 24;
@@ -51,4 +51,7 @@ public class ServerConfig {
     //端口
     public static int httpPort = 8080;
     public static String httpRemoteIp = "";
+
+    public static int rebuildSpeed = 1000;
+    public static int rebuildTaskSize = 100;
 }
