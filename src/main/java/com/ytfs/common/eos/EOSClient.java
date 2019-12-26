@@ -44,6 +44,10 @@ public class EOSClient {
                 PushTransactionRequest req = makeGetBalanceRequest(arg, username);
                 PushedTransaction pts = eosApi.pushTransaction(req);
                 String console = pts.getProcessed().getActionTraces().get(0).getConsole();
+                int index = console.indexOf("{\"balance\":");
+                console = console.substring(index);
+                index = console.indexOf("}");
+                console = console.substring(0, index + 1);
                 ObjectMapper mapper = new ObjectMapper();
                 Map readValue = mapper.readValue(console, Map.class);
                 Object obj = readValue.get("balance");
