@@ -5,8 +5,9 @@ import java.util.List;
 
 public class ListDNIResp {
 
-    private byte[] nextId;
     private List<byte[]> vhfList;
+    private String nextId;
+    
 
     public void addVHF(byte[] bs) {
         if (vhfList == null) {
@@ -18,14 +19,14 @@ public class ListDNIResp {
     /**
      * @return the nextId
      */
-    public byte[] getNextId() {
+    public String getNextId() {
         return nextId;
     }
 
     /**
      * @param nextId the nextId to set
      */
-    public void setNextId(byte[] nextId) {
+    public void setNextId(String nextId) {
         this.nextId = nextId;
     }
 

@@ -1,6 +1,8 @@
 package com.ytfs.common.node;
 
 import com.ytfs.common.Function;
+import com.ytfs.common.conf.ServerConfig;
+import static com.ytfs.common.conf.ServerConfig.selfIp;
 import com.ytfs.common.conf.UserConfig;
 import com.ytfs.common.net.P2PUtils;
 import com.ytfs.service.packet.user.ListSuperNodeReq;
@@ -8,6 +10,9 @@ import com.ytfs.service.packet.user.ListSuperNodeResp;
 import static io.jafka.jeos.util.Raw.charidx;
 import io.yottachain.nodemgmt.core.vo.SuperNode;
 import java.math.BigInteger;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+import java.util.List;
 import org.apache.log4j.Logger;
 
 public class SuperNodeList {
@@ -50,6 +55,30 @@ public class SuperNodeList {
     public static int getSuperNodeCount() {
         SuperNode[] nodes = getSuperNodeList();
         return nodes.length;
+    }
+
+    public static String getSelfIp() {
+        return getSelfIp(ServerConfig.superNodeID);
+    }
+
+    public static boolean isActive() {
+        String ip = getSelfIp();
+        return ip.equalsIgnoreCase(selfIp);
+    }
+
+    public static String getSelfIp(int snid) {
+        SuperNode self = getSuperNode(snid);
+        List<String> ls = self.getAddrs();
+        String add = ls.get(0);
+        String[] ips = add.split("\\/");
+        String host = ips[2];
+        InetAddress address;
+        try {
+            address = InetAddress.getByName(host);
+            return address.getHostAddress();
+        } catch (UnknownHostException ex) {
+            return host;
+        }
     }
 
     /**

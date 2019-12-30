@@ -30,6 +30,8 @@ public class ServerConfig {
     //**************************可配置参数********************************
     //服务端超级节点编号,本服务节点编号
     public static int superNodeID;
+    public static int isBackup = 0;
+    public static String selfIp = "";
 
     //去重分配系数
     public static int space_factor = 100;

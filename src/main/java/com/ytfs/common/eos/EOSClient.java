@@ -2,7 +2,6 @@ package com.ytfs.common.eos;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ytfs.common.conf.ServerConfig;
-import com.ytfs.common.conf.UserConfig;
 import com.ytfs.common.eos.BpList.EOSURI;
 import static com.ytfs.common.eos.EOSRequest.makeAddUsedSpaceRequest;
 import static com.ytfs.common.eos.EOSRequest.makeGetBalanceRequest;
@@ -42,7 +41,7 @@ public class EOSClient {
                 EosApi eosApi = EosApiFactory.create(uri.url);
                 SignArg arg = eosApi.getSignArg((int) EOSClientCache.EXPIRED_TIME);
                 PushTransactionRequest req = makeGetBalanceRequest(arg, username);
-                PushedTransaction pts = eosApi.pushTransaction(req);
+                PushedTransaction pts = eosApi.pushTransaction(req);              
                 String console = pts.getProcessed().getActionTraces().get(0).getConsole();
                 int index = console.indexOf("{\"balance\":");
                 console = console.substring(index);

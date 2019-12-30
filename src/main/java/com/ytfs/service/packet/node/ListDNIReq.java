@@ -2,20 +2,20 @@ package com.ytfs.service.packet.node;
 
 public class ListDNIReq {
 
-    private byte[] nextId;
+    private String nextId;
     private int count;
 
     /**
      * @return the nextId
      */
-    public byte[] getNextId() {
+    public String getNextId() {
         return nextId;
     }
 
     /**
      * @param nextId the nextId to set
      */
-    public void setNextId(byte[] nextId) {
+    public void setNextId(String nextId) {
         this.nextId = nextId;
     }
 
