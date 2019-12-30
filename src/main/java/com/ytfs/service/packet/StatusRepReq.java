@@ -14,7 +14,8 @@ public class StatusRepReq {
     private List<String> addrs;
     private boolean relay;
     private int version;
-    
+    private int rebuilding;
+
     /**
      * @return the id
      */
@@ -153,6 +154,20 @@ public class StatusRepReq {
      */
     public void setVersion(int version) {
         this.version = version;
+    }
+
+    /**
+     * @return the rebuilding
+     */
+    public int getRebuilding() {
+        return rebuilding;
+    }
+
+    /**
+     * @param rebuilding the rebuilding to set
+     */
+    public void setRebuilding(int rebuilding) {
+        this.rebuilding = rebuilding;
     }
 
 }

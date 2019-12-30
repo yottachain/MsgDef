@@ -30,7 +30,8 @@ message StatusRepReq {
    uint64 usedSpace=7;                       
    repeated string addrs=8;  
    bool relay=9;        
-   uint32 version=10;                
+   uint32 version=10;     
+   uint32 rebuilding=11;                     
 }
 
 //msgid=0xfa09
