@@ -10,9 +10,10 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import org.apache.log4j.Logger;
 
 public class SerializationUtil {
-
+    
     private static final ThreadLocal<LinkedBuffer> BUFFER_THREAD_LOCAL = ThreadLocal
             .withInitial(() -> LinkedBuffer.allocate(512));
 
@@ -119,6 +120,7 @@ public class SerializationUtil {
         }
         short id = (short) Function.bytes2Integer(paramArrayOfByte, 0, 2);
         Class targetClass = MessageFactory.getMessageType(id);
+        //Logger.getLogger(SerializationUtil.class).info("Class name:" + targetClass.getName());
         Object instance = null;
         try {
             instance = targetClass.newInstance();
@@ -183,15 +185,15 @@ public class SerializationUtil {
         ProtostuffIOUtil.mergeFrom(paramArrayOfByte, instance, schema);
         return instance.toMap();
     }
-
+    
     public static class MapObject<T> {
-
+        
         private List<String> keys;
         private List<T> values;
-
+        
         public MapObject() {
         }
-
+        
         public MapObject(Map<String, T> map) {
             keys = new ArrayList(map.keySet());
             values = new ArrayList(map.values());
@@ -224,7 +226,7 @@ public class SerializationUtil {
         public void setValues(List<T> values) {
             this.values = values;
         }
-
+        
         public void toMap(Map<String, T> map) {
             if (keys == null || values == null) {
                 return;
@@ -234,7 +236,7 @@ public class SerializationUtil {
                 map.put(keys.get(ii), values.get(ii));
             }
         }
-
+        
         public Map<String, T> toMap() {
             Map<String, T> map = new LinkedHashMap();
             if (keys == null || values == null) {
@@ -246,6 +248,6 @@ public class SerializationUtil {
             }
             return map;
         }
-
+        
     }
 }
