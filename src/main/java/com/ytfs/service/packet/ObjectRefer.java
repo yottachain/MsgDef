@@ -36,7 +36,8 @@ public class ObjectRefer {
     private long originalSize;  //编码前长度  6字节
     private int realSize;  //实际长度    3字节   
     private byte[] KEU;  //32
-    private short id;
+    private int keyNumber;
+    private short id;//52
 
     public ObjectRefer() {
     }
@@ -50,10 +51,11 @@ public class ObjectRefer {
         System.arraycopy(bs, 18, bbs, 0, 32);
         this.KEU = bbs;
         this.id = (short) bytes2Integer(bs, 50, 2);
+        this.keyNumber = bs[52] & 0xFF;
     }
 
     public byte[] toBytes() {
-        byte[] bs = new byte[52];
+        byte[] bs = new byte[53];
         int pos = 0;
         long2bytes(this.getVBI(), bs, pos);
         pos = pos + 8;
@@ -72,6 +74,7 @@ public class ObjectRefer {
         pos = pos + 32;
         bs[pos++] = (byte) (this.getId() >>> 8);
         bs[pos++] = (byte) (this.getId());
+        bs[pos++] = (byte) (this.getKeyNumber());
         return bs;
     }
 
@@ -157,5 +160,19 @@ public class ObjectRefer {
      */
     public void setId(short id) {
         this.id = id;
+    }
+
+    /**
+     * @return the keyNumber
+     */
+    public int getKeyNumber() {
+        return keyNumber;
+    }
+
+    /**
+     * @param keyNumber the keyNumber to set
+     */
+    public void setKeyNumber(int keyNumber) {
+        this.keyNumber = keyNumber;
     }
 }

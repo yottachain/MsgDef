@@ -4,6 +4,7 @@ public class LoginReq {
 
     private int userId;
     private String signData;
+    private int keyNumber;
 
     /**
      * @return the signData
@@ -31,6 +32,20 @@ public class LoginReq {
      */
     public void setUserId(int userId) {
         this.userId = userId;
+    }
+
+    /**
+     * @return the keyNumber
+     */
+    public int getKeyNumber() {
+        return keyNumber;
+    }
+
+    /**
+     * @param keyNumber the keyNumber to set
+     */
+    public void setKeyNumber(int keyNumber) {
+        this.keyNumber = keyNumber;
     }
 
 }

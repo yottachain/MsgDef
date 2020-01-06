@@ -62,11 +62,11 @@ public class SuperNodeList {
     }
 
     public static boolean isActive() {
+        if (ServerConfig.selfIp == null) {
+            return true;
+        }
         String ip = getSelfIp();
         boolean b = ip.equalsIgnoreCase(selfIp);
-        //if (!b) {
-          //  LOG.warn("The current node is not active." + ip + " -- " + selfIp);
-       // }
         return b;
     }
 

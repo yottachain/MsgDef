@@ -40,6 +40,7 @@ public class UserConfig {
     //用户钱包账户名
     public static int userId;
     public static String username;
+    public static int keyNumber;
 
     //用户私钥
     public static byte[] KUSp;
