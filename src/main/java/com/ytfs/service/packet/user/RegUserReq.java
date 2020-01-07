@@ -2,7 +2,6 @@ package com.ytfs.service.packet.user;
 
 public class RegUserReq {
 
-    private byte[] signdata;
     private String pubKey;
     private String username;
 
@@ -18,20 +17,6 @@ public class RegUserReq {
      */
     public void setUsername(String username) {
         this.username = username;
-    }
-
-    /**
-     * @return the signdata
-     */
-    public byte[] getSigndata() {
-        return signdata;
-    }
-
-    /**
-     * @param signdata the signdata to set
-     */
-    public void setSigndata(byte[] signdata) {
-        this.signdata = signdata;
     }
 
     /**

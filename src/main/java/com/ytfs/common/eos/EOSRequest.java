@@ -1,18 +1,13 @@
 package com.ytfs.common.eos;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.ytfs.common.Function;
 import com.ytfs.common.conf.ServerConfig;
-import io.jafka.jeos.EosApi;
-import io.jafka.jeos.EosApiFactory;
-import io.jafka.jeos.LocalApi;
 import io.jafka.jeos.convert.Packer;
 import io.jafka.jeos.core.common.SignArg;
 import io.jafka.jeos.core.common.transaction.PackedTransaction;
 import io.jafka.jeos.core.common.transaction.TransactionAction;
 import io.jafka.jeos.core.common.transaction.TransactionAuthorization;
 import io.jafka.jeos.core.request.chain.transaction.PushTransactionRequest;
-import io.jafka.jeos.core.response.chain.transaction.PushedTransaction;
 import io.jafka.jeos.util.KeyUtil;
 import io.jafka.jeos.util.Raw;
 import java.io.IOException;
@@ -33,66 +28,6 @@ public class EOSRequest {
         } else {
             return ii + nanos;
         }
-    }
-
-    private static byte[] encodeSignArg(SignArg req) throws JsonProcessingException {
-        LocalApi localApi = EosApiFactory.createLocalApi();
-        return localApi.getObjectMapper().writeValueAsBytes(req);
-    }
-
-    private static SignArg decodeSignArg(byte[] bs) throws IOException {
-        LocalApi localApi = EosApiFactory.createLocalApi();
-        return localApi.getObjectMapper().readValue(bs, SignArg.class);
-    }
-
-    private static byte[] encodeRequest(PushTransactionRequest req) throws JsonProcessingException {
-        LocalApi localApi = EosApiFactory.createLocalApi();
-        return localApi.getObjectMapper().writeValueAsBytes(req);
-    }
-
-    private static PushTransactionRequest decodeRequest(byte[] bs) throws IOException {
-        LocalApi localApi = EosApiFactory.createLocalApi();
-        return localApi.getObjectMapper().readValue(bs, PushTransactionRequest.class);
-    }
-
-    public static byte[] createEosClient(String pubkey) throws JsonProcessingException {
-        BpList.EOSURI uri = BpList.getEOSURI();
-        EosApi eosApi = EosApiFactory.create(uri.url);
-        SignArg arg = eosApi.getSignArg((int) EOSClientCache.EXPIRED_TIME);
-        EOSClientCache.putClient(pubkey, eosApi);
-        return encodeSignArg(arg);
-    }
-
-    public static PushedTransaction request(byte[] reqdata, String pubkey) throws IOException {
-        EosApi eosApi = EOSClientCache.getClient(pubkey);
-        PushTransactionRequest req = decodeRequest(reqdata);
-        return eosApi.pushTransaction(req);
-    }
-
-    public static byte[] makeGetBalanceRequest(byte[] signarg, String username, String privateKey, String contractAccount) throws JsonProcessingException, IOException {
-        SignArg arg = decodeSignArg(signarg);
-        Raw raw = new Raw();
-        raw.packName(username);
-        raw.packUint8(1);
-        raw.packName(username);
-        String transferData = raw.toHex();
-        List<TransactionAuthorization> authorizations = Arrays.asList(new TransactionAuthorization(username, "active"));
-        List<TransactionAction> actions = Arrays.asList(
-                new TransactionAction(contractAccount, "getbalance", authorizations, transferData)
-        );
-        PackedTransaction packedTransaction = new PackedTransaction();
-        packedTransaction.setExpiration(arg.getHeadBlockTime().plusNanos(getRandomInteger(arg)));
-        packedTransaction.setRefBlockNum(arg.getLastIrreversibleBlockNum());
-        packedTransaction.setRefBlockPrefix(arg.getRefBlockPrefix());
-        packedTransaction.setMaxNetUsageWords(0);
-        packedTransaction.setMaxCpuUsageMs(0);
-        packedTransaction.setDelaySec(0);
-        packedTransaction.setActions(actions);
-        String hash = sign(privateKey, arg, packedTransaction);
-        PushTransactionRequest req = new PushTransactionRequest();
-        req.setTransaction(packedTransaction);
-        req.setSignatures(Arrays.asList(hash));
-        return encodeRequest(req);
     }
 
     //void subbalance(name user, int64_t balance, uint8_t acc_type, name caller)

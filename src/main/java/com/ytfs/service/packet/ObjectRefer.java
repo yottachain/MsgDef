@@ -51,11 +51,11 @@ public class ObjectRefer {
         System.arraycopy(bs, 18, bbs, 0, 32);
         this.KEU = bbs;
         this.id = (short) bytes2Integer(bs, 50, 2);
-        this.keyNumber = bs[52] & 0xFF;
+        this.keyNumber = (int) bytes2Integer(bs, 52, 2);
     }
 
     public byte[] toBytes() {
-        byte[] bs = new byte[53];
+        byte[] bs = new byte[54];
         int pos = 0;
         long2bytes(this.getVBI(), bs, pos);
         pos = pos + 8;
@@ -74,6 +74,7 @@ public class ObjectRefer {
         pos = pos + 32;
         bs[pos++] = (byte) (this.getId() >>> 8);
         bs[pos++] = (byte) (this.getId());
+        bs[pos++] = (byte) (this.getKeyNumber() >>> 8);
         bs[pos++] = (byte) (this.getKeyNumber());
         return bs;
     }
