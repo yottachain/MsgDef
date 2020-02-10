@@ -19,6 +19,7 @@ public class YTFileEncoder {
     private final InputStream is;
     private final byte[] buf = new byte[16];
     private long length;
+    private long readinTotal = 0;
     private byte[] VHW;
     private boolean finished = false;
     private Block curBlock = null;
@@ -31,6 +32,9 @@ public class YTFileEncoder {
         digest(bi);
         is = new BackableBytesInputSteam(bs);
         length = bs.length;
+        if (length <= 0) {
+            throw new IOException("Zero length file");
+        }
     }
 
     private void digest(InputStream is) throws IOException {
@@ -55,6 +59,9 @@ public class YTFileEncoder {
         digest(new FileInputStream(file));
         is = new BackableBufferedInputSteam(new FileInputStream(file), Default_Block_Size);
         length = file.length();
+        if (length <= 0) {
+            throw new IOException("Zero length file");
+        }
     }
 
     public void closeFile() {
@@ -112,6 +119,12 @@ public class YTFileEncoder {
         } else {
             curBlock = new Block(data, Default_Block_Size - 2);
         }
+        readinTotal = readinTotal + len;
+    }
+
+    public int getProgress() {
+        long p = readinTotal * 100L / length;
+        return (int) p;
     }
 
     /**
@@ -159,6 +172,7 @@ public class YTFileEncoder {
                             finished = true;
                         }
                     }
+                    readinTotal = readinTotal + totalIn;
                     return 0;
                 }
             }
@@ -175,6 +189,7 @@ public class YTFileEncoder {
             curBlock = new Block(data, totalIn);
         }
         finished = true;
+        readinTotal = readinTotal + totalIn;
         return 0;
     }
 

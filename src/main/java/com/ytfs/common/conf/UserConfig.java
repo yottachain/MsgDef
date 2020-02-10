@@ -54,10 +54,10 @@ public class UserConfig {
     public static File tmpFilePath;
 
     //上传线程数
-    public static int UPLOADSHARDTHREAD = 400;
+    public static int UPLOADSHARDTHREAD = 1000;
 
     //上传块线程数
-    public static int UPLOADBLOCKTHREAD = 3;
+    public static long UPLOADFILEMAXMEMORY = 20L * 1024L * 1024L;
 
     //下载线程数
     public static int DOWNLOADSHARDTHREAD = 200;
@@ -73,5 +73,5 @@ public class UserConfig {
 
     public static String zipkinServer;
 
-    public static int CONN_EXPIRED = PTR * 3;
+    public static int CONN_EXPIRED = PTR * 5;
 }

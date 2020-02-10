@@ -2,7 +2,7 @@ package com.ytfs.common.codec;
 
 public class Shard {
 
-    private final byte[] data;
+    private byte[] data;
     private final byte[] VHF;
 
     public Shard(byte[] data) {
@@ -35,5 +35,9 @@ public class Shard {
      */
     public byte[] getVHF() {
         return VHF;
+    }
+
+    public void clearData() {
+        this.data = null;
     }
 }

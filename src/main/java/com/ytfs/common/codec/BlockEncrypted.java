@@ -11,6 +11,7 @@ public class BlockEncrypted {
     private int encryptedBlockSize;
     private byte[] data;
     private boolean copyMode = false;
+    private byte[] VHB;
 
     public BlockEncrypted() {
     }
@@ -41,13 +42,13 @@ public class BlockEncrypted {
         return encryptedBlockSize >= UserConfig.PL2;
     }
 
-    public byte[] getVHB() {
+    public final void makeVHB() {
         try {
             MessageDigest sha256 = MessageDigest.getInstance("SHA-256");
             MessageDigest md5 = MessageDigest.getInstance("MD5");
             byte[] bs = sha256.digest(data);
             md5.update(data);
-            return md5.digest(bs);
+            this.VHB = md5.digest(bs);
         } catch (NoSuchAlgorithmException r) {
             throw new IllegalArgumentException(r.getMessage());
         }
@@ -94,6 +95,7 @@ public class BlockEncrypted {
     public void setData(byte[] data) {
         this.data = data;
         this.encryptedBlockSize = data.length;
+        makeVHB();
     }
 
     /**
@@ -110,4 +112,21 @@ public class BlockEncrypted {
         this.copyMode = copyMode;
     }
 
+    /**
+     * @return the VHB
+     */
+    public byte[] getVHB() {
+        return VHB;
+    }
+
+    /**
+     * @param VHB the VHB to set
+     */
+    public void setVHB(byte[] VHB) {
+        this.VHB = VHB;
+    }
+
+    public void clearData() {
+        this.data = null;
+    }
 }

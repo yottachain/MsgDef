@@ -4,17 +4,17 @@ public class ServerConfig {
 
     //*************************不可配置参数*************************************
     //每个文件在上传后最短天数
-    public final static long PMS = 90;
+    public final static long PMS = 90L;
 
     //计费周期如:1天
-    public final static long PPC = 1000 * 60 * 60 * 24;
+    public final static long PPC = 1L;
 
     public static long unitCycleCost = 100000000L * PPC / 365L;
     public static long unitFirstCost = 100000000L * PMS / 365L;
-    public static long unitSpace = 1024 * 1024 * 1024;
+    public static long unitSpace = 1024L * 1024L * 1024L;
 
     //周期费用统计间隔
-    public static long CostSumCycle = PPC * 7;
+    public static long CostSumCycle = PPC * 7L * 1000L * 60L * 60L * 24L;
 
     //元数据空间
     public final static long PCM = 16 * 1024;
@@ -53,7 +53,8 @@ public class ServerConfig {
     //端口
     public static int httpPort = 8080;
     public static String httpRemoteIp = "";
-
+    public static String httpServlet = "";
+    
     public static int rebuildSpeed = 1000;
     public static int rebuildTaskSize = 100;
 }

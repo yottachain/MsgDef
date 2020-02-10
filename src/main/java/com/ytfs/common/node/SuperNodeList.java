@@ -8,6 +8,7 @@ import com.ytfs.common.net.P2PUtils;
 import com.ytfs.service.packet.user.ListSuperNodeReq;
 import com.ytfs.service.packet.user.ListSuperNodeResp;
 import static io.jafka.jeos.util.Raw.charidx;
+import io.yottachain.nodemgmt.YottaNodeMgmt;
 import io.yottachain.nodemgmt.core.vo.SuperNode;
 import java.math.BigInteger;
 import java.net.InetAddress;
@@ -61,12 +62,23 @@ public class SuperNodeList {
         return getSelfIp(ServerConfig.superNodeID);
     }
 
-    public static boolean isActive() {
+    public static boolean isMaster() {
         if (ServerConfig.selfIp == null) {
             return true;
         }
         String ip = getSelfIp();
         boolean b = ip.equalsIgnoreCase(selfIp);
+        return b;
+    }
+
+    public static boolean isActive() {
+        boolean b = isMaster();
+        try {
+            synchronized (SuperNodeList.class) {
+                YottaNodeMgmt.setMaster(b);
+            }
+        } catch (Throwable r) {
+        }
         return b;
     }
 
@@ -171,6 +183,13 @@ public class SuperNodeList {
     public static SuperNode getUserSuperNode(int userid) {
         SuperNode[] nodes = getSuperNodeList();
         long uid = Function.inttolong(userid);
+        int index = (int) (uid % (long) nodes.length);
+        return nodes[index];
+    }
+
+    public static SuperNode getNodeSuperNode(int nodeid) {
+        SuperNode[] nodes = getSuperNodeList();
+        long uid = Function.inttolong(nodeid);
         int index = (int) (uid % (long) nodes.length);
         return nodes[index];
     }

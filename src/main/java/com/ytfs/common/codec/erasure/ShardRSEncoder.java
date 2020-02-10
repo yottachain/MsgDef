@@ -55,5 +55,6 @@ public class ShardRSEncoder extends ShardEncoder {
             }
             this.dataCount = dataShardCount + (remainSize > 0 ? 1 : 0);
         }
+        makeVHB();
     }
 }
