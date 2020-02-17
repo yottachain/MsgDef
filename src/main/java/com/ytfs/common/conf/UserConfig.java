@@ -55,9 +55,11 @@ public class UserConfig {
 
     //上传线程数
     public static int UPLOADSHARDTHREAD = 1000;
+    
+    public static int UPLOADBLOCKTHREAD = 100;
 
     //上传块线程数
-    public static long UPLOADFILEMAXMEMORY = 20L * 1024L * 1024L;
+    public static long UPLOADFILEMAXMEMORY = 5L * 1024L * 1024L;
 
     //下载线程数
     public static int DOWNLOADSHARDTHREAD = 200;

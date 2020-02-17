@@ -20,6 +20,7 @@ public class YTFileEncoder {
     private final byte[] buf = new byte[16];
     private long length;
     private long readinTotal = 0;
+    private long outTotal = 0;
     private byte[] VHW;
     private boolean finished = false;
     private Block curBlock = null;
@@ -93,6 +94,7 @@ public class YTFileEncoder {
                 } catch (Exception e) {
                 }
             }
+            outTotal = outTotal + curBlock.getRealSize();
             return curBlock;
         } catch (IOException e) {
             is.close();
@@ -119,12 +121,7 @@ public class YTFileEncoder {
         } else {
             curBlock = new Block(data, Default_Block_Size - 2);
         }
-        readinTotal = readinTotal + len;
-    }
-
-    public int getProgress() {
-        long p = readinTotal * 100L / length;
-        return (int) p;
+        readinTotal = getReadinTotal() + len;
     }
 
     /**
@@ -172,7 +169,7 @@ public class YTFileEncoder {
                             finished = true;
                         }
                     }
-                    readinTotal = readinTotal + totalIn;
+                    readinTotal = getReadinTotal() + totalIn;
                     return 0;
                 }
             }
@@ -189,7 +186,7 @@ public class YTFileEncoder {
             curBlock = new Block(data, totalIn);
         }
         finished = true;
-        readinTotal = readinTotal + totalIn;
+        readinTotal = getReadinTotal() + totalIn;
         return 0;
     }
 
@@ -212,5 +209,19 @@ public class YTFileEncoder {
      */
     public boolean isFinished() {
         return finished;
+    }
+
+    /**
+     * @return the readinTotal
+     */
+    public long getReadinTotal() {
+        return readinTotal;
+    }
+
+    /**
+     * @return the outTotal
+     */
+    public long getOutTotal() {
+        return outTotal;
     }
 }
