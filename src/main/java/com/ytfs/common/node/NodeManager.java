@@ -20,7 +20,7 @@ public class NodeManager {
             LOG.info("NodeManager init...");
             ServerAddress serverAddress = addrs.get(0);
             String addr = "mongodb://" + serverAddress.getHost() + ":" + serverAddress.getPort();
-            YottaNodeMgmt.start(addr, eos, bpuser, sdkey, contractAccount, contractAccountD, sduser, id,false);
+            YottaNodeMgmt.start(addr, eos, bpuser, sdkey, contractAccount, contractAccountD, sduser, id, false);
             LOG.info("NodeManager init OK!");
         } catch (Throwable ne) {
             LOG.error("NodeManager init error:" + ne);
