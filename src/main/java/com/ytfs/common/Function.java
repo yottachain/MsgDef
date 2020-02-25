@@ -1,5 +1,8 @@
 package com.ytfs.common;
 
+import java.io.ByteArrayOutputStream;
+import java.util.zip.GZIPOutputStream;
+
 public class Function {
 
     /**
@@ -50,8 +53,8 @@ public class Function {
         return num;
     }
 
-    public static long inttolong(int ii){
-        byte[] bs=Function.int2bytes(ii);
+    public static long inttolong(int ii) {
+        byte[] bs = Function.int2bytes(ii);
         return Function.bytes2Integer(bs, 0, 4);
     }
 
@@ -142,5 +145,20 @@ public class Function {
         byte[] result = new byte[8];
         long2bytes(num, result, 0);
         return result;
+    }
+
+    public static byte[] gzip(byte[] data) {
+        byte[] out = null;
+        ByteArrayOutputStream bo = new ByteArrayOutputStream(data.length);
+        try {
+            GZIPOutputStream gzip = new GZIPOutputStream(bo);
+            gzip.write(data);
+            gzip.flush();
+            gzip.close();
+            out = bo.toByteArray();
+            bo.close();
+        } catch (Exception er) {
+        }
+        return out;
     }
 }

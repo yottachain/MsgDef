@@ -58,11 +58,11 @@ public class YTFileEncoder {
     public YTFileEncoder(String path) throws IOException {
         File file = new File(path);
         digest(new FileInputStream(file));
-        is = new BackableBufferedInputSteam(new FileInputStream(file), Default_Block_Size);
         length = file.length();
         if (length <= 0) {
             throw new IOException("Zero length file");
         }
+        is = new BackableBufferedInputSteam(new FileInputStream(file), Default_Block_Size);
     }
 
     public void closeFile() {
