@@ -18,7 +18,7 @@ public class P2PClient {
     private static final Logger LOG = Logger.getLogger(P2PClient.class);
     private String addrString;
     private final String key;
-    private boolean isConnected = false;
+    private long connectedTime = 0;
     private boolean isDestroy = false;
     private final AtomicLong lasttime = new AtomicLong(System.currentTimeMillis());
 
@@ -31,23 +31,29 @@ public class P2PClient {
     }
 
     public Object request(Object obj, List<String> addr, int type, String log_pre) throws ServiceException {
-        if (!isConnected) {
+        lasttime.set(System.currentTimeMillis());
+        if (connectedTime >= 0) {
             synchronized (this) {
-                if (!isConnected && !isDestroy) {
+                if (connectedTime >= 0 && !isDestroy) {
                     addrString = getAddrString(addr);
-                    try {
-                        String[] strs = new String[addr.size()];
-                        strs = addr.toArray(strs);
-                        YottaP2P.connect(getKey(), strs);
-                        isConnected = true;                    
-                    } catch (P2pHostException ex) {
-                        LOG.info(log_pre + "Connect " + addrString + " Err:" + ex.getMessage());
-                        throw new ServiceException(COMM_ERROR, ex.getMessage());
+                    if (System.currentTimeMillis()-connectedTime < 1000 * 15) {
+                        LOG.error(log_pre +  addrString + " did not connect successfully 15 seconds ago");
+                        throw new ServiceException(COMM_ERROR);
+                    } else {
+                        try {
+                            String[] strs = new String[addr.size()];
+                            strs = addr.toArray(strs);
+                            YottaP2P.connect(getKey(), strs);
+                            connectedTime = -1;
+                        } catch (P2pHostException ex) {
+                            connectedTime = System.currentTimeMillis();
+                            LOG.error(log_pre + "Connect " + addrString + " Err:" + ex.getMessage());
+                            throw new ServiceException(COMM_ERROR, ex.getMessage());
+                        }
                     }
                 }
             }
         }
-        lasttime.set(System.currentTimeMillis());
         short id = MessageFactory.getMessageID(obj.getClass());
         byte[] msgType = new byte[2];
         Function.short2bytes(id, msgType, 0);
@@ -58,7 +64,7 @@ public class P2PClient {
         } catch (Throwable e) {
             LOG.error(log_pre + "COMM_ERROR:" + addrString + e.getMessage());
             synchronized (this) {
-                isConnected = false;
+                connectedTime = 0;
             }
             throw new ServiceException(COMM_ERROR, e.getMessage());
         }
