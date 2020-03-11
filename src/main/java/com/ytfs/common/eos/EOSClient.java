@@ -17,6 +17,12 @@ import org.apache.log4j.Logger;
 public class EOSClient {
 
     private static final Logger LOG = Logger.getLogger(EOSClient.class);
+    private static final boolean BP_ENABLE;
+
+    static {
+        String s = System.getenv("IPFS_BP_ENABLE");
+        BP_ENABLE = !(s != null && s.trim().equalsIgnoreCase("no"));
+    }
 
     /**
      * 该用户是否有足够的HDD用于存储该数据最短存储时间PMS（例如60天）
@@ -34,6 +40,9 @@ public class EOSClient {
     }
 
     public static long getBalance(String username) throws Exception {
+        if (!BP_ENABLE) {
+            return Long.MAX_VALUE;
+        }
         Exception err = null;
         for (int ii = 0; ii < 3; ii++) {
             EOSURI uri = BpList.getEOSURI();
@@ -41,7 +50,7 @@ public class EOSClient {
                 EosApi eosApi = EosApiFactory.create(uri.url);
                 SignArg arg = eosApi.getSignArg((int) EOSClientCache.EXPIRED_TIME);
                 PushTransactionRequest req = makeGetBalanceRequest(arg, username);
-                PushedTransaction pts = eosApi.pushTransaction(req);              
+                PushedTransaction pts = eosApi.pushTransaction(req);
                 String console = pts.getProcessed().getActionTraces().get(0).getConsole();
                 int index = console.indexOf("{\"balance\":");
                 console = console.substring(index);
@@ -69,6 +78,9 @@ public class EOSClient {
      * @throws Throwable
      */
     public static void deductHDD(long firstCost, String username) throws Throwable {
+        if (!BP_ENABLE) {
+            return;
+        }
         Exception err = null;
         for (int ii = 0; ii < 8; ii++) {
             EOSURI uri = BpList.getEOSURI();
@@ -96,6 +108,9 @@ public class EOSClient {
      * @throws Throwable
      */
     public static void addUsedSpace(long length, String username) throws Throwable {
+        if (!BP_ENABLE) {
+            return;
+        }
         Exception err = null;
         for (int ii = 0; ii < 8; ii++) {
             EOSURI uri = BpList.getEOSURI();
@@ -123,6 +138,9 @@ public class EOSClient {
      * @throws Throwable
      */
     public static void setUserFee(long cost, String username) throws Throwable {
+        if (!BP_ENABLE) {
+            return;
+        }
         Exception err = null;
         for (int ii = 0; ii < 8; ii++) {
             EOSURI uri = BpList.getEOSURI();
