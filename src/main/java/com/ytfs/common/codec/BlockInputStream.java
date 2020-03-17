@@ -82,7 +82,7 @@ public class BlockInputStream extends InputStream {
                 return in.read();
             }
         }
-        return r;
+        return (r & 0xFF);
     }
 
     @Override
