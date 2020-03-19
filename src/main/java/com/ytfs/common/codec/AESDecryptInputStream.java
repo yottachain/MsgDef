@@ -69,7 +69,7 @@ public class AESDecryptInputStream extends FilterInputStream {
                 r = bufin.read();
             }
         }
-        return (r & 0xFF);
+        return r;
     }
 
     private void fill() throws IOException {
