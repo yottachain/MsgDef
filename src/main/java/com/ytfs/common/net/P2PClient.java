@@ -18,7 +18,7 @@ public class P2PClient {
     private static final Logger LOG = Logger.getLogger(P2PClient.class);
     private String addrString;
     private final String key;
-    private long connectedTime = 0;
+    private long connectedTime = 0;//-1:成功,
     private boolean isDestroy = false;
     private final AtomicLong lasttime = new AtomicLong(System.currentTimeMillis());
 

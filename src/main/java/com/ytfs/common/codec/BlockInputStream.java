@@ -80,7 +80,7 @@ public class BlockInputStream extends InputStream {
                 in = new ByteArrayInputStream(data, data.length - head, head);
                 head = 0;
                 return in.read();
-            }
+            } 
         }
         return r;
     }

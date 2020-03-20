@@ -15,6 +15,9 @@ public class StatusRepReq {
     private boolean relay;
     private int version;
     private int rebuilding;
+    private long realSpace;
+    private long tx;
+    private long rx;
 
     /**
      * @return the id
@@ -168,6 +171,48 @@ public class StatusRepReq {
      */
     public void setRebuilding(int rebuilding) {
         this.rebuilding = rebuilding;
+    }
+
+    /**
+     * @return the realSpace
+     */
+    public long getRealSpace() {
+        return realSpace;
+    }
+
+    /**
+     * @param realSpace the realSpace to set
+     */
+    public void setRealSpace(long realSpace) {
+        this.realSpace = realSpace;
+    }
+
+    /**
+     * @return the tx
+     */
+    public long getTx() {
+        return tx;
+    }
+
+    /**
+     * @param tx the tx to set
+     */
+    public void setTx(long tx) {
+        this.tx = tx;
+    }
+
+    /**
+     * @return the rx
+     */
+    public long getRx() {
+        return rx;
+    }
+
+    /**
+     * @param rx the rx to set
+     */
+    public void setRx(long rx) {
+        this.rx = rx;
     }
 
 }

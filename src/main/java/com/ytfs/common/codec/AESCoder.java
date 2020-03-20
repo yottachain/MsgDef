@@ -1,7 +1,11 @@
 package com.ytfs.common.codec;
 
 import com.ytfs.common.conf.UserConfig;
-import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import javax.crypto.BadPaddingException;
@@ -43,22 +47,45 @@ public class AESCoder {
     }
 
     public static void main(String[] arg) throws Exception {
+        UserConfig.AESKey = KeyStoreCoder.generateRandomKey();
 
         AESCoder code = new AESCoder(Cipher.ENCRYPT_MODE);
 
-        ByteArrayOutputStream bs = new ByteArrayOutputStream();
-
-        byte[] data1 = code.update("aaaaaaaaaa".getBytes());
+        FileInputStream is = new FileInputStream(new File("d:\\aa.jpg"));
+        FileOutputStream bs = new FileOutputStream(new File("d:\\aa.jpg.ec"));
+        byte[] data = new byte[8192];
+        int len = 0;
+        while ((len = is.read(data)) != -1) {
+            byte[] data1 = code.update(data, 0, len);
+            bs.write(data1);
+        }
+        byte[] data1 = code.doFinal();
         bs.write(data1);
-        byte[] data2 = code.update("bbbbbbbbbbb".getBytes());
-        bs.write(data2);
+        bs.close();
+        is.close();
+        OutputStream bss = new java.io.BufferedOutputStream(new FileOutputStream(new File("d:\\aa.0.jpg")));
+        InputStream is1 = new java.io.BufferedInputStream(new FileInputStream(new File("d:\\aa.jpg")));
 
-        byte[] data3 = code.doFinal();
-        bs.write(data3);
+        long readpos = 1024 * 126 + 3;
+        for (long ll = 0; ll < readpos; ll++) {
+            int r = is1.read();
+            bss.write(r);
+        }
+        is1.close();
 
-        AESCoder code1 = new AESCoder(Cipher.DECRYPT_MODE);
-        byte[] data = code1.doFinal(bs.toByteArray());
-        System.out.println(new String(data));
+        long startpos = readpos / 16L;
+        int skipn = (int) (readpos % 16L);
+        is = new FileInputStream(new File("d:\\aa.jpg.ec"));
+        is.skip(startpos * 16L);
+        InputStream bin = new AESDecryptInputStream(is, UserConfig.AESKey);
+        if (skipn > 0) {
+            bin.skip(skipn);
+        }
+        while ((len = bin.read(data)) != -1) {
+            bss.write(data, 0, len);
+        }
+        bin.close();
+        bss.close();
 
     }
 }
