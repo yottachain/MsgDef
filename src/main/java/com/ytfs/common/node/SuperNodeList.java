@@ -1,26 +1,97 @@
 package com.ytfs.common.node;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ytfs.common.Function;
 import com.ytfs.common.conf.ServerConfig;
 import static com.ytfs.common.conf.ServerConfig.selfIp;
-import com.ytfs.common.conf.UserConfig;
 import com.ytfs.common.net.P2PUtils;
 import com.ytfs.service.packet.user.ListSuperNodeReq;
 import com.ytfs.service.packet.user.ListSuperNodeResp;
 import static io.jafka.jeos.util.Raw.charidx;
 import io.yottachain.nodemgmt.YottaNodeMgmt;
 import io.yottachain.nodemgmt.core.vo.SuperNode;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.math.BigInteger;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import org.apache.log4j.Logger;
 
 public class SuperNodeList {
 
-    static SuperNode[] superList = null;
     private static final Logger LOG = Logger.getLogger(SuperNodeList.class);
+    private static SuperNode[] superList = null;
     public static boolean isServer = false;
+    private static final List<SuperNode> list = new ArrayList();
+
+    public static List<SuperNode> getSuperNodeListFromCfg() throws IOException {
+        if (list.isEmpty()) {
+            String path = System.getProperty("snlist.conf", "conf/snlist.properties");
+            File file = new File(path);
+            if (!file.exists()) {
+                file = new File("conf/snlist.properties");
+            }
+            if (!file.exists()) {
+                file = new File("../conf/snlist.properties");
+            }
+            InputStream is = null;
+            try {
+                is = new FileInputStream(file);
+            } catch (FileNotFoundException r) {
+                LOG.error("No snlist properties file could be found for ytfs service.");
+                throw new IOException("No snlist properties file could be found for ytfs service.");
+            }
+            List snlist;
+            try {
+                ObjectMapper mapper = new ObjectMapper();
+                snlist = mapper.readValue(is, ArrayList.class);
+            } finally {
+                is.close();
+            }
+            if (snlist == null || snlist.isEmpty()) {
+                LOG.error("No snlist properties file could be found for ytfs service.");
+                throw new IOException("No snlist properties file could be found for ytfs service");
+            }
+            for (Object obj : snlist) {
+                Map map = (Map) obj;
+                SuperNode sn = new SuperNode(0, null, null, null, null);
+                sn.setId(Integer.parseInt(map.get("Number").toString()));
+                sn.setNodeid(map.get("ID").toString());
+                List addr = (List) map.get("Addrs");
+                sn.setAddrs(addr);
+                list.add(sn);
+            }
+        }
+        return list;
+    }
+
+    private static void findSnList() throws Throwable {
+        List<SuperNode> snlist = new ArrayList(getSuperNodeListFromCfg());
+        while (true) {
+            long index = System.currentTimeMillis() % snlist.size();
+            SuperNode sn = snlist.remove((int) index);
+            try {
+                ListSuperNodeReq req = new ListSuperNodeReq();
+                ListSuperNodeResp res = (ListSuperNodeResp) P2PUtils.requestBPU(req, sn);
+                superList = res.getSuperList();
+                return;
+            } catch (Throwable r) {
+                try {
+                    Thread.sleep(15000);
+                } catch (InterruptedException ex) {
+                }
+                if (snlist.isEmpty()) {
+                    throw r;
+                }
+            }
+        }
+    }
 
     /**
      * 客户端获取node列表
@@ -37,11 +108,9 @@ public class SuperNodeList {
                     if (isServer) {
                         superList = NodeManager.getSuperNode();
                     } else {
-                        ListSuperNodeReq req = new ListSuperNodeReq();
-                        ListSuperNodeResp res = (ListSuperNodeResp) P2PUtils.requestBPU(req, UserConfig.superNode);
-                        superList = res.getSuperList();
+                        findSnList();
                     }
-                } catch (Exception ex) {
+                } catch (Throwable ex) {
                     LOG.error("", ex);
                     try {
                         Thread.sleep(5000);

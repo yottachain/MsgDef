@@ -32,11 +32,11 @@ public class P2PUtils {
      * 初始化P2P工具
      *
      * @param port
-     * @param privateKey
+     * @param privkey
      * @throws java.lang.Exception
      */
-    public static void start(int port, String privateKey) throws Exception {
-        YottaP2P.start(port, privateKey);
+    public static void start(int port, String privkey) throws Exception {
+        YottaP2P.start(port, privkey);
         LOG.info("P2P initialization completed, port " + port);
         LOG.info("NodeID:" + YottaP2P.id());
         String[] addrs = YottaP2P.addrs();
