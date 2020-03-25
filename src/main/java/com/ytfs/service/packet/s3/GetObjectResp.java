@@ -6,7 +6,17 @@ public class GetObjectResp {
 
     private String fileName;
     private ObjectId objectId;
+    private byte[] meta;
+    private String bucketName;
 
+
+    public String getBucketName() {
+        return bucketName;
+    }
+
+    public void setBucketName(String bucketName) {
+        this.bucketName = bucketName;
+    }
 
     public ObjectId getObjectId() {
         return objectId;
@@ -22,5 +32,13 @@ public class GetObjectResp {
 
     public void setFileName(String fileName) {
         this.fileName = fileName;
+    }
+
+    public byte[] getMeta() {
+        return meta;
+    }
+
+    public void setMeta(byte[] meta) {
+        this.meta = meta;
     }
 }
