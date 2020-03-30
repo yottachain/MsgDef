@@ -14,8 +14,20 @@ message NodeCapacityResponse {
     string allocId=2;
 }
 
+//msgid=0xe75c  这是不需要落盘的消息,收到除了不落盘,其他还是之前的逻辑,该获取token,发分片之前一样会获取
+message UploadFackShardRequest  { 
+   int32 SHARDID=1;
+   int32 BPDID = 2; 
+   int64 VBI = 3; 
+   bytes BPDSIGN=4; 
+   bytes DAT=5; 
+   bytes VHF=6; 
+   bytes USERSIGN=7; 
+   string allocId=8;
+   uint32 Sleep=9;
+}
 
-//msgid=0xCB05
+//msgid=0xcb05  这是正常的分片消息,按正常的逻辑走
 message UploadShardRequest  { 
    int32 SHARDID=1;
    int32 BPDID = 2; 

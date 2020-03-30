@@ -9,6 +9,10 @@ public class EccTest {
 
     public static void bpsign() {
         try {
+            int ii= 120;
+            System.out.println(ii % 21);
+;
+            
             String privateKey = "5JBpNe39ydfNM1QeDb2u2ymPUZqRnxiUGiatGH1KFZuDhiuoAbA";
             System.out.println("SuperNode privateKey:" + privateKey);
             String nodeid = "16Uiu2HAmNfU9cixngZQBxW7ftew5kSegTJQaJDVBNpGZXUoRqq88";

@@ -2,6 +2,7 @@ package com.ytfs.service.packet;
 
 import com.google.protobuf.ByteString;
 import com.ytfs.common.SerializationUtil;
+import com.ytfs.service.packet.v2.UploadObjectInitReqV2;
 import java.io.IOException;
 import java.util.ArrayList;
 import org.apache.commons.codec.binary.Hex;
@@ -10,7 +11,17 @@ public class ProtobufTest {
 
     public static void main(String[] args) throws IOException {
  
+        UploadObjectInitReqV2 req=new UploadObjectInitReqV2();
+        req.setKeyNumber(1);
+        req.setLength(2);
+        req.setSignData("dssd");
+        req.setUserId(3);
+        req.setVHW("sd".getBytes());
+        byte[] result1 = SerializationUtil.serialize(req);
         
+        
+        req=(UploadObjectInitReqV2)SerializationUtil.deserialize(result1);
+        System.out.println();
         
     }
 

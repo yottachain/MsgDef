@@ -1,7 +1,6 @@
 package com.ytfs.common;
 
 import com.ytfs.service.packet.ErrorMessage;
-import com.ytfs.service.packet.user.UploadBlockEndReq;
 import io.protostuff.LinkedBuffer;
 import io.protostuff.ProtostuffIOUtil;
 import io.protostuff.Schema;
