@@ -54,7 +54,8 @@ public class ServerConfig {
     public static int httpPort = 8080;
     public static String httpRemoteIp = "";
     public static String httpServlet = "";
-    
+
     public static int rebuildSpeed = 1000;
     public static int rebuildTaskSize = 100;
+    public static int sendShardInterval = 1000;
 }

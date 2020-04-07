@@ -18,8 +18,12 @@ public class AESCoder {
 
     Cipher cipher;
 
-    //Cipher.ENCRYPT_MODE
-    //Cipher.DECRYPT_MODE 
+    public AESCoder(int mode, byte[] aeskey) throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException {
+        SecretKeySpec skeySpec = new SecretKeySpec(aeskey, "AES");
+        cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");
+        cipher.init(mode, skeySpec);
+    }
+
     public AESCoder(int mode) throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException {
         SecretKeySpec skeySpec = new SecretKeySpec(UserConfig.AESKey, "AES");
         cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");
