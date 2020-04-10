@@ -92,10 +92,14 @@ public class P2PUtils {
                     throw r;
                 }
                 retryTimes++;
+                if (retryTimes == 1 && (r.getMessage() == null || r.getMessage().isEmpty())) {
+                    continue;
+                }
                 try {
-                    Thread.sleep(10000);
+                    Thread.sleep(30000);
                 } catch (InterruptedException ex) {
                 }
+
             }
         }
         throw err;
