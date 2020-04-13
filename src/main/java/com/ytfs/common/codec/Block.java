@@ -176,8 +176,8 @@ public class Block {
     public void setRealSize(int realSize) {
         this.realSize = realSize;
     }
-    
-    public void clearData(){
-        this.data=null;
+
+    public void clearData() {
+        this.data = null;
     }
 }
