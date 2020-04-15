@@ -74,7 +74,7 @@ public class ProtobufTest {
         MessageCheck.SpotCheckTaskList task = MessageCheck.SpotCheckTaskList.parseFrom(res);
         System.out.println(task);
     }
-
+/*
     public static void taskDescriptionTest() throws IOException {
         MessageRebuild.TaskDescription.Builder builder = MessageRebuild.TaskDescription.newBuilder();
         builder.setId(5);
@@ -114,7 +114,7 @@ public class ProtobufTest {
         req.getParityHash().add("eeee".getBytes("utf-8"));
         req.getParityHash().add("ffff".getBytes("utf-8"));
         req.getParityHash().add("gggg".getBytes("utf-8"));
-*/
+ 
         P2PLocation loa = new P2PLocation();
         loa.setAddrs(new ArrayList());
         loa.getAddrs().add("1111111");
@@ -144,4 +144,5 @@ public class ProtobufTest {
         System.out.println(task);
 */
     }
-}
+
+

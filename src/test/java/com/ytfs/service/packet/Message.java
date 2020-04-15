@@ -14,6 +14,2176 @@ public final class Message {
     registerAllExtensions(
         (com.google.protobuf.ExtensionRegistryLite) registry);
   }
+  public interface NodeCapacityRequestOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:NodeCapacityRequest)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>int64 startTime = 1;</code>
+     */
+    long getStartTime();
+
+    /**
+     * <code>int32 retryTimes = 2;</code>
+     */
+    int getRetryTimes();
+  }
+  /**
+   * <pre>
+   *msgid=0xc487
+   * </pre>
+   *
+   * Protobuf type {@code NodeCapacityRequest}
+   */
+  public  static final class NodeCapacityRequest extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:NodeCapacityRequest)
+      NodeCapacityRequestOrBuilder {
+  private static final long serialVersionUID = 0L;
+    // Use NodeCapacityRequest.newBuilder() to construct.
+    private NodeCapacityRequest(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private NodeCapacityRequest() {
+      startTime_ = 0L;
+      retryTimes_ = 0;
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private NodeCapacityRequest(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 8: {
+
+              startTime_ = input.readInt64();
+              break;
+            }
+            case 16: {
+
+              retryTimes_ = input.readInt32();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.ytfs.service.packet.Message.internal_static_NodeCapacityRequest_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.ytfs.service.packet.Message.internal_static_NodeCapacityRequest_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.ytfs.service.packet.Message.NodeCapacityRequest.class, com.ytfs.service.packet.Message.NodeCapacityRequest.Builder.class);
+    }
+
+    public static final int STARTTIME_FIELD_NUMBER = 1;
+    private long startTime_;
+    /**
+     * <code>int64 startTime = 1;</code>
+     */
+    public long getStartTime() {
+      return startTime_;
+    }
+
+    public static final int RETRYTIMES_FIELD_NUMBER = 2;
+    private int retryTimes_;
+    /**
+     * <code>int32 retryTimes = 2;</code>
+     */
+    public int getRetryTimes() {
+      return retryTimes_;
+    }
+
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (startTime_ != 0L) {
+        output.writeInt64(1, startTime_);
+      }
+      if (retryTimes_ != 0) {
+        output.writeInt32(2, retryTimes_);
+      }
+      unknownFields.writeTo(output);
+    }
+
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (startTime_ != 0L) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(1, startTime_);
+      }
+      if (retryTimes_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(2, retryTimes_);
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof com.ytfs.service.packet.Message.NodeCapacityRequest)) {
+        return super.equals(obj);
+      }
+      com.ytfs.service.packet.Message.NodeCapacityRequest other = (com.ytfs.service.packet.Message.NodeCapacityRequest) obj;
+
+      boolean result = true;
+      result = result && (getStartTime()
+          == other.getStartTime());
+      result = result && (getRetryTimes()
+          == other.getRetryTimes());
+      result = result && unknownFields.equals(other.unknownFields);
+      return result;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (37 * hash) + STARTTIME_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+          getStartTime());
+      hash = (37 * hash) + RETRYTIMES_FIELD_NUMBER;
+      hash = (53 * hash) + getRetryTimes();
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static com.ytfs.service.packet.Message.NodeCapacityRequest parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.ytfs.service.packet.Message.NodeCapacityRequest parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.ytfs.service.packet.Message.NodeCapacityRequest parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.ytfs.service.packet.Message.NodeCapacityRequest parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.ytfs.service.packet.Message.NodeCapacityRequest parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.ytfs.service.packet.Message.NodeCapacityRequest parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.ytfs.service.packet.Message.NodeCapacityRequest parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.ytfs.service.packet.Message.NodeCapacityRequest parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.ytfs.service.packet.Message.NodeCapacityRequest parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static com.ytfs.service.packet.Message.NodeCapacityRequest parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.ytfs.service.packet.Message.NodeCapacityRequest parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.ytfs.service.packet.Message.NodeCapacityRequest parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(com.ytfs.service.packet.Message.NodeCapacityRequest prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * <pre>
+     *msgid=0xc487
+     * </pre>
+     *
+     * Protobuf type {@code NodeCapacityRequest}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:NodeCapacityRequest)
+        com.ytfs.service.packet.Message.NodeCapacityRequestOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.ytfs.service.packet.Message.internal_static_NodeCapacityRequest_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.ytfs.service.packet.Message.internal_static_NodeCapacityRequest_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.ytfs.service.packet.Message.NodeCapacityRequest.class, com.ytfs.service.packet.Message.NodeCapacityRequest.Builder.class);
+      }
+
+      // Construct using com.ytfs.service.packet.Message.NodeCapacityRequest.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      public Builder clear() {
+        super.clear();
+        startTime_ = 0L;
+
+        retryTimes_ = 0;
+
+        return this;
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.ytfs.service.packet.Message.internal_static_NodeCapacityRequest_descriptor;
+      }
+
+      public com.ytfs.service.packet.Message.NodeCapacityRequest getDefaultInstanceForType() {
+        return com.ytfs.service.packet.Message.NodeCapacityRequest.getDefaultInstance();
+      }
+
+      public com.ytfs.service.packet.Message.NodeCapacityRequest build() {
+        com.ytfs.service.packet.Message.NodeCapacityRequest result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.ytfs.service.packet.Message.NodeCapacityRequest buildPartial() {
+        com.ytfs.service.packet.Message.NodeCapacityRequest result = new com.ytfs.service.packet.Message.NodeCapacityRequest(this);
+        result.startTime_ = startTime_;
+        result.retryTimes_ = retryTimes_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.ytfs.service.packet.Message.NodeCapacityRequest) {
+          return mergeFrom((com.ytfs.service.packet.Message.NodeCapacityRequest)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.ytfs.service.packet.Message.NodeCapacityRequest other) {
+        if (other == com.ytfs.service.packet.Message.NodeCapacityRequest.getDefaultInstance()) return this;
+        if (other.getStartTime() != 0L) {
+          setStartTime(other.getStartTime());
+        }
+        if (other.getRetryTimes() != 0) {
+          setRetryTimes(other.getRetryTimes());
+        }
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.ytfs.service.packet.Message.NodeCapacityRequest parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.ytfs.service.packet.Message.NodeCapacityRequest) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+
+      private long startTime_ ;
+      /**
+       * <code>int64 startTime = 1;</code>
+       */
+      public long getStartTime() {
+        return startTime_;
+      }
+      /**
+       * <code>int64 startTime = 1;</code>
+       */
+      public Builder setStartTime(long value) {
+        
+        startTime_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>int64 startTime = 1;</code>
+       */
+      public Builder clearStartTime() {
+        
+        startTime_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      private int retryTimes_ ;
+      /**
+       * <code>int32 retryTimes = 2;</code>
+       */
+      public int getRetryTimes() {
+        return retryTimes_;
+      }
+      /**
+       * <code>int32 retryTimes = 2;</code>
+       */
+      public Builder setRetryTimes(int value) {
+        
+        retryTimes_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>int32 retryTimes = 2;</code>
+       */
+      public Builder clearRetryTimes() {
+        
+        retryTimes_ = 0;
+        onChanged();
+        return this;
+      }
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFieldsProto3(unknownFields);
+      }
+
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:NodeCapacityRequest)
+    }
+
+    // @@protoc_insertion_point(class_scope:NodeCapacityRequest)
+    private static final com.ytfs.service.packet.Message.NodeCapacityRequest DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new com.ytfs.service.packet.Message.NodeCapacityRequest();
+    }
+
+    public static com.ytfs.service.packet.Message.NodeCapacityRequest getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<NodeCapacityRequest>
+        PARSER = new com.google.protobuf.AbstractParser<NodeCapacityRequest>() {
+      public NodeCapacityRequest parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new NodeCapacityRequest(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<NodeCapacityRequest> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<NodeCapacityRequest> getParserForType() {
+      return PARSER;
+    }
+
+    public com.ytfs.service.packet.Message.NodeCapacityRequest getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
+  public interface NodeCapacityResponseOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:NodeCapacityResponse)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>bool writable = 1;</code>
+     */
+    boolean getWritable();
+
+    /**
+     * <code>string allocId = 2;</code>
+     */
+    java.lang.String getAllocId();
+    /**
+     * <code>string allocId = 2;</code>
+     */
+    com.google.protobuf.ByteString
+        getAllocIdBytes();
+  }
+  /**
+   * <pre>
+   *msgid=0xe684
+   * </pre>
+   *
+   * Protobuf type {@code NodeCapacityResponse}
+   */
+  public  static final class NodeCapacityResponse extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:NodeCapacityResponse)
+      NodeCapacityResponseOrBuilder {
+  private static final long serialVersionUID = 0L;
+    // Use NodeCapacityResponse.newBuilder() to construct.
+    private NodeCapacityResponse(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private NodeCapacityResponse() {
+      writable_ = false;
+      allocId_ = "";
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private NodeCapacityResponse(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 8: {
+
+              writable_ = input.readBool();
+              break;
+            }
+            case 18: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              allocId_ = s;
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.ytfs.service.packet.Message.internal_static_NodeCapacityResponse_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.ytfs.service.packet.Message.internal_static_NodeCapacityResponse_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.ytfs.service.packet.Message.NodeCapacityResponse.class, com.ytfs.service.packet.Message.NodeCapacityResponse.Builder.class);
+    }
+
+    public static final int WRITABLE_FIELD_NUMBER = 1;
+    private boolean writable_;
+    /**
+     * <code>bool writable = 1;</code>
+     */
+    public boolean getWritable() {
+      return writable_;
+    }
+
+    public static final int ALLOCID_FIELD_NUMBER = 2;
+    private volatile java.lang.Object allocId_;
+    /**
+     * <code>string allocId = 2;</code>
+     */
+    public java.lang.String getAllocId() {
+      java.lang.Object ref = allocId_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        allocId_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string allocId = 2;</code>
+     */
+    public com.google.protobuf.ByteString
+        getAllocIdBytes() {
+      java.lang.Object ref = allocId_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        allocId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (writable_ != false) {
+        output.writeBool(1, writable_);
+      }
+      if (!getAllocIdBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, allocId_);
+      }
+      unknownFields.writeTo(output);
+    }
+
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (writable_ != false) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBoolSize(1, writable_);
+      }
+      if (!getAllocIdBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, allocId_);
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof com.ytfs.service.packet.Message.NodeCapacityResponse)) {
+        return super.equals(obj);
+      }
+      com.ytfs.service.packet.Message.NodeCapacityResponse other = (com.ytfs.service.packet.Message.NodeCapacityResponse) obj;
+
+      boolean result = true;
+      result = result && (getWritable()
+          == other.getWritable());
+      result = result && getAllocId()
+          .equals(other.getAllocId());
+      result = result && unknownFields.equals(other.unknownFields);
+      return result;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (37 * hash) + WRITABLE_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
+          getWritable());
+      hash = (37 * hash) + ALLOCID_FIELD_NUMBER;
+      hash = (53 * hash) + getAllocId().hashCode();
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static com.ytfs.service.packet.Message.NodeCapacityResponse parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.ytfs.service.packet.Message.NodeCapacityResponse parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.ytfs.service.packet.Message.NodeCapacityResponse parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.ytfs.service.packet.Message.NodeCapacityResponse parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.ytfs.service.packet.Message.NodeCapacityResponse parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.ytfs.service.packet.Message.NodeCapacityResponse parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.ytfs.service.packet.Message.NodeCapacityResponse parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.ytfs.service.packet.Message.NodeCapacityResponse parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.ytfs.service.packet.Message.NodeCapacityResponse parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static com.ytfs.service.packet.Message.NodeCapacityResponse parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.ytfs.service.packet.Message.NodeCapacityResponse parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.ytfs.service.packet.Message.NodeCapacityResponse parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(com.ytfs.service.packet.Message.NodeCapacityResponse prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * <pre>
+     *msgid=0xe684
+     * </pre>
+     *
+     * Protobuf type {@code NodeCapacityResponse}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:NodeCapacityResponse)
+        com.ytfs.service.packet.Message.NodeCapacityResponseOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.ytfs.service.packet.Message.internal_static_NodeCapacityResponse_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.ytfs.service.packet.Message.internal_static_NodeCapacityResponse_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.ytfs.service.packet.Message.NodeCapacityResponse.class, com.ytfs.service.packet.Message.NodeCapacityResponse.Builder.class);
+      }
+
+      // Construct using com.ytfs.service.packet.Message.NodeCapacityResponse.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      public Builder clear() {
+        super.clear();
+        writable_ = false;
+
+        allocId_ = "";
+
+        return this;
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.ytfs.service.packet.Message.internal_static_NodeCapacityResponse_descriptor;
+      }
+
+      public com.ytfs.service.packet.Message.NodeCapacityResponse getDefaultInstanceForType() {
+        return com.ytfs.service.packet.Message.NodeCapacityResponse.getDefaultInstance();
+      }
+
+      public com.ytfs.service.packet.Message.NodeCapacityResponse build() {
+        com.ytfs.service.packet.Message.NodeCapacityResponse result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.ytfs.service.packet.Message.NodeCapacityResponse buildPartial() {
+        com.ytfs.service.packet.Message.NodeCapacityResponse result = new com.ytfs.service.packet.Message.NodeCapacityResponse(this);
+        result.writable_ = writable_;
+        result.allocId_ = allocId_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.ytfs.service.packet.Message.NodeCapacityResponse) {
+          return mergeFrom((com.ytfs.service.packet.Message.NodeCapacityResponse)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.ytfs.service.packet.Message.NodeCapacityResponse other) {
+        if (other == com.ytfs.service.packet.Message.NodeCapacityResponse.getDefaultInstance()) return this;
+        if (other.getWritable() != false) {
+          setWritable(other.getWritable());
+        }
+        if (!other.getAllocId().isEmpty()) {
+          allocId_ = other.allocId_;
+          onChanged();
+        }
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.ytfs.service.packet.Message.NodeCapacityResponse parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.ytfs.service.packet.Message.NodeCapacityResponse) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+
+      private boolean writable_ ;
+      /**
+       * <code>bool writable = 1;</code>
+       */
+      public boolean getWritable() {
+        return writable_;
+      }
+      /**
+       * <code>bool writable = 1;</code>
+       */
+      public Builder setWritable(boolean value) {
+        
+        writable_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>bool writable = 1;</code>
+       */
+      public Builder clearWritable() {
+        
+        writable_ = false;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object allocId_ = "";
+      /**
+       * <code>string allocId = 2;</code>
+       */
+      public java.lang.String getAllocId() {
+        java.lang.Object ref = allocId_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          allocId_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string allocId = 2;</code>
+       */
+      public com.google.protobuf.ByteString
+          getAllocIdBytes() {
+        java.lang.Object ref = allocId_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          allocId_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string allocId = 2;</code>
+       */
+      public Builder setAllocId(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        allocId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string allocId = 2;</code>
+       */
+      public Builder clearAllocId() {
+        
+        allocId_ = getDefaultInstance().getAllocId();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string allocId = 2;</code>
+       */
+      public Builder setAllocIdBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        allocId_ = value;
+        onChanged();
+        return this;
+      }
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFieldsProto3(unknownFields);
+      }
+
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:NodeCapacityResponse)
+    }
+
+    // @@protoc_insertion_point(class_scope:NodeCapacityResponse)
+    private static final com.ytfs.service.packet.Message.NodeCapacityResponse DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new com.ytfs.service.packet.Message.NodeCapacityResponse();
+    }
+
+    public static com.ytfs.service.packet.Message.NodeCapacityResponse getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<NodeCapacityResponse>
+        PARSER = new com.google.protobuf.AbstractParser<NodeCapacityResponse>() {
+      public NodeCapacityResponse parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new NodeCapacityResponse(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<NodeCapacityResponse> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<NodeCapacityResponse> getParserForType() {
+      return PARSER;
+    }
+
+    public com.ytfs.service.packet.Message.NodeCapacityResponse getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
+  public interface UploadFackShardRequestOrBuilder extends
+      // @@protoc_insertion_point(interface_extends:UploadFackShardRequest)
+      com.google.protobuf.MessageOrBuilder {
+
+    /**
+     * <code>int32 SHARDID = 1;</code>
+     */
+    int getSHARDID();
+
+    /**
+     * <code>int32 BPDID = 2;</code>
+     */
+    int getBPDID();
+
+    /**
+     * <code>int64 VBI = 3;</code>
+     */
+    long getVBI();
+
+    /**
+     * <code>bytes BPDSIGN = 4;</code>
+     */
+    com.google.protobuf.ByteString getBPDSIGN();
+
+    /**
+     * <code>bytes DAT = 5;</code>
+     */
+    com.google.protobuf.ByteString getDAT();
+
+    /**
+     * <code>bytes VHF = 6;</code>
+     */
+    com.google.protobuf.ByteString getVHF();
+
+    /**
+     * <code>bytes USERSIGN = 7;</code>
+     */
+    com.google.protobuf.ByteString getUSERSIGN();
+
+    /**
+     * <code>string allocId = 8;</code>
+     */
+    java.lang.String getAllocId();
+    /**
+     * <code>string allocId = 8;</code>
+     */
+    com.google.protobuf.ByteString
+        getAllocIdBytes();
+
+    /**
+     * <code>uint32 Sleep = 9;</code>
+     */
+    int getSleep();
+  }
+  /**
+   * <pre>
+   *msgid=0xe75c  这是不需要落盘的消息,收到除了不落盘,其他还是之前的逻辑,该获取token,发分片之前一样会获取
+   * </pre>
+   *
+   * Protobuf type {@code UploadFackShardRequest}
+   */
+  public  static final class UploadFackShardRequest extends
+      com.google.protobuf.GeneratedMessageV3 implements
+      // @@protoc_insertion_point(message_implements:UploadFackShardRequest)
+      UploadFackShardRequestOrBuilder {
+  private static final long serialVersionUID = 0L;
+    // Use UploadFackShardRequest.newBuilder() to construct.
+    private UploadFackShardRequest(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
+      super(builder);
+    }
+    private UploadFackShardRequest() {
+      sHARDID_ = 0;
+      bPDID_ = 0;
+      vBI_ = 0L;
+      bPDSIGN_ = com.google.protobuf.ByteString.EMPTY;
+      dAT_ = com.google.protobuf.ByteString.EMPTY;
+      vHF_ = com.google.protobuf.ByteString.EMPTY;
+      uSERSIGN_ = com.google.protobuf.ByteString.EMPTY;
+      allocId_ = "";
+      sleep_ = 0;
+    }
+
+    @java.lang.Override
+    public final com.google.protobuf.UnknownFieldSet
+    getUnknownFields() {
+      return this.unknownFields;
+    }
+    private UploadFackShardRequest(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      this();
+      if (extensionRegistry == null) {
+        throw new java.lang.NullPointerException();
+      }
+      int mutable_bitField0_ = 0;
+      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
+          com.google.protobuf.UnknownFieldSet.newBuilder();
+      try {
+        boolean done = false;
+        while (!done) {
+          int tag = input.readTag();
+          switch (tag) {
+            case 0:
+              done = true;
+              break;
+            default: {
+              if (!parseUnknownFieldProto3(
+                  input, unknownFields, extensionRegistry, tag)) {
+                done = true;
+              }
+              break;
+            }
+            case 8: {
+
+              sHARDID_ = input.readInt32();
+              break;
+            }
+            case 16: {
+
+              bPDID_ = input.readInt32();
+              break;
+            }
+            case 24: {
+
+              vBI_ = input.readInt64();
+              break;
+            }
+            case 34: {
+
+              bPDSIGN_ = input.readBytes();
+              break;
+            }
+            case 42: {
+
+              dAT_ = input.readBytes();
+              break;
+            }
+            case 50: {
+
+              vHF_ = input.readBytes();
+              break;
+            }
+            case 58: {
+
+              uSERSIGN_ = input.readBytes();
+              break;
+            }
+            case 66: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              allocId_ = s;
+              break;
+            }
+            case 72: {
+
+              sleep_ = input.readUInt32();
+              break;
+            }
+          }
+        }
+      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+        throw e.setUnfinishedMessage(this);
+      } catch (java.io.IOException e) {
+        throw new com.google.protobuf.InvalidProtocolBufferException(
+            e).setUnfinishedMessage(this);
+      } finally {
+        this.unknownFields = unknownFields.build();
+        makeExtensionsImmutable();
+      }
+    }
+    public static final com.google.protobuf.Descriptors.Descriptor
+        getDescriptor() {
+      return com.ytfs.service.packet.Message.internal_static_UploadFackShardRequest_descriptor;
+    }
+
+    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+        internalGetFieldAccessorTable() {
+      return com.ytfs.service.packet.Message.internal_static_UploadFackShardRequest_fieldAccessorTable
+          .ensureFieldAccessorsInitialized(
+              com.ytfs.service.packet.Message.UploadFackShardRequest.class, com.ytfs.service.packet.Message.UploadFackShardRequest.Builder.class);
+    }
+
+    public static final int SHARDID_FIELD_NUMBER = 1;
+    private int sHARDID_;
+    /**
+     * <code>int32 SHARDID = 1;</code>
+     */
+    public int getSHARDID() {
+      return sHARDID_;
+    }
+
+    public static final int BPDID_FIELD_NUMBER = 2;
+    private int bPDID_;
+    /**
+     * <code>int32 BPDID = 2;</code>
+     */
+    public int getBPDID() {
+      return bPDID_;
+    }
+
+    public static final int VBI_FIELD_NUMBER = 3;
+    private long vBI_;
+    /**
+     * <code>int64 VBI = 3;</code>
+     */
+    public long getVBI() {
+      return vBI_;
+    }
+
+    public static final int BPDSIGN_FIELD_NUMBER = 4;
+    private com.google.protobuf.ByteString bPDSIGN_;
+    /**
+     * <code>bytes BPDSIGN = 4;</code>
+     */
+    public com.google.protobuf.ByteString getBPDSIGN() {
+      return bPDSIGN_;
+    }
+
+    public static final int DAT_FIELD_NUMBER = 5;
+    private com.google.protobuf.ByteString dAT_;
+    /**
+     * <code>bytes DAT = 5;</code>
+     */
+    public com.google.protobuf.ByteString getDAT() {
+      return dAT_;
+    }
+
+    public static final int VHF_FIELD_NUMBER = 6;
+    private com.google.protobuf.ByteString vHF_;
+    /**
+     * <code>bytes VHF = 6;</code>
+     */
+    public com.google.protobuf.ByteString getVHF() {
+      return vHF_;
+    }
+
+    public static final int USERSIGN_FIELD_NUMBER = 7;
+    private com.google.protobuf.ByteString uSERSIGN_;
+    /**
+     * <code>bytes USERSIGN = 7;</code>
+     */
+    public com.google.protobuf.ByteString getUSERSIGN() {
+      return uSERSIGN_;
+    }
+
+    public static final int ALLOCID_FIELD_NUMBER = 8;
+    private volatile java.lang.Object allocId_;
+    /**
+     * <code>string allocId = 8;</code>
+     */
+    public java.lang.String getAllocId() {
+      java.lang.Object ref = allocId_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        allocId_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string allocId = 8;</code>
+     */
+    public com.google.protobuf.ByteString
+        getAllocIdBytes() {
+      java.lang.Object ref = allocId_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        allocId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
+    public static final int SLEEP_FIELD_NUMBER = 9;
+    private int sleep_;
+    /**
+     * <code>uint32 Sleep = 9;</code>
+     */
+    public int getSleep() {
+      return sleep_;
+    }
+
+    private byte memoizedIsInitialized = -1;
+    public final boolean isInitialized() {
+      byte isInitialized = memoizedIsInitialized;
+      if (isInitialized == 1) return true;
+      if (isInitialized == 0) return false;
+
+      memoizedIsInitialized = 1;
+      return true;
+    }
+
+    public void writeTo(com.google.protobuf.CodedOutputStream output)
+                        throws java.io.IOException {
+      if (sHARDID_ != 0) {
+        output.writeInt32(1, sHARDID_);
+      }
+      if (bPDID_ != 0) {
+        output.writeInt32(2, bPDID_);
+      }
+      if (vBI_ != 0L) {
+        output.writeInt64(3, vBI_);
+      }
+      if (!bPDSIGN_.isEmpty()) {
+        output.writeBytes(4, bPDSIGN_);
+      }
+      if (!dAT_.isEmpty()) {
+        output.writeBytes(5, dAT_);
+      }
+      if (!vHF_.isEmpty()) {
+        output.writeBytes(6, vHF_);
+      }
+      if (!uSERSIGN_.isEmpty()) {
+        output.writeBytes(7, uSERSIGN_);
+      }
+      if (!getAllocIdBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 8, allocId_);
+      }
+      if (sleep_ != 0) {
+        output.writeUInt32(9, sleep_);
+      }
+      unknownFields.writeTo(output);
+    }
+
+    public int getSerializedSize() {
+      int size = memoizedSize;
+      if (size != -1) return size;
+
+      size = 0;
+      if (sHARDID_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(1, sHARDID_);
+      }
+      if (bPDID_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt32Size(2, bPDID_);
+      }
+      if (vBI_ != 0L) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeInt64Size(3, vBI_);
+      }
+      if (!bPDSIGN_.isEmpty()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(4, bPDSIGN_);
+      }
+      if (!dAT_.isEmpty()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(5, dAT_);
+      }
+      if (!vHF_.isEmpty()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(6, vHF_);
+      }
+      if (!uSERSIGN_.isEmpty()) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeBytesSize(7, uSERSIGN_);
+      }
+      if (!getAllocIdBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(8, allocId_);
+      }
+      if (sleep_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt32Size(9, sleep_);
+      }
+      size += unknownFields.getSerializedSize();
+      memoizedSize = size;
+      return size;
+    }
+
+    @java.lang.Override
+    public boolean equals(final java.lang.Object obj) {
+      if (obj == this) {
+       return true;
+      }
+      if (!(obj instanceof com.ytfs.service.packet.Message.UploadFackShardRequest)) {
+        return super.equals(obj);
+      }
+      com.ytfs.service.packet.Message.UploadFackShardRequest other = (com.ytfs.service.packet.Message.UploadFackShardRequest) obj;
+
+      boolean result = true;
+      result = result && (getSHARDID()
+          == other.getSHARDID());
+      result = result && (getBPDID()
+          == other.getBPDID());
+      result = result && (getVBI()
+          == other.getVBI());
+      result = result && getBPDSIGN()
+          .equals(other.getBPDSIGN());
+      result = result && getDAT()
+          .equals(other.getDAT());
+      result = result && getVHF()
+          .equals(other.getVHF());
+      result = result && getUSERSIGN()
+          .equals(other.getUSERSIGN());
+      result = result && getAllocId()
+          .equals(other.getAllocId());
+      result = result && (getSleep()
+          == other.getSleep());
+      result = result && unknownFields.equals(other.unknownFields);
+      return result;
+    }
+
+    @java.lang.Override
+    public int hashCode() {
+      if (memoizedHashCode != 0) {
+        return memoizedHashCode;
+      }
+      int hash = 41;
+      hash = (19 * hash) + getDescriptor().hashCode();
+      hash = (37 * hash) + SHARDID_FIELD_NUMBER;
+      hash = (53 * hash) + getSHARDID();
+      hash = (37 * hash) + BPDID_FIELD_NUMBER;
+      hash = (53 * hash) + getBPDID();
+      hash = (37 * hash) + VBI_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+          getVBI());
+      hash = (37 * hash) + BPDSIGN_FIELD_NUMBER;
+      hash = (53 * hash) + getBPDSIGN().hashCode();
+      hash = (37 * hash) + DAT_FIELD_NUMBER;
+      hash = (53 * hash) + getDAT().hashCode();
+      hash = (37 * hash) + VHF_FIELD_NUMBER;
+      hash = (53 * hash) + getVHF().hashCode();
+      hash = (37 * hash) + USERSIGN_FIELD_NUMBER;
+      hash = (53 * hash) + getUSERSIGN().hashCode();
+      hash = (37 * hash) + ALLOCID_FIELD_NUMBER;
+      hash = (53 * hash) + getAllocId().hashCode();
+      hash = (37 * hash) + SLEEP_FIELD_NUMBER;
+      hash = (53 * hash) + getSleep();
+      hash = (29 * hash) + unknownFields.hashCode();
+      memoizedHashCode = hash;
+      return hash;
+    }
+
+    public static com.ytfs.service.packet.Message.UploadFackShardRequest parseFrom(
+        java.nio.ByteBuffer data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.ytfs.service.packet.Message.UploadFackShardRequest parseFrom(
+        java.nio.ByteBuffer data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.ytfs.service.packet.Message.UploadFackShardRequest parseFrom(
+        com.google.protobuf.ByteString data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.ytfs.service.packet.Message.UploadFackShardRequest parseFrom(
+        com.google.protobuf.ByteString data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.ytfs.service.packet.Message.UploadFackShardRequest parseFrom(byte[] data)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data);
+    }
+    public static com.ytfs.service.packet.Message.UploadFackShardRequest parseFrom(
+        byte[] data,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws com.google.protobuf.InvalidProtocolBufferException {
+      return PARSER.parseFrom(data, extensionRegistry);
+    }
+    public static com.ytfs.service.packet.Message.UploadFackShardRequest parseFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.ytfs.service.packet.Message.UploadFackShardRequest parseFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.ytfs.service.packet.Message.UploadFackShardRequest parseDelimitedFrom(java.io.InputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input);
+    }
+    public static com.ytfs.service.packet.Message.UploadFackShardRequest parseDelimitedFrom(
+        java.io.InputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
+    }
+    public static com.ytfs.service.packet.Message.UploadFackShardRequest parseFrom(
+        com.google.protobuf.CodedInputStream input)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input);
+    }
+    public static com.ytfs.service.packet.Message.UploadFackShardRequest parseFrom(
+        com.google.protobuf.CodedInputStream input,
+        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+        throws java.io.IOException {
+      return com.google.protobuf.GeneratedMessageV3
+          .parseWithIOException(PARSER, input, extensionRegistry);
+    }
+
+    public Builder newBuilderForType() { return newBuilder(); }
+    public static Builder newBuilder() {
+      return DEFAULT_INSTANCE.toBuilder();
+    }
+    public static Builder newBuilder(com.ytfs.service.packet.Message.UploadFackShardRequest prototype) {
+      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
+    }
+    public Builder toBuilder() {
+      return this == DEFAULT_INSTANCE
+          ? new Builder() : new Builder().mergeFrom(this);
+    }
+
+    @java.lang.Override
+    protected Builder newBuilderForType(
+        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+      Builder builder = new Builder(parent);
+      return builder;
+    }
+    /**
+     * <pre>
+     *msgid=0xe75c  这是不需要落盘的消息,收到除了不落盘,其他还是之前的逻辑,该获取token,发分片之前一样会获取
+     * </pre>
+     *
+     * Protobuf type {@code UploadFackShardRequest}
+     */
+    public static final class Builder extends
+        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
+        // @@protoc_insertion_point(builder_implements:UploadFackShardRequest)
+        com.ytfs.service.packet.Message.UploadFackShardRequestOrBuilder {
+      public static final com.google.protobuf.Descriptors.Descriptor
+          getDescriptor() {
+        return com.ytfs.service.packet.Message.internal_static_UploadFackShardRequest_descriptor;
+      }
+
+      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+          internalGetFieldAccessorTable() {
+        return com.ytfs.service.packet.Message.internal_static_UploadFackShardRequest_fieldAccessorTable
+            .ensureFieldAccessorsInitialized(
+                com.ytfs.service.packet.Message.UploadFackShardRequest.class, com.ytfs.service.packet.Message.UploadFackShardRequest.Builder.class);
+      }
+
+      // Construct using com.ytfs.service.packet.Message.UploadFackShardRequest.newBuilder()
+      private Builder() {
+        maybeForceBuilderInitialization();
+      }
+
+      private Builder(
+          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
+        super(parent);
+        maybeForceBuilderInitialization();
+      }
+      private void maybeForceBuilderInitialization() {
+        if (com.google.protobuf.GeneratedMessageV3
+                .alwaysUseFieldBuilders) {
+        }
+      }
+      public Builder clear() {
+        super.clear();
+        sHARDID_ = 0;
+
+        bPDID_ = 0;
+
+        vBI_ = 0L;
+
+        bPDSIGN_ = com.google.protobuf.ByteString.EMPTY;
+
+        dAT_ = com.google.protobuf.ByteString.EMPTY;
+
+        vHF_ = com.google.protobuf.ByteString.EMPTY;
+
+        uSERSIGN_ = com.google.protobuf.ByteString.EMPTY;
+
+        allocId_ = "";
+
+        sleep_ = 0;
+
+        return this;
+      }
+
+      public com.google.protobuf.Descriptors.Descriptor
+          getDescriptorForType() {
+        return com.ytfs.service.packet.Message.internal_static_UploadFackShardRequest_descriptor;
+      }
+
+      public com.ytfs.service.packet.Message.UploadFackShardRequest getDefaultInstanceForType() {
+        return com.ytfs.service.packet.Message.UploadFackShardRequest.getDefaultInstance();
+      }
+
+      public com.ytfs.service.packet.Message.UploadFackShardRequest build() {
+        com.ytfs.service.packet.Message.UploadFackShardRequest result = buildPartial();
+        if (!result.isInitialized()) {
+          throw newUninitializedMessageException(result);
+        }
+        return result;
+      }
+
+      public com.ytfs.service.packet.Message.UploadFackShardRequest buildPartial() {
+        com.ytfs.service.packet.Message.UploadFackShardRequest result = new com.ytfs.service.packet.Message.UploadFackShardRequest(this);
+        result.sHARDID_ = sHARDID_;
+        result.bPDID_ = bPDID_;
+        result.vBI_ = vBI_;
+        result.bPDSIGN_ = bPDSIGN_;
+        result.dAT_ = dAT_;
+        result.vHF_ = vHF_;
+        result.uSERSIGN_ = uSERSIGN_;
+        result.allocId_ = allocId_;
+        result.sleep_ = sleep_;
+        onBuilt();
+        return result;
+      }
+
+      public Builder clone() {
+        return (Builder) super.clone();
+      }
+      public Builder setField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return (Builder) super.setField(field, value);
+      }
+      public Builder clearField(
+          com.google.protobuf.Descriptors.FieldDescriptor field) {
+        return (Builder) super.clearField(field);
+      }
+      public Builder clearOneof(
+          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
+        return (Builder) super.clearOneof(oneof);
+      }
+      public Builder setRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          int index, java.lang.Object value) {
+        return (Builder) super.setRepeatedField(field, index, value);
+      }
+      public Builder addRepeatedField(
+          com.google.protobuf.Descriptors.FieldDescriptor field,
+          java.lang.Object value) {
+        return (Builder) super.addRepeatedField(field, value);
+      }
+      public Builder mergeFrom(com.google.protobuf.Message other) {
+        if (other instanceof com.ytfs.service.packet.Message.UploadFackShardRequest) {
+          return mergeFrom((com.ytfs.service.packet.Message.UploadFackShardRequest)other);
+        } else {
+          super.mergeFrom(other);
+          return this;
+        }
+      }
+
+      public Builder mergeFrom(com.ytfs.service.packet.Message.UploadFackShardRequest other) {
+        if (other == com.ytfs.service.packet.Message.UploadFackShardRequest.getDefaultInstance()) return this;
+        if (other.getSHARDID() != 0) {
+          setSHARDID(other.getSHARDID());
+        }
+        if (other.getBPDID() != 0) {
+          setBPDID(other.getBPDID());
+        }
+        if (other.getVBI() != 0L) {
+          setVBI(other.getVBI());
+        }
+        if (other.getBPDSIGN() != com.google.protobuf.ByteString.EMPTY) {
+          setBPDSIGN(other.getBPDSIGN());
+        }
+        if (other.getDAT() != com.google.protobuf.ByteString.EMPTY) {
+          setDAT(other.getDAT());
+        }
+        if (other.getVHF() != com.google.protobuf.ByteString.EMPTY) {
+          setVHF(other.getVHF());
+        }
+        if (other.getUSERSIGN() != com.google.protobuf.ByteString.EMPTY) {
+          setUSERSIGN(other.getUSERSIGN());
+        }
+        if (!other.getAllocId().isEmpty()) {
+          allocId_ = other.allocId_;
+          onChanged();
+        }
+        if (other.getSleep() != 0) {
+          setSleep(other.getSleep());
+        }
+        this.mergeUnknownFields(other.unknownFields);
+        onChanged();
+        return this;
+      }
+
+      public final boolean isInitialized() {
+        return true;
+      }
+
+      public Builder mergeFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws java.io.IOException {
+        com.ytfs.service.packet.Message.UploadFackShardRequest parsedMessage = null;
+        try {
+          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
+        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
+          parsedMessage = (com.ytfs.service.packet.Message.UploadFackShardRequest) e.getUnfinishedMessage();
+          throw e.unwrapIOException();
+        } finally {
+          if (parsedMessage != null) {
+            mergeFrom(parsedMessage);
+          }
+        }
+        return this;
+      }
+
+      private int sHARDID_ ;
+      /**
+       * <code>int32 SHARDID = 1;</code>
+       */
+      public int getSHARDID() {
+        return sHARDID_;
+      }
+      /**
+       * <code>int32 SHARDID = 1;</code>
+       */
+      public Builder setSHARDID(int value) {
+        
+        sHARDID_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>int32 SHARDID = 1;</code>
+       */
+      public Builder clearSHARDID() {
+        
+        sHARDID_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int bPDID_ ;
+      /**
+       * <code>int32 BPDID = 2;</code>
+       */
+      public int getBPDID() {
+        return bPDID_;
+      }
+      /**
+       * <code>int32 BPDID = 2;</code>
+       */
+      public Builder setBPDID(int value) {
+        
+        bPDID_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>int32 BPDID = 2;</code>
+       */
+      public Builder clearBPDID() {
+        
+        bPDID_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private long vBI_ ;
+      /**
+       * <code>int64 VBI = 3;</code>
+       */
+      public long getVBI() {
+        return vBI_;
+      }
+      /**
+       * <code>int64 VBI = 3;</code>
+       */
+      public Builder setVBI(long value) {
+        
+        vBI_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>int64 VBI = 3;</code>
+       */
+      public Builder clearVBI() {
+        
+        vBI_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      private com.google.protobuf.ByteString bPDSIGN_ = com.google.protobuf.ByteString.EMPTY;
+      /**
+       * <code>bytes BPDSIGN = 4;</code>
+       */
+      public com.google.protobuf.ByteString getBPDSIGN() {
+        return bPDSIGN_;
+      }
+      /**
+       * <code>bytes BPDSIGN = 4;</code>
+       */
+      public Builder setBPDSIGN(com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        bPDSIGN_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>bytes BPDSIGN = 4;</code>
+       */
+      public Builder clearBPDSIGN() {
+        
+        bPDSIGN_ = getDefaultInstance().getBPDSIGN();
+        onChanged();
+        return this;
+      }
+
+      private com.google.protobuf.ByteString dAT_ = com.google.protobuf.ByteString.EMPTY;
+      /**
+       * <code>bytes DAT = 5;</code>
+       */
+      public com.google.protobuf.ByteString getDAT() {
+        return dAT_;
+      }
+      /**
+       * <code>bytes DAT = 5;</code>
+       */
+      public Builder setDAT(com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        dAT_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>bytes DAT = 5;</code>
+       */
+      public Builder clearDAT() {
+        
+        dAT_ = getDefaultInstance().getDAT();
+        onChanged();
+        return this;
+      }
+
+      private com.google.protobuf.ByteString vHF_ = com.google.protobuf.ByteString.EMPTY;
+      /**
+       * <code>bytes VHF = 6;</code>
+       */
+      public com.google.protobuf.ByteString getVHF() {
+        return vHF_;
+      }
+      /**
+       * <code>bytes VHF = 6;</code>
+       */
+      public Builder setVHF(com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        vHF_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>bytes VHF = 6;</code>
+       */
+      public Builder clearVHF() {
+        
+        vHF_ = getDefaultInstance().getVHF();
+        onChanged();
+        return this;
+      }
+
+      private com.google.protobuf.ByteString uSERSIGN_ = com.google.protobuf.ByteString.EMPTY;
+      /**
+       * <code>bytes USERSIGN = 7;</code>
+       */
+      public com.google.protobuf.ByteString getUSERSIGN() {
+        return uSERSIGN_;
+      }
+      /**
+       * <code>bytes USERSIGN = 7;</code>
+       */
+      public Builder setUSERSIGN(com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        uSERSIGN_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>bytes USERSIGN = 7;</code>
+       */
+      public Builder clearUSERSIGN() {
+        
+        uSERSIGN_ = getDefaultInstance().getUSERSIGN();
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object allocId_ = "";
+      /**
+       * <code>string allocId = 8;</code>
+       */
+      public java.lang.String getAllocId() {
+        java.lang.Object ref = allocId_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          allocId_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string allocId = 8;</code>
+       */
+      public com.google.protobuf.ByteString
+          getAllocIdBytes() {
+        java.lang.Object ref = allocId_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          allocId_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string allocId = 8;</code>
+       */
+      public Builder setAllocId(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        allocId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string allocId = 8;</code>
+       */
+      public Builder clearAllocId() {
+        
+        allocId_ = getDefaultInstance().getAllocId();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string allocId = 8;</code>
+       */
+      public Builder setAllocIdBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        allocId_ = value;
+        onChanged();
+        return this;
+      }
+
+      private int sleep_ ;
+      /**
+       * <code>uint32 Sleep = 9;</code>
+       */
+      public int getSleep() {
+        return sleep_;
+      }
+      /**
+       * <code>uint32 Sleep = 9;</code>
+       */
+      public Builder setSleep(int value) {
+        
+        sleep_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>uint32 Sleep = 9;</code>
+       */
+      public Builder clearSleep() {
+        
+        sleep_ = 0;
+        onChanged();
+        return this;
+      }
+      public final Builder setUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.setUnknownFieldsProto3(unknownFields);
+      }
+
+      public final Builder mergeUnknownFields(
+          final com.google.protobuf.UnknownFieldSet unknownFields) {
+        return super.mergeUnknownFields(unknownFields);
+      }
+
+
+      // @@protoc_insertion_point(builder_scope:UploadFackShardRequest)
+    }
+
+    // @@protoc_insertion_point(class_scope:UploadFackShardRequest)
+    private static final com.ytfs.service.packet.Message.UploadFackShardRequest DEFAULT_INSTANCE;
+    static {
+      DEFAULT_INSTANCE = new com.ytfs.service.packet.Message.UploadFackShardRequest();
+    }
+
+    public static com.ytfs.service.packet.Message.UploadFackShardRequest getDefaultInstance() {
+      return DEFAULT_INSTANCE;
+    }
+
+    private static final com.google.protobuf.Parser<UploadFackShardRequest>
+        PARSER = new com.google.protobuf.AbstractParser<UploadFackShardRequest>() {
+      public UploadFackShardRequest parsePartialFrom(
+          com.google.protobuf.CodedInputStream input,
+          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
+          throws com.google.protobuf.InvalidProtocolBufferException {
+        return new UploadFackShardRequest(input, extensionRegistry);
+      }
+    };
+
+    public static com.google.protobuf.Parser<UploadFackShardRequest> parser() {
+      return PARSER;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Parser<UploadFackShardRequest> getParserForType() {
+      return PARSER;
+    }
+
+    public com.ytfs.service.packet.Message.UploadFackShardRequest getDefaultInstanceForType() {
+      return DEFAULT_INSTANCE;
+    }
+
+  }
+
   public interface UploadShardRequestOrBuilder extends
       // @@protoc_insertion_point(interface_extends:UploadShardRequest)
       com.google.protobuf.MessageOrBuilder {
@@ -52,10 +2222,20 @@ public final class Message {
      * <code>bytes USERSIGN = 7;</code>
      */
     com.google.protobuf.ByteString getUSERSIGN();
+
+    /**
+     * <code>string allocId = 8;</code>
+     */
+    java.lang.String getAllocId();
+    /**
+     * <code>string allocId = 8;</code>
+     */
+    com.google.protobuf.ByteString
+        getAllocIdBytes();
   }
   /**
    * <pre>
-   *msgid=0xCB05
+   *msgid=0xcb05  这是正常的分片消息,按正常的逻辑走
    * </pre>
    *
    * Protobuf type {@code UploadShardRequest}
@@ -77,6 +2257,7 @@ public final class Message {
       dAT_ = com.google.protobuf.ByteString.EMPTY;
       vHF_ = com.google.protobuf.ByteString.EMPTY;
       uSERSIGN_ = com.google.protobuf.ByteString.EMPTY;
+      allocId_ = "";
     }
 
     @java.lang.Override
@@ -143,6 +2324,12 @@ public final class Message {
             case 58: {
 
               uSERSIGN_ = input.readBytes();
+              break;
+            }
+            case 66: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              allocId_ = s;
               break;
             }
           }
@@ -232,6 +2419,40 @@ public final class Message {
       return uSERSIGN_;
     }
 
+    public static final int ALLOCID_FIELD_NUMBER = 8;
+    private volatile java.lang.Object allocId_;
+    /**
+     * <code>string allocId = 8;</code>
+     */
+    public java.lang.String getAllocId() {
+      java.lang.Object ref = allocId_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        allocId_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string allocId = 8;</code>
+     */
+    public com.google.protobuf.ByteString
+        getAllocIdBytes() {
+      java.lang.Object ref = allocId_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        allocId_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
@@ -264,6 +2485,9 @@ public final class Message {
       }
       if (!uSERSIGN_.isEmpty()) {
         output.writeBytes(7, uSERSIGN_);
+      }
+      if (!getAllocIdBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 8, allocId_);
       }
       unknownFields.writeTo(output);
     }
@@ -301,6 +2525,9 @@ public final class Message {
         size += com.google.protobuf.CodedOutputStream
           .computeBytesSize(7, uSERSIGN_);
       }
+      if (!getAllocIdBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(8, allocId_);
+      }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
@@ -331,6 +2558,8 @@ public final class Message {
           .equals(other.getVHF());
       result = result && getUSERSIGN()
           .equals(other.getUSERSIGN());
+      result = result && getAllocId()
+          .equals(other.getAllocId());
       result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
@@ -357,6 +2586,8 @@ public final class Message {
       hash = (53 * hash) + getVHF().hashCode();
       hash = (37 * hash) + USERSIGN_FIELD_NUMBER;
       hash = (53 * hash) + getUSERSIGN().hashCode();
+      hash = (37 * hash) + ALLOCID_FIELD_NUMBER;
+      hash = (53 * hash) + getAllocId().hashCode();
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -452,7 +2683,7 @@ public final class Message {
     }
     /**
      * <pre>
-     *msgid=0xCB05
+     *msgid=0xcb05  这是正常的分片消息,按正常的逻辑走
      * </pre>
      *
      * Protobuf type {@code UploadShardRequest}
@@ -504,6 +2735,8 @@ public final class Message {
 
         uSERSIGN_ = com.google.protobuf.ByteString.EMPTY;
 
+        allocId_ = "";
+
         return this;
       }
 
@@ -533,6 +2766,7 @@ public final class Message {
         result.dAT_ = dAT_;
         result.vHF_ = vHF_;
         result.uSERSIGN_ = uSERSIGN_;
+        result.allocId_ = allocId_;
         onBuilt();
         return result;
       }
@@ -594,6 +2828,10 @@ public final class Message {
         }
         if (other.getUSERSIGN() != com.google.protobuf.ByteString.EMPTY) {
           setUSERSIGN(other.getUSERSIGN());
+        }
+        if (!other.getAllocId().isEmpty()) {
+          allocId_ = other.allocId_;
+          onChanged();
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -815,6 +3053,75 @@ public final class Message {
         onChanged();
         return this;
       }
+
+      private java.lang.Object allocId_ = "";
+      /**
+       * <code>string allocId = 8;</code>
+       */
+      public java.lang.String getAllocId() {
+        java.lang.Object ref = allocId_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          allocId_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string allocId = 8;</code>
+       */
+      public com.google.protobuf.ByteString
+          getAllocIdBytes() {
+        java.lang.Object ref = allocId_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          allocId_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string allocId = 8;</code>
+       */
+      public Builder setAllocId(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        allocId_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string allocId = 8;</code>
+       */
+      public Builder clearAllocId() {
+        
+        allocId_ = getDefaultInstance().getAllocId();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string allocId = 8;</code>
+       */
+      public Builder setAllocIdBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        allocId_ = value;
+        onChanged();
+        return this;
+      }
       public final Builder setUnknownFields(
           final com.google.protobuf.UnknownFieldSet unknownFields) {
         return super.setUnknownFieldsProto3(unknownFields);
@@ -859,724 +3166,6 @@ public final class Message {
     }
 
     public com.ytfs.service.packet.Message.UploadShardRequest getDefaultInstanceForType() {
-      return DEFAULT_INSTANCE;
-    }
-
-  }
-
-  public interface UploadShardResponseOrBuilder extends
-      // @@protoc_insertion_point(interface_extends:UploadShardResponse)
-      com.google.protobuf.MessageOrBuilder {
-
-    /**
-     * <code>int32 RES = 1;</code>
-     */
-    int getRES();
-
-    /**
-     * <code>int32 SHARDID = 2;</code>
-     */
-    int getSHARDID();
-
-    /**
-     * <code>int64 VBI = 3;</code>
-     */
-    long getVBI();
-
-    /**
-     * <code>bytes VHF = 4;</code>
-     */
-    com.google.protobuf.ByteString getVHF();
-
-    /**
-     * <code>bytes USERSIGN = 5;</code>
-     */
-    com.google.protobuf.ByteString getUSERSIGN();
-  }
-  /**
-   * <pre>
-   *msgid=0x870B
-   * </pre>
-   *
-   * Protobuf type {@code UploadShardResponse}
-   */
-  public  static final class UploadShardResponse extends
-      com.google.protobuf.GeneratedMessageV3 implements
-      // @@protoc_insertion_point(message_implements:UploadShardResponse)
-      UploadShardResponseOrBuilder {
-  private static final long serialVersionUID = 0L;
-    // Use UploadShardResponse.newBuilder() to construct.
-    private UploadShardResponse(com.google.protobuf.GeneratedMessageV3.Builder<?> builder) {
-      super(builder);
-    }
-    private UploadShardResponse() {
-      rES_ = 0;
-      sHARDID_ = 0;
-      vBI_ = 0L;
-      vHF_ = com.google.protobuf.ByteString.EMPTY;
-      uSERSIGN_ = com.google.protobuf.ByteString.EMPTY;
-    }
-
-    @java.lang.Override
-    public final com.google.protobuf.UnknownFieldSet
-    getUnknownFields() {
-      return this.unknownFields;
-    }
-    private UploadShardResponse(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      this();
-      if (extensionRegistry == null) {
-        throw new java.lang.NullPointerException();
-      }
-      int mutable_bitField0_ = 0;
-      com.google.protobuf.UnknownFieldSet.Builder unknownFields =
-          com.google.protobuf.UnknownFieldSet.newBuilder();
-      try {
-        boolean done = false;
-        while (!done) {
-          int tag = input.readTag();
-          switch (tag) {
-            case 0:
-              done = true;
-              break;
-            default: {
-              if (!parseUnknownFieldProto3(
-                  input, unknownFields, extensionRegistry, tag)) {
-                done = true;
-              }
-              break;
-            }
-            case 8: {
-
-              rES_ = input.readInt32();
-              break;
-            }
-            case 16: {
-
-              sHARDID_ = input.readInt32();
-              break;
-            }
-            case 24: {
-
-              vBI_ = input.readInt64();
-              break;
-            }
-            case 34: {
-
-              vHF_ = input.readBytes();
-              break;
-            }
-            case 42: {
-
-              uSERSIGN_ = input.readBytes();
-              break;
-            }
-          }
-        }
-      } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-        throw e.setUnfinishedMessage(this);
-      } catch (java.io.IOException e) {
-        throw new com.google.protobuf.InvalidProtocolBufferException(
-            e).setUnfinishedMessage(this);
-      } finally {
-        this.unknownFields = unknownFields.build();
-        makeExtensionsImmutable();
-      }
-    }
-    public static final com.google.protobuf.Descriptors.Descriptor
-        getDescriptor() {
-      return com.ytfs.service.packet.Message.internal_static_UploadShardResponse_descriptor;
-    }
-
-    protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-        internalGetFieldAccessorTable() {
-      return com.ytfs.service.packet.Message.internal_static_UploadShardResponse_fieldAccessorTable
-          .ensureFieldAccessorsInitialized(
-              com.ytfs.service.packet.Message.UploadShardResponse.class, com.ytfs.service.packet.Message.UploadShardResponse.Builder.class);
-    }
-
-    public static final int RES_FIELD_NUMBER = 1;
-    private int rES_;
-    /**
-     * <code>int32 RES = 1;</code>
-     */
-    public int getRES() {
-      return rES_;
-    }
-
-    public static final int SHARDID_FIELD_NUMBER = 2;
-    private int sHARDID_;
-    /**
-     * <code>int32 SHARDID = 2;</code>
-     */
-    public int getSHARDID() {
-      return sHARDID_;
-    }
-
-    public static final int VBI_FIELD_NUMBER = 3;
-    private long vBI_;
-    /**
-     * <code>int64 VBI = 3;</code>
-     */
-    public long getVBI() {
-      return vBI_;
-    }
-
-    public static final int VHF_FIELD_NUMBER = 4;
-    private com.google.protobuf.ByteString vHF_;
-    /**
-     * <code>bytes VHF = 4;</code>
-     */
-    public com.google.protobuf.ByteString getVHF() {
-      return vHF_;
-    }
-
-    public static final int USERSIGN_FIELD_NUMBER = 5;
-    private com.google.protobuf.ByteString uSERSIGN_;
-    /**
-     * <code>bytes USERSIGN = 5;</code>
-     */
-    public com.google.protobuf.ByteString getUSERSIGN() {
-      return uSERSIGN_;
-    }
-
-    private byte memoizedIsInitialized = -1;
-    public final boolean isInitialized() {
-      byte isInitialized = memoizedIsInitialized;
-      if (isInitialized == 1) return true;
-      if (isInitialized == 0) return false;
-
-      memoizedIsInitialized = 1;
-      return true;
-    }
-
-    public void writeTo(com.google.protobuf.CodedOutputStream output)
-                        throws java.io.IOException {
-      if (rES_ != 0) {
-        output.writeInt32(1, rES_);
-      }
-      if (sHARDID_ != 0) {
-        output.writeInt32(2, sHARDID_);
-      }
-      if (vBI_ != 0L) {
-        output.writeInt64(3, vBI_);
-      }
-      if (!vHF_.isEmpty()) {
-        output.writeBytes(4, vHF_);
-      }
-      if (!uSERSIGN_.isEmpty()) {
-        output.writeBytes(5, uSERSIGN_);
-      }
-      unknownFields.writeTo(output);
-    }
-
-    public int getSerializedSize() {
-      int size = memoizedSize;
-      if (size != -1) return size;
-
-      size = 0;
-      if (rES_ != 0) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(1, rES_);
-      }
-      if (sHARDID_ != 0) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(2, sHARDID_);
-      }
-      if (vBI_ != 0L) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt64Size(3, vBI_);
-      }
-      if (!vHF_.isEmpty()) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(4, vHF_);
-      }
-      if (!uSERSIGN_.isEmpty()) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(5, uSERSIGN_);
-      }
-      size += unknownFields.getSerializedSize();
-      memoizedSize = size;
-      return size;
-    }
-
-    @java.lang.Override
-    public boolean equals(final java.lang.Object obj) {
-      if (obj == this) {
-       return true;
-      }
-      if (!(obj instanceof com.ytfs.service.packet.Message.UploadShardResponse)) {
-        return super.equals(obj);
-      }
-      com.ytfs.service.packet.Message.UploadShardResponse other = (com.ytfs.service.packet.Message.UploadShardResponse) obj;
-
-      boolean result = true;
-      result = result && (getRES()
-          == other.getRES());
-      result = result && (getSHARDID()
-          == other.getSHARDID());
-      result = result && (getVBI()
-          == other.getVBI());
-      result = result && getVHF()
-          .equals(other.getVHF());
-      result = result && getUSERSIGN()
-          .equals(other.getUSERSIGN());
-      result = result && unknownFields.equals(other.unknownFields);
-      return result;
-    }
-
-    @java.lang.Override
-    public int hashCode() {
-      if (memoizedHashCode != 0) {
-        return memoizedHashCode;
-      }
-      int hash = 41;
-      hash = (19 * hash) + getDescriptor().hashCode();
-      hash = (37 * hash) + RES_FIELD_NUMBER;
-      hash = (53 * hash) + getRES();
-      hash = (37 * hash) + SHARDID_FIELD_NUMBER;
-      hash = (53 * hash) + getSHARDID();
-      hash = (37 * hash) + VBI_FIELD_NUMBER;
-      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
-          getVBI());
-      hash = (37 * hash) + VHF_FIELD_NUMBER;
-      hash = (53 * hash) + getVHF().hashCode();
-      hash = (37 * hash) + USERSIGN_FIELD_NUMBER;
-      hash = (53 * hash) + getUSERSIGN().hashCode();
-      hash = (29 * hash) + unknownFields.hashCode();
-      memoizedHashCode = hash;
-      return hash;
-    }
-
-    public static com.ytfs.service.packet.Message.UploadShardResponse parseFrom(
-        java.nio.ByteBuffer data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static com.ytfs.service.packet.Message.UploadShardResponse parseFrom(
-        java.nio.ByteBuffer data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static com.ytfs.service.packet.Message.UploadShardResponse parseFrom(
-        com.google.protobuf.ByteString data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static com.ytfs.service.packet.Message.UploadShardResponse parseFrom(
-        com.google.protobuf.ByteString data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static com.ytfs.service.packet.Message.UploadShardResponse parseFrom(byte[] data)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data);
-    }
-    public static com.ytfs.service.packet.Message.UploadShardResponse parseFrom(
-        byte[] data,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws com.google.protobuf.InvalidProtocolBufferException {
-      return PARSER.parseFrom(data, extensionRegistry);
-    }
-    public static com.ytfs.service.packet.Message.UploadShardResponse parseFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static com.ytfs.service.packet.Message.UploadShardResponse parseFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static com.ytfs.service.packet.Message.UploadShardResponse parseDelimitedFrom(java.io.InputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input);
-    }
-    public static com.ytfs.service.packet.Message.UploadShardResponse parseDelimitedFrom(
-        java.io.InputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseDelimitedWithIOException(PARSER, input, extensionRegistry);
-    }
-    public static com.ytfs.service.packet.Message.UploadShardResponse parseFrom(
-        com.google.protobuf.CodedInputStream input)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input);
-    }
-    public static com.ytfs.service.packet.Message.UploadShardResponse parseFrom(
-        com.google.protobuf.CodedInputStream input,
-        com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-        throws java.io.IOException {
-      return com.google.protobuf.GeneratedMessageV3
-          .parseWithIOException(PARSER, input, extensionRegistry);
-    }
-
-    public Builder newBuilderForType() { return newBuilder(); }
-    public static Builder newBuilder() {
-      return DEFAULT_INSTANCE.toBuilder();
-    }
-    public static Builder newBuilder(com.ytfs.service.packet.Message.UploadShardResponse prototype) {
-      return DEFAULT_INSTANCE.toBuilder().mergeFrom(prototype);
-    }
-    public Builder toBuilder() {
-      return this == DEFAULT_INSTANCE
-          ? new Builder() : new Builder().mergeFrom(this);
-    }
-
-    @java.lang.Override
-    protected Builder newBuilderForType(
-        com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-      Builder builder = new Builder(parent);
-      return builder;
-    }
-    /**
-     * <pre>
-     *msgid=0x870B
-     * </pre>
-     *
-     * Protobuf type {@code UploadShardResponse}
-     */
-    public static final class Builder extends
-        com.google.protobuf.GeneratedMessageV3.Builder<Builder> implements
-        // @@protoc_insertion_point(builder_implements:UploadShardResponse)
-        com.ytfs.service.packet.Message.UploadShardResponseOrBuilder {
-      public static final com.google.protobuf.Descriptors.Descriptor
-          getDescriptor() {
-        return com.ytfs.service.packet.Message.internal_static_UploadShardResponse_descriptor;
-      }
-
-      protected com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-          internalGetFieldAccessorTable() {
-        return com.ytfs.service.packet.Message.internal_static_UploadShardResponse_fieldAccessorTable
-            .ensureFieldAccessorsInitialized(
-                com.ytfs.service.packet.Message.UploadShardResponse.class, com.ytfs.service.packet.Message.UploadShardResponse.Builder.class);
-      }
-
-      // Construct using com.ytfs.service.packet.Message.UploadShardResponse.newBuilder()
-      private Builder() {
-        maybeForceBuilderInitialization();
-      }
-
-      private Builder(
-          com.google.protobuf.GeneratedMessageV3.BuilderParent parent) {
-        super(parent);
-        maybeForceBuilderInitialization();
-      }
-      private void maybeForceBuilderInitialization() {
-        if (com.google.protobuf.GeneratedMessageV3
-                .alwaysUseFieldBuilders) {
-        }
-      }
-      public Builder clear() {
-        super.clear();
-        rES_ = 0;
-
-        sHARDID_ = 0;
-
-        vBI_ = 0L;
-
-        vHF_ = com.google.protobuf.ByteString.EMPTY;
-
-        uSERSIGN_ = com.google.protobuf.ByteString.EMPTY;
-
-        return this;
-      }
-
-      public com.google.protobuf.Descriptors.Descriptor
-          getDescriptorForType() {
-        return com.ytfs.service.packet.Message.internal_static_UploadShardResponse_descriptor;
-      }
-
-      public com.ytfs.service.packet.Message.UploadShardResponse getDefaultInstanceForType() {
-        return com.ytfs.service.packet.Message.UploadShardResponse.getDefaultInstance();
-      }
-
-      public com.ytfs.service.packet.Message.UploadShardResponse build() {
-        com.ytfs.service.packet.Message.UploadShardResponse result = buildPartial();
-        if (!result.isInitialized()) {
-          throw newUninitializedMessageException(result);
-        }
-        return result;
-      }
-
-      public com.ytfs.service.packet.Message.UploadShardResponse buildPartial() {
-        com.ytfs.service.packet.Message.UploadShardResponse result = new com.ytfs.service.packet.Message.UploadShardResponse(this);
-        result.rES_ = rES_;
-        result.sHARDID_ = sHARDID_;
-        result.vBI_ = vBI_;
-        result.vHF_ = vHF_;
-        result.uSERSIGN_ = uSERSIGN_;
-        onBuilt();
-        return result;
-      }
-
-      public Builder clone() {
-        return (Builder) super.clone();
-      }
-      public Builder setField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return (Builder) super.setField(field, value);
-      }
-      public Builder clearField(
-          com.google.protobuf.Descriptors.FieldDescriptor field) {
-        return (Builder) super.clearField(field);
-      }
-      public Builder clearOneof(
-          com.google.protobuf.Descriptors.OneofDescriptor oneof) {
-        return (Builder) super.clearOneof(oneof);
-      }
-      public Builder setRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          int index, java.lang.Object value) {
-        return (Builder) super.setRepeatedField(field, index, value);
-      }
-      public Builder addRepeatedField(
-          com.google.protobuf.Descriptors.FieldDescriptor field,
-          java.lang.Object value) {
-        return (Builder) super.addRepeatedField(field, value);
-      }
-      public Builder mergeFrom(com.google.protobuf.Message other) {
-        if (other instanceof com.ytfs.service.packet.Message.UploadShardResponse) {
-          return mergeFrom((com.ytfs.service.packet.Message.UploadShardResponse)other);
-        } else {
-          super.mergeFrom(other);
-          return this;
-        }
-      }
-
-      public Builder mergeFrom(com.ytfs.service.packet.Message.UploadShardResponse other) {
-        if (other == com.ytfs.service.packet.Message.UploadShardResponse.getDefaultInstance()) return this;
-        if (other.getRES() != 0) {
-          setRES(other.getRES());
-        }
-        if (other.getSHARDID() != 0) {
-          setSHARDID(other.getSHARDID());
-        }
-        if (other.getVBI() != 0L) {
-          setVBI(other.getVBI());
-        }
-        if (other.getVHF() != com.google.protobuf.ByteString.EMPTY) {
-          setVHF(other.getVHF());
-        }
-        if (other.getUSERSIGN() != com.google.protobuf.ByteString.EMPTY) {
-          setUSERSIGN(other.getUSERSIGN());
-        }
-        this.mergeUnknownFields(other.unknownFields);
-        onChanged();
-        return this;
-      }
-
-      public final boolean isInitialized() {
-        return true;
-      }
-
-      public Builder mergeFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws java.io.IOException {
-        com.ytfs.service.packet.Message.UploadShardResponse parsedMessage = null;
-        try {
-          parsedMessage = PARSER.parsePartialFrom(input, extensionRegistry);
-        } catch (com.google.protobuf.InvalidProtocolBufferException e) {
-          parsedMessage = (com.ytfs.service.packet.Message.UploadShardResponse) e.getUnfinishedMessage();
-          throw e.unwrapIOException();
-        } finally {
-          if (parsedMessage != null) {
-            mergeFrom(parsedMessage);
-          }
-        }
-        return this;
-      }
-
-      private int rES_ ;
-      /**
-       * <code>int32 RES = 1;</code>
-       */
-      public int getRES() {
-        return rES_;
-      }
-      /**
-       * <code>int32 RES = 1;</code>
-       */
-      public Builder setRES(int value) {
-        
-        rES_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>int32 RES = 1;</code>
-       */
-      public Builder clearRES() {
-        
-        rES_ = 0;
-        onChanged();
-        return this;
-      }
-
-      private int sHARDID_ ;
-      /**
-       * <code>int32 SHARDID = 2;</code>
-       */
-      public int getSHARDID() {
-        return sHARDID_;
-      }
-      /**
-       * <code>int32 SHARDID = 2;</code>
-       */
-      public Builder setSHARDID(int value) {
-        
-        sHARDID_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>int32 SHARDID = 2;</code>
-       */
-      public Builder clearSHARDID() {
-        
-        sHARDID_ = 0;
-        onChanged();
-        return this;
-      }
-
-      private long vBI_ ;
-      /**
-       * <code>int64 VBI = 3;</code>
-       */
-      public long getVBI() {
-        return vBI_;
-      }
-      /**
-       * <code>int64 VBI = 3;</code>
-       */
-      public Builder setVBI(long value) {
-        
-        vBI_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>int64 VBI = 3;</code>
-       */
-      public Builder clearVBI() {
-        
-        vBI_ = 0L;
-        onChanged();
-        return this;
-      }
-
-      private com.google.protobuf.ByteString vHF_ = com.google.protobuf.ByteString.EMPTY;
-      /**
-       * <code>bytes VHF = 4;</code>
-       */
-      public com.google.protobuf.ByteString getVHF() {
-        return vHF_;
-      }
-      /**
-       * <code>bytes VHF = 4;</code>
-       */
-      public Builder setVHF(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
-        vHF_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>bytes VHF = 4;</code>
-       */
-      public Builder clearVHF() {
-        
-        vHF_ = getDefaultInstance().getVHF();
-        onChanged();
-        return this;
-      }
-
-      private com.google.protobuf.ByteString uSERSIGN_ = com.google.protobuf.ByteString.EMPTY;
-      /**
-       * <code>bytes USERSIGN = 5;</code>
-       */
-      public com.google.protobuf.ByteString getUSERSIGN() {
-        return uSERSIGN_;
-      }
-      /**
-       * <code>bytes USERSIGN = 5;</code>
-       */
-      public Builder setUSERSIGN(com.google.protobuf.ByteString value) {
-        if (value == null) {
-    throw new NullPointerException();
-  }
-  
-        uSERSIGN_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>bytes USERSIGN = 5;</code>
-       */
-      public Builder clearUSERSIGN() {
-        
-        uSERSIGN_ = getDefaultInstance().getUSERSIGN();
-        onChanged();
-        return this;
-      }
-      public final Builder setUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.setUnknownFieldsProto3(unknownFields);
-      }
-
-      public final Builder mergeUnknownFields(
-          final com.google.protobuf.UnknownFieldSet unknownFields) {
-        return super.mergeUnknownFields(unknownFields);
-      }
-
-
-      // @@protoc_insertion_point(builder_scope:UploadShardResponse)
-    }
-
-    // @@protoc_insertion_point(class_scope:UploadShardResponse)
-    private static final com.ytfs.service.packet.Message.UploadShardResponse DEFAULT_INSTANCE;
-    static {
-      DEFAULT_INSTANCE = new com.ytfs.service.packet.Message.UploadShardResponse();
-    }
-
-    public static com.ytfs.service.packet.Message.UploadShardResponse getDefaultInstance() {
-      return DEFAULT_INSTANCE;
-    }
-
-    private static final com.google.protobuf.Parser<UploadShardResponse>
-        PARSER = new com.google.protobuf.AbstractParser<UploadShardResponse>() {
-      public UploadShardResponse parsePartialFrom(
-          com.google.protobuf.CodedInputStream input,
-          com.google.protobuf.ExtensionRegistryLite extensionRegistry)
-          throws com.google.protobuf.InvalidProtocolBufferException {
-        return new UploadShardResponse(input, extensionRegistry);
-      }
-    };
-
-    public static com.google.protobuf.Parser<UploadShardResponse> parser() {
-      return PARSER;
-    }
-
-    @java.lang.Override
-    public com.google.protobuf.Parser<UploadShardResponse> getParserForType() {
-      return PARSER;
-    }
-
-    public com.ytfs.service.packet.Message.UploadShardResponse getDefaultInstanceForType() {
       return DEFAULT_INSTANCE;
     }
 
@@ -1985,6 +3574,16 @@ public final class Message {
      * <code>int32 RES = 1;</code>
      */
     int getRES();
+
+    /**
+     * <code>string DNSIGN = 2;</code>
+     */
+    java.lang.String getDNSIGN();
+    /**
+     * <code>string DNSIGN = 2;</code>
+     */
+    com.google.protobuf.ByteString
+        getDNSIGNBytes();
   }
   /**
    * <pre>
@@ -2004,6 +3603,7 @@ public final class Message {
     }
     private UploadShard2CResponse() {
       rES_ = 0;
+      dNSIGN_ = "";
     }
 
     @java.lang.Override
@@ -2042,6 +3642,12 @@ public final class Message {
               rES_ = input.readInt32();
               break;
             }
+            case 18: {
+              java.lang.String s = input.readStringRequireUtf8();
+
+              dNSIGN_ = s;
+              break;
+            }
           }
         }
       } catch (com.google.protobuf.InvalidProtocolBufferException e) {
@@ -2075,6 +3681,40 @@ public final class Message {
       return rES_;
     }
 
+    public static final int DNSIGN_FIELD_NUMBER = 2;
+    private volatile java.lang.Object dNSIGN_;
+    /**
+     * <code>string DNSIGN = 2;</code>
+     */
+    public java.lang.String getDNSIGN() {
+      java.lang.Object ref = dNSIGN_;
+      if (ref instanceof java.lang.String) {
+        return (java.lang.String) ref;
+      } else {
+        com.google.protobuf.ByteString bs = 
+            (com.google.protobuf.ByteString) ref;
+        java.lang.String s = bs.toStringUtf8();
+        dNSIGN_ = s;
+        return s;
+      }
+    }
+    /**
+     * <code>string DNSIGN = 2;</code>
+     */
+    public com.google.protobuf.ByteString
+        getDNSIGNBytes() {
+      java.lang.Object ref = dNSIGN_;
+      if (ref instanceof java.lang.String) {
+        com.google.protobuf.ByteString b = 
+            com.google.protobuf.ByteString.copyFromUtf8(
+                (java.lang.String) ref);
+        dNSIGN_ = b;
+        return b;
+      } else {
+        return (com.google.protobuf.ByteString) ref;
+      }
+    }
+
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
@@ -2090,6 +3730,9 @@ public final class Message {
       if (rES_ != 0) {
         output.writeInt32(1, rES_);
       }
+      if (!getDNSIGNBytes().isEmpty()) {
+        com.google.protobuf.GeneratedMessageV3.writeString(output, 2, dNSIGN_);
+      }
       unknownFields.writeTo(output);
     }
 
@@ -2101,6 +3744,9 @@ public final class Message {
       if (rES_ != 0) {
         size += com.google.protobuf.CodedOutputStream
           .computeInt32Size(1, rES_);
+      }
+      if (!getDNSIGNBytes().isEmpty()) {
+        size += com.google.protobuf.GeneratedMessageV3.computeStringSize(2, dNSIGN_);
       }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
@@ -2120,6 +3766,8 @@ public final class Message {
       boolean result = true;
       result = result && (getRES()
           == other.getRES());
+      result = result && getDNSIGN()
+          .equals(other.getDNSIGN());
       result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
@@ -2133,6 +3781,8 @@ public final class Message {
       hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + RES_FIELD_NUMBER;
       hash = (53 * hash) + getRES();
+      hash = (37 * hash) + DNSIGN_FIELD_NUMBER;
+      hash = (53 * hash) + getDNSIGN().hashCode();
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -2268,6 +3918,8 @@ public final class Message {
         super.clear();
         rES_ = 0;
 
+        dNSIGN_ = "";
+
         return this;
       }
 
@@ -2291,6 +3943,7 @@ public final class Message {
       public com.ytfs.service.packet.Message.UploadShard2CResponse buildPartial() {
         com.ytfs.service.packet.Message.UploadShard2CResponse result = new com.ytfs.service.packet.Message.UploadShard2CResponse(this);
         result.rES_ = rES_;
+        result.dNSIGN_ = dNSIGN_;
         onBuilt();
         return result;
       }
@@ -2334,6 +3987,10 @@ public final class Message {
         if (other == com.ytfs.service.packet.Message.UploadShard2CResponse.getDefaultInstance()) return this;
         if (other.getRES() != 0) {
           setRES(other.getRES());
+        }
+        if (!other.getDNSIGN().isEmpty()) {
+          dNSIGN_ = other.dNSIGN_;
+          onChanged();
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -2384,6 +4041,75 @@ public final class Message {
       public Builder clearRES() {
         
         rES_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private java.lang.Object dNSIGN_ = "";
+      /**
+       * <code>string DNSIGN = 2;</code>
+       */
+      public java.lang.String getDNSIGN() {
+        java.lang.Object ref = dNSIGN_;
+        if (!(ref instanceof java.lang.String)) {
+          com.google.protobuf.ByteString bs =
+              (com.google.protobuf.ByteString) ref;
+          java.lang.String s = bs.toStringUtf8();
+          dNSIGN_ = s;
+          return s;
+        } else {
+          return (java.lang.String) ref;
+        }
+      }
+      /**
+       * <code>string DNSIGN = 2;</code>
+       */
+      public com.google.protobuf.ByteString
+          getDNSIGNBytes() {
+        java.lang.Object ref = dNSIGN_;
+        if (ref instanceof String) {
+          com.google.protobuf.ByteString b = 
+              com.google.protobuf.ByteString.copyFromUtf8(
+                  (java.lang.String) ref);
+          dNSIGN_ = b;
+          return b;
+        } else {
+          return (com.google.protobuf.ByteString) ref;
+        }
+      }
+      /**
+       * <code>string DNSIGN = 2;</code>
+       */
+      public Builder setDNSIGN(
+          java.lang.String value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  
+        dNSIGN_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string DNSIGN = 2;</code>
+       */
+      public Builder clearDNSIGN() {
+        
+        dNSIGN_ = getDefaultInstance().getDNSIGN();
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>string DNSIGN = 2;</code>
+       */
+      public Builder setDNSIGNBytes(
+          com.google.protobuf.ByteString value) {
+        if (value == null) {
+    throw new NullPointerException();
+  }
+  checkByteStringIsUtf8(value);
+        
+        dNSIGN_ = value;
         onChanged();
         return this;
       }
@@ -3957,15 +5683,25 @@ public final class Message {
   }
 
   private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_NodeCapacityRequest_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_NodeCapacityRequest_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_NodeCapacityResponse_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_NodeCapacityResponse_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
+    internal_static_UploadFackShardRequest_descriptor;
+  private static final 
+    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
+      internal_static_UploadFackShardRequest_fieldAccessorTable;
+  private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_UploadShardRequest_descriptor;
   private static final 
     com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
       internal_static_UploadShardRequest_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
-    internal_static_UploadShardResponse_descriptor;
-  private static final 
-    com.google.protobuf.GeneratedMessageV3.FieldAccessorTable
-      internal_static_UploadShardResponse_fieldAccessorTable;
   private static final com.google.protobuf.Descriptors.Descriptor
     internal_static_VoidResponse_descriptor;
   private static final 
@@ -4000,18 +5736,23 @@ public final class Message {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\rmessage.proto\"~\n\022UploadShardRequest\022\017\n" +
-      "\007SHARDID\030\001 \001(\005\022\r\n\005BPDID\030\002 \001(\005\022\013\n\003VBI\030\003 \001" +
-      "(\003\022\017\n\007BPDSIGN\030\004 \001(\014\022\013\n\003DAT\030\005 \001(\014\022\013\n\003VHF\030" +
-      "\006 \001(\014\022\020\n\010USERSIGN\030\007 \001(\014\"_\n\023UploadShardRe" +
-      "sponse\022\013\n\003RES\030\001 \001(\005\022\017\n\007SHARDID\030\002 \001(\005\022\013\n\003" +
-      "VBI\030\003 \001(\003\022\013\n\003VHF\030\004 \001(\014\022\020\n\010USERSIGN\030\005 \001(\014" +
-      "\"\016\n\014VoidResponse\"$\n\025UploadShard2CRespons" +
-      "e\022\013\n\003RES\030\001 \001(\005\"#\n\024DownloadShardRequest\022\013" +
-      "\n\003VHF\030\001 \001(\014\"%\n\025DownloadShardResponse\022\014\n\004" +
-      "data\030\001 \001(\014\")\n\014ErrorMessage\022\014\n\004code\030\001 \001(\005" +
-      "\022\013\n\003msg\030\002 \001(\tB\031\n\027com.ytfs.service.packet" +
-      "b\006proto3"
+      "\n\rmessage.proto\"<\n\023NodeCapacityRequest\022\021" +
+      "\n\tstartTime\030\001 \001(\003\022\022\n\nretryTimes\030\002 \001(\005\"9\n" +
+      "\024NodeCapacityResponse\022\020\n\010writable\030\001 \001(\010\022" +
+      "\017\n\007allocId\030\002 \001(\t\"\242\001\n\026UploadFackShardRequ" +
+      "est\022\017\n\007SHARDID\030\001 \001(\005\022\r\n\005BPDID\030\002 \001(\005\022\013\n\003V" +
+      "BI\030\003 \001(\003\022\017\n\007BPDSIGN\030\004 \001(\014\022\013\n\003DAT\030\005 \001(\014\022\013" +
+      "\n\003VHF\030\006 \001(\014\022\020\n\010USERSIGN\030\007 \001(\014\022\017\n\007allocId" +
+      "\030\010 \001(\t\022\r\n\005Sleep\030\t \001(\r\"\217\001\n\022UploadShardReq" +
+      "uest\022\017\n\007SHARDID\030\001 \001(\005\022\r\n\005BPDID\030\002 \001(\005\022\013\n\003" +
+      "VBI\030\003 \001(\003\022\017\n\007BPDSIGN\030\004 \001(\014\022\013\n\003DAT\030\005 \001(\014\022" +
+      "\013\n\003VHF\030\006 \001(\014\022\020\n\010USERSIGN\030\007 \001(\014\022\017\n\007allocI" +
+      "d\030\010 \001(\t\"\016\n\014VoidResponse\"4\n\025UploadShard2C" +
+      "Response\022\013\n\003RES\030\001 \001(\005\022\016\n\006DNSIGN\030\002 \001(\t\"#\n" +
+      "\024DownloadShardRequest\022\013\n\003VHF\030\001 \001(\014\"%\n\025Do" +
+      "wnloadShardResponse\022\014\n\004data\030\001 \001(\014\")\n\014Err" +
+      "orMessage\022\014\n\004code\030\001 \001(\005\022\013\n\003msg\030\002 \001(\tB\031\n\027" +
+      "com.ytfs.service.packetb\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -4025,44 +5766,56 @@ public final class Message {
       .internalBuildGeneratedFileFrom(descriptorData,
         new com.google.protobuf.Descriptors.FileDescriptor[] {
         }, assigner);
-    internal_static_UploadShardRequest_descriptor =
+    internal_static_NodeCapacityRequest_descriptor =
       getDescriptor().getMessageTypes().get(0);
+    internal_static_NodeCapacityRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_NodeCapacityRequest_descriptor,
+        new java.lang.String[] { "StartTime", "RetryTimes", });
+    internal_static_NodeCapacityResponse_descriptor =
+      getDescriptor().getMessageTypes().get(1);
+    internal_static_NodeCapacityResponse_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_NodeCapacityResponse_descriptor,
+        new java.lang.String[] { "Writable", "AllocId", });
+    internal_static_UploadFackShardRequest_descriptor =
+      getDescriptor().getMessageTypes().get(2);
+    internal_static_UploadFackShardRequest_fieldAccessorTable = new
+      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
+        internal_static_UploadFackShardRequest_descriptor,
+        new java.lang.String[] { "SHARDID", "BPDID", "VBI", "BPDSIGN", "DAT", "VHF", "USERSIGN", "AllocId", "Sleep", });
+    internal_static_UploadShardRequest_descriptor =
+      getDescriptor().getMessageTypes().get(3);
     internal_static_UploadShardRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_UploadShardRequest_descriptor,
-        new java.lang.String[] { "SHARDID", "BPDID", "VBI", "BPDSIGN", "DAT", "VHF", "USERSIGN", });
-    internal_static_UploadShardResponse_descriptor =
-      getDescriptor().getMessageTypes().get(1);
-    internal_static_UploadShardResponse_fieldAccessorTable = new
-      com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
-        internal_static_UploadShardResponse_descriptor,
-        new java.lang.String[] { "RES", "SHARDID", "VBI", "VHF", "USERSIGN", });
+        new java.lang.String[] { "SHARDID", "BPDID", "VBI", "BPDSIGN", "DAT", "VHF", "USERSIGN", "AllocId", });
     internal_static_VoidResponse_descriptor =
-      getDescriptor().getMessageTypes().get(2);
+      getDescriptor().getMessageTypes().get(4);
     internal_static_VoidResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_VoidResponse_descriptor,
         new java.lang.String[] { });
     internal_static_UploadShard2CResponse_descriptor =
-      getDescriptor().getMessageTypes().get(3);
+      getDescriptor().getMessageTypes().get(5);
     internal_static_UploadShard2CResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_UploadShard2CResponse_descriptor,
-        new java.lang.String[] { "RES", });
+        new java.lang.String[] { "RES", "DNSIGN", });
     internal_static_DownloadShardRequest_descriptor =
-      getDescriptor().getMessageTypes().get(4);
+      getDescriptor().getMessageTypes().get(6);
     internal_static_DownloadShardRequest_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_DownloadShardRequest_descriptor,
         new java.lang.String[] { "VHF", });
     internal_static_DownloadShardResponse_descriptor =
-      getDescriptor().getMessageTypes().get(5);
+      getDescriptor().getMessageTypes().get(7);
     internal_static_DownloadShardResponse_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_DownloadShardResponse_descriptor,
         new java.lang.String[] { "Data", });
     internal_static_ErrorMessage_descriptor =
-      getDescriptor().getMessageTypes().get(6);
+      getDescriptor().getMessageTypes().get(8);
     internal_static_ErrorMessage_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_ErrorMessage_descriptor,

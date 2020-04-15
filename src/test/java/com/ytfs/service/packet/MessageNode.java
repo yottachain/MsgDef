@@ -66,6 +66,11 @@ public final class MessageNode {
      * <code>bool relay = 5;</code>
      */
     boolean getRelay();
+
+    /**
+     * <code>uint32 id = 6;</code>
+     */
+    int getId();
   }
   /**
    * <pre>
@@ -89,6 +94,7 @@ public final class MessageNode {
       maxDataSpace_ = 0L;
       addrs_ = com.google.protobuf.LazyStringArrayList.EMPTY;
       relay_ = false;
+      id_ = 0;
     }
 
     @java.lang.Override
@@ -151,6 +157,11 @@ public final class MessageNode {
             case 40: {
 
               relay_ = input.readBool();
+              break;
+            }
+            case 48: {
+
+              id_ = input.readUInt32();
               break;
             }
           }
@@ -296,6 +307,15 @@ public final class MessageNode {
       return relay_;
     }
 
+    public static final int ID_FIELD_NUMBER = 6;
+    private int id_;
+    /**
+     * <code>uint32 id = 6;</code>
+     */
+    public int getId() {
+      return id_;
+    }
+
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
@@ -322,6 +342,9 @@ public final class MessageNode {
       }
       if (relay_ != false) {
         output.writeBool(5, relay_);
+      }
+      if (id_ != 0) {
+        output.writeUInt32(6, id_);
       }
       unknownFields.writeTo(output);
     }
@@ -353,6 +376,10 @@ public final class MessageNode {
         size += com.google.protobuf.CodedOutputStream
           .computeBoolSize(5, relay_);
       }
+      if (id_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt32Size(6, id_);
+      }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
@@ -379,6 +406,8 @@ public final class MessageNode {
           .equals(other.getAddrsList());
       result = result && (getRelay()
           == other.getRelay());
+      result = result && (getId()
+          == other.getId());
       result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
@@ -404,6 +433,8 @@ public final class MessageNode {
       hash = (37 * hash) + RELAY_FIELD_NUMBER;
       hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
           getRelay());
+      hash = (37 * hash) + ID_FIELD_NUMBER;
+      hash = (53 * hash) + getId();
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -547,6 +578,8 @@ public final class MessageNode {
         bitField0_ = (bitField0_ & ~0x00000008);
         relay_ = false;
 
+        id_ = 0;
+
         return this;
       }
 
@@ -580,6 +613,7 @@ public final class MessageNode {
         }
         result.addrs_ = addrs_;
         result.relay_ = relay_;
+        result.id_ = id_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -645,6 +679,9 @@ public final class MessageNode {
         }
         if (other.getRelay() != false) {
           setRelay(other.getRelay());
+        }
+        if (other.getId() != 0) {
+          setId(other.getId());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -954,6 +991,32 @@ public final class MessageNode {
       public Builder clearRelay() {
         
         relay_ = false;
+        onChanged();
+        return this;
+      }
+
+      private int id_ ;
+      /**
+       * <code>uint32 id = 6;</code>
+       */
+      public int getId() {
+        return id_;
+      }
+      /**
+       * <code>uint32 id = 6;</code>
+       */
+      public Builder setId(int value) {
+        
+        id_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>uint32 id = 6;</code>
+       */
+      public Builder clearId() {
+        
+        id_ = 0;
         onChanged();
         return this;
       }
@@ -1728,6 +1791,31 @@ public final class MessageNode {
      * <code>bool relay = 9;</code>
      */
     boolean getRelay();
+
+    /**
+     * <code>uint32 version = 10;</code>
+     */
+    int getVersion();
+
+    /**
+     * <code>uint32 rebuilding = 11;</code>
+     */
+    int getRebuilding();
+
+    /**
+     * <code>uint64 realSpace = 12;</code>
+     */
+    long getRealSpace();
+
+    /**
+     * <code>uint64 tx = 13;</code>
+     */
+    long getTx();
+
+    /**
+     * <code>uint64 rx = 14;</code>
+     */
+    long getRx();
   }
   /**
    * <pre>
@@ -1755,6 +1843,11 @@ public final class MessageNode {
       usedSpace_ = 0L;
       addrs_ = com.google.protobuf.LazyStringArrayList.EMPTY;
       relay_ = false;
+      version_ = 0;
+      rebuilding_ = 0;
+      realSpace_ = 0L;
+      tx_ = 0L;
+      rx_ = 0L;
     }
 
     @java.lang.Override
@@ -1835,6 +1928,31 @@ public final class MessageNode {
             case 72: {
 
               relay_ = input.readBool();
+              break;
+            }
+            case 80: {
+
+              version_ = input.readUInt32();
+              break;
+            }
+            case 88: {
+
+              rebuilding_ = input.readUInt32();
+              break;
+            }
+            case 96: {
+
+              realSpace_ = input.readUInt64();
+              break;
+            }
+            case 104: {
+
+              tx_ = input.readUInt64();
+              break;
+            }
+            case 112: {
+
+              rx_ = input.readUInt64();
               break;
             }
           }
@@ -1966,6 +2084,51 @@ public final class MessageNode {
       return relay_;
     }
 
+    public static final int VERSION_FIELD_NUMBER = 10;
+    private int version_;
+    /**
+     * <code>uint32 version = 10;</code>
+     */
+    public int getVersion() {
+      return version_;
+    }
+
+    public static final int REBUILDING_FIELD_NUMBER = 11;
+    private int rebuilding_;
+    /**
+     * <code>uint32 rebuilding = 11;</code>
+     */
+    public int getRebuilding() {
+      return rebuilding_;
+    }
+
+    public static final int REALSPACE_FIELD_NUMBER = 12;
+    private long realSpace_;
+    /**
+     * <code>uint64 realSpace = 12;</code>
+     */
+    public long getRealSpace() {
+      return realSpace_;
+    }
+
+    public static final int TX_FIELD_NUMBER = 13;
+    private long tx_;
+    /**
+     * <code>uint64 tx = 13;</code>
+     */
+    public long getTx() {
+      return tx_;
+    }
+
+    public static final int RX_FIELD_NUMBER = 14;
+    private long rx_;
+    /**
+     * <code>uint64 rx = 14;</code>
+     */
+    public long getRx() {
+      return rx_;
+    }
+
     private byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
@@ -2004,6 +2167,21 @@ public final class MessageNode {
       }
       if (relay_ != false) {
         output.writeBool(9, relay_);
+      }
+      if (version_ != 0) {
+        output.writeUInt32(10, version_);
+      }
+      if (rebuilding_ != 0) {
+        output.writeUInt32(11, rebuilding_);
+      }
+      if (realSpace_ != 0L) {
+        output.writeUInt64(12, realSpace_);
+      }
+      if (tx_ != 0L) {
+        output.writeUInt64(13, tx_);
+      }
+      if (rx_ != 0L) {
+        output.writeUInt64(14, rx_);
       }
       unknownFields.writeTo(output);
     }
@@ -2053,6 +2231,26 @@ public final class MessageNode {
         size += com.google.protobuf.CodedOutputStream
           .computeBoolSize(9, relay_);
       }
+      if (version_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt32Size(10, version_);
+      }
+      if (rebuilding_ != 0) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt32Size(11, rebuilding_);
+      }
+      if (realSpace_ != 0L) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt64Size(12, realSpace_);
+      }
+      if (tx_ != 0L) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt64Size(13, tx_);
+      }
+      if (rx_ != 0L) {
+        size += com.google.protobuf.CodedOutputStream
+          .computeUInt64Size(14, rx_);
+      }
       size += unknownFields.getSerializedSize();
       memoizedSize = size;
       return size;
@@ -2087,6 +2285,16 @@ public final class MessageNode {
           .equals(other.getAddrsList());
       result = result && (getRelay()
           == other.getRelay());
+      result = result && (getVersion()
+          == other.getVersion());
+      result = result && (getRebuilding()
+          == other.getRebuilding());
+      result = result && (getRealSpace()
+          == other.getRealSpace());
+      result = result && (getTx()
+          == other.getTx());
+      result = result && (getRx()
+          == other.getRx());
       result = result && unknownFields.equals(other.unknownFields);
       return result;
     }
@@ -2122,6 +2330,19 @@ public final class MessageNode {
       hash = (37 * hash) + RELAY_FIELD_NUMBER;
       hash = (53 * hash) + com.google.protobuf.Internal.hashBoolean(
           getRelay());
+      hash = (37 * hash) + VERSION_FIELD_NUMBER;
+      hash = (53 * hash) + getVersion();
+      hash = (37 * hash) + REBUILDING_FIELD_NUMBER;
+      hash = (53 * hash) + getRebuilding();
+      hash = (37 * hash) + REALSPACE_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+          getRealSpace());
+      hash = (37 * hash) + TX_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+          getTx());
+      hash = (37 * hash) + RX_FIELD_NUMBER;
+      hash = (53 * hash) + com.google.protobuf.Internal.hashLong(
+          getRx());
       hash = (29 * hash) + unknownFields.hashCode();
       memoizedHashCode = hash;
       return hash;
@@ -2273,6 +2494,16 @@ public final class MessageNode {
         bitField0_ = (bitField0_ & ~0x00000080);
         relay_ = false;
 
+        version_ = 0;
+
+        rebuilding_ = 0;
+
+        realSpace_ = 0L;
+
+        tx_ = 0L;
+
+        rx_ = 0L;
+
         return this;
       }
 
@@ -2310,6 +2541,11 @@ public final class MessageNode {
         }
         result.addrs_ = addrs_;
         result.relay_ = relay_;
+        result.version_ = version_;
+        result.rebuilding_ = rebuilding_;
+        result.realSpace_ = realSpace_;
+        result.tx_ = tx_;
+        result.rx_ = rx_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -2385,6 +2621,21 @@ public final class MessageNode {
         }
         if (other.getRelay() != false) {
           setRelay(other.getRelay());
+        }
+        if (other.getVersion() != 0) {
+          setVersion(other.getVersion());
+        }
+        if (other.getRebuilding() != 0) {
+          setRebuilding(other.getRebuilding());
+        }
+        if (other.getRealSpace() != 0L) {
+          setRealSpace(other.getRealSpace());
+        }
+        if (other.getTx() != 0L) {
+          setTx(other.getTx());
+        }
+        if (other.getRx() != 0L) {
+          setRx(other.getRx());
         }
         this.mergeUnknownFields(other.unknownFields);
         onChanged();
@@ -2712,6 +2963,136 @@ public final class MessageNode {
       public Builder clearRelay() {
         
         relay_ = false;
+        onChanged();
+        return this;
+      }
+
+      private int version_ ;
+      /**
+       * <code>uint32 version = 10;</code>
+       */
+      public int getVersion() {
+        return version_;
+      }
+      /**
+       * <code>uint32 version = 10;</code>
+       */
+      public Builder setVersion(int value) {
+        
+        version_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>uint32 version = 10;</code>
+       */
+      public Builder clearVersion() {
+        
+        version_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private int rebuilding_ ;
+      /**
+       * <code>uint32 rebuilding = 11;</code>
+       */
+      public int getRebuilding() {
+        return rebuilding_;
+      }
+      /**
+       * <code>uint32 rebuilding = 11;</code>
+       */
+      public Builder setRebuilding(int value) {
+        
+        rebuilding_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>uint32 rebuilding = 11;</code>
+       */
+      public Builder clearRebuilding() {
+        
+        rebuilding_ = 0;
+        onChanged();
+        return this;
+      }
+
+      private long realSpace_ ;
+      /**
+       * <code>uint64 realSpace = 12;</code>
+       */
+      public long getRealSpace() {
+        return realSpace_;
+      }
+      /**
+       * <code>uint64 realSpace = 12;</code>
+       */
+      public Builder setRealSpace(long value) {
+        
+        realSpace_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>uint64 realSpace = 12;</code>
+       */
+      public Builder clearRealSpace() {
+        
+        realSpace_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      private long tx_ ;
+      /**
+       * <code>uint64 tx = 13;</code>
+       */
+      public long getTx() {
+        return tx_;
+      }
+      /**
+       * <code>uint64 tx = 13;</code>
+       */
+      public Builder setTx(long value) {
+        
+        tx_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>uint64 tx = 13;</code>
+       */
+      public Builder clearTx() {
+        
+        tx_ = 0L;
+        onChanged();
+        return this;
+      }
+
+      private long rx_ ;
+      /**
+       * <code>uint64 rx = 14;</code>
+       */
+      public long getRx() {
+        return rx_;
+      }
+      /**
+       * <code>uint64 rx = 14;</code>
+       */
+      public Builder setRx(long value) {
+        
+        rx_ = value;
+        onChanged();
+        return this;
+      }
+      /**
+       * <code>uint64 rx = 14;</code>
+       */
+      public Builder clearRx() {
+        
+        rx_ = 0L;
         onChanged();
         return this;
       }
@@ -3390,18 +3771,20 @@ public final class MessageNode {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\022message_node.proto\"_\n\nNodeRegReq\022\016\n\006no" +
+      "\n\022message_node.proto\"k\n\nNodeRegReq\022\016\n\006no" +
       "deid\030\001 \001(\t\022\r\n\005owner\030\002 \001(\t\022\024\n\014maxDataSpac" +
-      "e\030\003 \001(\004\022\r\n\005addrs\030\004 \003(\t\022\r\n\005relay\030\005 \001(\010\"B\n" +
-      "\013NodeRegResp\022\n\n\002id\030\001 \001(\r\022\025\n\rassignedSpac" +
-      "e\030\002 \001(\004\022\020\n\010relayUrl\030\003 \001(\t\"\250\001\n\014StatusRepR" +
-      "eq\022\n\n\002id\030\001 \001(\r\022\013\n\003cpu\030\002 \001(\r\022\016\n\006memory\030\003 " +
-      "\001(\r\022\021\n\tbandwidth\030\004 \001(\r\022\024\n\014maxDataSpace\030\005" +
-      " \001(\004\022\025\n\rassignedSpace\030\006 \001(\004\022\021\n\tusedSpace" +
-      "\030\007 \001(\004\022\r\n\005addrs\030\010 \003(\t\022\r\n\005relay\030\t \001(\010\":\n\r" +
-      "StatusRepResp\022\027\n\017productiveSpace\030\001 \001(\004\022\020" +
-      "\n\010relayUrl\030\002 \001(\tB\031\n\027com.ytfs.service.pac" +
-      "ketb\006proto3"
+      "e\030\003 \001(\004\022\r\n\005addrs\030\004 \003(\t\022\r\n\005relay\030\005 \001(\010\022\n\n" +
+      "\002id\030\006 \001(\r\"B\n\013NodeRegResp\022\n\n\002id\030\001 \001(\r\022\025\n\r" +
+      "assignedSpace\030\002 \001(\004\022\020\n\010relayUrl\030\003 \001(\t\"\370\001" +
+      "\n\014StatusRepReq\022\n\n\002id\030\001 \001(\r\022\013\n\003cpu\030\002 \001(\r\022" +
+      "\016\n\006memory\030\003 \001(\r\022\021\n\tbandwidth\030\004 \001(\r\022\024\n\014ma" +
+      "xDataSpace\030\005 \001(\004\022\025\n\rassignedSpace\030\006 \001(\004\022" +
+      "\021\n\tusedSpace\030\007 \001(\004\022\r\n\005addrs\030\010 \003(\t\022\r\n\005rel" +
+      "ay\030\t \001(\010\022\017\n\007version\030\n \001(\r\022\022\n\nrebuilding\030" +
+      "\013 \001(\r\022\021\n\trealSpace\030\014 \001(\004\022\n\n\002tx\030\r \001(\004\022\n\n\002" +
+      "rx\030\016 \001(\004\":\n\rStatusRepResp\022\027\n\017productiveS" +
+      "pace\030\001 \001(\004\022\020\n\010relayUrl\030\002 \001(\tB\031\n\027com.ytfs" +
+      ".service.packetb\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -3420,7 +3803,7 @@ public final class MessageNode {
     internal_static_NodeRegReq_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_NodeRegReq_descriptor,
-        new java.lang.String[] { "Nodeid", "Owner", "MaxDataSpace", "Addrs", "Relay", });
+        new java.lang.String[] { "Nodeid", "Owner", "MaxDataSpace", "Addrs", "Relay", "Id", });
     internal_static_NodeRegResp_descriptor =
       getDescriptor().getMessageTypes().get(1);
     internal_static_NodeRegResp_fieldAccessorTable = new
@@ -3432,7 +3815,7 @@ public final class MessageNode {
     internal_static_StatusRepReq_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_StatusRepReq_descriptor,
-        new java.lang.String[] { "Id", "Cpu", "Memory", "Bandwidth", "MaxDataSpace", "AssignedSpace", "UsedSpace", "Addrs", "Relay", });
+        new java.lang.String[] { "Id", "Cpu", "Memory", "Bandwidth", "MaxDataSpace", "AssignedSpace", "UsedSpace", "Addrs", "Relay", "Version", "Rebuilding", "RealSpace", "Tx", "Rx", });
     internal_static_StatusRepResp_descriptor =
       getDescriptor().getMessageTypes().get(3);
     internal_static_StatusRepResp_fieldAccessorTable = new
