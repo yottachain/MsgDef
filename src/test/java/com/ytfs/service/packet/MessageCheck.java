@@ -1788,20 +1788,15 @@ public final class MessageCheck {
         getTaskIdBytes();
 
     /**
-     * <code>int32 percent = 2;</code>
-     */
-    int getPercent();
-
-    /**
-     * <code>repeated int32 invalidNodeList = 3;</code>
+     * <code>repeated int32 invalidNodeList = 2;</code>
      */
     java.util.List<java.lang.Integer> getInvalidNodeListList();
     /**
-     * <code>repeated int32 invalidNodeList = 3;</code>
+     * <code>repeated int32 invalidNodeList = 2;</code>
      */
     int getInvalidNodeListCount();
     /**
-     * <code>repeated int32 invalidNodeList = 3;</code>
+     * <code>repeated int32 invalidNodeList = 2;</code>
      */
     int getInvalidNodeList(int index);
   }
@@ -1823,7 +1818,6 @@ public final class MessageCheck {
     }
     private SpotCheckStatus() {
       taskId_ = "";
-      percent_ = 0;
       invalidNodeList_ = java.util.Collections.emptyList();
     }
 
@@ -1865,24 +1859,19 @@ public final class MessageCheck {
               break;
             }
             case 16: {
-
-              percent_ = input.readInt32();
-              break;
-            }
-            case 24: {
-              if (!((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
+              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
                 invalidNodeList_ = new java.util.ArrayList<java.lang.Integer>();
-                mutable_bitField0_ |= 0x00000004;
+                mutable_bitField0_ |= 0x00000002;
               }
               invalidNodeList_.add(input.readInt32());
               break;
             }
-            case 26: {
+            case 18: {
               int length = input.readRawVarint32();
               int limit = input.pushLimit(length);
-              if (!((mutable_bitField0_ & 0x00000004) == 0x00000004) && input.getBytesUntilLimit() > 0) {
+              if (!((mutable_bitField0_ & 0x00000002) == 0x00000002) && input.getBytesUntilLimit() > 0) {
                 invalidNodeList_ = new java.util.ArrayList<java.lang.Integer>();
-                mutable_bitField0_ |= 0x00000004;
+                mutable_bitField0_ |= 0x00000002;
               }
               while (input.getBytesUntilLimit() > 0) {
                 invalidNodeList_.add(input.readInt32());
@@ -1898,7 +1887,7 @@ public final class MessageCheck {
         throw new com.google.protobuf.InvalidProtocolBufferException(
             e).setUnfinishedMessage(this);
       } finally {
-        if (((mutable_bitField0_ & 0x00000004) == 0x00000004)) {
+        if (((mutable_bitField0_ & 0x00000002) == 0x00000002)) {
           invalidNodeList_ = java.util.Collections.unmodifiableList(invalidNodeList_);
         }
         this.unknownFields = unknownFields.build();
@@ -1952,32 +1941,23 @@ public final class MessageCheck {
       }
     }
 
-    public static final int PERCENT_FIELD_NUMBER = 2;
-    private int percent_;
-    /**
-     * <code>int32 percent = 2;</code>
-     */
-    public int getPercent() {
-      return percent_;
-    }
-
-    public static final int INVALIDNODELIST_FIELD_NUMBER = 3;
+    public static final int INVALIDNODELIST_FIELD_NUMBER = 2;
     private java.util.List<java.lang.Integer> invalidNodeList_;
     /**
-     * <code>repeated int32 invalidNodeList = 3;</code>
+     * <code>repeated int32 invalidNodeList = 2;</code>
      */
     public java.util.List<java.lang.Integer>
         getInvalidNodeListList() {
       return invalidNodeList_;
     }
     /**
-     * <code>repeated int32 invalidNodeList = 3;</code>
+     * <code>repeated int32 invalidNodeList = 2;</code>
      */
     public int getInvalidNodeListCount() {
       return invalidNodeList_.size();
     }
     /**
-     * <code>repeated int32 invalidNodeList = 3;</code>
+     * <code>repeated int32 invalidNodeList = 2;</code>
      */
     public int getInvalidNodeList(int index) {
       return invalidNodeList_.get(index);
@@ -2000,11 +1980,8 @@ public final class MessageCheck {
       if (!getTaskIdBytes().isEmpty()) {
         com.google.protobuf.GeneratedMessageV3.writeString(output, 1, taskId_);
       }
-      if (percent_ != 0) {
-        output.writeInt32(2, percent_);
-      }
       if (getInvalidNodeListList().size() > 0) {
-        output.writeUInt32NoTag(26);
+        output.writeUInt32NoTag(18);
         output.writeUInt32NoTag(invalidNodeListMemoizedSerializedSize);
       }
       for (int i = 0; i < invalidNodeList_.size(); i++) {
@@ -2020,10 +1997,6 @@ public final class MessageCheck {
       size = 0;
       if (!getTaskIdBytes().isEmpty()) {
         size += com.google.protobuf.GeneratedMessageV3.computeStringSize(1, taskId_);
-      }
-      if (percent_ != 0) {
-        size += com.google.protobuf.CodedOutputStream
-          .computeInt32Size(2, percent_);
       }
       {
         int dataSize = 0;
@@ -2057,8 +2030,6 @@ public final class MessageCheck {
       boolean result = true;
       result = result && getTaskId()
           .equals(other.getTaskId());
-      result = result && (getPercent()
-          == other.getPercent());
       result = result && getInvalidNodeListList()
           .equals(other.getInvalidNodeListList());
       result = result && unknownFields.equals(other.unknownFields);
@@ -2074,8 +2045,6 @@ public final class MessageCheck {
       hash = (19 * hash) + getDescriptor().hashCode();
       hash = (37 * hash) + TASKID_FIELD_NUMBER;
       hash = (53 * hash) + getTaskId().hashCode();
-      hash = (37 * hash) + PERCENT_FIELD_NUMBER;
-      hash = (53 * hash) + getPercent();
       if (getInvalidNodeListCount() > 0) {
         hash = (37 * hash) + INVALIDNODELIST_FIELD_NUMBER;
         hash = (53 * hash) + getInvalidNodeListList().hashCode();
@@ -2215,10 +2184,8 @@ public final class MessageCheck {
         super.clear();
         taskId_ = "";
 
-        percent_ = 0;
-
         invalidNodeList_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00000004);
+        bitField0_ = (bitField0_ & ~0x00000002);
         return this;
       }
 
@@ -2244,10 +2211,9 @@ public final class MessageCheck {
         int from_bitField0_ = bitField0_;
         int to_bitField0_ = 0;
         result.taskId_ = taskId_;
-        result.percent_ = percent_;
-        if (((bitField0_ & 0x00000004) == 0x00000004)) {
+        if (((bitField0_ & 0x00000002) == 0x00000002)) {
           invalidNodeList_ = java.util.Collections.unmodifiableList(invalidNodeList_);
-          bitField0_ = (bitField0_ & ~0x00000004);
+          bitField0_ = (bitField0_ & ~0x00000002);
         }
         result.invalidNodeList_ = invalidNodeList_;
         result.bitField0_ = to_bitField0_;
@@ -2296,13 +2262,10 @@ public final class MessageCheck {
           taskId_ = other.taskId_;
           onChanged();
         }
-        if (other.getPercent() != 0) {
-          setPercent(other.getPercent());
-        }
         if (!other.invalidNodeList_.isEmpty()) {
           if (invalidNodeList_.isEmpty()) {
             invalidNodeList_ = other.invalidNodeList_;
-            bitField0_ = (bitField0_ & ~0x00000004);
+            bitField0_ = (bitField0_ & ~0x00000002);
           } else {
             ensureInvalidNodeListIsMutable();
             invalidNodeList_.addAll(other.invalidNodeList_);
@@ -2406,60 +2369,34 @@ public final class MessageCheck {
         return this;
       }
 
-      private int percent_ ;
-      /**
-       * <code>int32 percent = 2;</code>
-       */
-      public int getPercent() {
-        return percent_;
-      }
-      /**
-       * <code>int32 percent = 2;</code>
-       */
-      public Builder setPercent(int value) {
-        
-        percent_ = value;
-        onChanged();
-        return this;
-      }
-      /**
-       * <code>int32 percent = 2;</code>
-       */
-      public Builder clearPercent() {
-        
-        percent_ = 0;
-        onChanged();
-        return this;
-      }
-
       private java.util.List<java.lang.Integer> invalidNodeList_ = java.util.Collections.emptyList();
       private void ensureInvalidNodeListIsMutable() {
-        if (!((bitField0_ & 0x00000004) == 0x00000004)) {
+        if (!((bitField0_ & 0x00000002) == 0x00000002)) {
           invalidNodeList_ = new java.util.ArrayList<java.lang.Integer>(invalidNodeList_);
-          bitField0_ |= 0x00000004;
+          bitField0_ |= 0x00000002;
          }
       }
       /**
-       * <code>repeated int32 invalidNodeList = 3;</code>
+       * <code>repeated int32 invalidNodeList = 2;</code>
        */
       public java.util.List<java.lang.Integer>
           getInvalidNodeListList() {
         return java.util.Collections.unmodifiableList(invalidNodeList_);
       }
       /**
-       * <code>repeated int32 invalidNodeList = 3;</code>
+       * <code>repeated int32 invalidNodeList = 2;</code>
        */
       public int getInvalidNodeListCount() {
         return invalidNodeList_.size();
       }
       /**
-       * <code>repeated int32 invalidNodeList = 3;</code>
+       * <code>repeated int32 invalidNodeList = 2;</code>
        */
       public int getInvalidNodeList(int index) {
         return invalidNodeList_.get(index);
       }
       /**
-       * <code>repeated int32 invalidNodeList = 3;</code>
+       * <code>repeated int32 invalidNodeList = 2;</code>
        */
       public Builder setInvalidNodeList(
           int index, int value) {
@@ -2469,7 +2406,7 @@ public final class MessageCheck {
         return this;
       }
       /**
-       * <code>repeated int32 invalidNodeList = 3;</code>
+       * <code>repeated int32 invalidNodeList = 2;</code>
        */
       public Builder addInvalidNodeList(int value) {
         ensureInvalidNodeListIsMutable();
@@ -2478,7 +2415,7 @@ public final class MessageCheck {
         return this;
       }
       /**
-       * <code>repeated int32 invalidNodeList = 3;</code>
+       * <code>repeated int32 invalidNodeList = 2;</code>
        */
       public Builder addAllInvalidNodeList(
           java.lang.Iterable<? extends java.lang.Integer> values) {
@@ -2489,11 +2426,11 @@ public final class MessageCheck {
         return this;
       }
       /**
-       * <code>repeated int32 invalidNodeList = 3;</code>
+       * <code>repeated int32 invalidNodeList = 2;</code>
        */
       public Builder clearInvalidNodeList() {
         invalidNodeList_ = java.util.Collections.emptyList();
-        bitField0_ = (bitField0_ & ~0x00000004);
+        bitField0_ = (bitField0_ & ~0x00000002);
         onChanged();
         return this;
       }
@@ -2574,10 +2511,9 @@ public final class MessageCheck {
       "st\022\016\n\006taskId\030\001 \001(\t\022\014\n\004snid\030\002 \001(\005\022 \n\010task" +
       "List\030\003 \003(\0132\016.SpotCheckTask\"F\n\rSpotCheckT" +
       "ask\022\n\n\002id\030\001 \001(\005\022\016\n\006nodeId\030\002 \001(\t\022\014\n\004addr\030" +
-      "\003 \001(\t\022\013\n\003VHF\030\004 \001(\014\"K\n\017SpotCheckStatus\022\016\n" +
-      "\006taskId\030\001 \001(\t\022\017\n\007percent\030\002 \001(\005\022\027\n\017invali" +
-      "dNodeList\030\003 \003(\005B\031\n\027com.ytfs.service.pack" +
-      "etb\006proto3"
+      "\003 \001(\t\022\013\n\003VHF\030\004 \001(\014\":\n\017SpotCheckStatus\022\016\n" +
+      "\006taskId\030\001 \001(\t\022\027\n\017invalidNodeList\030\002 \003(\005B\031" +
+      "\n\027com.ytfs.service.packetb\006proto3"
     };
     com.google.protobuf.Descriptors.FileDescriptor.InternalDescriptorAssigner assigner =
         new com.google.protobuf.Descriptors.FileDescriptor.    InternalDescriptorAssigner() {
@@ -2608,7 +2544,7 @@ public final class MessageCheck {
     internal_static_SpotCheckStatus_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessageV3.FieldAccessorTable(
         internal_static_SpotCheckStatus_descriptor,
-        new java.lang.String[] { "TaskId", "Percent", "InvalidNodeList", });
+        new java.lang.String[] { "TaskId", "InvalidNodeList", });
   }
 
   // @@protoc_insertion_point(outer_class_scope)
