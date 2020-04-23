@@ -88,7 +88,7 @@ public class MessageFactory {
     public static void main(String[] args) {
         Set<Short> set = id_class_Map.keySet();
         for (Short s : set) {
-            System.out.print("MessageID:" + Hex.encodeHexString(Function.short2bytes(s)) + "---->");
+            System.out.print("MessageID:" + Hex.encodeHexString(Function.short2bytes(s)) + "---->("+s+")");
             System.out.println(id_class_Map.get(s).getName());
         }
     }
