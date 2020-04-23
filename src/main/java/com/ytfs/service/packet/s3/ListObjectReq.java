@@ -2,8 +2,8 @@ package com.ytfs.service.packet.s3;
 
 import org.bson.types.ObjectId;
 
-
 public class ListObjectReq {
+
     private String bucketName;
 
     private ObjectId startId;
@@ -14,9 +14,11 @@ public class ListObjectReq {
 
     private String prefix;
 
-    private boolean isVersion;
+    private boolean version;
 
     private ObjectId nextVersionId;
+
+    private boolean compress = false;
 
     public ObjectId getNextVersionId() {
         return nextVersionId;
@@ -27,11 +29,11 @@ public class ListObjectReq {
     }
 
     public boolean isVersion() {
-        return isVersion;
+        return version;
     }
 
     public void setVersion(boolean version) {
-        isVersion = version;
+        this.version = version;
     }
 
     public String getPrefix() {
@@ -73,4 +75,19 @@ public class ListObjectReq {
     public void setBucketName(String bucketName) {
         this.bucketName = bucketName;
     }
+
+    /**
+     * @return the compress
+     */
+    public boolean isCompress() {
+        return compress;
+    }
+
+    /**
+     * @param compress the compress to set
+     */
+    public void setCompress(boolean compress) {
+        this.compress = compress;
+    }
+
 }

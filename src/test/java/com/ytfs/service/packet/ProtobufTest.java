@@ -2,27 +2,57 @@ package com.ytfs.service.packet;
 
 import com.google.protobuf.ByteString;
 import com.ytfs.common.SerializationUtil;
-import com.ytfs.service.packet.v2.UploadObjectInitReqV2;
+import com.ytfs.service.packet.s3.ListObjectRespV2;
+import com.ytfs.service.packet.s3.entities.FileMetaMsg;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import org.apache.commons.codec.binary.Hex;
+import org.bson.types.ObjectId;
 
 public class ProtobufTest {
 
     public static void main(String[] args) throws IOException {
- 
-        UploadObjectInitReqV2 req=new UploadObjectInitReqV2();
-        req.setKeyNumber(1);
-        req.setLength(2);
-        req.setSignData("dssd");
-        req.setUserId(3);
-        req.setVHW("sd".getBytes());
-        byte[] result1 = SerializationUtil.serialize(req);
-        
-        
-        req=(UploadObjectInitReqV2)SerializationUtil.deserialize(result1);
-        System.out.println();
-        
+
+        ListObjectRespV2 res = new ListObjectRespV2();
+        List<FileMetaMsg> fileMetaMsgList = new ArrayList();
+        FileMetaMsg msg = new FileMetaMsg();
+        msg.setFileName("sssdsdfsgwtw3s");
+        msg.setFileId(new ObjectId());
+        msg.setBucketId(new ObjectId());
+        msg.setFileId(new ObjectId());
+        msg.setVersionId(new ObjectId());
+        fileMetaMsgList.add(msg);
+        msg = new FileMetaMsg();
+        msg.setFileName("ssswewe2");
+        msg.setBucketId(new ObjectId());
+        msg.setFileId(new ObjectId());
+        msg.setVersionId(new ObjectId());
+        fileMetaMsgList.add(msg);
+        msg = new FileMetaMsg();
+        msg.setFileName("ssswewe2");
+        msg.setBucketId(new ObjectId());
+        msg.setFileId(new ObjectId());
+        msg.setVersionId(new ObjectId());
+        fileMetaMsgList.add(msg);
+        msg = new FileMetaMsg();
+        msg.setFileName("ssswewe2");
+        msg.setBucketId(new ObjectId());
+        msg.setFileId(new ObjectId());
+        msg.setVersionId(new ObjectId());
+        fileMetaMsgList.add(msg);
+        msg = new FileMetaMsg();
+        msg.setFileName("ssswewe2");
+        msg.setBucketId(new ObjectId());
+        msg.setFileId(new ObjectId());
+        msg.setVersionId(new ObjectId());
+        fileMetaMsgList.add(msg);
+        res.setFileMetaMsgList(fileMetaMsgList);
+
+        List<FileMetaMsg> list = res.getFileMetaMsgList();
+
+        System.in.read();
+
     }
 
     public static void taskCheckTest() throws IOException {
@@ -74,7 +104,7 @@ public class ProtobufTest {
         MessageCheck.SpotCheckTaskList task = MessageCheck.SpotCheckTaskList.parseFrom(res);
         System.out.println(task);
     }
-/*
+    /*
     public static void taskDescriptionTest() throws IOException {
         MessageRebuild.TaskDescription.Builder builder = MessageRebuild.TaskDescription.newBuilder();
         builder.setId(5);
@@ -142,7 +172,5 @@ public class ProtobufTest {
         System.arraycopy(result1, 2, res, 0, res.length);
         MessageRebuild.TaskDescription task = MessageRebuild.TaskDescription.parseFrom(res);
         System.out.println(task);
-*/
-    }
-
-
+     */
+}
