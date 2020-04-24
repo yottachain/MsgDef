@@ -59,4 +59,5 @@ public class ServerConfig {
     public static int rebuildTaskSize = 100;
     public static int sendShardInterval = 1000;
     public static int shardNumPerNode = 8;
+    public static int lsCacheExpireTime = 30;
 }

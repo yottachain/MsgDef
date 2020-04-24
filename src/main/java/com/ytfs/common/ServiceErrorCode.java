@@ -32,4 +32,5 @@ public class ServiceErrorCode {
     public static final int INVALID_SESSION = 0x21;
     public static final int NEED_LOGIN = 0x22;
     public static final int INVALID_NEXTID = 0x23;
+    public static final int TOO_MANY_CURSOR = 0x24;
 }
