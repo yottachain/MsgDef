@@ -1,5 +1,9 @@
 package com.ytfs.service.packet.s3;
 
+import io.jafka.jeos.util.Base58;
+import java.nio.charset.Charset;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import org.bson.types.ObjectId;
 
 public class ListObjectReq {
@@ -19,6 +23,35 @@ public class ListObjectReq {
     private ObjectId nextVersionId;
 
     private boolean compress = false;
+
+    public String getHashCode(int userid) {
+        try {
+            MessageDigest md5 = MessageDigest.getInstance("MD5");
+            md5.update(String.valueOf(userid).getBytes());
+            if (bucketName != null && !bucketName.isEmpty()) {
+                md5.update(bucketName.getBytes(Charset.forName("UTF-8")));
+            }
+            if (startId != null) {
+                md5.update(startId.toByteArray());
+            }
+            md5.update(String.valueOf(limit).getBytes());
+            if (fileName != null && !fileName.isEmpty()) {
+                md5.update(fileName.getBytes(Charset.forName("UTF-8")));
+            }
+            if (prefix != null && !prefix.isEmpty()) {
+                md5.update(prefix.getBytes(Charset.forName("UTF-8")));
+            }
+            md5.update(version ? (byte) 1 : (byte) 0);
+            if (nextVersionId != null) {
+                md5.update(nextVersionId.toByteArray());
+            }
+            md5.update(compress ? (byte) 1 : (byte) 0);
+            byte[] bs = md5.digest();
+            return Base58.encode(bs);
+        } catch (NoSuchAlgorithmException ex) {
+            return "";
+        }
+    }
 
     public ObjectId getNextVersionId() {
         return nextVersionId;
