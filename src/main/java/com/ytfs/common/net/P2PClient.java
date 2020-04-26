@@ -36,8 +36,8 @@ public class P2PClient {
             synchronized (this) {
                 if (connectedTime >= 0 && !isDestroy) {
                     addrString = getAddrString(addr);
-                    if (System.currentTimeMillis()-connectedTime < 1000 * 15) {
-                        LOG.error(log_pre +  addrString + " did not connect successfully 15 seconds ago");
+                    if (System.currentTimeMillis() - connectedTime < 1000 * 15) {
+                        LOG.error(log_pre + addrString + " did not connect successfully 15 seconds ago");
                         throw new ServiceException(COMM_ERROR);
                     } else {
                         try {
@@ -47,7 +47,7 @@ public class P2PClient {
                             connectedTime = -1;
                         } catch (P2pHostException ex) {
                             connectedTime = System.currentTimeMillis();
-                            LOG.error(log_pre + "Connect " + addrString + " Err:" + ex.getMessage());
+                            LOG.error(log_pre + "Connect " + addrString + " Err:" + getErrMessage(ex));
                             throw new ServiceException(COMM_ERROR, ex.getMessage());
                         }
                     }
@@ -62,7 +62,7 @@ public class P2PClient {
         try {                    //访问p2p网络
             bs = YottaP2P.sendMsg(getKey(), msgType, data);
         } catch (Throwable e) {
-            LOG.error(log_pre + "COMM_ERROR:" + addrString + e.getMessage());
+            LOG.error(log_pre + "COMM_ERROR:" + addrString + getErrMessage(e));
             synchronized (this) {
                 connectedTime = 0;
             }
@@ -73,6 +73,19 @@ public class P2PClient {
             throw (ServiceException) res;
         }
         return res;
+    }
+
+    private static String getErrMessage(Throwable err) {
+        Throwable t = err;
+        while (t != null) {
+            if (t.getMessage() == null || t.getMessage().isEmpty()) {
+                t = t.getCause();
+                continue;
+            } else {
+                return t.getMessage();
+            }
+        }
+        return "";
     }
 
     void disconnect() {
