@@ -11,6 +11,7 @@ import io.jafka.jeos.EosApiFactory;
 import io.jafka.jeos.core.common.SignArg;
 import io.jafka.jeos.core.request.chain.transaction.PushTransactionRequest;
 import io.jafka.jeos.core.response.chain.transaction.PushedTransaction;
+import io.jafka.jeos.impl.EosApiRestClientImpl;
 import java.util.Map;
 import org.apache.log4j.Logger;
 
