@@ -18,6 +18,7 @@ public class StatusRepReq {
     private long realSpace;
     private long tx;
     private long rx;
+    private String other;
 
     /**
      * @return the id
@@ -213,6 +214,20 @@ public class StatusRepReq {
      */
     public void setRx(long rx) {
         this.rx = rx;
+    }
+
+    /**
+     * @return the other
+     */
+    public String getOther() {
+        return other;
+    }
+
+    /**
+     * @param other the other to set
+     */
+    public void setOther(String other) {
+        this.other = other;
     }
 
 }
