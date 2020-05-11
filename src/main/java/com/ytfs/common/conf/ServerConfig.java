@@ -60,4 +60,5 @@ public class ServerConfig {
     public static int sendShardInterval = 1000;
     public static int shardNumPerNode = 10;
     public static int lsCacheExpireTime = 30;
+    public static int lsCursorLimit=3;
 }
