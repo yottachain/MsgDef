@@ -66,6 +66,10 @@ public class P2PClient {
             LOG.error(log_pre + "COMM_ERROR:" + addrString + getErrMessage(e));
             synchronized (this) {
                 connectedTime = 0;
+                try {
+                    YottaP2P.disconnect(getKey());
+                } catch (P2pHostException r) {
+                }
             }
             throw new ServiceException(COMM_ERROR, e.getMessage());
         }
