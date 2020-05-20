@@ -53,7 +53,10 @@ public class ListObjectRespV2 {
                 out.write(buf, 0, len);
             }
             out.close();
-            ListObjectResp resp = new ListObjectResp();
+            if(out.toByteArray().length==0){
+                return new ArrayList();
+            }
+            ListObjectResp resp = new ListObjectResp();           
             SerializationUtil.deserializeNoID(out.toByteArray(), resp);
             return resp.getFileMetaMsgList();
         } catch (IOException r) {

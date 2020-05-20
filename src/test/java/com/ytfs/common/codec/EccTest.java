@@ -13,8 +13,9 @@ public class EccTest {
             System.out.println(ii % 21);
 ;
             
-            String privateKey = "5JBpNe39ydfNM1QeDb2u2ymPUZqRnxiUGiatGH1KFZuDhiuoAbA";
+            String privateKey = "5KMTskAHMW4uqwgBGsrhKzggyD15LuTrLScSY3nDkrKPQP2fCws";
             System.out.println("SuperNode privateKey:" + privateKey);
+ 
             String nodeid = "16Uiu2HAmNfU9cixngZQBxW7ftew5kSegTJQaJDVBNpGZXUoRqq88";
             System.out.println("nodeid:" + nodeid);
             long VBI = 6698593494929466116L;
@@ -38,7 +39,12 @@ public class EccTest {
     }
 
     public static void main(String[] args) throws Exception {
-        bpsign();
+                    String privateKey = "5KMTskAHMW4uqwgBGsrhKzggyD15LuTrLScSY3nDkrKPQP2fCws";
+            System.out.println("SuperNode privateKey:" + privateKey);
+                String pubkey1 = KeyUtil.toPublicKey(privateKey);
+            pubkey1 = pubkey1.substring(3);
+            System.out.println("SuperNode privateKey:" + pubkey1);
+       // bpsign();
         //aes();
         //crype();
     }

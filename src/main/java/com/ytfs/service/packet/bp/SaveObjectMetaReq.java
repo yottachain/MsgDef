@@ -9,7 +9,7 @@ public class SaveObjectMetaReq {
     private ObjectId VNU;
     private ObjectRefer refer;
     private long usedSpace;
-   
+    private boolean mode = false;
 
     /**
      * @return the VNU
@@ -65,6 +65,20 @@ public class SaveObjectMetaReq {
      */
     public void setUsedSpace(long usedSpace) {
         this.usedSpace = usedSpace;
+    }
+
+    /**
+     * @return the mode
+     */
+    public boolean isMode() {
+        return mode;
+    }
+
+    /**
+     * @param mode the mode to set
+     */
+    public void setMode(boolean mode) {
+        this.mode = mode;
     }
 
 }

@@ -4,6 +4,7 @@ import com.ytfs.common.Function;
 import com.ytfs.common.MessageFactory;
 import com.ytfs.common.SerializationUtil;
 import static com.ytfs.common.ServiceErrorCode.COMM_ERROR;
+import static com.ytfs.common.ServiceErrorCode.getErrMessage;
 import com.ytfs.common.ServiceException;
 import static com.ytfs.common.conf.UserConfig.CONN_EXPIRED;
 import static com.ytfs.common.net.P2PUtils.getAddrString;
@@ -65,6 +66,10 @@ public class P2PClient {
             LOG.error(log_pre + "COMM_ERROR:" + addrString + getErrMessage(e));
             synchronized (this) {
                 connectedTime = 0;
+                //try {
+                   // YottaP2P.disconnect(getKey());
+                //} catch (P2pHostException r) {
+               // }
             }
             throw new ServiceException(COMM_ERROR, e.getMessage());
         }
@@ -73,19 +78,6 @@ public class P2PClient {
             throw (ServiceException) res;
         }
         return res;
-    }
-
-    private static String getErrMessage(Throwable err) {
-        Throwable t = err;
-        while (t != null) {
-            if (t.getMessage() == null || t.getMessage().isEmpty()) {
-                t = t.getCause();
-                continue;
-            } else {
-                return t.getMessage();
-            }
-        }
-        return "";
     }
 
     void disconnect() {

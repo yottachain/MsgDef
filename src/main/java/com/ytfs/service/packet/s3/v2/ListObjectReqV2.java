@@ -25,15 +25,50 @@ public class ListObjectReqV2 extends AuthReq {
 
     private boolean compress = false;
 
-    public String getHashCode(int userid) {
+    public String getHashCode(int userid, String newfileName, ObjectId newNextVersionId) {
         try {
             MessageDigest md5 = MessageDigest.getInstance("MD5");
-             md5.update(String.valueOf(userid).getBytes());
+            md5.update(String.valueOf(userid).getBytes());
             if (bucketName != null && !bucketName.isEmpty()) {
                 md5.update(bucketName.getBytes(Charset.forName("UTF-8")));
             }
-            if (startId != null) {
-                md5.update(startId.toByteArray());
+            if (limit < 10) {
+                limit = 10;
+            }
+            if (limit > 1000) {
+                limit = 1000;
+            }
+            md5.update(String.valueOf(limit).getBytes());
+            if (newfileName != null && !newfileName.isEmpty()) {
+                md5.update(newfileName.getBytes(Charset.forName("UTF-8")));
+            }
+            if (prefix != null && !prefix.isEmpty()) {
+                md5.update(prefix.getBytes(Charset.forName("UTF-8")));
+            }
+            md5.update(version ? (byte) 1 : (byte) 0);
+            if (nextVersionId != null) {
+                md5.update(newNextVersionId.toByteArray());
+            }
+            md5.update(compress ? (byte) 1 : (byte) 0);
+            byte[] bs = md5.digest();
+            return Base58.encode(bs);
+        } catch (NoSuchAlgorithmException ex) {
+            return "";
+        }
+    }
+
+    public String getHashCode(int userid) {
+        try {
+            MessageDigest md5 = MessageDigest.getInstance("MD5");
+            md5.update(String.valueOf(userid).getBytes());
+            if (bucketName != null && !bucketName.isEmpty()) {
+                md5.update(bucketName.getBytes(Charset.forName("UTF-8")));
+            }
+            if (limit < 10) {
+                limit = 10;
+            }
+            if (limit > 1000) {
+                limit = 1000;
             }
             md5.update(String.valueOf(limit).getBytes());
             if (fileName != null && !fileName.isEmpty()) {
