@@ -59,7 +59,11 @@ public class ServerConfig {
     public static int rebuildTaskSize = 100;
     public static int sendShardInterval = 1000;
     public static int shardNumPerNode = 10;
+    
     public static int lsCacheExpireTime = 30;
     public static int lsCachePageNum = 10;
+    public static int lsCursorLimit = 1;
     public static int lsCacheMaxSize = 20000;
+    
+    public static String s3Version = null;
 }

@@ -4,7 +4,9 @@ public class RegUserReq {
 
     private String pubKey;
     private String username;
+    private String versionId;
 
+    
     /**
      * @return the username
      */
@@ -31,6 +33,20 @@ public class RegUserReq {
      */
     public void setPubKey(String pubKey) {
         this.pubKey = pubKey;
+    }
+
+    /**
+     * @return the versionId
+     */
+    public String getVersionId() {
+        return versionId;
+    }
+
+    /**
+     * @param versionId the versionId to set
+     */
+    public void setVersionId(String versionId) {
+        this.versionId = versionId;
     }
 
 }
