@@ -37,7 +37,7 @@ public class ServerConfig {
     public static int space_factor = 100;
     //超级节点私钥
     public static String privateKey;
-    public static byte[] SNDSP;
+    //public static byte[] SNDSP1;
 
     //端口
     public static int port = 9999;
