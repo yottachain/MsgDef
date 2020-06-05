@@ -69,7 +69,7 @@ public class P2PClient {
                 //try {
                    // YottaP2P.disconnect(getKey());
                 //} catch (P2pHostException r) {
-               // }
+                //}
             }
             throw new ServiceException(COMM_ERROR, e.getMessage());
         }

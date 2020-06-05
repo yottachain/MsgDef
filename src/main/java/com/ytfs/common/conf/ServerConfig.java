@@ -37,7 +37,7 @@ public class ServerConfig {
     public static int space_factor = 100;
     //超级节点私钥
     public static String privateKey;
-    public static byte[] SNDSP;
+    //public static byte[] SNDSP1;
 
     //端口
     public static int port = 9999;
@@ -59,7 +59,11 @@ public class ServerConfig {
     public static int rebuildTaskSize = 100;
     public static int sendShardInterval = 1000;
     public static int shardNumPerNode = 10;
+    
     public static int lsCacheExpireTime = 30;
     public static int lsCachePageNum = 10;
+    public static int lsCursorLimit = 1;
     public static int lsCacheMaxSize = 20000;
+    
+    public static String s3Version = null;
 }

@@ -2,10 +2,13 @@ package com.ytfs.service.packet.bp;
 
 import org.bson.types.ObjectId;
 
-public class ActiveCache {
+public class ActiveCache{ 
 
+ 
     private ObjectId VNU; //upload id
-
+    
+ 
+    
     /**
      * @return the VNU
      */
@@ -19,5 +22,7 @@ public class ActiveCache {
     public void setVNU(ObjectId VNU) {
         this.VNU = VNU;
     }
+
+ 
 
 }

@@ -33,6 +33,7 @@ public class ServiceErrorCode {
     public static final int NEED_LOGIN = 0x22;
     public static final int INVALID_NEXTID = 0x23;
     public static final int TOO_MANY_CURSOR = 0x24;
+    public static final int TOO_LOW_VERSION = 0x25;
 
     public static String getErrMessage(Throwable err) {
         Throwable t = err;
