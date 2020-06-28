@@ -7,7 +7,7 @@ public class NodeInfo {
 
     private int id;
     private String peerId;
-    private long sendSpotTaskTime = 0;
+    private long sendSpotTaskTime1 = 0;
     private List<String> addr;
 
     public Node getNode() {
@@ -49,15 +49,15 @@ public class NodeInfo {
     /**
      * @return the sendSpotTaskTime
      */
-    public long getSendSpotTaskTime() {
-        return sendSpotTaskTime;
+    public long getSendSpotTaskTime1() {
+        return sendSpotTaskTime1;
     }
 
     /**
      * @param sendSpotTaskTime the sendSpotTaskTime to set
      */
-    public void setSendSpotTaskTime(long sendSpotTaskTime) {
-        this.sendSpotTaskTime = sendSpotTaskTime;
+    public void setSendSpotTaskTime1(long sendSpotTaskTime) {
+        this.sendSpotTaskTime1 = sendSpotTaskTime;
     }
 
     /**
