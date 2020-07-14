@@ -34,6 +34,7 @@ public class ServiceErrorCode {
     public static final int INVALID_NEXTID = 0x23;
     public static final int TOO_MANY_CURSOR = 0x24;
     public static final int TOO_LOW_VERSION = 0x25;
+    public static final int DN_IN_BLACKLIST = 0x26;
 
     public static String getErrMessage(Throwable err) {
         Throwable t = err;

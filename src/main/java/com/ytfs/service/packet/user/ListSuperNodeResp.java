@@ -1,21 +1,25 @@
 package com.ytfs.service.packet.user;
 
 import io.yottachain.nodemgmt.core.vo.SuperNode;
+import java.util.List;
 
 public class ListSuperNodeResp {
-
-    /**
-     * @return the superList
-     */
+ 
+ 
     public SuperNode[] getSuperList() {
         return superList;
     }
 
-    /**
-     * @param superList the superList to set
-     */
+ 
     public void setSuperList(SuperNode[] superList) {
         this.superList = superList;
     }
     private SuperNode[] superList;
+    
+    
+   
+     
+     
+     
+ 
 }
