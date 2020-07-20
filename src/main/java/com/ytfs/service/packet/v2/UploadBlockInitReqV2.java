@@ -7,6 +7,7 @@ public class UploadBlockInitReqV2 extends AuthReq {
     private byte[] VHP;//该数据块的明文SHA256摘要
     private ObjectId VNU; //upload id
     private short id;
+    private String version;
 
     public UploadBlockInitReqV2() {
     }
@@ -58,4 +59,19 @@ public class UploadBlockInitReqV2 extends AuthReq {
     public final void setId(short id) {
         this.id = id;
     }
+
+    /**
+     * @return the version
+     */
+    public String getVersion() {
+        return version;
+    }
+
+    /**
+     * @param version the version to set
+     */
+    public void setVersion(String version) {
+        this.version = version;
+    }
+       
 }
