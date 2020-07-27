@@ -13,7 +13,7 @@
                 <version>2.3.2</version>
                 <configuration>
                     <encoding>${project.build.sourceEncoding}</encoding>
-                </configuration>
+                </configuration>                         
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
