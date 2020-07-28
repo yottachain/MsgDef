@@ -76,4 +76,6 @@ public class UserConfig {
     public static String zipkinServer;
 
     public static int CONN_EXPIRED = PTR * 5;
+    
+    public static int shardNumPerNode=8;
 }
