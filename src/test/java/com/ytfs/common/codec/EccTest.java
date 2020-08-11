@@ -1,8 +1,10 @@
 package com.ytfs.common.codec;
 
+import io.jafka.jeos.util.Base58;
 import io.jafka.jeos.util.KeyUtil;
 import io.yottachain.ytcrypto.YTCrypto;
 import java.nio.ByteBuffer;
+import java.security.MessageDigest;
 import org.apache.commons.codec.binary.Hex;
 
 public class EccTest {
@@ -39,11 +41,20 @@ public class EccTest {
     }
 
     public static void main(String[] args) throws Exception {
-                    String privateKey = "5KMTskAHMW4uqwgBGsrhKzggyD15LuTrLScSY3nDkrKPQP2fCws";
-            System.out.println("SuperNode privateKey:" + privateKey);
-                String pubkey1 = KeyUtil.toPublicKey(privateKey);
-            pubkey1 = pubkey1.substring(3);
-            System.out.println("SuperNode privateKey:" + pubkey1);
+        byte[] data=("abcdefg").getBytes();
+        MessageDigest sha256 = MessageDigest.getInstance("SHA-256");
+        byte[] newdate =sha256.digest(data);
+        
+        byte[] key=("123456789").getBytes();
+        sha256 = MessageDigest.getInstance("SHA-256");
+        byte[] newkey =sha256.digest(key);
+        
+        byte[] res=KeyStoreCoder.aesEncryped(newdate, newkey);
+        
+        System.out.println(Base58.encode(res));
+        
+        byte[] res1=KeyStoreCoder.aesDecryped(res, newkey);
+        System.out.println(Base58.encode(res1));
        // bpsign();
         //aes();
         //crype();

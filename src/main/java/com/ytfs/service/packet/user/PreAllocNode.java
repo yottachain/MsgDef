@@ -4,13 +4,13 @@ import io.yottachain.nodemgmt.core.vo.Node;
 import java.util.List;
 
 public class PreAllocNode {
-
     private int id;
     private String nodeid;
     private String pubkey;
     private List<String> addrs;
     private long timestamp;
     private String sign;
+    private double weight;
 
     public PreAllocNode() {
     }
@@ -18,6 +18,7 @@ public class PreAllocNode {
     public PreAllocNode(Node node) {
         this.id = node.getId();
         this.nodeid = node.getNodeid();
+        this.weight=node.getWeight();
         this.pubkey = node.getPubkey();
         this.addrs = node.getAddrs();
         this.timestamp = System.currentTimeMillis();
@@ -113,5 +114,17 @@ public class PreAllocNode {
     public void setSign(String sign) {
         this.sign = sign;
     }
+   /**
+     * @return the weight
+     */
+    public double getWeight() {
+        return weight;
+    }
 
+    /**
+     * @param weight the weight to set
+     */
+    public void setWeight(double weight) {
+        this.weight = weight;
+    }
 }
